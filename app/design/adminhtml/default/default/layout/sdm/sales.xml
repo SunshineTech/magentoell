@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * @category  SDM
+ * @package   SDM_Sales
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <adminhtml_sales_order_view>
+        <reference name="order_info">
+            <action method="setTemplate"><template>sdm/sales/order/view/info.phtml</template></action>
+            <block type="sdm_sales/adminhtml_sales_order_view_info_ax" name="ax_account_info" template="sdm/sales/order/view/ax.phtml" />
+            <block type="sdm_sales/adminhtml_sales_order_view_info_ax" name="ax_invoice_info" template="sdm/sales/order/view/invoice.phtml" />
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_sales_order_saveaxaccountid>
+        <block type="sdm_sales/adminhtml_sales_order_view_info_ax" name="ax_account_info" template="sdm/sales/order/view/ax.phtml" output="toHtml" />
+    </adminhtml_sales_order_saveaxaccountid>
+    <adminhtml_sales_order_saveaxinvoiceid>
+        <block type="sdm_sales/adminhtml_sales_order_view_info_ax" name="ax_invoice_info" template="sdm/sales/order/view/invoice.phtml" output="toHtml" />
+    </adminhtml_sales_order_saveaxinvoiceid>
+</layout>

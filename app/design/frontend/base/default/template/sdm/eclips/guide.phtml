@@ -1,0 +1,110 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * eClips Software Download
+ *
+ * @category  SDM
+ * @package   SDM_Eclips
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+?>
+
+<?php echo $this->getChildHtml('eclips_download_links') ?>
+
+<div class="eclips-header">
+    <h2>eClips Software Update</h2>
+    <p>Welcome to our the Sizzix eclips machine firmware downloads page. Below are the most recent features, bug fixes and upgrades for your eclips machine</p>
+</div>
+<div class="eclips-releases">
+    <div class="now-available">
+        <img class="" alt="eClips Software Now Available"  src="<?php echo $this->getSkinUrl('sdm/eclips/images/now-available.png') ?>" />
+    </div>
+    <div class="notes">
+        <h4>Version 3.1, released May 5, 2012</h4>
+        <ul>
+            <li>Stamp2Cut feature allows for the quickest and easiest cuts around Tim Holtz Stampers Anonymous stamped images</li>
+            <li>Improved Center Point functionality with alphabets</li>
+            <li>Minor bug fixes</li>
+        </ul>
+        <h4>Version 2.3, released June 1, 2011</h4>
+        <ul>
+            <li>Improved Double Cut functionality with shapes wider than 12"</li>
+            <li>Corrected quantity calculations with Fill and Double Cut functions</li>
+            <li>Added support for new Cartridge names</li>
+            <li>Improved blade compensation mechanism</li>
+            <li>Fixed Border sizes when using Rotate feature</li>
+            <li>Minor changes to user interface and bug fixes</li>
+        </ul>
+        <h4>Version 2.2, released December 15, 2010</h4>
+        <ul>
+            <li>Improved laser calibration procedure</li>
+            <li>Modified shape size suggestions</li>
+            <li>Addressed software crashes in special cases</li>
+        </ul>
+        <h4>Version 2.1, released October 8, 2010</h4>
+        <ul>
+            <li>Updated translations</li>
+            <li>Minor bug fixes</li>
+        </ul>
+        <h4>Version 2.0, released September 22, 2010</h4>
+        <ul>
+            <li>Scoring added to create easy fold lines.</li>
+            <li>Center Point implemented to center a shape inside (or around) another shape.</li>
+            <li>Double Cut assists in cutting thick materials or intricate designs.</li>
+            <li>Pen Holder settings added to draw with virtually any felt tip, ball point or glue pen.</li>
+            <li>Rotate image up to 360 degrees in 1-degree increments.</li>
+            <li>Pop-Up Menu added and functions consolidated with Hot Keys.</li>
+            <li>Shape width as well as height now adjustable.</li>
+            <li>Character and line spacing in fonts added.</li>
+            <li>Paper Saver option added to economize paper use.</li>
+            <li>Cartridge name shown on screen.</li>
+            <li>Minimum size of design shown when editing size.</li>
+            <li>Designs remain in Queue when Cartridges are swapped.</li>
+            <li>Repeat key operative after machine restart.</li>
+            <li>More material presets added for a wider range of materials to be cut.</li>
+            <li>Other usability improvements and minor bug fixes.</li>
+        </ul>
+    </div>
+</div>
+<div class="check-version">
+    <h2>Do I Need To Update My Handheld Remote Control?</h2>
+    <div>
+        <div class="version-image">
+            <img class="" alt="eClips Software Version Check"  src="<?php echo $this->getSkinUrl('sdm/eclips/images/eclip-device.png') ?>" />
+        </div>
+        <div class="version-content">
+            <p>To check your current version, press the Setup function key (see pg. 16 in the eclips User’s Guide for moreinformation). Scroll to Version and select.</p>
+            <p>The number after “Controller” is the software version. If it is not the version shown above, update your software, following the steps below. Updating your Handheld Remote Control requires a Mini USB Cable, not included with the machine. You may own one already, or you may purchase one online.</p>
+        </div>
+    </div>
+</div>
+<div class="update-firmware">
+    <h2>Updating Your eClips Firmware</h2>
+
+    <h4>1. Begin Update</h4>
+    <div class="update-form">
+        <?php echo $this->getChildHtml('eclips_form') ?>
+    </div>
+    <h4 class="eclips-clear-both">2. Download File</h4>
+    <p>Choose your operating system.The software can be updated from any system for subsequent updates.     Unsure if you have a Windows 32-bit or 64-bit system? <a href="<?php // Need link to modal window ?> ">Click here.</a></p>
+    <h4>3. Remove Cartridge</h4>
+    <p>Before updating your eclips Handheld Remote Control with the latest version of software, please make sure that the cartridge has been removed from the Handheld Remote Control. Failure to do so may result in a damaged cartridge. Please do not plug in your controller until prompted.</p>
+    <h4>4. Follow On-Screen Instructions</h4>
+    <p>For Microsoft Windows users: Locate the downloaded update file, titled “eclips Software Update.” Double-click to open, and select “Run.” Follow the onscreen instructions to update your eclips Handheld Remote Control.For Apple Macintosh users: Locate the downloaded update file. Double-click to open, and it will     expand to “eclips Software Update.” Double-click this file, and the driver will open. Follow the onscreen instructions to update your eclips Handheld Remote Control.</p>
+    <img class="" alt="eClips Update On-Screen Instructions"  src="<?php echo $this->getSkinUrl('sdm/eclips/images/eclips-installations.png') ?>" />
+</div>
+<div class="eclips-guides">
+    <h2>Installation Guide For Software Update</h2>
+    <p>Please select which language you would like to read the Installation Guide below.</p>
+    <ul>
+        <li><a href="<?php echo $this->getEnglishGuide() ?>">English</a></li>
+        <li><a href="<?php echo $this->getFrenchGuide() ?>">Francais</a></li>
+        <li><a href="<?php echo $this->getSpanishGuide() ?>">Español</a></li>
+        <li><a href="<?php echo $this->getGermanGuide() ?>">Deutch</a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>

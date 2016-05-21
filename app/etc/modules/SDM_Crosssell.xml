@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Extends Qty Treshold to Shopping cart page
+ *
+ * @category  SDM
+ * @package   SDM_Crosssell
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Crosssell>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <SDM_Core />
+                <Aitoc_Aitquantitymanager />
+            </depends>
+        </SDM_Crosssell>
+    </modules>
+</config>

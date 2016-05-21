@@ -1,0 +1,53 @@
+<?php if( count( $this->getItems() ) > 0 ){ ?>
+
+<div class="saveforlater-container">
+
+	<div class="saveforlater-title">
+		<h2><?php echo $this->__('Saved for Later'); ?></h2>
+		<p><?php echo $this->__('Note: Items and promotional pricing not reserved until checkout is completed.')?></p>
+	</div>
+
+	<form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" id="saveforlater_form" method="post">
+		<fieldset>
+			<table id="saveforlater-table" class="data-table cart-table">
+				<col width="1" />
+				<col width="1" />
+				<col width="1" />
+				<col width="1" />
+				<col width="1" />
+
+			<?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+				<thead>
+					<tr>
+						<th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Product') ?></span></th>
+						<th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+						<th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Price') ?></span></th>
+						<th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Quantity') ?></th>
+						<th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach($this->getItems() as $_item): ?>
+					<?php echo $this->getItemHtml($_item) ?>
+				<?php endforeach ?>
+				</tbody>
+			</table>
+			<script type="text/javascript">decorateTable('saveforlater-table')</script>
+		</fieldset>
+	</form>
+
+</div>
+
+<?php } ?>
+
+<script type="text/javascript" language="javascript">
+	document.observe( 'dom:loaded', function(){
+		/* ADD ACTION COLUMN */
+		$$('#shopping-cart-table tbody tr input.qty').each( function( qty_input ){
+			item_id = $(qty_input).readAttribute('name').replace( /(^.+\D)(\d+)(\D.+$)/i,'$2'); // Thank you Stack Overflow (http://stackoverflow.com/questions/609574/get-the-first-ints-in-a-string-with-javascript)
+			//$(':last-child', qty_input.up().up ).insert( '<strong>Test</strong>' );
+			qty_input.up().up().select(".product-cart-actions .cart-links")[0].insert('<li class="saveforlater"><a href="<?php echo Mage::getUrl('saveforlater'); ?>index/save/item/'+ item_id +'" class="saveforlater-action">Save&nbsp;for&nbsp;Later</a></li>');
+		} );
+		/* END ADD ACTION COLUMN */
+	} );
+</script>

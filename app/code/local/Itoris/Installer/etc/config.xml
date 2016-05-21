@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Fixed issue with the Itoris_Installer.
+ *
+ * @category  Itoris
+ * @package   Itoris_Installer
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+	<modules>
+		<Itoris_Installer>
+			<version>0.1.0</version>
+		</Itoris_Installer>
+	</modules>
+</config>

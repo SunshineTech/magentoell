@@ -1,0 +1,33 @@
+<?php
+/**
+ * StoreFront CyberSource Tokenized Payment Extension for Magento
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of StoreFront Consulting, Inc.
+ *
+ * @category  SFC
+ * @package   SFC_CyberSource
+ * @author    Garth Brantley <garth@storefrontconsulting.com>
+ * @copyright 2009-2013 StoreFront Consulting, Inc. All Rights Reserved.
+ * @license   http://www.storefrontconsulting.com/media/downloads/ExtensionLicense.pdf StoreFront Consulting Commercial License
+ * @link      http://www.storefrontconsulting.com/cybersource-saved-credit-cards-extension-for-magento/
+ *
+ */
+?>
+<?php if (Mage::getStoreConfig('payment/sfc_cybersource/enable_secure_acceptance') == '1'): ?>
+<iframe
+    id="sop-iframe"
+    allowtransparency="true"
+    frameborder="0"
+    name="iframeSop"
+    style="display:none;width:100%;background-color:transparent;"
+    src="<?php echo $this->getUrl('creditcards/onepage/sop_iframe') ?>">
+</iframe>
+<script>
+    var sopAccessKey = "<?php echo $this->getSOPAccessKey() ?>";
+    var sopSecretKey = "<?php echo $this->getSOPSecretKey() ?>";
+    var sopErrorMessage = "<?php echo $this->getErrorMessageText() ?>";
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/sfc_cybersource/sop_checkout.js') ?>"></script>
+<?php endif; ?>

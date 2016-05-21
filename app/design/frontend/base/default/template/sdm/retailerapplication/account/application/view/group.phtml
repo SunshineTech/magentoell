@@ -1,0 +1,31 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+?>
+
+<?php $_fields = $this->getFields() ?>
+<?php $_note = $this->getNote() ?>
+<?php $_endNote = $this->getEndNote() ?>
+
+<div class="field-group">
+	<h2><?php echo $this->getName() ?></h2>
+	<?php if(!empty($_note)): ?>
+		<div class="note"><?php echo $_note ?></div>
+		<div class="clear"></div>
+	<?php endif; ?>
+	<?php foreach($_fields as $_block): ?>
+		<?php echo $_block->toHtml() ?>
+	<?php endforeach ?>
+	<?php if(!empty($_endNote)): ?>
+		<div class="clear"></div>
+		<div class="note"><?php echo $_endNote ?></div>
+	<?php endif; ?>
+</div>

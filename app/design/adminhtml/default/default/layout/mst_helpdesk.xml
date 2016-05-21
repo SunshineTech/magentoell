@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss"><script>mirasvit/helpdesk/helpdesk.css</script></action>
+        </reference>
+    </default>
+
+    <helpdeskadmin_adminhtml_ticket_index>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/lib/jquery.MultiFile.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/adminhtml/adminhtml.js</script></action>
+        </reference>
+    </helpdeskadmin_adminhtml_ticket_index>
+
+   <helpdeskadmin_adminhtml_ticket_add>
+        <update handle="editor"/>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/lib/jquery.MultiFile.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/adminhtml/adminhtml.js</script></action>
+        </reference>
+    </helpdeskadmin_adminhtml_ticket_add>
+
+    <helpdeskadmin_adminhtml_ticket_edit>
+        <update handle="editor"/>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+			<action method="addJs"><script>mirasvit/code/helpdesk/lib/jquery.MultiFile.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/adminhtml/adminhtml.js</script></action>
+        </reference>
+    </helpdeskadmin_adminhtml_ticket_edit>
+
+    <helpdeskadmin_adminhtml_department_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_department_add>
+    <helpdeskadmin_adminhtml_department_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_department_edit>
+
+    <helpdeskadmin_adminhtml_status_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_status_add>
+    <helpdeskadmin_adminhtml_status_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_status_edit>
+
+    <helpdeskadmin_adminhtml_priority_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_priority_add>
+    <helpdeskadmin_adminhtml_priority_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_priority_edit>
+
+    <helpdeskadmin_adminhtml_gateway_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_gateway_add>
+    <helpdeskadmin_adminhtml_gateway_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_gateway_edit>
+
+    <helpdeskadmin_adminhtml_pattern_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_pattern_add>
+    <helpdeskadmin_adminhtml_pattern_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_pattern_edit>
+
+    <helpdeskadmin_adminhtml_field_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_field_add>
+    <helpdeskadmin_adminhtml_field_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_field_edit>
+
+    <helpdeskadmin_adminhtml_template_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_template_add>
+    <helpdeskadmin_adminhtml_template_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_template_edit>
+
+    <helpdeskadmin_adminhtml_spam_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_spam_add>
+    <helpdeskadmin_adminhtml_spam_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_spam_edit>
+
+    <helpdeskadmin_adminhtml_satisfaction_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_satisfaction_add>
+    <helpdeskadmin_adminhtml_satisfaction_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_satisfaction_edit>
+
+    <helpdeskadmin_adminhtml_rule_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_rule_add>
+    <helpdeskadmin_adminhtml_rule_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_rule_edit>
+
+    <helpdeskadmin_adminhtml_permission_add>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_permission_add>
+    <helpdeskadmin_adminhtml_permission_edit>
+        <update handle="editor"/>
+    </helpdeskadmin_adminhtml_permission_edit>
+
+    <adminhtml_permissions_user_edit>
+        <update handle="editor"/>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/lib/jquery.MultiFile.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/adminhtml/adminhtml.js</script></action>
+        </reference>
+        <reference name="adminhtml.permissions.user.edit.tabs">
+            <block type="helpdesk/adminhtml_user_edit_tab_helpdesk" name="adminhtml.user.edit.tab.helpdesk"/>
+            <action method="addTabAfter">
+                <id>helpdesk_section</id>
+                <block>adminhtml.user.edit.tab.helpdesk</block>
+                <after>roles_section</after>
+            </action>
+        </reference>
+    </adminhtml_permissions_user_edit>
+
+    <helpdeskadmin_adminhtml_report_ticket_index>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/code/helpdesk/lib/amcharts-3.4.5/amcharts.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/lib/amcharts-3.4.5/serial.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="helpdesk/adminhtml_report_ticket" template="mst_helpdesk/report/ticket/grid/container.phtml" name="report.grid.container">
+                <block type="adminhtml/store_switcher" template="report/store/switcher/enhanced.phtml" name="store.switcher">
+                    <action method="setStoreVarName"><var_name>store_ids</var_name></action>
+                </block>
+                <block type="helpdesk/adminhtml_report_ticket_filter" name="grid.filter.form">
+                </block>
+                <block type="helpdesk/adminhtml_report_ticket_chart" template="mst_helpdesk/report/ticket/grid/chart.phtml" name="grid.chart"/>
+            </block>
+        </reference>
+    </helpdeskadmin_adminhtml_report_ticket_index>
+    <helpdeskadmin_adminhtml_report_satisfaction_index>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/code/helpdesk/lib/amcharts-3.4.5/amcharts.js</script></action>
+            <action method="addJs"><script>mirasvit/code/helpdesk/lib/amcharts-3.4.5/serial.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="helpdesk/adminhtml_report_satisfaction" template="mst_helpdesk/report/satisfaction/grid/container.phtml" name="report.grid.container">
+<!--                 <block type="adminhtml/store_switcher" template="report/store/switcher/enhanced.phtml" name="store.switcher">
+                    <action method="setStoreVarName"><var_name>store_ids</var_name></action>
+                </block> -->
+                <block type="helpdesk/adminhtml_report_satisfaction_filter" name="grid.filter.form">
+                </block>
+                <block type="helpdesk/adminhtml_report_satisfaction_chart" template="mst_helpdesk/report/satisfaction/grid/chart.phtml" name="grid.chart"/>
+            </block>
+        </reference>
+    </helpdeskadmin_adminhtml_report_satisfaction_index>
+
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <block type="helpdesk/adminhtml_customer_edit_tabs_ticket" name="helpdesk_ticket"/>
+            <action method="addTabAfter">
+                <name>tickets</name>
+                <block>helpdesk_ticket</block>
+                <after>tags</after>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+    <adminhtml_sales_order_view>
+        <reference name="sales_order_tabs">
+            <block type="helpdesk/adminhtml_sales_order_view_tabs_ticket" name="helpdesk_ticket"/>
+            <action method="addTab">
+                <name>tickets</name>
+                <block>helpdesk_ticket</block>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+</layout>

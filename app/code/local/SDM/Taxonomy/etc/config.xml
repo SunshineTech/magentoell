@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's custom product taxonomy implementation.
+ *
+ * @category  SDM
+ * @package   SDM_Taxonomy
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Taxonomy>
+            <version>0.4.9</version>
+        </SDM_Taxonomy>
+    </modules>
+    <global>
+        <models>
+            <taxonomy>
+                <class>SDM_Taxonomy_Model</class>
+                <resourceModel>taxonomy_resource</resourceModel>
+            </taxonomy>
+            <taxonomy_resource>
+                <class>SDM_Taxonomy_Model_Resource</class>
+                <entities>
+                    <item>
+                        <table>sdm_taxonomy</table>
+                    </item>
+                    <item_date>
+                        <table>sdm_taxonomy_date</table>
+                    </item_date>
+                    <item_product>
+                        <table>sdm_taxonomy_product</table>
+                    </item_product>
+                </entities>
+            </taxonomy_resource>
+            <catalog_resource>
+                <rewrite>
+                    <product_indexer_eav_source>SDM_Taxonomy_Model_Resource_Product_Indexer_Eav_Source</product_indexer_eav_source>
+                </rewrite>
+            </catalog_resource>
+        </models>
+        <blocks>
+            <sdm_taxonomy_adminhtml>
+               <class>SDM_Taxonomy_Block_Adminhtml</class>
+            </sdm_taxonomy_adminhtml>
+        </blocks>
+        <helpers>
+            <taxonomy>
+                <class>SDM_Taxonomy_Helper</class>
+            </taxonomy>
+        </helpers>
+        <resources>
+            <sdm_taxonomy>
+                <setup>
+                    <module>SDM_Taxonomy</module>
+                </setup>
+            </sdm_taxonomy>
+            <taxonomy_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </taxonomy_write>
+            <taxonomy_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </taxonomy_read>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <sdm_taxonomy after="Mage_Adminhtml">SDM_Taxonomy_Adminhtml</sdm_taxonomy>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sdm_taxonomy>
+                    <file>taxonomy.xml</file>
+                </sdm_taxonomy>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

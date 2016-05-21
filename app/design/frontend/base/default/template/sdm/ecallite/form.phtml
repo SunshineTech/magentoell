@@ -1,0 +1,56 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * eCallite
+ *
+ * @category  SDM
+ * @package   SDM_Ecallite
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+    $_inputs =  Mage::registry('form_inputs');
+?>
+<h2><?php echo $this->__('FREE eCAL lite Software Download')?></h2>
+<p><?php echo $this->__('To begin your Free Download of the eCAL lite software download, please fill out the short form below.')?></p>
+<form id="ecallite-request-form" method="post" action="<?php echo $this->getUrl('ecallite/index/submit') ?>">
+    <div>
+        <input value="" type="hidden">
+    </div>
+    <div class="form">
+        <label for="firstname"><span class="required"></span> <?php echo $this->__('First name') ?>:</label>
+        <input id="firstname" name="firstname" class="input-text validate-alpha required-entry" placeholder="Enter First Name " value="<?php echo (isset($_inputs['firstname'])) ? $_inputs['firstname'] : '' ?>" />
+    </div>
+    <div class="form">
+        <label for="lastname"><span class="required"></span> <?php echo $this->__('Last name') ?>:</label>
+        <input id="lastname" name="lastname" class="input-text validate-alpha required-entry" placeholder="Enter Last Name" value="<?php echo (isset($_inputs['lastname'])) ? $_inputs['lastname'] : '' ?>" />
+    </div>
+    <div class="form">
+        <label for="email"><span class="required"></span> <?php echo $this->__('Enter Email') ?>:</label>
+        <input type="text" name="email" id="email" class="input-text required-entry validate-email" placeholder="Enter Email Address" value="<?php echo (isset($_inputs['email'])) ? $_inputs['email'] : '' ?>" />
+    </div>
+    <!-- Add email confirmation validation -->
+    <div class="form">
+        <label for="confirm_email"><span class="required"></span> <?php echo $this->__('Confirm Email') ?>:</label>
+        <input type="text" name="confirm_email" id="confirm_email" class="input-text required-entry validate-cemail" placeholder="Confirm Email Address" value="<?php echo (isset($_inputs['confirm_email'])) ? $_inputs['confirm_email'] : '' ?>" />
+    </div>
+    <div class="form ecal-code">
+        <label for="codes"><span class="required"></span> <?php echo $this->__('Enter eCAL Access Code') ?>:</label>
+        <input class="ecal-code-input validate-alphanum" maxlength="4" minlength="4" name="codes[]" value="<?php echo (isset($_inputs['codes'][0])) ? $_inputs['codes'][0] : '' ?>" />
+        -
+        <input class="ecal-code-input validate-alphanum" digits="true" maxlength="5" minlength="5" name="codes[]" value="<?php echo (isset($_inputs['codes'][1])) ? $_inputs['codes'][1] : '' ?>" />
+        -
+        <input class="ecal-code-input validate-alphanum" digits="true" maxlength="5" minlength="5" name="codes[]" value="<?php echo (isset($_inputs['codes'][2])) ? $_inputs['codes'][2] : '' ?>" />
+        -
+        <input class="ecal-code-input validate-alphanum" digits="true" maxlength="5" minlength="5" name="codes[]" value="<?php echo (isset($_inputs['codes'][3])) ? $_inputs['codes'][3] : '' ?>" />
+        -
+        <input class="ecal-code-input validate-alphanum" digits="true" maxlength="5" minlength="5" name="codes[]" value="<?php echo (isset($_inputs['codes'][4])) ? $_inputs['codes'][4] : '' ?>" />
+        <input class="form_button button" name="" value="Submit" type="submit">
+    </div>
+</form>
+
+<script type="text/javascript">
+    //< ![CDATA[
+        var customForm = new VarienForm('ecallite-request-form');
+    //]]>
+</script>

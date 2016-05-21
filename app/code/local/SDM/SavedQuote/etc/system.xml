@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <sections>
+        <savedquote translate="label" module="savedquote">
+            <label>Saved Quotes</label>
+            <tab>sdm_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>220</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <comment><![CDATA[Note: This is configurable on the website level]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enabled>
+                        <valid_days translate="label">
+                            <label>Saved Quote Valid Days</label>
+                            <comment><![CDATA[Note: This does not apply retroactively to previously saved quotes]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </valid_days>
+                        <logging translate="label">
+                            <label>Logging</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </logging>
+                        <log_filename translate="label">
+                            <label>Log File Name</label>
+                            <comment><![CDATA[Default: sdm_savedquote.log]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </log_filename>
+                    </fields>
+                </general>
+            </groups>
+        </savedquote>
+    </sections>
+</config>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <!-- Here, we reference the XML node path of our route -->
+    <adminhtml_sdm_lyris_ads_index>
+        <reference name="content">
+            <!-- We also reference our block by namespacename_modulename/adminhtml_controllername, and name it uniquely -->
+            <block type="sdm_lyris/adminhtml_ads" name="adminhtml.sdm.lyris.ads" />
+        </reference>
+    </adminhtml_sdm_lyris_ads_index>
+</layout>

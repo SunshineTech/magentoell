@@ -1,0 +1,62 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+?>
+<?php if($this->getCollection()->getSize()): ?>
+<div class="toolbar">
+    <?php if( $this->isExpanded() ): ?>
+        <div class="sorter">
+            <div class="sort-by">
+                <label><?php echo $this->__('Sort By') ?></label>
+                <select onchange="setLocation(this.value)">
+                    <?php foreach($this->getSortingOptions() as $_sortData): ?>
+                        <option value="<?php echo $this->getOrderUrl($_sortData['orderby'], $_sortData['direction']) ?>"<?php if($this->isOrderCurrent($_sortData['orderby']) && $this->getCurrentDirection() == $_sortData['direction']): ?> selected="selected"<?php endif; ?>>
+                            <?php echo $this->__($_sortData['label']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="count-container">
+                <div class="limiter">
+                    <label><?php echo $this->__('Show') ?></label>
+                    <select onchange="setLocation(this.value)" title="<?php echo $this->__('Results per page'); ?>">
+                    <?php foreach ($this->getAvailableLimit() as  $_key => $_limit): ?>
+                        <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                            <?php echo $_limit ?>
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <?php if( $this->isEnabledViewSwitcher() ): ?>
+                <p class="view-mode">
+                    <?php $_modes = $this->getModes(); ?>
+                    <?php if($_modes && count($_modes)>1): ?>
+                        <label><?php echo $this->__('View') ?></label>
+                        <select onchange="setLocation(this.value)">
+                        <?php foreach ($this->getModes() as $_code => $_label): ?>
+                            <?php if($this->isModeActive($_code)): ?>
+                                <option value="<?php echo $this->getModeUrl($_code) ?>" selected="selected"><?php echo $_label ?></option>
+                            <?php else: ?>
+                                <option value="<?php echo $this->getModeUrl($_code) ?>"><?php echo $_label ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                        </select>
+                    <?php endif; ?>
+                </p>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+    <div class="pager">
+        <?php echo $this->getPagerHtml() ?>
+    </div>
+</div>
+<?php endif ?>

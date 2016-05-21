@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Perm
+ */
+
+$hlp = Mage::helper('amperm');
+$dealers = $hlp->getSalesPersonList();
+$dealerId = $this->getDealerId();
+if (!empty($dealers)):
+?>
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $hlp->__('Choose a Dealer'); ?></h2>
+        <ul class="form-list">
+            <li>
+                <label for="dealer"><?php echo $hlp->__('Dealer'); ?></label>
+                <div class="input-box">
+                    <select id="sales_person" name="sales_person" title="<?php echo $hlp->__('Dealer'); ?>">
+                        <option value="" <?php if (!$dealerId) echo 'selected="selected"'; ?>></option>
+                        <?php foreach($dealers as $userId => $name): ?>
+                            <option value="<?php echo $userId; ?>" <?php echo ($userId == $dealerId ? 'selected="selected" ' : ''); ?>><?php echo $name; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </li>
+        </ul>
+    </div>
+<?php endif; ?>

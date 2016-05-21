@@ -1,0 +1,49 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Teachers' Planning Calendar
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Calendar
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+/**
+ * @var SDM_Calendar_Block_Event_List $this
+ */
+$_calendar = $this->getCalendar();
+$_year = $this->getYear();
+$_month = $this->getMonth();
+$_prevMonth = $this->getPreviousMonth();
+$_nextMonth = $this->getNextMonth();
+?>
+<div class="fc fc-ltr fc-unthemed">
+    <div class="fc-toolbar">
+        <div class="fc-right">
+            <button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right" onclick="window.location = '<?php echo $this->getUrl($_calendar->getUrl()) ?>'"><?php echo $this->__('Today') ?></button>
+            <div class="fc-button-group">
+                <button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left" onclick="window.location = '<?php echo $this->getUrl($_calendar->getUrl() . '/' . ($_month == 1 ? $_year - 1 : $_year) . '/' . $_prevMonth) ?>'"><span class="fc-icon fc-icon-left-single-arrow"></span></button>
+                <button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right" onclick="window.location = '<?php echo $this->getUrl($_calendar->getUrl() . '/' . ($_month == 12 ? $_year + 1 : $_year) . '/' . $_nextMonth) ?>'"><span class="fc-icon fc-icon-right-single-arrow"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="sdm-calendar-events-<?php echo $_calendar->getId() ?>" class='grid-calendar'></div>
+<script>
+//<![CDATA[
+jQuery(document).ready(function() {
+    jQuery('#sdm-calendar-events-<?php echo $_calendar->getId() ?>').fullCalendar({
+        events: <?php echo $this->getEvents(true) ?>,
+        eventRender: function(event, element) {
+            element.text(event.title);
+        }
+    });
+    <?php if ($_year && $_month): ?>
+    jQuery('#sdm-calendar-events-<?php echo $_calendar->getId() ?>').fullCalendar('gotoDate', '<?php echo $_year ?>-<?php echo $_month ?>-01');
+    <?php endif ?>
+});
+//]]>
+</script>

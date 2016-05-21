@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Add newest & oldest sorting by.
+ *
+ * @category  SDM
+ * @package   SDM_SortBy
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_SortBy>
+            <version>1.0.0</version>
+        </SDM_SortBy>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_sortby>
+                <class>SDM_SortBy_Block</class>
+            </sdm_sortby>
+            <catalog>
+                <rewrite>
+                    <product_list_toolbar>SDM_SortBy_Block_Product_List_Toolbar</product_list_toolbar>
+                </rewrite>
+            </catalog>
+        </blocks>
+    </global>
+</config>

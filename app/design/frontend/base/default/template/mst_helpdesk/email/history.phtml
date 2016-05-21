@@ -1,0 +1,19 @@
+<?php if ($this->getMessages()->count() && $this->getLimit()) :?>
+<br>
+<br>
+<b><?php echo Mage::helper('helpdesk')->__('Ticket History') ?></b><br>
+<?php foreach($this->getMessages() as $message):?>
+    <p>
+        <i>
+            <?php if ($message->getCustomerName()):?>
+                <?php echo $message->getCustomerName() ?>
+            <?php else: ?>
+                <?php echo $message->getFrontendUserName() ?>
+            <?php endif ?> |
+            <?php echo Mage::helper('core')->formatDate($message->getCreatedAt(), 'medium') ?>
+        </i><br>
+
+        <?php echo Mage::helper('helpdesk/string')->convertToHtml($message->getBody()) ?>
+    </p>
+<?php endforeach ?>
+<?php endif;?>

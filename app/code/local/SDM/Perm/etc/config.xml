@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Adds more functionality to Amasty_Perm
+ *
+ * @category  SDM
+ * @package   SDM_Perm
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Perm>
+            <version>0.1.0</version>
+        </SDM_Perm>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_perm>
+                <class>SDM_Perm_Block</class>
+            </sdm_perm>
+            <amperm>
+                <rewrite>
+                    <adminhtml_relation>SDM_Perm_Block_Adminhtml_Relation</adminhtml_relation>
+                </rewrite>
+            </amperm>
+        </blocks>
+    </global>
+</config>

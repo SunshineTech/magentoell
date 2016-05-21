@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<widgets>
+    <helpdesk_contacts type="helpdesk/widget_contacts" translate="name description" module="helpdesk">
+        <name>Helpdesk Contact Form</name>
+        <description></description>
+        <parameters>
+        </parameters>
+    </helpdesk_contacts>
+</widgets>

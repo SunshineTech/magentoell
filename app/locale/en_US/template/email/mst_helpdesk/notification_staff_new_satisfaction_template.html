@@ -1,0 +1,41 @@
+<!--@subject Satisfaction survey result for ticket #{{var ticket.code}} @-->
+<!--@styles
+body,td { color:#2f2f2f; }
+@-->
+{{var hidden_separator}}
+<div style="font:13px/1.45em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p align="center">
+                                Dear <strong>{{var user.firstname}} {{var user.lastname}}</strong>, <br><br>
+                                {{var ticket.customer_name}} rated your help with smile<br><br>
+                                <img src="{{var rate_image_url}}" width="100px" height="100px">
+                            </p>
+                            {{var ticket.name}}<br>
+                            ------------------------------<br>
+                            Ticket ID: {{var ticket.code}}<br>
+                            Customer email: {{var ticket.customer_email}}<br>
+                            {{depend satisfaction.comment}}
+                            Comment: {{var satisfaction.comment}}<br>
+                            {{/depend}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

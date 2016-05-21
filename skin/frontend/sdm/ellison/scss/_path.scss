@@ -1,0 +1,38 @@
+/* FONT PATH
+ * -------------------------- */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
+    url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+    url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
+  //src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+    font-family: 'AvenirRegular';
+    src: url('#{$fa-font-path}/avenirnextltpro-regular.eot');
+    src: url('#{$fa-font-path}/avenirnextltpro-regular.woff2') format('woff2'),
+         url('#{$fa-font-path}/avenirnextltpro-regular.woff') format('woff'),
+         url('#{$fa-font-path}/avenirnextltpro-regular.ttf') format('truetype'),
+         url('#{$fa-font-path}/avenirnextltpro-regular.svg#AvenirRegular') format('svg');
+}
+@font-face {
+    font-family: 'AvenirBold';
+    src: url('#{$fa-font-path}/avenirnextltpro-demi.eot');
+    src: url('#{$fa-font-path}/avenirnextltpro-demi.woff2') format('woff2'),
+         url('#{$fa-font-path}/avenirnextltpro-demi.woff') format('woff'),
+         url('#{$fa-font-path}/avenirnextltpro-demi.ttf') format('truetype'),
+         url('#{$fa-font-path}/avenirnextltpro-demi.svg#AvenirBold') format('svg');
+}
+@font-face {
+    font-family: 'AvenirBlack';
+    src: url('#{$fa-font-path}/avenirnextltpro-bold.eot');
+    src: url('#{$fa-font-path}/avenirnextltpro-bold.woff2') format('woff2'),
+         url('#{$fa-font-path}/avenirnextltpro-bold.woff') format('woff'),
+         url('#{$fa-font-path}/avenirnextltpro-bold.ttf') format('truetype'),
+         url('#{$fa-font-path}/avenirnextltpro-bold.svg#AvenirBold') format('svg');
+}

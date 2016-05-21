@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <menu>
+        <newsletter translate="title" module="newsletter">
+            <children>
+                <sdm_lyris translate="label" module="sdm_lyris">
+                    <title>Previous Email Thumbnails</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/sdm_lyris_ads</action>
+                </sdm_lyris>
+            </children>
+        </newsletter>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <newsletter translate="title" module="newsletter">
+                        <children>
+                            <sdm_lyris translate="label" module="sdm_lyris">
+                                <title>Previous Email Thumbnails</title>
+                                <sort_order>20</sort_order>
+                            </sdm_lyris>
+                        </children>
+                    </newsletter>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <sdm_lyris translate="label" module="sdm_lyris">
+                                        <title>Lyris</title>
+                                        <sort_order>10</sort_order>
+                                    </sdm_lyris>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

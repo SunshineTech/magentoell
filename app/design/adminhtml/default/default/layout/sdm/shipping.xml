@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison and Sizzix Shipping Rules
+ *
+ * @category  SDM
+ * @package   SDM_Shipping
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_shipping_giftcard_total" template="sdm/shipping/sales/order/totals/surcharge.phtml" />
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_shipping_giftcard_total" template="sdm/shipping/sales/order/totals/surcharge.phtml" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_shipping_giftcard_total" template="sdm/shipping/sales/order/totals/surcharge.phtml" />
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_shipping_giftcard_total" template="sdm/shipping/sales/order/totals/surcharge.phtml" />
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_shipping_giftcard_total" template="sdm/shipping/sales/order/totals/surcharge.phtml" after="-" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_shipping_giftcard_total" template="sdm/shipping/sales/order/totals/surcharge.phtml" after="-" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_shipping_giftcard_total" template="sdm/shipping/sales/order/totals/surcharge.phtml" after="-" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+</layout>

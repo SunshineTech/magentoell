@@ -1,0 +1,53 @@
+<!--@subject {{var ticket.getEmailSubject()}} @-->
+<!--@vars
+{"htmlescape var=$customer.name":"Customer Name",
+"var customer.email":"Customer Email"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; }
+@-->
+{{var hidden_separator}}
+<div style="font:13px/1.45em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            {{var ticket.name}}<br>
+                            ------------------------------<br><br>
+
+                            Ticket ID: {{var ticket.code}}<br>
+                            Name: {{htmlescape var=$customer.name}}<br>
+                            Email address: {{var customer.email}}<br>
+                            Store: {{var store.getFrontendName()}}<br>
+                            Department: {{var ticket.department}}<br>
+                            Staff (Owner): {{var ticket.user_name}}<br>
+                            Status: {{var ticket.status}}<br>
+                            Priority: {{var ticket.priority}}<br>
+                            Created: {{var ticket.getCreatedAtFormated('long')}}<br>
+                            Updated: {{var ticket.getUpdatedAtFormated('long')}}<br>
+                            <br>
+{{depend ticket.getLastMessage().isInternal()}}
+== INTERNAL NOTE ==
+{{/depend}}
+                            {{var ticket.getLastMessageHtmlText()}}
+                            {{var ticket.getHistoryHtml()}}
+                            {{var ticket.getHiddenCodeHtml()}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

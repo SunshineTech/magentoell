@@ -1,0 +1,224 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Compatibility template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_product = $this->getProduct();
+$_machineCollection = $this->getCompatibleProducts();
+$_materialCollection = $_product->getCompatibleMaterials();
+$_helper = $this->helper('catalog/output');
+$_saleLabelHelper = $this->helper('sdm_catalog/salelabel');
+$_columnCount = 5;
+
+?>
+
+<?php if (!empty($_machineCollection)): ?>
+    <h2 class="related-title">
+        <?php echo $this->__('Machine Compatibility')?>
+    </h2>
+    <div class="compatibility-info">
+        <?php echo $this->__('For complete machine compatibility, <strong>please select your machine from the slider below.</strong>')?>
+    </div>
+    <div class="category-products">
+        <ul id="machine-compatibility" class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col">
+            <?php foreach ($_machineCollection as $_productLine): ?>
+                <li class="item machine-<?php echo $_productLine['machine_productline_id']?>">
+                    <img width="120px" id="product-collection-image" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_productLine['image_link']?>" />
+                    <h2 class="product-name">
+                        <?php echo $_productLine['machine_name'] ?>
+                    </h2>
+                    <div class="actions">
+                        <?php echo $this->__('View Compatibility');?>
+                    </div>
+                </li>
+            <?php endforeach ?>
+        </ul>
+        <?php foreach ($_machineCollection as $_productLine): ?>
+            <?php $_canBuy = false; ?>
+            <div class="compatability-overlay"></div>
+            <div class="compatibility-block" id="machine-<?php echo $_productLine['machine_productline_id']?>">
+                <form action="<?php echo Mage::helper('sdm_catalog')->getMultiSubmitAjaxCartUrl() ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                    <h2 class="title">
+                        <?php echo $_productLine['machine_name'] . $this->__(' Compatibility')?>
+                    </h2>
+                    <div class="close"><i class="fa fa-times"></i></div>
+                    <div class="machine-wrap">
+                        <div class="instructions">
+                            <?php echo $this->__('The %s requires additional accessories for full compatibility with %s', $_productLine['machine_name'], $_product->getName()) ?>
+                        </div>
+                        <a href="<?php echo $_productLine['image_page_link'] ?>">
+                            <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_productLine['image_link']?>" width="300px" id="product-collection-image" />
+                        </a>
+                    </div>
+                    <?php $_accessories = $_productLine['collection'] ?>
+                    <table class="data-table associated-table" id="associated-table-<?php echo $_productLine['machine_name'] ?>">
+                        <thead>
+                            <tr>
+                                <td><?php echo $this->__('Product')?></td>
+                                <td></td>
+                                <td><?php echo $this->__('Price')?></td>
+                                <td><?php echo $this->__('Quantity')?></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($_accessories as $_item): ?>
+                                <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+                                <tr>
+                                    <td class='image'>
+                                        <a href="<?php echo $_item->getProductUrl() ?>">
+                                            <img class="thumbnail"
+                                                 src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->constrainOnly(true)->resize(75); ?>"
+                                                 alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>"
+                                                 title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>" />
+                                         </a>
+                                    </td>
+                                    <td class="name">
+                                        <p class="name-wrapper">
+                                            <a href="<?php echo $_item->getProductUrl() ?>">
+                                                <?php echo $this->escapeHtml($_item->getName()) ?>
+                                            </a>
+                                        </p>
+                                        <p class="sku">
+                                            <?php echo Mage::helper('sdm_catalog')->getSkuLabel($_item) . $_item->getSku() ?>
+                                        </p>
+                                        <?php // Show sale label ?>
+                                        <?php echo $_saleLabelHelper->getSaleLabelHtml($_item, 'text'); ?>
+                                        <?php if($this->helper('wishlist')->isAllow()): ?>
+                                            <p class="wishlist">
+                                                <a href="<?php echo $this->helper('wishlist')->getAddUrl($_item) ?>" class="link-wishlist">
+                                                    <?php echo $this->__('Add to Wishlist') ?>
+                                                </a>
+                                            </p>
+                                        <?php endif; ?>
+                                    </td>
+                                    <?php if($_item->getButtonType() == 'text'): ?>
+                                        <?php if ($_item->getButtonLogicRetailerOverride()): ?>
+                                            <?php // Retailer override active ?>
+                                            <td>
+                                                <?php if ($this->getCanShowProductPrice($_product)): ?>
+                                                    <?php if ($this->getCanShowProductPrice($_item)): ?>
+                                                    <?php echo $this->getPriceHtml($_item, true) ?>
+                                                    <?php echo $this->getTierPriceHtml($_item) ?>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td></td>
+                                        <?php else: ?>
+                                            <?php // Normal text output ?>
+                                            <td class="a-right" colspan="2">
+                                                <p class="availability">
+                                                    <span><?php echo $_item->getButtonValue() ?></span>
+                                                </p>
+                                            </td>
+                                        <?php endif; ?>
+                                    <?php elseif($_item->getButtonType() == 'add-to-cart'): ?>
+                                        <td>
+                                            <?php if ($this->getCanShowProductPrice($_item)): ?>
+                                            <?php echo $this->getPriceHtml($_item, true) ?>
+                                            <?php echo $this->getTierPriceHtml($_item) ?>
+                                            <?php endif; ?>
+                                        </td>
+                                        <?php if ($_item->isPreorderable()): ?>
+                                            <td class="a-right" colspan="2">
+                                                <p class="availability">
+                                                    <span>Available for Pre Order Only</span>
+                                                </p>
+                                            </td>
+                                        <?php else: ?>
+                                            <?php $_canBuy = true; ?>
+                                            <td class="a-right">
+                                                <input id="multi_add_products_<?php echo $_item->getId(); ?>" type="text" pattern="\d*" name="multi_add_products[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+                                            </td>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <td colspan='2'>
+                                            <p class="availability">
+                                                <span>
+                                                    <?php echo $this->__('Product not available for purchase'); ?>
+                                                </span>
+                                            </p>
+                                        </td>
+                                    <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                    <?php if ($_canBuy): ?>
+                        <div class="add-to-cart">
+                            <div class="add-to-cart-buttons">
+                                <button type="button" class="button btn-cart ajax-cart">
+                                    <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                </button>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </form>
+            </div>
+            <script type="text/javascript">
+                jQuery(document).ready(function(){
+                    jQuery('.compatibility-block .close').click(function(){
+                        jQuery('.category-products .compatibility-block').hide().prev('.compatability-overlay').hide();
+                        return false;
+                    });
+                    jQuery('.compatibility-block').prev('.compatability-overlay').click(function(){
+                        jQuery('.category-products .compatibility-block').hide().prev('.compatability-overlay').hide();
+                        return false;
+                    });
+                    jQuery('.machine-<?php echo $_productLine['machine_productline_id']?>').click(function(){
+                        var allMachines = jQuery('.category-products .compatibility-block').hide();
+                        allMachines.hide();
+                        jQuery(this).parents('.category-products')
+                            .find('#machine-<?php echo $_productLine['machine_productline_id']?>')
+                            .show()
+                            .prev('.compatability-overlay')
+                            .show();
+                        return false;
+                    });
+                });
+            </script>
+        <?php endforeach ?>
+    </div>
+    <script type="text/javascript">
+        decorateTable("associated-table-<?php echo $_productLine['machine_name'] ?>")
+    </script>
+<?php endif ?>
+<?php if (!empty($_materialCollection)): ?>
+    <h2 class="related-title">
+        <?php echo $this->__('Material Compatibility')?>
+    </h2>
+    <div class="compatibility-info">
+        <?php if (strtolower($_product->getAttributeText('brand')) === 'sizzix'): ?>
+            <?php echo $this->__('<strong>NOTE:</strong> Sizzix products work with a variety of materials. However, for the best performance, do not overload the machine with too many layers of materials.')?>
+        <?php else: ?>
+            <?php echo $this->__('<strong>NOTE:</strong> While Ellison machines can cut multiple layers of materials, we recommended not overloading the machine with cutting materials to ensure the best cutting performance.')?>
+        <?php endif; ?>
+    </div>
+    <div class="category-products">
+        <ul id="material-compatibility" class="products-grid products-grid--max-6-col">
+            <?php foreach ($_materialCollection as $_material): ?>
+                <li>
+                    <?php if(count($_material->getSwatch())): ?>
+                        <a href="/catalog?tag_material_compatibility=<?php echo $_material->getId();?>">
+                            <img id="product-collection-image" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_material->getSwatch();?>" />
+                        </a>
+                    <?php else : ?>
+                        <a href="/catalog?tag_material_compatibility=<?php echo $_material->getId();?>" class="name">
+                            <img id="product-collection-image" src="<?php echo $this->getSkinUrl('images/no-image.png'); ?>" alt="No Image Available" />
+                        </a>
+                    <?php endif ?>
+                    <a href="/catalog?tag_material_compatibility=<?php echo $_material->getId();?>">
+                        <?php echo $_material->getName();?>
+                    </a>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+<?php endif; ?>

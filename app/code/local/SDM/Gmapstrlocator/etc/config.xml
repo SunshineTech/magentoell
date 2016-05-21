@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Separation Degrees Media
+ *
+ * This module handles all the store locator functionality for Ellison.
+ * 
+ * The original code from this module is based off the FME_Gmapstrlocator module. We converted their
+ * module to an SDM module rather than extending from it because the amount of modifications and
+ * rewrites necessary for it to fit Ellison's spec were extensive, yet we still felt there was value
+ * in using FME's module as a starting point.
+ *
+ * @category  SDM
+ * @package   SDM_Gmapstrlocator
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Gmapstrlocator>
+            <version>0.3.0</version>
+        </SDM_Gmapstrlocator>
+    </modules>
+    <frontend>
+        <routers>
+            <gmapstrlocator>
+                <use>standard</use>
+                <args>
+                    <module>SDM_Gmapstrlocator</module>
+                    <frontName>gmapstrlocator</frontName>
+                </args>
+            </gmapstrlocator>
+        </routers>
+        <layout>
+            <updates>
+                <gmapstrlocator>
+                    <file>sdm/gmapstrlocator.xml</file>
+                </gmapstrlocator>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <SDM_Gmapstrlocator>
+                    <files>
+                        <default>SDM_Gmapstrlocator.csv</default>
+                    </files>
+                </SDM_Gmapstrlocator>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <gmapstrlocator before="Mage_Adminhtml">SDM_Gmapstrlocator_Adminhtml</gmapstrlocator>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <translate>
+            <modules>
+                <SDM_Gmapstrlocator>
+                    <files>
+                        <default>SDM_Gmapstrlocator.csv</default>
+                    </files>
+                </SDM_Gmapstrlocator>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <gmapstrlocatoradmin>
+                    <file>sdm/gmapstrlocator.xml</file>
+                </gmapstrlocatoradmin>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <models>
+            <gmapstrlocator>
+                <class>SDM_Gmapstrlocator_Model</class>
+                <resourceModel>gmapstrlocator_resource</resourceModel>
+            </gmapstrlocator>
+            <gmapstrlocator_resource>
+                <class>SDM_Gmapstrlocator_Model_Resource</class>
+                <entities>
+                    <gmapstrlocator_location>
+                        <table>gmapstrlocator_location</table>
+                    </gmapstrlocator_location>
+                    <gmapstrlocator_store>
+                        <table>gmapstrlocator_store</table>
+                    </gmapstrlocator_store>
+                    <gmapstrlocator_website>
+                        <table>gmapstrlocator_website</table>
+                    </gmapstrlocator_website>
+                </entities>
+            </gmapstrlocator_resource>
+        </models>
+        <resources>
+            <gmapstrlocator_setup>
+                <setup>
+                    <module>SDM_Gmapstrlocator</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </gmapstrlocator_setup>
+            <gmapstrlocator_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </gmapstrlocator_write>
+            <gmapstrlocator_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </gmapstrlocator_read>
+        </resources>
+        <blocks>
+            <gmapstrlocator>
+                <class>SDM_Gmapstrlocator_Block</class>
+            </gmapstrlocator>
+        </blocks>
+        <helpers>
+            <gmapstrlocator>
+                <class>SDM_Gmapstrlocator_Helper</class>
+            </gmapstrlocator>
+        </helpers>
+        <rewrite>
+            <gmapstrlocator>
+                <from><![CDATA[#stores#]]></from>
+                <to><![CDATA[/gmapstrlocator/index/index/]]></to>
+                <complete>1</complete>
+            </gmapstrlocator>
+        </rewrite>
+    </global>
+</config>

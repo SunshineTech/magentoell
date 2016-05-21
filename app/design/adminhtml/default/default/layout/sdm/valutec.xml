@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_valutec_giftcard_total" template="sdm/valutec/sales/order/totals/giftcard.phtml" />
+        </reference>
+        <reference name="order_tab_info">
+            <action method="setTemplate"><template>sdm/valutec/sales/order/view/tab/info.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_valutec_giftcard_total" template="sdm/valutec/sales/order/totals/giftcard.phtml" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_valutec_giftcard_total" template="sdm/valutec/sales/order/totals/giftcard.phtml" />
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_valutec_giftcard_total" template="sdm/valutec/sales/order/totals/giftcard.phtml" />
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_valutec_giftcard_total" template="sdm/valutec/sales/order/totals/giftcard.phtml" after="-" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_valutec_giftcard_total" template="sdm/valutec/sales/order/totals/giftcard.phtml" after="-" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="sdm_valutec_giftcard_total" template="sdm/valutec/sales/order/totals/giftcard.phtml" after="-" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>sdm/valutec/giftcard.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>sdm/valutec/css/giftcard.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="js">
+            <block type="sdm_valutec/page_html_head_js" name="sdm.valutec.js" template="sdm/valutec/page/html/head/js.phtml" />
+        </reference>
+    </adminhtml_sales_order_create_index>
+</layout>

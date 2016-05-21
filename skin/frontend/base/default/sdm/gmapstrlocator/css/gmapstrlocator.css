@@ -1,0 +1,35 @@
+.legend span {
+    white-space: nowrap;
+    padding-left: 26px;
+    width: auto;
+    line-height: 23px;
+    margin-right: 10px;
+}
+.brand-key {
+    height: 21px;
+    width: 21px;
+    display: inline-block;
+    float: left;
+}
+.brand-key.allstar {
+    background: url(../images/legend/brand-allstar.png) center left no-repeat;
+}
+.brand-key.eclips {
+    background: url(../images/legend/brand-eclips.png) center left no-repeat;
+}
+.brand-key.prestige {
+    background: url(../images/legend/brand-prestige.png) center left no-repeat;
+}
+.brand-key.quilting {
+    background: url(../images/legend/brand-quilting.png) center left no-repeat;
+}
+.brand-key.sizzix {
+    background: url(../images/legend/brand-sizzix.png) center left no-repeat;
+}
+#locator-online-results .storeType {
+    display: block;
+    font-style: italic;
+    color: #999 !important;
+    font-size: 12px;
+    margin-top: 5px;
+}

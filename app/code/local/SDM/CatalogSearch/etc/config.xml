@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Magento catalog search customizations
+ *
+ * @category  SDM
+ * @package   SDM_CatalogSearch
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CatalogSearch>
+            <version>0.1.1</version>
+        </SDM_CatalogSearch>
+    </modules>
+    <global>
+        <helpers>
+            <sdm_catalogsearch>
+                <class>SDM_CatalogSearch_Helper</class>
+            </sdm_catalogsearch>
+        </helpers>
+        <models>
+            <sdm_catalogsearch>
+                <class>SDM_CatalogSearch_Model</class>
+            </sdm_catalogsearch>
+            <catalogsearch>
+                <rewrite>
+                    <layer>SDM_CatalogSearch_Model_Layer</layer>
+                    <resource_fulltext_collection>SDM_CatalogSearch_Model_Resource_Fulltext_Collection</resource_fulltext_collection>
+                </rewrite>
+            </catalogsearch>
+            <catalogsearch_resource>
+                <rewrite>
+                    <query>SDM_CatalogSearch_Model_Resource_Query</query>
+                    <fulltext>SDM_CatalogSearch_Model_Resource_Fulltext</fulltext>
+                    <fulltext_collection>SDM_CatalogSearch_Model_Resource_Fulltext_Collection</fulltext_collection>
+                    <fulltext_engine>SDM_CatalogSearch_Model_Resource_Fulltext_Engine</fulltext_engine>
+                </rewrite>
+            </catalogsearch_resource>
+        </models>
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <catalog_search_grid>SDM_CatalogSearch_Block_Adminhtml_Catalog_Search_Grid</catalog_search_grid>
+                    <catalog_search_edit_form>SDM_CatalogSearch_Block_Adminhtml_Catalog_Search_Edit_Form</catalog_search_edit_form>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+    </global>
+    <frontend>
+        <routers>
+            <catalogsearch>
+                <args>
+                    <modules>
+                        <SDM_CatalogSearch before="Mage_CatalogSearch">SDM_CatalogSearch</SDM_CatalogSearch>
+                    </modules>
+                </args>
+            </catalogsearch>
+        </routers>
+    </frontend>
+</config>

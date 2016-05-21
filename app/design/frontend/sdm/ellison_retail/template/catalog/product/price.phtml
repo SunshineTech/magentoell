@@ -1,0 +1,151 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * Customized ERUS price template
+ *
+ * If customer is not logged in, only display MSRP ('msrp').
+ */
+?>
+<?php
+$_coreHelper = $this->helper('core');
+$_taxHelper = $this->helper('tax');
+
+$_product = $this->getProduct();
+$_storeId = $_product->getStoreId();
+$_store = $_product->getStore();
+$_id = $_product->getId();
+$_simplePricesTax = ($_taxHelper->displayPriceIncludingTax() || $_taxHelper->displayBothPrices());
+$_minimalPriceValue = $_product->getMinimalPrice();
+$_minimalPriceValue = $_store->roundPrice($_store->convertPrice($_minimalPriceValue));
+$_minimalPrice = $_taxHelper->getPrice($_product, $_minimalPriceValue, $_simplePricesTax);
+$_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStoreLabel();
+
+// Custom variables added by SDM
+$_msrp = $_product->getMsrp();
+if (!$_msrp || $_msrp <= 0) {
+    $_msrp = $_store->roundPrice($_store->convertPrice($_product->getPrice()));
+}
+$_customer = Mage::getSingleton('customer/session')->getCustomer();
+
+// Get negotiated price, if available (only for ERUS)
+$_negotiatedPrice = Mage::helper('customerdiscount/price')->getNegotiatedPrice($_product);
+$_newFinalPrice = min($_product->getFinalPrice(), $_negotiatedPrice);
+$_convertedFinalPrice = $_store->roundPrice($_store->convertPrice($_newFinalPrice));
+?>
+
+<?php if (!$_product->isGrouped()): ?>
+
+    <div class="price-box-msrp-only">
+    <?php // Display only MSRP if not logged in or not approved ?>
+    <?php if (!$_customer->isApprovedRetailer()): ?>
+        <span class="msrp-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+            <?php echo $_coreHelper->formatPrice($_msrp, true) ?>
+        </span>
+    <?php // Display normally for ERUS ?>
+    <?php else: ?>
+        <div class="price-box">
+        <?php $_convertedPrice = $_store->roundPrice($_store->convertPrice($_product->getPrice())); ?>
+        <?php $_price = $_taxHelper->getPrice($_product, $_convertedPrice); ?>
+        <?php $_wholesalePrice = $_taxHelper->getPrice($_product, $_convertedPrice, $_simplePricesTax); ?>
+        <?php $_finalPrice = $_taxHelper->getPrice($_product, $_convertedFinalPrice) ?>
+        <?php $_finalPriceInclTax = $_taxHelper->getPrice($_product, $_convertedFinalPrice, true) ?>
+        <?php if ($_finalPrice >= $_price): ?>
+            <?php if ($_wholesalePrice > $_price): ?>
+                <p class="old-price">
+                    <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                    <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                        <?php echo $_coreHelper->formatPrice($_wholesalePrice, false) ?>
+                    </span>
+                </p>
+            <?php endif; ?>
+            <?php if ($_taxHelper->displayBothPrices()): ?>
+                <span class="price-excluding-tax">
+                    <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
+                    <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                        <?php if ($_finalPrice == $_price): ?>
+                            <?php echo $_coreHelper->formatPrice($_price, false) ?>
+                        <?php else: ?>
+                            <?php echo $_coreHelper->formatPrice($_finalPrice, false) ?>
+                        <?php endif; ?>
+                    </span>
+                </span>
+                <span class="price-including-tax">
+                    <span class="label"><?php echo $this->helper('tax')->__('Incl. Tax:') ?></span>
+                    <span class="price" id="price-including-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                        <?php echo $_coreHelper->formatPrice($_finalPriceInclTax, false) ?>
+                    </span>
+                </span>
+            <?php else: ?>
+                <?php if ($_finalPrice < $_msrp): ?>
+                    <p class="msrp-price">
+                        <span class="price-label"><?php echo $this->__('MSRP:') ?></span>
+                        <span class="price" id="msrp-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                            <?php echo $_coreHelper->formatPrice($_msrp, false) ?>
+                        </span>
+                    </p>
+                <?php endif; ?>
+                <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <?php if ($_finalPrice == $_price): ?>
+                        <?php echo $_coreHelper->formatPrice($_price, true) ?>
+                    <?php else: ?>
+                        <?php echo $_coreHelper->formatPrice($_finalPrice, true) ?>
+                    <?php endif; ?>
+                </span>
+            <?php endif; ?>
+        <?php else: /* if ($_finalPrice >= $_price): */ ?>
+            <p class="msrp-price">
+                <span class="price-label"><?php echo $this->__('MSRP:') ?></span>
+                <span class="price" id="msrp-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <?php echo $_coreHelper->formatPrice($_msrp, false) ?>
+                </span>
+            </p>
+            <p class="old-price">
+                <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <?php echo $_coreHelper->formatPrice($_wholesalePrice, false) ?>
+                </span>
+            </p>
+            <?php if ($_taxHelper->displayBothPrices()): ?>
+                <p class="special-price">
+                    <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
+                    <span class="price-excluding-tax">
+                        <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
+                        <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                            <?php echo $_coreHelper->formatPrice($_finalPrice, false) ?>
+                        </span>
+                    </span>
+                    <span class="price-including-tax">
+                        <span class="label"><?php echo $this->helper('tax')->__('Incl. Tax:') ?></span>
+                        <span class="price" id="price-including-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                            <?php echo $_coreHelper->formatPrice($_finalPriceInclTax, false) ?>
+                        </span>
+                    </span>
+                </p>
+            <?php else: ?>
+                <p class="special-price">
+                    <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
+                    <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                        <?php echo $_coreHelper->formatPrice($_finalPrice, false) ?>
+                    </span>
+                </p>
+            <?php endif; ?>
+        <?php endif; /* if ($_finalPrice >= $_price): */ ?>
+        </div>
+    <?php endif; ?>
+    </div>
+
+<?php else: /* if (!$_product->isGrouped()): */ ?>
+    <?php
+    // Group product prices are never shown
+    ?>
+<?php endif; /* if (!$_product->isGrouped()): */ ?>

@@ -1,0 +1,115 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * Customizations to this template by SDM include:
+ *
+ * -   Removed of all Weee logic since it doesn't apply to Ellison and
+ *     simply overcomplicates this template
+ * -   Added logic to show Price/MSRP ('price') if the price is less than it
+ */
+
+
+$_coreHelper = $this->helper('core');
+$_taxHelper = $this->helper('tax');
+$_product = $this->getProduct();
+$_storeId = $_product->getStoreId();
+$_store = $_product->getStore();
+$_id = $_product->getId();
+$_simplePricesTax = ($_taxHelper->displayPriceIncludingTax() || $_taxHelper->displayBothPrices());
+$_minimalPriceValue = $_product->getMinimalPrice();
+$_minimalPriceValue = $_store->roundPrice($_store->convertPrice($_minimalPriceValue));
+$_minimalPrice = $_taxHelper->getPrice($_product, $_minimalPriceValue, $_simplePricesTax);
+$_convertedFinalPrice = $_store->roundPrice($_store->convertPrice($_product->getFinalPrice()));
+$_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStoreLabel();
+
+?>
+
+<?php 
+    // Show prices for everything except grouped products
+    if (!$_product->isGrouped()):
+?>
+    <div class="price-box">
+        <?php $_convertedPrice = $_store->roundPrice($_store->convertPrice($_product->getPrice())); ?>
+        <?php $_price = $_taxHelper->getPrice($_product, $_convertedPrice); ?>
+        <?php $_regularPrice = $_taxHelper->getPrice($_product, $_convertedPrice, $_simplePricesTax); ?>
+        <?php $_finalPrice = $_taxHelper->getPrice($_product, $_convertedFinalPrice) ?>
+        <?php $_finalPriceInclTax = $_taxHelper->getPrice($_product, $_convertedFinalPrice, true) ?>
+        <?php if ($_finalPrice >= $_price): ?>
+            <?php if ($_regularPrice > $_price): ?>
+                <p class="old-price">
+                    <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                    <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                        <?php echo $_coreHelper->formatPrice($_regularPrice, false) ?>
+                    </span>
+                </p>
+            <?php endif; ?>
+            <?php if ($_taxHelper->displayBothPrices()): ?>
+                <span class="price-excluding-tax">
+                    <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
+                    <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                        <?php if ($_finalPrice == $_price): ?>
+                            <?php echo $_coreHelper->formatPrice($_price, false) ?>
+                        <?php else: ?>
+                            <?php echo $_coreHelper->formatPrice($_finalPrice, false) ?>
+                        <?php endif; ?>
+                    </span>
+                </span>
+                <span class="price-including-tax">
+                    <span class="label"><?php echo $this->helper('tax')->__('Incl. Tax:') ?></span>
+                    <span class="price" id="price-including-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                        <?php echo $_coreHelper->formatPrice($_finalPriceInclTax, false) ?>
+                    </span>
+                </span>
+            <?php else: ?>
+                <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <?php if ($_finalPrice == $_price): ?>
+                        <?php echo $_coreHelper->formatPrice($_price, true) ?>
+                    <?php else: ?>
+                        <?php echo $_coreHelper->formatPrice($_finalPrice, true) ?>
+                    <?php endif; ?>
+                </span>
+            <?php endif; ?>
+        <?php else: /* if ($_finalPrice == $_price): */ ?>
+            <p class="old-price">
+                <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <?php echo $_coreHelper->formatPrice($_regularPrice, false) ?>
+                </span>
+            </p>
+            <?php if ($_taxHelper->displayBothPrices()): ?>
+                <p class="special-price">
+                    <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
+                    <span class="price-excluding-tax">
+                        <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
+                        <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                            <?php echo $_coreHelper->formatPrice($_finalPrice, false) ?>
+                        </span>
+                    </span>
+                    <span class="price-including-tax">
+                        <span class="label"><?php echo $this->helper('tax')->__('Incl. Tax:') ?></span>
+                        <span class="price" id="price-including-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                            <?php echo $_coreHelper->formatPrice($_finalPriceInclTax, false) ?>
+                        </span>
+                    </span>
+                </p>
+            <?php else: ?>
+                <p class="special-price">
+                    <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
+                <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <?php echo $_coreHelper->formatPrice($_finalPrice, false) ?>
+                </span>
+                </p>
+            <?php endif; ?>
+        <?php endif; /* if ($_finalPrice >= $_price): */ ?>
+    </div>
+<?php endif; /* if (!$_product->isGrouped()): */ ?>

@@ -1,0 +1,39 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Tabs - Product by designers template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_designerCollection = $this->getDesignerCollection();
+$_designerProductHtml = $this->getDesignerProductsHtml();
+
+?>
+<?php if (!empty($_designerProductHtml)): ?>
+    <h2 class="related-title">
+        <?php echo $this->__('Products by ')?>
+        <span class="designers-name">
+        <?php 
+            if (!empty($_designerCollection)) {
+                $i = 0;
+                foreach ($_designerCollection as $designer) {
+                    $i++;
+                    if(count($_designerCollection) == $i) {
+                        echo $designer->getName() . '.';
+                    } else {
+                        echo $designer->getName() . ', ';
+                    }
+                }
+            } else {
+                echo $this->__('No Designers');
+            }
+        ?>
+        </span>
+    </h2>
+    <?php echo $_designerProductHtml ?>
+<?php endif; ?>

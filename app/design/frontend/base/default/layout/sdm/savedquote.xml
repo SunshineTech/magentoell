@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+    <savedquote_quote_list>
+        <update handle="customer_account"/>
+       <reference name="my.account.wrapper">
+            <block type="savedquote/account_list" name="savedquote.account.list" />
+            <block type="savedquote/account_dashboard" name="customer.account.link.back" template="sdm/savedquote/account/link/back.phtml" />
+       </reference>
+    </savedquote_quote_list>
+    <savedquote_quote_view>
+        <update handle="customer_account" />
+        <reference name="my.account.wrapper">
+            <block type="savedquote/account_savedquote_view" name="savedquote.account.view" template="sdm/savedquote/account/savedquote/view.phtml">
+                <block type="savedquote/link" name="savequote.place.order" as="place_order" template="sdm/savedquote/button/placeorder.phtml" />
+                <block type="savedquote/address" name="savedquote.billing.address" as="billing_address" template="sdm/savedquote/form/billing.phtml"/>
+                <!-- Not displaying payment information -->
+                <!-- <block type="payment/form_cc" name="payment.form" as="cc" /> -->
+                <!-- <block type="savedquote/cc" name="savedquote.billing.address" as="cc" template="sdm/savedquote/form/cc.phtml"/> -->
+            </block>
+        </reference>
+    </savedquote_quote_view>
+    <savedquote_quote_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><script>/sdm/savedquote/js/savedquote.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="savedquote/savedquote" name="savedquote.save.page" template="sdm/savedquote/index.phtml">
+                <action method="addItemRender"><type>simple</type><block>savedquote/item_renderer</block><template>sdm/savedquote/item/default.phtml</template></action>
+                <block type="savedquote/address" name="savedquote.shipping.address" as="shipping_address" template="sdm/savedquote/form/shipping.phtml"/>
+                <block type="savedquote/link" name="savequote.place.quote" as="place_quote" template="sdm/savedquote/button/savequote.phtml" />
+                <block type="savedquote/totals" name="checkout.cart.totals" as="totals" template="sdm/savedquote/totals.phtml" />
+            </block>
+        </reference>
+    </savedquote_quote_index>
+    <savedquote_quote_print>
+        <reference name="root">
+            <action method="setTemplate"><template>page/print.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addCss"><file>sdm/savedquote/css/print.css</file></action>
+        </reference>
+        <reference name="content">
+            <block type="savedquote/savedquote" template="sdm/savedquote/account/savedquote/print.phtml" name="savedquote.print" />
+        </reference>
+    </savedquote_quote_print>
+</layout>

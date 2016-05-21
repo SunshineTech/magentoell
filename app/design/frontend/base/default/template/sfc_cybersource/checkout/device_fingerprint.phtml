@@ -1,0 +1,30 @@
+<?php
+/**
+ * StoreFront CyberSource Tokenized Payment Extension for Magento
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of StoreFront Consulting, Inc.
+ *
+ * @category  SFC
+ * @package   SFC_CyberSource
+ * @author    Garth Brantley <garth@storefrontconsulting.com>
+ * @copyright 2009-2013 StoreFront Consulting, Inc. All Rights Reserved.
+ * @license   http://www.storefrontconsulting.com/media/downloads/ExtensionLicense.pdf StoreFront Consulting Commercial License
+ * @link      http://www.storefrontconsulting.com/cybersource-saved-credit-cards-extension-for-magento/
+ *
+ */
+?>
+<?php if ($this->isEnabled()): ?>
+    <p style="background:url(https://h.online-metrix.net/fp/clear.png?org_id=<?php echo $this->getOrgId() ?>&amp;session_id=<?php echo $this->getMerchantSessionId() ?>&amp;m=1)"></p>
+    <img src="https://h.online-metrix.net/fp/clear.png?org_id=<?php echo $this->getOrgId() ?>&amp;session_id=<?php echo $this->getMerchantSessionId() ?>&amp;m=2" alt="">
+    <object type="application/x-shockwave-flash"
+            data="https://h.online-metrix.net/fp/fp.swf?org_id=<?php echo $this->getOrgId() ?>&amp;session_id=<?php echo $this->getMerchantSessionId() ?>" width="1" height="1"
+            id="thm_fp">
+        <param name="movie" value="https://h.online-metrix.net/fp/fp.swf?org_id=<?php echo $this->getOrgId() ?>&amp;session_id=<?php echo $this->getMerchantSessionId() ?>"/>
+        <div></div>
+    </object>
+    <script src="https://h.online-metrix.net/fp/check.js?org_id=<?php echo $this->getOrgId() ?>&amp;session_id=<?php echo $this->getMerchantSessionId() ?>"
+            type="text/javascript">
+    </script>
+<?php endif; ?>

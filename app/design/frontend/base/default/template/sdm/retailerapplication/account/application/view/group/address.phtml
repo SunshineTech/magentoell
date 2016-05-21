@@ -1,0 +1,112 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_address = $this->getAddress();
+$_streets = $_address->getStreet();
+$_addressType = $this->getAddressType();
+$isCorporate = false;
+$fax = '';
+if ($_addressType === SDM_RetailerApplication_Helper_Data::ONWER_ADDRESS_CODE) {
+    $isCorporate = true;
+    $fax = trim($_address->getFax());
+}
+?>
+
+<h3><?php echo $this->getName() ?></h3>
+
+<!-- <div class="field address">
+    <input type="hidden" name="<?php echo $_addressType ?>[address_id]" value="<?php echo $_address->getId() ?>" id="<?php echo $_addressType ?>:address_id" />
+</div> -->
+
+<div class="field address name-firstname">
+    <label for="<?php echo $_addressType ?>:firstname" class="required"><?php echo $this->__('First Name') ?></label>
+    <input id="<?php echo $_addressType ?>:firstname" name="<?php echo $_addressType ?>[firstname]" value="<?php echo $this->escapeHtml($_address->getFirstname()) ?>" title="<?php echo $this->__('First Name') ?>" maxlength="255" class="input-text required-entry" type="text">
+</div>
+
+
+<div class="field address name-lastname">
+    <label for="<?php echo $_addressType ?>:lastname" class="required"><?php echo $this->__('Last Name') ?></label>
+    <input id="<?php echo $_addressType ?>:lastname" name="<?php echo $_addressType ?>[lastname]" value="<?php echo $this->escapeHtml($_address->getLastname()) ?>" title="<?php echo $this->__('Last Name') ?>" maxlength="255" class="input-text required-entry" type="text">
+</div>
+
+
+<div class="field address">
+    <label for="<?php echo $_addressType ?>:company" class="required"><?php echo $this->__('Company') ?></label>
+    <div class="input-box">
+        <input type="text" id="<?php echo $_addressType ?>:company" name="<?php echo $_addressType ?>[company]" value="<?php echo $this->escapeHtml($_address->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
+    </div>
+</div>
+
+<div class="field address">
+    <label for="<?php echo $_addressType ?>:street1" class="required"><?php echo $this->__('Address') ?></label>
+    <input type="text" title="<?php echo $this->__('Street Address') ?>" name="<?php echo $_addressType ?>[street][]" id="<?php echo $_addressType ?>:street1" value="<?php echo $this->escapeHtml($_streets[0]) ?>" class="input-text <?php echo $this->helper('customer/address')
+    ->getAttributeValidationClass('street') ?>" />
+</div>
+
+<div class="field address">
+    <label for="<?php echo $_addressType ?>:street2" class=""><?php echo $this->__('Address 2') ?></label>
+    <input type="text" title="<?php echo $this->__('Street Address 2') ?>" name="<?php echo $_addressType ?>[street][]" id="<?php echo $_addressType ?>:street2" value="<?php echo (isset($_streets[1])) ? $this->escapeHtml($_streets[1]) : '' ?>" class="input-text" />
+</div>
+
+<div class="field address">
+    <label for="<?php echo $_addressType ?>:city" class="required"><?php echo $this->__('City') ?></label>
+    <input type="text" title="<?php echo $this->__('City') ?>" name="<?php echo $_addressType ?>[city]" value="<?php echo $this->escapeHtml($_address->getCity()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="<?php echo $_addressType ?>:city" />
+</div>
+
+<div class="field address">
+    <label for="<?php echo $_addressType ?>:region_id" class="required"><?php echo $this->__('State/Province') ?></label>
+    <select id="<?php echo $_addressType ?>:region_id" name="<?php echo $_addressType ?>[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select required-entry">
+       <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+    </select>
+    <input type='text' name="<?php echo $_addressType ?>[region]" id="<?php echo $_addressType ?>:region" value="<?php echo $this->escapeHtml($_address->getRegion()) ?>" />
+    <script type="text/javascript">
+        defaultRegionValues['#<?php echo $_addressType ?>\\:region_id'] = <?php echo $_address->getRegionId() ?>;
+    </script>
+</div>
+
+<div class="field address">
+    <label for="<?php echo $_addressType ?>:postcode" class="required"><?php echo $this->__('Zip/Postal Code') ?></label>
+    <input type="text" name="<?php echo $_addressType ?>[postcode]" value="<?php echo $this->escapeHtml($_address->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="<?php echo $_addressType ?>:postcode" class="input-text" />
+</div>
+
+<div class="field address">
+    <label for="<?php echo $_addressType ?>:country" class="required"><?php echo $this->__('Country') ?></label>
+    <?php echo $this->getCountryHtmlSelect($_addressType) ?>
+</div>
+
+<div class="field address">
+    <label for="<?php echo $_addressType ?>:telephone" class="required"><?php echo $this->__('Telephone') ?></label>
+    <input type="tel" name="<?php echo $_addressType ?>[telephone]" value="<?php echo $this->escapeHtml($_address->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="<?php echo $_addressType ?>:telephone" />
+</div>
+
+<?php if ($isCorporate) :?>
+    <div class="field address">
+        <label for="<?php echo $_addressType ?>:fax"><?php echo $this->__('Fax') ?></label>
+        <input type="tel" name="<?php echo $_addressType ?>[fax]" value="<?php echo $this->escapeHtml($_address->getFax()) ?>" title="<?php echo $this->__('Fax') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>" id="<?php echo $_addressType ?>:fax" />
+        <input type="hidden" name="fax_cannot_change" value="<?php echo (empty($fax)) ? '0' : '1' ?>" />
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+//<![CDATA[
+    var <?php echo $_addressType ?>SDMRegionUpdater = null;
+    jQuery(document).ready(function(){
+        <?php echo $_addressType ?>SDMRegionUpdater = new SDMRegionUpdater();
+        <?php echo $_addressType ?>SDMRegionUpdater.init(
+            '<?php echo $_addressType ?>\\:country',
+            '<?php echo $_addressType ?>\\:region',
+            '<?php echo $_addressType ?>\\:region_id',
+            <?php echo $this->helper('directory')->getRegionJson() ?>
+        );
+    });
+//]]>
+</script>

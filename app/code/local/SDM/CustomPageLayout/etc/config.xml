@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Custom Page Layout
+ *
+ * @category  SDM
+ * @package   SDM_CustomPageLayout
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CustomPageLayout>
+            <version>1.0.0</version>
+        </SDM_CustomPageLayout>
+    </modules>
+    <global>
+        <page>
+            <layouts>
+                <home translate="label">
+                    <label>Home Page</label>
+                    <template>page/home.phtml</template>
+                    <layout_handle>custom_homepage_column</layout_handle>
+                </home>
+            </layouts>
+        </page>
+    </global>
+</config>

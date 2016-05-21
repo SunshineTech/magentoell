@@ -1,0 +1,102 @@
+<?php if ($this->isShowChart()): ?>
+<div id="trendchart" style="width: 100%; height: 400px;"></div>
+<script type="text/javascript">
+    var chart;
+    var recipeintTrendData = [];
+    <?php foreach ($this->getCollection() as $row): ?>
+        recipeintTrendData.push({
+            new_ticket_cnt: '<?php echo $row->getData('new_ticket_cnt') ?>',
+            full_resolution_time: '<?php echo $row->getData('full_resolution_time') ?>',
+            date: '<?php echo $row->getData('period') ?>'
+        });
+    <?php endforeach ?>
+
+    AmCharts.ready(function () {
+        chart                    = new AmCharts.AmSerialChart();
+        chart.pathToImages       = "/js/mirasvit/code/helpdesk/lib/amcharts-3.4.5/images/";
+        chart.dataProvider       = recipeintTrendData;
+        chart.categoryField      = "date";
+
+        var categoryAxis = chart.categoryAxis;
+        categoryAxis.parseDates       = true;
+        categoryAxis.minPeriod        = "DD";
+        categoryAxis.dashLength       = 1;
+        categoryAxis.minorGridEnabled = true;
+        categoryAxis.position         = "top";
+        categoryAxis.axisColor        = "#DADADA";
+
+        var newTicketCntAxis = new AmCharts.ValueAxis();
+        newTicketCntAxis.axisAlpha  = 1;
+        //newTicketCntAxis.gridAlpha  = 1;
+        newTicketCntAxis.dashLength = 1;
+        newTicketCntAxis.title      = "New Tickets Number";
+        newTicketCntAxis.inside     = true;
+        newTicketCntAxis.position   = "left";
+        chart.addValueAxis(newTicketCntAxis);
+
+        var graph = new AmCharts.AmGraph();
+        graph.id                          = 'new_ticket_cnt';
+        graph.valueField                  = "new_ticket_cnt";
+        graph.title                       = "New Tickets Number";
+        graph.valueAxis                   = newTicketCntAxis;
+        graph.balloonText                 = "New Tickets Number: [[value]]";
+        graph.type                        = "smoothedLine";
+        graph.lineColor                   = "#5fb503";
+        graph.lineAlpha                   = 1;
+        graph.lineThickness               = 2;
+        graph.fillAlphas                  = 0.1;
+        graph.bulletSize                  = 6;
+        graph.bullet                      = 'round';
+        graph.hideBulletsCount            = 50,
+        graph.bulletBorderAlpha           = 1;
+        graph.bulletColor                 = '#FFFFFF';
+        graph.useLineColorForBulletBorder = true;
+        chart.addGraph(graph);
+
+        var fullResolutionTimeAxis = new AmCharts.ValueAxis();
+        fullResolutionTimeAxis.axisAlpha  = 1;
+        fullResolutionTimeAxis.dashLength = 1;
+        fullResolutionTimeAxis.gridAlpha  = 0;
+        fullResolutionTimeAxis.title      = "Full Resolution Time, h.";
+        fullResolutionTimeAxis.inside     = true;
+        fullResolutionTimeAxis.position   = "right";
+        chart.addValueAxis(fullResolutionTimeAxis);
+
+        var graph = new AmCharts.AmGraph();
+        graph.valueField                  = "full_resolution_time";
+        graph.title                       = "Full Resolution Time, h.";
+        graph.valueAxis                   = fullResolutionTimeAxis;
+        graph.balloonText                 = "Full Resolution Time, h.: [[value]]";
+        graph.type                        = "smoothedLine";
+        graph.lineColor                   = "#ff0000";
+        graph.lineAlpha                   = 1;
+        graph.lineThickness               = 2;
+        graph.fillAlphas                  = 0.1;
+        graph.bulletSize                  = 5;
+        graph.bullet                      = 'round';
+        graph.hideBulletsCount            = 50,
+        graph.bulletBorderAlpha           = 1;
+        graph.bulletColor                 = '#FFFFFF';
+        graph.useLineColorForBulletBorder = true;
+        chart.addGraph(graph);
+
+
+        var legend = new AmCharts.AmLegend();
+        legend.equalWidths = false;
+        chart.addLegend(legend);
+
+        var chartCursor            = new AmCharts.ChartCursor();
+        chartCursor.cursorPosition = "mouse";
+        chartCursor.pan            = true;
+        chart.addChartCursor(chartCursor);
+
+        var chartScrollbar = new AmCharts.ChartScrollbar();
+        chartScrollbar.autoGridCount   = true;
+        chartScrollbar.graph           = 'new_ticket_cnt';
+        chartScrollbar.scrollbarHeight = 40;
+        chart.addChartScrollbar(chartScrollbar);
+
+        chart.write("trendchart");
+    });
+</script>
+<?php endif;?>

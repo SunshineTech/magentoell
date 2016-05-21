@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * eClips Software Download
+ *
+ * @category  SDM
+ * @package   SDM_Eclips
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <menu>
+        <report>
+            <children>
+                <eclips translate="title" module="eclips">
+                    <title>View eClips Downloads</title>
+                    <sort_order>600</sort_order>
+                    <action>adminhtml/eclips</action>
+                </eclips>
+            </children>
+        </report>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <report>
+                        <children>
+                            <eclips translate="title" module="eclips">
+                                <title>View eClips Downloads</title>
+                                <sort_order>600</sort_order>
+                            </eclips>
+                        </children>
+                    </report>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

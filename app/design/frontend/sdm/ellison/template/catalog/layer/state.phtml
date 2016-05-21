@@ -1,0 +1,22 @@
+
+<div class="block-title">
+    <span><?php echo $this->__('Narrow Results By:')?></span>
+</div>
+<div class="block-content">
+    <?php
+        $catalogSearchHelper =  $this->helper('sdm_catalogsearch');
+        $searchParams = $catalogSearchHelper->getParams();
+    ?>
+    <form id="search_layer_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+        <div class="input-box">
+            <input id="search" type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>" class="input-text required-entry" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" placeholder="<?php echo $this->__('Enter keywords...') ?>" />
+            <button type="submit" title="<?php echo $this->__('Search') ?>" class="button search-button"><span><span><i class="fa fa-search"></i></span></span></button>
+            <?php foreach($searchParams as $key => $value): ?>
+                <?php if ($key !== 'q'): ?>
+                    <input type='hidden' name='<?php echo $key ?>' value='<?php echo addslashes($value) ?>' />
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <input type='hidden' name='reload' value='1' />
+        </div>
+    </form>
+</div>

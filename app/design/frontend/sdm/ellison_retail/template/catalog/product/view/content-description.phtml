@@ -1,0 +1,117 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product description template
+ *
+ * @see Mage_Catalog_Block_Product_View_Description
+ */
+
+$_product = $this->getProduct();
+$_description = $_product->getDescription();
+$_productDimensions = $_product->getProductDimensions();
+$_designDimensions = $_product->getDesignDimensions();
+$_includes = $_product->getIncludes();
+$_construction = $_product->getConstruction();
+$_productWeight = $_product->getProductWeight();
+$_packagedWeight = $_product->getPackagedWeight();
+$_machineWeight = $_product->getMachineWeight();
+$_machineDimensions = $_product->getMachineDimensions();
+$_warranty = $_product->getWarranty();
+$_masterQty = $_product->getMasterqty();
+
+?>
+<div class="clear"></div>
+<?php if ($_description): ?>
+    <h2 class="related-title">
+        <?php echo $this->__('Overview') ?>
+    </h2>
+    <div class="content">
+        <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_description, 'description') ?>
+    </div>
+<?php endif; ?>
+<div class="attributes-block">
+    <?php if ($_productDimensions): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Product Dimensions');?></span>
+            <span class="value"><?php echo $_productDimensions; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_designDimensions): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Design Dimensions');?></span>
+            <span class="value"><?php echo $_designDimensions; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_includes): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Includes');?></span>
+            <span class="value"><?php echo $_includes; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_construction): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Construction');?></span>
+            <span class="value"><?php echo $_construction; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_productWeight): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Product Weight');?></span>
+            <span class="value"><?php echo $_productWeight; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_packagedWeight): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Packaged Weight');?></span>
+            <span class="value"><?php echo $_packagedWeight; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_machineWeight): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Machine Weight');?></span>
+            <span class="value"><?php echo $_machineWeight; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_machineDimensions): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Machine Dimensions');?></span>
+            <span class="value"><?php echo $_machineDimensions; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_warranty): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Warranty');?></span>
+            <span class="value"><?php echo $_warranty; ?></span>
+        </div>
+    <?php endif; ?>
+    <?php if ($_masterQty): ?>
+        <div class="product-attribute">
+            <span class="title"><?php echo $this->__('Master Quantity');?></span>
+            <span class="value"><?php echo $_masterQty; ?></span>
+        </div>
+    <?php endif; ?>
+</div>

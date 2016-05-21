@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * SDM's address verification extension
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_AddressVerification
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_AddressVerification>
+            <version>0.1.0</version>
+        </SDM_AddressVerification>
+    </modules>
+    <global>
+        <helpers>
+            <sdm_av>
+                <class>SDM_AddressVerification_Helper</class>
+            </sdm_av>
+        </helpers>
+    </global>
+</config>

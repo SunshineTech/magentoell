@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Press release listing and article rendering 
+ *
+ * @category  SDM
+ * @package   SDM_PressReleases
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_PressReleases>
+            <version>0.1.0</version>
+        </SDM_PressReleases>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_pressreleases>
+                <class>SDM_PressReleases_Block</class>
+            </sdm_pressreleases>
+        </blocks>
+        <helpers>
+            <sdm_pressreleases>
+                <class>SDM_PressReleases_Helper</class>
+            </sdm_pressreleases>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <sdm_pressreleases>
+                <use>standard</use>
+                <args>
+                    <module>SDM_PressReleases</module>
+                    <frontName>pressreleases</frontName>
+                </args>
+            </sdm_pressreleases>
+        </routers>
+        <layout>
+            <updates>
+                <sdm_pressreleases>
+                    <file>sdm/pressreleases.xml</file>
+                </sdm_pressreleases>
+            </updates>
+        </layout>
+    </frontend>
+</config>

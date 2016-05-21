@@ -1,0 +1,24 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Handles rendering the instructions page
+ *
+ * @category  SDM
+ * @package   SDM_Instructions
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_activeData = $this->getActiveInstructionsData();
+$_activeLabel = $this->getActiveInstructionsLabel();
+?>
+
+<?php if ($_activeData === false): ?>
+	<h2><?php echo $this->__('No Instructions Found'); ?></h2>
+<?php else: ?>
+	<div class="instructions-content">
+		<h2><?php echo $_activeData['label'] ?> <?php echo $this->__('Instructions') ?></h2>
+		<?php echo $_activeData['block']->toHtml() ?>
+	</div>
+<?php endif; ?>

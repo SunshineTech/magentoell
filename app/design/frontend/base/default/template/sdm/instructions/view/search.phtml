@@ -1,0 +1,23 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Instruction
+ *
+ * @category  SDM
+ * @package   SDM_Instructions
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Instructions_Block_Page $this
+ */
+?>
+<form id="search_mini_form" action="<?php echo $this->getSearchUrl() ?>" method="get">
+    <div class="input-box">
+        <label for="search"><?php echo $this->__('Search:') ?></label>
+        <input id="search" type="search" name="search" value="<?php echo $this->getEscapedSearchQuery() ?>" class="input-text required-entry" placeholder="<?php echo $this->__('Search %s Instructions', ucwords($this->getActiveType())) ?>" />
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button search-button"><span><span><?php echo $this->__('Search') ?></span></span></button>
+    </div>
+</form>

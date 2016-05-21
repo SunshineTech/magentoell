@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Wordpress/Fishpig Fixes
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Wordpress
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<!-- Note that there's a local/Fishpig/Wordpress override being done for a router. -->
+<config>
+    <modules>
+        <SDM_Wordpress>
+            <version>0.1.0</version>
+        </SDM_Wordpress>
+    </modules>
+    <global>
+        <models>
+            <wordpress>
+                <rewrite>
+                    <post>SDM_Wordpress_Model_Post</post>
+                </rewrite>
+            </wordpress>
+        </models>
+        <blocks>
+            <wordpress>
+                <rewrite>
+                    <menu>SDM_Wordpress_Block_Menu</menu>
+                    <post_list_pager>SDM_Wordpress_Block_Post_List_Pager</post_list_pager>
+                </rewrite>
+            </wordpress>
+        </blocks>
+    </global>
+</config>

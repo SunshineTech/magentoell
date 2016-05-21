@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Catalog>
+            <version>0.9.4</version>
+        </SDM_Catalog>
+    </modules>
+    <global>
+        <models>
+            <sdm_catalog>
+                <class>SDM_Catalog_Model</class>
+                <resourceModel>sdm_catalog_resource</resourceModel>
+            </sdm_catalog>
+            <sdm_catalog_resource>
+                <entities>
+                    <index_custom_price>
+                        <table>sdm_catalog_product_index_custom_price</table>
+                    </index_custom_price>
+                </entities>
+            </sdm_catalog_resource>
+            <core>
+                <rewrite>
+                    <!-- <store>SDM_Catalog_Model_Store</store> -->
+                </rewrite>
+            </core>
+            <catalog>
+                <rewrite>
+                    <product>SDM_Catalog_Model_Product</product>
+                    <category>SDM_Catalog_Model_Category</category>
+                    <product_attribute_backend_media>SDM_Catalog_Model_Product_Attribute_Backend_Media</product_attribute_backend_media>
+                    <product_visibility>SDM_Catalog_Model_Product_Visibility</product_visibility>
+                    <resource_product>SDM_Catalog_Model_Resource_Product</resource_product>
+                    <resource_product_link_product_collection>SDM_Catalog_Model_Resource_Product_Link_Product_Collection</resource_product_link_product_collection>
+                    <product_type_grouped>SDM_Catalog_Model_Product_Type_Grouped</product_type_grouped>
+                    <product_type_price>SDM_Catalog_Model_Product_Type_Price</product_type_price>
+                    <layer>SDM_Catalog_Model_Layer</layer>
+                </rewrite>
+            </catalog>
+            <catalog_resource>
+                <rewrite>
+                    <url>SDM_Catalog_Model_Resource_Url</url>
+                    <product>SDM_Catalog_Model_Resource_Product</product>
+                    <product_collection>SDM_Catalog_Model_Resource_Product_Collection</product_collection>
+                    <product_link_product_collection>SDM_Catalog_Model_Resource_Product_Link_Product_Collection</product_link_product_collection>
+                    <layer_filter_price>SDM_Catalog_Model_Resource_Layer_Filter_Price</layer_filter_price>
+                    <category_flat>SDM_Catalog_Model_Resource_Category_Flat</category_flat>
+                    <!-- Classes' methods not being used; AdjustWare uses a compeltely custom method instead. -->
+                    <!-- <layer_filter_attribute>SDM_Catalog_Model_Resource_Layer_Filter_Attribute</layer_filter_attribute> -->
+                    <!-- <layer_filter_decimal>SDM_Catalog_Model_Resource_Layer_Filter_Decimal</layer_filter_decimal> -->
+                </rewrite>
+            </catalog_resource>
+        </models>
+        <blocks>
+            <sdm_catalog>
+                <class>SDM_Catalog_Block</class>
+            </sdm_catalog>
+            <catalog>
+                <rewrite>
+                    <product_view>SDM_Catalog_Block_Product_View</product_view>
+                </rewrite>
+            </catalog>
+            <adminhtml>
+                <rewrite>
+                    <cache_additional>SDM_Catalog_Block_Adminhtml_Cache_Additional</cache_additional>
+                    <catalog_product_edit_tab_related>SDM_Catalog_Block_Adminhtml_Catalog_Product_Edit_Tab_Related</catalog_product_edit_tab_related>
+                    <catalog_product_edit_tab_super_group>SDM_Catalog_Block_Adminhtml_Catalog_Product_Edit_Tab_Super_Group</catalog_product_edit_tab_super_group>
+                    <catalog_category_tab_product>SDM_Catalog_Block_Adminhtml_Catalog_Category_Tab_Product</catalog_category_tab_product>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <resources>
+            <sdm_catalog>
+                <setup>
+                    <module>SDM_Catalog</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </sdm_catalog>
+        </resources>
+        <helpers>
+            <sdm_catalog>
+                <class>SDM_Catalog_Helper</class>
+            </sdm_catalog>
+            <storepricing>
+                <rewrite>
+                    <catalog_product_price_indexer>SDM_Catalog_Helper_Catalog_Product_Price_Indexer</catalog_product_price_indexer>
+                </rewrite>
+            </storepricing>
+        </helpers>
+        <events>
+            <catalog_product_save_before>
+                <observers>
+                    <sdm_catalog_product_save_observer>
+                        <type>singleton</type>
+                        <class>sdm_catalog/observer</class>
+                        <method>lockLifecycleOnProductSave</method>
+                    </sdm_catalog_product_save_observer>
+                </observers>
+            </catalog_product_save_before>
+            <catalog_product_save_commit_after>
+                <observers>
+                    <sdm_catalog_product_save_observer>
+                        <type>singleton</type>
+                        <class>sdm_catalog/observer</class>
+                        <method>unlockAndRunLifecycleOnProductSave</method>
+                    </sdm_catalog_product_save_observer>
+                </observers>
+            </catalog_product_save_commit_after>
+            <cataloginventory_stock_item_save_commit_after>
+                <observers>
+                    <sdm_catalog_product_save_observer>
+                        <type>singleton</type>
+                        <class>sdm_catalog/observer</class>
+                        <method>applyLifecycleModificationsOnStockChange</method>
+                    </sdm_catalog_product_save_observer>
+                </observers>
+            </cataloginventory_stock_item_save_commit_after>
+            <controller_action_predispatch_adminhtml_system_currency_saveRates>
+                <observers>
+                    <sdm_enforce_currency>
+                        <class>sdm_catalog/observer</class>
+                        <method>enforceCurrency</method>
+                    </sdm_enforce_currency>
+                </observers>
+            </controller_action_predispatch_adminhtml_system_currency_saveRates>
+            <catalog_controller_product_view>
+                <observers>
+                    <sdm_check_print_catalog>
+                        <class>sdm_catalog/observer</class>
+                        <method>checkPrintCatalog</method>
+                    </sdm_check_print_catalog>
+                </observers>
+            </catalog_controller_product_view>
+        </events>
+        <sales>
+            <quote>
+                <item>
+                    <!-- Make these available when adding product to quote and in $item->getProduct() -->
+                    <!-- These configurations are copied from SDM_Sales -->
+                    <product_attributes>
+                        <msrp /> <!-- Note: this node is already defined in CE 1.9 -->
+                        <min_qty />
+                        <tag_discount_category />
+                        <price_euro />
+                        <special_price_euro />
+                        <release_date />
+                        <allow_cart_backorder />
+                        <allow_checkout_backorder />
+                        <allow_cart />
+                        <allow_checkout />
+                        <allow_preorder />
+                        <allow_quote />
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+    </global>
+    <frontend>
+        <routers>
+            <catalog>
+                <args>
+                    <modules>
+                        <SDM_Catalog before="Mage_Catalog">SDM_Catalog</SDM_Catalog>
+                    </modules>
+                </args>
+            </catalog>
+        </routers>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_Catalog before="Mage_Adminhtml">SDM_Catalog</SDM_Catalog>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sdm_catalog>
+                    <file>sdm_catalog.xml</file>
+                </sdm_catalog>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <sdm_catalog>
+            <general>
+                <limit>5</limit>
+                <!-- <interval>24</interval> -->
+            </general>
+        </sdm_catalog>
+        <sdm_lifecycle>
+            <options>
+                <enabled>1</enabled>
+            </options>
+        </sdm_lifecycle>
+    </default>
+    <crontab>
+        <jobs>
+            <sdm_catalog_check_display_dates>
+                <schedule>
+                    <!-- Run every hour on the 10th minute -->
+                    <cron_expr>10 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>sdm_catalog/observer::checkDisplayDates</model>
+                </run>
+            </sdm_catalog_check_display_dates>
+        </jobs>
+    </crontab>
+</config>

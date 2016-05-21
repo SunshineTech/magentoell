@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Cybersource Modification
+ *
+ * @category  SDM
+ * @package   SDM_Cybersource
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Cybersource>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Cybersource />
+            </depends>
+        </SDM_Cybersource>
+    </modules>
+</config>

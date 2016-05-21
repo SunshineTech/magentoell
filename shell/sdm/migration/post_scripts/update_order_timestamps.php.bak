@@ -1,0 +1,87 @@
+<?php
+
+require_once(dirname(__FILE__) . '/../abstract_migrate.php');
+require_once(dirname(__FILE__) . '/../db.php');
+
+/**
+ * Update created_at and updated_at timestamps. updated_at is
+ *
+ * DOES NOT WORK PROPERLY FOR SOME REASON
+ */
+class Mage_Shell_Test extends SDM_Shell_AbstractMigrate
+{
+
+    protected $_db = 'sizzix_mongo_20141215';
+
+    protected $_user = 'root';
+
+    protected $_password = 'root';
+
+    protected $_host = '127.0.0.1';
+
+    public function run()
+    {
+        ini_set('max_execution_time', 86400);   // 1 day
+        ini_set('memory_limit', '4096M');
+
+        $this->_initMongoDb();
+        $timestamps = array();
+
+        // Get all Ellison order timestamps
+        $results = $this->query("SELECT order_number,created_at,updated_at FROM orders");
+        // $results = $this->query("SELECT order_number,created_at,updated_at FROM orders WHERE order_number = 1000126");
+        Mage::log($results); die;
+
+        $i = 0;
+        foreach ($results as $one) {
+            $timestamps[$i]['order_number'] = trim($one->order_number);
+            $timestamps[$i]['created_at'] = $one->created_at;
+            $timestamps[$i]['updated_at'] = $one->updated_at;
+            $i++;
+        }
+
+        // Update all Magento order timestamps
+        $i = 1;
+        $N = count($timestamps);
+        $dbc = $this->getConn('core_write');
+        foreach ($timestamps as $one) {
+            echo "$i/$N..." . PHP_EOL;
+            $orderNum = $one['order_number'];
+            $created = $one['created_at'];
+            $updated = $one['updated_at'];
+
+            $q1 = "UPDATE sales_flat_order SET created_at = '$created', updated_at = '$updated' WHERE increment_id = '$orderNum'";
+            $q2 = "UPDATE sales_flat_order_grid SET created_at = '$created', updated_at = '$updated' WHERE increment_id = '$orderNum'";
+            Mage::log($q1); Mage::log($q2);
+            $dbc->query($q1);
+            $dbc->query($q2);
+            $i++;
+        }
+
+    }
+
+    public function getMethodNames($data)
+    {
+        $names = array();
+        foreach ($data as $key => $one) {
+            $names[] = $key;
+        }
+        return $names;
+    }
+
+    protected function _getAllNames()
+    {
+        $q1 = "SELECT p.`name`,p.`item_num` FROM `products` AS p";// where p.item_num = '7636'";
+        $q2 = "SELECT i.`name`,i.`idea_num` FROM `ideas` AS i";
+
+        $pNames = $this->query($q1);
+        $iNames = $this->query($q2);
+        // $this->out($pNames);
+        // $this->out($iNames);
+
+        return array_merge($pNames, $iNames);
+    }
+}
+
+$shell = new Mage_Shell_Test();
+$shell->run();

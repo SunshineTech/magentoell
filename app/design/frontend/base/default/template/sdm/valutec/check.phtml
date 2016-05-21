@@ -1,0 +1,45 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Valutec Giftcard Integration
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Valutec
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Valutec_Block_Check $this
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('Check Your Gift Card Balance') ?></h1>
+</div>
+<div class="giftcard-img"><img src="<?php echo $this->getSkinUrl('sdm/valutec/img/check-example.png') ?>" alt="<?php echo $this->__('How to Locate Gift Card Numbers') ?>" class="giftcard-example" /></div>
+<form id="co-payment-form" method="post" action="" onsubmit="sdm_valutec_giftcard.getBalance(); return false;">
+    <ul class="form-list">
+        <li>
+            <div class="input-box">
+                <label for="card_number" class="required"><?php echo $this->__('Gift Card Number') ?></label><br/>
+                <input type="text" id="card_number" name="payment[card_number]" title="<?php echo $this->__('Card Number') ?>" class="required-entry input-text validate-digits required-entry validate-length maximum-length-19 minimum-length-19" maxlength="19" value=""/>
+            </div>
+            <div class="input-box">
+                <label for="card_pin" class="required"><?php echo $this->__('Gift Card Pin') ?></label><br/>
+                <input type="text" id="card_pin" name="payment[card_pin]" title="<?php echo $this->__('Card Pin') ?>" class="required-entry input-text validate-digits required-entry validate-length maximum-length-8 minimum-length-8" maxlength="8" value=""/>
+            </div>
+            <div class="input-box" id="sdm-valutec-giftcard-balance">
+                <button type="button" class="button" onclick="sdm_valutec_giftcard.getBalance()" id="sdm-valutec-giftcard-balance-button"><span><span><?php echo $this->__('Check Balance') ?></span></span></button>
+            </div>
+        </li>
+    </ul>
+</form>
+<script>
+// <[CDATA[
+var giftcardBalanceForm = new VarienForm('co-payment-form');
+// ]]>
+</script>
+<div id="sdm-valutec-giftcard-balance-response" style="display: none;"></div>

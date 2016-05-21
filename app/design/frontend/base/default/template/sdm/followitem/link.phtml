@@ -1,0 +1,29 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Allows customers to follow an item
+ *
+ * @category  SDM
+ * @package   SDM_FollowItem
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_followText = $this->getFollowText();
+
+?>
+
+<?php if ($this->getIsFollowed()): ?>
+	<div class="follow">
+	    <a href="#" class='follow-product' data-follow-url='<?php echo $this->getUrl("followitem/".$this->getType()."/unfollow", $this->getParams()); ?>'>
+			<?php echo empty($_followText) ? $this->__('Unfollow') : $this->__('Unfollow %s', $_followText); ?>
+		</a>
+	</div>
+<?php else: ?>
+	<div class="follow">
+	    <a href="#" class='follow-product' data-follow-url='<?php echo $this->getUrl("followitem/".$this->getType()."/follow", $this->getParams()); ?>'>
+			<?php echo empty($_followText) ? $this->__('Follow') : $this->__('Follow %s', $_followText); ?>
+		</a>
+	</div>
+<?php endif; ?>

@@ -1,0 +1,23 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Tabs - Sizzix 101 template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_blockName = Mage::helper('sdm_catalog')->getSizzix101BlockName(Mage::registry('current_product'), 'media_box');
+$_staticBlock = $this->getLayout()->createBlock('cms/block')->setBlockId($_blockName)->toHtml();
+
+?>
+<div id="mediabox" class="static">
+    <?php if(!empty($_staticBlock)): ?>
+        <?php echo $_staticBlock; ?>
+    <?php else: ?>
+        <img src="<?php echo $this->getSkinUrl('images/catalog/product/placeholder/image.jpg'); ?>" />
+    <?php endif;?>
+</div>

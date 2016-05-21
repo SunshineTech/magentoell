@@ -1,0 +1,39 @@
+@todo:
+- Check/get with Madhavi
+    - Order flow for all websites
+
+    - Customer AX ID: maintained only for EEUS (when customer places an order and a rep works on it) and ERUS (when retailer account is activated). SZUK used to maintain it but no longer (some may have it; others may not). SZUS does not have it. Essentially, if available, write it; otherwise, no need. Sames values for "invoice_account", for the most part.
+
+    - Amounts in respective currencies? yes.
+    - "tax" node: UK only values? "tax_amount" node unclear.
+
+    - Shipping: FedEx for all websites, except USPS used for for APO, FPO, Hawaii, Alaska, etc.
+        - All orders get FXGround sent.. but ERUS has its own list of methods available; refer to the document.
+
+    - delivery_zone? This is sent back from FedEx.
+    - delivery_mode? Don't see them in shipping document, except for ERUS.
+    - delivery_term: "always "PP" but if Retailer (ERUS website) used Collect shiping then code should be "CC""?
+
+    - All shipping carrier accounts and credentials for real rates: Get it from Madhavi.
+
+    - Cybersource sandbox credential. Also need web login. Below has no p/w.
+        http://ebctest.cybersource.com
+        merchant name: sizzix
+        user name: abassi
+        - Need to install the extension first and see what fields are required to use this payment.
+        - Only US website use this. UK uses Sagepay.
+
+    - Need detailed timestamp format on file: It can be anything, really.
+
+    - The third-party file transfer program moves the files when transferring them.
+
+    - What happens if an order is sent more than once to AX? Not a big deal. AX has its own filtering.
+
+    - How frequent? Every 2 hours for all files, but they have different minutes.
+
+    - For the next dev, work on the inventory update for Madhavi, so she can start QAing.
+
+    - Outlet price is only for SZUS -> becomes special price. Wholesale also but for ERUS.
+
+411:
+https://docs.google.com/spreadsheets/d/1gJEOv8V2DQha_OeG8IwboLj9FmWXTnezzIXrCUsQADk/edit?pli=1#gid=0

@@ -1,0 +1,78 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Mage_Sales customizations
+ *
+ * @category  design
+ * @package   sdm_ellison
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+?>
+<?php
+$_products = $this->getProducts();
+$_customer = Mage::registry('current_customer');
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Enter negotiated products and prices') ?></h4>
+    </div>
+</div>
+<form id="negotiated-product-entry" method="post" action="<?php echo Mage::getUrl('sdmcustomer/negotiatedproduct/add')?>">
+    <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <input type="hidden" name="customer_id" value="<?php echo $_customer->getId(); ?>" />
+    <div>
+        <textarea name="product_data" style="width: 50%; height: 90px"></textarea>
+        <br/>
+    </div>
+    <div>
+        <p>Add one SKU and its price per line. e.g. sku-1,5.99</p>
+    </div>
+    <div>
+        <input class="" type="submit" name="submit_product_add" value="Add Products">
+    </div>
+</form>
+<br>
+<form id="negotiated-product-entry" method="post" action="<?php echo Mage::getUrl('sdmcustomer/negotiatedproduct/massDelete')?>">
+    <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <input type="hidden" name="customer_id" value="<?php echo $_customer->getId(); ?>" />
+    <div class="grid">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4><?php echo $this->__('Negotiated Products (ERUS only)') ?></h4>
+            </div>
+            <table class="data">
+                <thead>
+                    <tr class="headings">
+                        <th style="width: 20px;"></th>
+                        <th style="width: 30px;">ID</th>
+                        <th style="width: 150px;">SKU</th>
+                        <th>Negotiated Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php $_i = 1 ?>
+                <?php foreach ($_products as $_product): ?>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="<?php echo 'checkbox_' . $_product->getId()?>" value="1">
+                        </td>
+                        <td>
+                            <?php echo $_product->getId() ?>
+                        </td>
+                        <td>
+                            <?php echo $_product->getSku() ?>
+                        </td>
+                        <td>
+                            <?php echo Mage::helper('core')->currency($_product->getPrice(), true, false); ?>
+                        </td>
+                    </tr>
+                    <?php $_i++ ?>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <input class="" type="submit" name="submit_mass_delete" value="Delete">
+</form>

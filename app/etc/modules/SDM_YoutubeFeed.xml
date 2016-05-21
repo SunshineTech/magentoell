@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_YoutubeFeed>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <SDM_Core />
+                <SDM_Designer />
+                <SDM_RenderCollection />
+            </depends>
+        </SDM_YoutubeFeed>
+    </modules>
+</config>

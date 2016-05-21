@@ -1,0 +1,25 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_value = $this->getValue();
+
+?>
+
+<div class="field textarea">
+    <label for="<?php echo $this->getId() ?>" class='required'>
+        <?php echo $this->getName() ?>
+    </label>
+    <textarea id="<?php echo $this->getId() ?>" class="required-entry" type='text' name='<?php echo $this->getId() ?>'><?php echo $_value ?></textarea>
+    <?php if($this->getNote()): ?>
+        <div class='note'><?php echo $this->getNote() ?></div>
+    <?php endif; ?>
+</div>

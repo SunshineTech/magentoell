@@ -1,0 +1,207 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Lyris_Block_Account $this
+ */
+
+$_submitText = $this->__($this->isEditMode() ? 'Click to update my Profile' : 'Sign-up to the Newsletter Now!');
+$_machines = array(
+    array(
+        'value' => 'Big Shot',
+        'label' => 'Big Shot&trade;',
+    ),
+    array(
+        'value' => 'Big Shot Plus',
+        'label' => 'Big Shot&trade; Plus',
+    ),
+    array(
+        'value' => 'Big Shot Pro',
+        'label' => 'Big Shot&trade; Pro',
+    ),
+    array(
+        'value' => 'eClips',
+        'label' => 'eClips&trade;',
+    ),
+    array(
+        'value' => 'Texture Boutique',
+        'label' => 'Texture Boutique&trade;',
+    ),
+    array(
+        'value' => 'Vagabond',
+        'label' => 'Vagabond&trade;',
+    ),
+    array(
+        'value' => 'I don\'t own any Sizzix Machine',
+        'label' => 'I don\'t own any',
+    ),
+);
+$_interests = array(
+    'Applique',
+    'Cardmaking',
+    'Papercrafting',
+    'Quilting',
+    'Scrapbooking',
+    'Home Decor',
+    'Classroom Activities'
+);
+natcasesort($_interests);
+?>
+<form id="newsletter-signup" method="post" action="<?php echo $this->getEditFormAction() ?>">
+    <input type="hidden" name="lyris_37789" value="Newsletter Signup Page" />
+    <?php if ($this->isEditMode()): ?>
+    <div class="page-title title-buttons">
+        <h1><?php echo $this->__('Update my newsletter preferences') ?></h1>
+    </div>
+    <p><?php echo $this->__('Edit here to update your email preferences.') ?></p>
+    <input type="hidden" name="edit" value="1" />
+    <?php else: ?>
+    <div class="page-title title-buttons">
+        <h1><?php echo $this->__('Sign Up Now!') ?></h1>
+    </div>
+    <p><?php echo $this->__('To become a subscriber to our %s, simply fill out the information below.', $this->getNewsletterName()) ?></p>
+    <?php endif ?>
+    <div class="fieldset">
+        <ul class="form-list">
+            <li>
+                <label for="email" class="required"><em>*</em> <?php echo $this->__('Email Address') ?></label>
+                <div class="input-box">
+                    <?php if ($this->isEditMode()): ?>
+                    <input type="hidden" name="email" value="<?php echo $this->getValue('email') ?>" />
+                    <p><?php echo $this->getValue('email') ?>
+                    <?php else: ?>
+                    <input type="text" name="email" id="email" value="<?php echo $this->getValue('email') ?>" class="input-text required-entry validate-email" />
+                    <?php endif ?>
+                </div>
+            </li>
+            <li>
+                <label for="name_first" class="required"><em>*</em> <?php echo $this->__('First Name') ?></label>
+                <div class="input-box">
+                    <input type="text" name="lyris_1" id="name_first" value="<?php echo $this->getValue('lyris_1') ?>" class="input-text required-entry" />
+                </div>
+            </li>
+            <li>
+                <label for="country" class="required"><em>*</em> <?php echo $this->__('Country') ?></label>
+                <div class="input-box">
+                    <?php echo Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect($this->getValue('country_id') ?: 'US') ?>
+                </div>
+            </li>
+            <li style="display: none">
+                <label for="region_id" class="required"><em>*</em> <?php echo $this->__('State/Province') ?></label>
+                <div class="input-box">
+                    <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;" class="validate-select">
+                        <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                    </select>
+                   <input type="text" id="region" name="region" title="<?php echo $this->__('State/Province') ?>" class="input-text required-entry" style="display:none;" />
+               </div>
+            </li>
+            <li class="birthday">
+                <label for="birth_month"><?php echo $this->__('Birthday') ?></label>
+                <div class="input-box">
+                    <select id="birth_day" name="lyris_37788" title="<?php echo $this->__('Birth Day') ?>">
+                        <option value=""><?php echo $this->__('Day') ?></option>
+                        <?php foreach ($this->getBirthDays() as $_value): ?>
+                        <option value="<?php echo $_value ?>"<?php echo $this->getValue('lyris_37788') == $_value ? ' selected="selected"' : '' ?>><?php echo $_value ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <select id="birth_month" name="lyris_37689" title="<?php echo $this->__('Birth Month') ?>">
+                        <option value=""><?php echo $this->__('Month') ?></option>
+                        <?php foreach ($this->getBirthMonths() as $_value => $_label): ?>
+                        <option value="<?php echo $_value ?>"<?php echo $this->getValue('lyris_37689') == $_value ? ' selected="selected"' : '' ?>><?php echo $_label ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <select id="birth_year" name="lyris_37791" title="<?php echo $this->__('Birth Year') ?>">
+                        <option value=""><?php echo $this->__('Year') ?></option>
+                        <?php foreach ($this->getBirthYears() as $_value): ?>
+                        <option value="<?php echo $_value ?>"<?php echo $this->getValue('lyris_37791') == $_value ? ' selected="selected"' : '' ?>><?php echo $_value ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </li>
+            <li class="machine">
+                <label><?php echo $this->__('Which Sizzix&reg; Machines do you use?') ?></label>
+                <div class="input-box">
+                    <?php foreach ($_machines as $_id => $_value): ?>
+                    <span class="field">
+                        <input type="checkbox" name="lyris_37654[]" id="machine_<?php echo $_id ?>" value="<?php echo $_value['value'] ?>"<?php echo (is_array($this->getValue('lyris_37654')) ? in_array($_value['value'], $this->getValue('lyris_37654')) : $_value['value'] == $this->getValue('lyris_37654')) ? ' checked="checked"' : '' ?> />
+                        <label for="machine_<?php echo $_id ?>"><?php echo $_value['label'] ?></label>
+                    </span>
+                    <?php endforeach ?>
+                </div>
+            </li>
+            <?php if ($this->isEditMode()): ?>
+            <input type="hidden" name="lyris_37653_original" value="<?php echo is_array($this->getValue('lyris_37653')) ? implode('||', $this->getValue('lyris_37653')) : $this->getValue('lyris_37653') ?>" />
+            <?php endif ?>
+            <li class="interest">
+                <label><?php echo $this->__('Areas of interest') ?></label>
+                <div class="input-box">
+                    <?php foreach ($_interests as $_id => $_label): ?>
+                    <span class="field">
+                        <input type="checkbox" name="lyris_35658[]" id="interest_<?php echo $_id ?>" value="<?php echo $this->quoteEscape($_label) ?>"<?php echo (is_array($this->getValue('lyris_35658')) ? in_array($_label, $this->getValue('lyris_35658')) : $_label == $this->getValue('lyris_35658')) ? ' checked="checked"' : '' ?> />
+                        <label for="interest_<?php echo $_id ?>"><?php echo $_label ?></label>
+                    </span>
+                    <?php endforeach ?>
+                </div>
+            </li>
+            <?php if ($this->isEditMode()): ?>
+            <input type="hidden" name="lyris_35658_original" value="<?php echo is_array($this->getValue('lyris_35658')) ? implode('||', $this->getValue('lyris_35658')) : $this->getValue('lyris_35658') ?>" />
+            <?php endif ?>
+            <li>
+                <label for="interest_additional"><?php echo $this->__('Do you have any other crafting interests?') ?></label>
+                <div class="input-box">
+                    <input type="text" name="lyris_37690" id="interest_additional" value="<?php echo $this->getValue('lyris_37690') ?>" class="input-text" />
+                </div>
+            </li>
+        </ul>        
+        <div class="buttons-set">
+            <button type="button" title="<?php echo $_submitText ?>" onclick="newsletterSignup.submit()" class="button"><span><span><?php echo $_submitText ?></span></span></button>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</form>
+<br />
+<p style="clear: both;"><?php echo $this->__('By signing up to our newsletter, you get full access to all our promotions, the latest news and much more. Keep up to date with exclusive projects from our designers and follow us on our blog and social media sites. To join all you need to do is fill out the form above.') ?></p>
+
+<h3><?php echo $this->__('To ensure delivery of the Sizzix.co.uk Newsletter... ') ?></h3>
+<p><?php echo $this->__('To ensure that your Sizzix.co.uk newsletter is delivered to your inbox, and not treated as spam, please add <a href="mailto:sizzixinteractivenews@marketing.sizzix.co.uk">sizzixinteractivenews@marketing.sizzix.co.uk</a> to your email address book as soon as possible.  This will prevent any deliveries to your Bulk or Junk Mail folders. ') ?></p>
+
+<h3><?php echo $this->__('To unsubscribe from the Sizzix.co.uk Newsletter... ') ?></h3>
+<p><?php echo $this->__('To remove your subscription to the Sizzix.co.uk newsletter, please follow the unsubscribe link in your newsletter email.') ?></p>
+
+<script type="text/javascript">
+//<![CDATA[
+    <?php if ($this->getValue('region_id')): ?>
+    $('region_id').setAttribute('defaultValue', "<?php echo $this->getValue('region_id') ?>");
+    <?php endif ?>
+    <?php if ($this->getValue('country_id')): ?>
+    $('country').setAttribute('defaultValue', "<?php echo $this->getValue('country_id') ?>");
+    <?php endif ?>
+    new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+    Validation.add('validate-one-required-by-name-placeholder', 'Please select one of the options.', function (v, elm) {
+        var inputs = $$('input[name="' + elm.name.replace(/([\\"])/g, '\\$1').replace('\-placeholder', '') + '"]');
+        var error = 1;
+        for(var i=0;i<inputs.length;i++) {
+            if ((inputs[i].type == 'checkbox' || inputs[i].type == 'radio') && inputs[i].checked == true) {
+                error = 0;
+            }
+            if (Validation.isOnChange && (inputs[i].type == 'checkbox' || inputs[i].type == 'radio')) {
+                Validation.reset(inputs[i]);
+            }
+        }
+        return error == 0;
+    });
+    var newsletterSignup = new VarienForm('newsletter-signup');
+    var newsletterLookup = new VarienForm('newsletter-lookup');
+//]]>
+</script>

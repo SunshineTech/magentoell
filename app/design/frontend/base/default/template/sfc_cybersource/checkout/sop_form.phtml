@@ -1,0 +1,67 @@
+<?php
+/**
+ * StoreFront CyberSource Tokenized Payment Extension for Magento
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of StoreFront Consulting, Inc.
+ *
+ * @category  SFC
+ * @package   SFC_CyberSource
+ * @author    Garth Brantley <garth@storefrontconsulting.com>
+ * @copyright 2009-2013 StoreFront Consulting, Inc. All Rights Reserved.
+ * @license   http://www.storefrontconsulting.com/media/downloads/ExtensionLicense.pdf StoreFront Consulting Commercial License
+ * @link      http://www.storefrontconsulting.com/cybersource-saved-credit-cards-extension-for-magento/
+ *
+ */
+?>
+<?php if (Mage::getStoreConfig('payment/sfc_cybersource/enable_secure_acceptance') == '1'): ?>
+<?php if ($this->getQuote()->getPayment()->getData('method') == SFC_CyberSource_Model_Method::METHOD_CODE): ?>
+<?php $billingAddress = $this->getBillingAddress(); ?>
+<form id="sop-pay-form" action="<?php echo $this->getSopCreatePostUrl() ?>" method="POST" target="iframeSop" style="display:none;">
+    <input type="hidden" id="access_key" name="access_key" value="<?php echo $this->getSOPAccessKey() ?>"/>
+    <input type="hidden" id="profile_id" name="profile_id" value="<?php echo $this->getSOPProfileId() ?>"/>
+    <input type="hidden" id="transaction_uuid" name="transaction_uuid" value=""/>
+    <input type="hidden" id="reference_number" name="reference_number" value=""/>
+    <input type="hidden" id="signed_field_names" name="signed_field_names"
+           value="access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,currency,payment_method,card_number,card_type,card_expiry_date,bill_to_forename,bill_to_surname,bill_to_email,bill_to_phone,bill_to_address_line1,bill_to_address_line2,bill_to_address_city,bill_to_address_state,bill_to_address_country,bill_to_address_postal_code"/>
+    <input type="hidden" id="unsigned_field_names" name="unsigned_field_names"/>
+    <input type="hidden" id="signed_date_time" name="signed_date_time" value=""/>
+    <input type="hidden" id="locale" name="locale" value="<?php echo $this->getLocaleLanguage() ?>"/>
+    <input type="hidden" id="signature" name="signature" value=""/>
+    <input type="hidden" id="transaction_type" name="transaction_type" value="create_payment_token"/>
+    <input type="hidden" id="currency" name="currency" value="<?php echo $this->getQuote()->getBaseCurrencyCode() ?>"/>
+    <input type="hidden" id="payment_method" name="payment_method" value="card"/>
+    <input type="hidden" id="card_type" name="card_type"
+           value="<?php echo $this->getCyberSourceCardType() ?>"/>
+    <input type="hidden" id="card_number" name="card_number" value=""/>
+    <input type="hidden" id="card_expiry_date" name="card_expiry_date"
+           value="<?php echo $this->getCyberSourceExpirationDate() ?>"/>
+    <input type="hidden" id="bill_to_forename" name="bill_to_forename"
+           value="<?php echo $this->escapeHtml($billingAddress->getData('firstname')) ?>"/>
+    <input type="hidden" id="bill_to_surname" name="bill_to_surname"
+           value="<?php echo $this->escapeHtml($billingAddress->getData('lastname')) ?>"/>
+    <input type="hidden" id="bill_to_email" name="bill_to_email"
+           value="<?php echo $this->escapeHtml($billingAddress->getData('email')) ?>"/>
+    <input type="hidden" id="bill_to_address_line1" name="bill_to_address_line1"
+           value="<?php echo $this->escapeHtml($billingAddress->getStreet(1)) ?>"/>
+    <input type="hidden" id="bill_to_address_line2" name="bill_to_address_line2"
+           value="<?php echo $this->escapeHtml($billingAddress->getStreet(2)) ?>"/>
+    <input type="hidden" id="bill_to_address_city" name="bill_to_address_city"
+           value="<?php echo $this->escapeHtml($billingAddress->getData('city')) ?>"/>
+    <input type="hidden" id="bill_to_address_state" name="bill_to_address_state"
+           value="<?php echo $this->escapeHtml($billingAddress->getRegionCode()) ?>"/>
+    <input type="hidden" id="bill_to_address_postal_code" name="bill_to_address_postal_code"
+           value="<?php echo $this->escapeHtml($billingAddress->getData('postcode')) ?>"/>
+    <input type="hidden" id="bill_to_address_country" name="bill_to_address_country"
+           value="<?php echo $this->escapeHtml($billingAddress->getData('country_id')) ?>"/>
+    <input type="hidden" id="bill_to_phone" name="bill_to_phone"
+           value="<?php echo $this->escapeHtml($billingAddress->getData('telephone')) ?>"/>
+</form>
+<script>
+    (function($){
+        $('#review-buttons-container button').attr('onclick', 'reviewSave()');
+    })(jQuery);
+</script>
+<?php endif; ?>
+<?php endif; ?>

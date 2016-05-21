@@ -1,0 +1,243 @@
+<?php
+/**
+ * StoreFront CyberSource Tokenized Payment Extension for Magento
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of StoreFront Consulting, Inc.
+ *
+ * @category  SFC
+ * @package   SFC_CyberSource
+ * @author    Garth Brantley <garth@storefrontconsulting.com>
+ * @copyright 2009-2014 StoreFront Consulting, Inc. All Rights Reserved.
+ * @license   http://www.storefrontconsulting.com/media/downloads/ExtensionLicense.pdf StoreFront Consulting Commercial License
+ * @link      http://www.storefrontconsulting.com/cybersource-saved-credit-cards-extension-for-magento/
+ *
+ */
+?>
+<?php $paymentProfile = $this->getCimProfile(); ?>
+<?php $countries = Mage::getResourceModel('directory/country_collection')->loadByStore()->toOptionArray(); ?>
+
+<div class="page-title">
+    <h1><?php echo $this->getTitle(); ?></h1>
+</div>
+
+<form id="edit_form" method="post" action="<?php echo $this->getSaveUrl() ?>">
+    <input type="hidden" id="customer_id" name="customer_id" value="<?php echo $this->escapeHtml($paymentProfile->getData('customer_id')) ?>" />
+    <?php if (!$this->getIsNewProfile()): ?>
+    <input type="hidden" id="payment_token" name="payment_token" value="<?php echo $this->escapeHtml($paymentProfile->getData('payment_token')) ?>" />
+    <?php endif; ?>
+    <input type="hidden" id="access_key" name="access_key" value="<?php echo $this->getSOPAccessKey() ?>">
+    <input type="hidden" id="profile_id" name="profile_id" value="<?php echo $this->getSOPProfileId() ?>">
+    <input type="hidden" id="transaction_uuid" name="transaction_uuid" value="">
+    <input type="hidden" id="signed_field_names" name="signed_field_names" value="access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,currency,<?php if (!$this->getIsNewProfile()): ?>payment_token,<?php endif; ?>payment_method,card_type,card_expiry_date,<?php if ($this->useVerification()): ?>card_cvn,<?php endif; ?>bill_to_forename,bill_to_surname,bill_to_email,bill_to_phone,bill_to_address_line1,bill_to_address_line2,bill_to_address_city,bill_to_address_state,bill_to_address_country,bill_to_address_postal_code">
+    <input type="hidden" id="unsigned_field_names" name="unsigned_field_names">
+    <input type="hidden" id="signed_date_time" name="signed_date_time" value="">
+    <input type="hidden" id="locale" name="locale" value="<?php echo $this->getLocaleLanguage() ?>">
+    <input type="hidden" id="signature" name="signature" value="">
+    <input type="hidden" id="reference_number" name="reference_number" value="">
+    <input type="hidden" id="transaction_type" name="transaction_type" value="<?php if ($this->getIsNewProfile()): ?>create_payment_token<?php else: ?>update_payment_token<?php endif; ?>">
+    <input type="hidden" id="currency" name="currency" value="<?php echo Mage::app()->getStore()->getBaseCurrencyCode() ?>">
+    <input type="hidden" id="payment_method" name="payment_method" value="card">
+    <input type="hidden" id="card_expiry_date" name="card_expiry_date" value="">
+
+    <div class="fieldset">
+        <h2 class="legend">Cardholder Information</h2>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="bill_to_forename" class="required"><em>*</em>First Name</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_forename" name="bill_to_forename"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('customer_fname')) ?>" title="First Name"
+                               maxlength="255" class="input-text required-entry"/>
+                    </div>
+                </div>
+                <div class="field name-lastname">
+                    <label for="bill_to_surname" class="required"><em>*</em>Last Name</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_surname" name="bill_to_surname"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('customer_lname')) ?>" title="Last Name"
+                               maxlength="255" class="input-text required-entry"/>
+                    </div>
+                </div>
+            </li>
+            <li class="wide" style="display:none;">
+                <div class="">
+                    <div class="input-box">
+                        <label for="bill_to_email" class="required">Email</label>
+                        <input type="hidden" id="bill_to_email" name="bill_to_email"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('email')) ?>" title="Email" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="fieldset">
+        <h2 class="legend">Billing Address</h2>
+        <ul class="form-list">
+            <li class="wide">
+                <div class="address">
+                    <label for="bill_to_address_line1" class="required">Street Address</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_line1" name="bill_to_address_line1"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('street1')) ?>" title="Address" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <div class="address">
+                    <label for="bill_to_address_line2" class="required"></label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_line2" name="bill_to_address_line2"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('street2')) ?>" title="Address" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="bill_to_address_city" class="required">City</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_city" name="bill_to_address_city" value="<?php echo $this->escapeHtml($paymentProfile->getData('city')) ?>"
+                               title="City" maxlength="255" class="input-text"/>
+                    </div>
+                </div>
+                <div class="field name-lastname">
+                    <label for="bill_to_address_state" class="required">State/Province</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_state" name="bill_to_address_state"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('region')) ?>" title="State" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="bill_to_address_postal_code" class="required">Zip/Postal Code</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_address_postal_code" name="bill_to_address_postal_code"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('postcode')) ?>" title="Zip" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <div class="country">
+                    <label for="bill_to_address_country" class="required">Country</label>
+
+                    <div class="input-box">
+                        <select id="bill_to_address_country" name="bill_to_address_country" title="Country" class="input-text">
+                            <?php foreach ($countries as $country) : ?>
+                                <option value="<?php echo $country['value']; ?>" <?php if ($country['value'] ==
+                                    $paymentProfile->getData('country_id')
+                                ) {
+                                    echo 'selected="selected"';
+                                } ?>><?php echo $country['label']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="bill_to_phone" class="required">Telephone</label>
+
+                    <div class="input-box">
+                        <input type="text" id="bill_to_phone" name="bill_to_phone"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('telephone')) ?>" title="Phone" maxlength="255"
+                               class="input-text"/>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="fieldset">
+        <h2 class="legend">Payment Information</h2>
+        <ul class="form-list">
+            <li>
+                <label for="card_type" class="required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
+                <div class="input-box">
+                    <select id="card_type" name="card_type" class="required-entry validate-cc-type-select">
+                        <option value=""><?php echo $this->__('--Please Select--') ?></option>
+                        <?php $_ccType = $this->getCcTypeInCyberSourceFormat(); ?>
+                        <?php foreach ($this->getCcAvailableTypesCyberSourceFormat() as $_typeCode => $_typeName): ?>
+                            <option value="<?php echo $_typeCode ?>"<?php if ($_typeCode == $_ccType
+                            ): ?> selected="selected"<?php endif ?>><?php echo $_typeName ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </li>
+            <li class="wide">
+                <div class="">
+                    <label for="card_number" class="required"><em>*</em>Card Number</label>
+
+                    <div class="input-box">
+                        <input type="text" id="card_number" name="card_number"
+                               value="<?php echo $this->escapeHtml($paymentProfile->getData('customer_cardnumber')) ?>"
+                               class="input-text required-entry"/>
+                    </div>
+                </div>
+            </li>
+            <?php if ($this->useVerification()): ?>
+                <li>
+                    <label for="card_cvn" class="required"><em>*</em><?php echo $this->__('Card Verification Number') ?></label>
+
+                    <div class="input-box">
+                        <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry validate-cc-cvn" id="card_cvn" name="card_cvn" value="" />
+                    </div>
+                </li>
+            <?php endif; ?>
+            <li class="fields">
+                <div class="field name-firstname">
+                    <label for="cc_exp_month" class="required"><em>*</em><?php echo $this->__('Expiration Month') ?></label>
+
+                    <div class="input-box">
+                        <select id="cc_exp_month" name="cc_exp_month" class="validate-month required-entry">
+                            <?php $_ccExpMonth = $paymentProfile->getData('cc_exp_month') ?>
+                            <?php foreach ($this->getCcMonths() as $k => $v): ?>
+                                <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpMonth
+                                ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="field name-lastname">
+                    <label for="cc_exp_year" class="required"><em>*</em><?php echo $this->__('Expiration Year') ?></label>
+
+                    <div class="input-box">
+                        <?php $_ccExpYear = $paymentProfile->getData('cc_exp_year') ?>
+                        <select id="cc_exp_year" name="cc_exp_year" class="year required-entry validate-year">
+                            <?php foreach ($this->getCcYears() as $k => $v): ?>
+                                <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $_ccExpYear
+                                ): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="buttons-set form-buttons">
+        <p class="back-link"><a href="<?php echo $this->getBackUrl() ?>">
+                <small>&#171;</small>
+                Back</a></p>
+        <button type="submit" class="button" title="Save">
+            <span><span>Save Credit Card</span></span>
+        </button>
+    </div>
+</form>
+<script>var sopSecretKey = "<?php echo $this->getSOPSecretKey() ?>";</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/sfc_cybersource/sop_profile.js') ?>"></script>

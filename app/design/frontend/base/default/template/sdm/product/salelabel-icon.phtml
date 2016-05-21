@@ -1,0 +1,26 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+$_saleCode = $this->getSaleCode();
+$_salePercentage = $this->getSalePercentage();
+
+?>
+
+<?php if (!empty($_saleCode)): ?>
+    <span class='sales-icon <?php echo $_saleCode ?>'>
+        <?php if (!empty($_salePercentage)): ?>
+            <span>
+            	<?php echo $_salePercentage . $this->__('%<br>Off'); ?>
+            </span>
+        <?php endif; ?>
+    </span>
+<?php endif; ?>

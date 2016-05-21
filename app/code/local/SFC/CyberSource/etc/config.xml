@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * StoreFront CyberSource Tokenized Payment Extension for Magento
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of StoreFront Consulting, Inc.
+ *
+ * @category  SFC
+ * @package   SFC_CyberSource
+ * @author    Garth Brantley <garth@storefrontconsulting.com>
+ * @copyright 2009-2013 StoreFront Consulting, Inc. All Rights Reserved.
+ * @license   http://www.storefrontconsulting.com/media/downloads/ExtensionLicense.pdf StoreFront Consulting Commercial License
+ * @link      http://www.storefrontconsulting.com/cybersource-saved-credit-cards-extension-for-magento/
+ *
+ */
+-->
+<config>
+    <!-- Module version info -->
+    <modules>
+        <SFC_CyberSource>
+            <version>1.1.0.10</version>
+        </SFC_CyberSource>
+    </modules>
+
+    <global>
+        <!-- Helper classes -->
+        <helpers>
+            <sfc_cybersource>
+                <class>SFC_CyberSource_Helper</class>
+            </sfc_cybersource>
+            <payment>
+                <rewrite>
+                    <data>SFC_CyberSource_Helper_Payment</data>
+                </rewrite>
+            </payment>
+        </helpers>
+
+        <!-- Block classes -->
+        <blocks>
+            <sfc_cybersource>
+                <class>SFC_CyberSource_Block</class>
+            </sfc_cybersource>
+        </blocks>
+
+        <!-- Model / entity classes -->
+        <models>
+            <sfc_cybersource>
+                <class>SFC_CyberSource_Model</class>
+                <resourceModel>sfc_cybersource_mysql4</resourceModel>
+            </sfc_cybersource>
+            <sfc_cybersource_mysql4>
+                <class>SFC_CyberSource_Model_Mysql4</class>
+                <entities>
+                    <payment_profile>
+                        <table>sfc_cybersource_payment_profile</table>
+                    </payment_profile>
+                </entities>
+            </sfc_cybersource_mysql4>
+
+            <!-- Model rewrites -->
+            <checkout>
+                <rewrite>
+                    <type_onepage>SFC_CyberSource_Model_Checkout_Type_Onepage</type_onepage>
+                </rewrite>
+            </checkout>
+
+        </models>
+
+        <!-- Resources - Install / upgrade scripts -->
+        <resources>
+            <sfc_cybersource_setup>
+                <setup>
+                    <module>SFC_CyberSource</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </sfc_cybersource_setup>
+            <sfc_cybersource_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </sfc_cybersource_write>
+            <sfc_cybersource_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </sfc_cybersource_read>
+        </resources>
+
+        <events>
+            <sales_convert_quote_payment_to_order_payment>
+                <observers>
+                    <cim_core_sales_convert_quote_payment_to_order_payment>
+                        <type>singleton</type>
+                        <class>sfc_cybersource/observer</class>
+                        <method>onSalesConvertQuotePaymentToOrderPayment</method>
+                    </cim_core_sales_convert_quote_payment_to_order_payment>
+                </observers>
+            </sales_convert_quote_payment_to_order_payment>
+        </events>
+    </global>
+
+    <!-- Frontend layout XML updates -->
+    <frontend>
+        <secure_url>
+            <creditcards>/creditcards</creditcards>
+        </secure_url>
+        <routers>
+            <sfc_cybersource>
+                <use>standard</use>
+                <args>
+                    <module>SFC_CyberSource</module>
+                    <frontName>creditcards</frontName>
+                </args>
+            </sfc_cybersource>
+        </routers>
+        <layout>
+            <updates>
+                <sfc_cybersource module="SFC_CyberSource">
+                    <file>sfc_cybersource.xml</file>
+                </sfc_cybersource>
+            </updates>
+        </layout>
+    </frontend>
+
+    <!-- Admin panel routers -->
+    <admin>
+        <routers>         
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SFC_CyberSource_Override before="Mage_Adminhtml">SFC_CyberSource_Override_Admin</SFC_CyberSource_Override>
+                        <SFC_CyberSource after="Mage_Adminhtml">SFC_CyberSource_Adminhtml</SFC_CyberSource>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <!-- Admin panel html changes -->
+    <adminhtml>
+        <layout>
+            <updates>
+                <sfc_cybersource>
+                    <file>sfc_cybersource.xml</file>
+                </sfc_cybersource>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <!-- Cron schedules for integration jobs -->
+    <crontab>
+        <jobs>
+        </jobs>
+    </crontab>
+
+    <!-- Default configuration values -->
+    <default>
+        <payment>
+            <sfc_cybersource>
+                <active>0</active>
+                <model>sfc_cybersource/method</model>
+                <title>Enter a New Credit Card (CyberSource by StoreFront Consulting)</title>
+                <allowspecific>0</allowspecific>
+                <debug>0</debug>
+                <test>1</test>
+                <enable_device_fingerprint>0</enable_device_fingerprint>
+                <enable_secure_acceptance>0</enable_secure_acceptance>
+                <cctypes>AE,VI,MC,DI</cctypes>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <currency>USD</currency>
+                <ignore_avs>0</ignore_avs>
+                <decline_avs_flags></decline_avs_flags>
+                <allow_guest_checkout>1</allow_guest_checkout>
+                <guest_checkout_save_profiles>0</guest_checkout_save_profiles>
+            </sfc_cybersource>
+        </payment>
+    </default>
+
+</config>

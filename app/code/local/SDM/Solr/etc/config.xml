@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Modifications to the IntegerNet_Solr module
+ *
+ * @category  SDM
+ * @package   SDM_Solr
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2016 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Solr>
+            <version>1.0.0</version>
+        </SDM_Solr>
+    </modules>
+    <global>
+        <blocks>
+            <integernet_solr>
+                <rewrite>
+                    <result_list>SDM_Solr_Block_Result_List</result_list>
+                    <result_layer_filter>SDM_Solr_Block_Result_Layer_Filter</result_layer_filter>
+                    <result_layer_view>SDM_Solr_Block_Result_Layer_View</result_layer_view>
+                </rewrite>
+            </integernet_solr>
+            <catalog>
+                <rewrite>
+                    <product_list>SDM_Solr_Block_Product_List</product_list>
+                </rewrite>
+            </catalog>
+        </blocks>
+        <models>
+            <integernet_solr>
+                <rewrite>
+                    <result>SDM_Solr_Model_Result</result>
+                    <result_collection>SDM_Solr_Model_Result_Collection</result_collection>
+                </rewrite>
+            </integernet_solr>
+            <catalog>
+                <rewrite>
+                    <layer_filter_attribute>SDM_Solr_Model_Layer_Filter_Attribute</layer_filter_attribute>
+                </rewrite>
+            </catalog>
+            <sdm_solr>
+                <class>SDM_Solr_Model</class>
+            </sdm_solr>
+        </models>
+        <events>
+            <integernet_solr_before_category_request>
+                <observers>
+                    <beforeSolrRequest>
+                        <type>singleton</type>
+                        <class>sdm_solr/observer</class>
+                        <method>beforeSolrRequest</method>
+                    </beforeSolrRequest>
+                </observers>
+            </integernet_solr_before_category_request>
+            <integernet_solr_before_search_request>
+                <observers>
+                    <beforeSolrRequest>
+                        <type>singleton</type>
+                        <class>sdm_solr/observer</class>
+                        <method>beforeSolrRequest</method>
+                    </beforeSolrRequest>
+                </observers>
+            </integernet_solr_before_search_request>
+            <integernet_solr_get_product_data>
+                <observers>
+                    <addProductDataToIndex>
+                        <type>singleton</type>
+                        <class>sdm_solr/observer</class>
+                        <method>addProductDataToIndex</method>
+                    </addProductDataToIndex>
+                </observers>
+            </integernet_solr_get_product_data>
+        </events>
+    </global>
+</config>

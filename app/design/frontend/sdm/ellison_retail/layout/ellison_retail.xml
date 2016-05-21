@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * ellison_retail.xml
+ *
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @category  Separation Degrees Media
+ * @package   sdm
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+<!--
+    Default layout, loads all of the pages
+-->
+    <default>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/ellison_retail.css</name></action>
+        </reference>
+    </default>
+<!--
+    Add customer account link for retailer application
+-->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="followitem">
+                <name>retailerapplication</name>
+                <path>retailerapplication/application/view</path>
+                <label>Retailer Application</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <customer_logged_in>
+        <reference name="top.links">
+            <action method="checkRetailerApplication" />
+        </reference>
+    </customer_logged_in>
+
+    <checkout_cart_index>
+        <reference name="content">
+            <block type="retailerapplication/checkapplication" before="-" />
+        </reference>
+    </checkout_cart_index>
+
+    <checkout_onepage_index>
+        <reference name="content">
+            <block type="retailerapplication/checkapplication" before="-" />
+        </reference>
+        <!-- Purchase order payment block is overridden using directory fallback -->
+    </checkout_onepage_index>
+
+    <checkout_onepage_success>
+        <reference name="checkout.success">
+            <!-- See SDM_Checkout_Block_Payment_Info_Purchaseorder -->
+            <block type="checkout/onepage_success" name="checkout.success.purchaseorder" as="success_po_upload" template="sdm/checkout/success/purchaseorder.phtml" />
+        </reference>
+    </checkout_onepage_success>
+
+    <catalog_product_view>
+        <reference name="product.info">
+            <block type="catalog/product_view" name="product.min.qty" as="product_min_qty" template="catalog/product/view/min_qty.phtml" />
+        </reference>
+    </catalog_product_view>
+
+    <!-- SAVED QUOTE: Frontend customer account tab update for saved quote -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="savedquote">
+                <name>saved_quote_list</name>
+                <path>savedquote/quote/list</path>
+                <label>Pre-Orders</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <!-- SAVED QUOTE: Add saved quote button to cart page -->
+    <checkout_cart_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="checkout.cart.methods">
+            <block type="savedquote/link" name="checkout.cart.methods.savequote" template="sdm/savedquote/button/reviewquote.phtml" />
+        </reference>
+    </checkout_cart_index>
+    <savedquote_quote_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <file>js/preorder.js</file>
+            </action>
+        </reference>
+    </savedquote_quote_index>
+</layout>

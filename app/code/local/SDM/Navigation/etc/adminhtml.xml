@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's navigation links
+ *
+ * @category  SDM
+ * @package   SDM_Navigation
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <navigation>
+                        <title>Navigation Links</title>
+                        <sort_order>15</sort_order>
+                    </navigation>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <navigation translate="title" module="navigation">
+                                        <title>Navigation Links</title>
+                                    </navigation>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

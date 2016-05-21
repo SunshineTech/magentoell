@@ -1,0 +1,80 @@
+<?php if( count( $this->getItems() ) > 0 ){ ?>
+
+<div class="saveforlater-container" style="display:none;">
+
+	<h2><?php echo $this->__('Saved for Later'); ?></h2>
+
+	<form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" id="saveforlater_form" method="post">
+		<fieldset>
+			<table id="saveforlater-table" class="data-table cart-table">
+				<col width="1" />
+				<col />
+				<col width="1" />
+			<?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+				<col width="1" />
+			<?php endif; ?>
+			<?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+				<col width="1" />
+			<?php endif; ?>
+				<col width="1" />
+			<?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+				<col width="1" />
+			<?php endif; ?>
+			<?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+				<col width="1" />
+			<?php endif; ?>
+				<col width="1" />
+
+			<?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+				<thead>
+					<tr>
+						<th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+						<th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+						<th rowspan="<?php echo $mergedCells; ?>" class="a-center"><span class="nobr"><?php echo $this->__('Action') ?></span></th>
+						<th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>
+						<th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
+						<th class="a-center" colspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Subtotal') ?></th>
+						<th rowspan="<?php echo $mergedCells; ?>" class="a-center">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach($this->getItems() as $_item): ?>
+					<?php echo $this->getItemHtml($_item) ?>
+				<?php endforeach ?>
+				</tbody>
+			</table>
+			<script type="text/javascript">decorateTable('saveforlater-table')</script>
+		</fieldset>
+	</form>
+
+	<script type="text/javascript" language="javascript">
+		document.observe( 'dom:loaded', function(){
+			/* SWAP POSITIONS -- checkout.cart.form.before is placed before the cart.  there is no "after" equivalent */
+			saveforlater_container = $$('.saveforlater-container')[0];
+			cartform = saveforlater_container.up().next();
+			clone = cartform.cloneNode(false); // no need to clone deep
+
+			Element.replace(saveforlater_container, clone);
+			Element.replace(cartform, saveforlater_container);
+			Element.replace(clone, cartform); // make sure references (like event observers) are kept
+
+			saveforlater_container.show();
+			/* END SWAP POSITIONS */
+		} );
+	</script>
+
+</div>
+
+<?php } ?>
+
+<script type="text/javascript" language="javascript">
+	document.observe( 'dom:loaded', function(){
+		/* ADD ACTION COLUMN */
+		$$('#shopping-cart-table tbody tr input.qty').each( function( qty_input ){
+			item_id = $(qty_input).readAttribute('name').replace( /(^.+\D)(\d+)(\D.+$)/i,'$2'); // Thank you Stack Overflow (http://stackoverflow.com/questions/609574/get-the-first-ints-in-a-string-with-javascript)
+			//$(':last-child', qty_input.up().up ).insert( '<strong>Test</strong>' );
+			qty_input.up().up().select("td:last-child")[0].insert('<br /><br /><a href="<?php echo Mage::getUrl('saveforlater'); ?>index/save/item/'+ item_id +'" class="saveforlater-action">Save&nbsp;for&nbsp;Later</a>');
+		} );
+		/* END ADD ACTION COLUMN */
+	} );
+</script>

@@ -1,0 +1,258 @@
+{
+    "100": {
+        "flag": "SOK",
+        "description": "Successful transaction"
+    },
+    "101": {
+        "flag": "DMISSINGFIELD",
+        "description": "Declined - The request is missing one or more fields"
+    },
+    "102": {
+        "flag": "DINVALIDDATA",
+        "description": "Declined - One or more fields in the request contains invalid data"
+    },
+    "104": {
+        "flag": "DDUPLICATE",
+        "description": "Declined - The merchantReferenceCode sent with this authorization request matches the merchantReferenceCode of another authorization request that you sent in the last 15 minutes."
+    },
+    "110": {
+        "flag": "SPARTIALAPPROVAL",
+        "description": "Partial amount was approved"
+    },
+    "150": {
+        "flag": "ESYSTEM",
+        "description": "Error - General system failure."
+    },
+    "151": {
+        "flag": "ETIMEOUT",
+        "description": "Error - The request was received but there was a server timeout. This error does not include timeouts between the client and the server."
+    },
+    "152": {
+        "flag": "ETIMEOUT",
+        "description": "Error: The request was received, but a service did not finish running in time."
+    },
+    "200": {
+        "flag": "DAVSNO",
+        "description": "Soft Decline - The authorization request was approved by the issuing bank but declined by CyberSource because it did not pass the Address Verification Service (AVS) check."
+    },
+    "201": {
+        "flag": "DCALL",
+        "description": "Decline - The issuing bank has questions about the request. You do not receive an authorization code programmatically, but you might receive one verbally by calling the processor."
+    },
+    "202": {
+        "flag": "DCARDEXPIRED",
+        "description": "Decline - Expired card. You might also receive this if the expiration date you provided does not match the date the issuing bank has on file.\n\nNote: The ccCreditService does not check the expiration date; instead, it passes the request to the payment processor. If the payment processor allows issuance of credits to expired cards, CyberSource does not limit this functionality."
+    },
+    "203": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - General decline of the card. No other information provided by the issuing bank."
+    },
+    "204": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - Insufficient funds in the account."
+    },
+    "205": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - Stolen or lost card."
+    },
+    "207": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - Issuing bank unavailable."
+    },
+    "208": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - Inactive card or card not authorized for card-not-present transactions."
+    },
+    "209": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - American Express Card Identification Digits (CID) did not match."
+    },
+    "210": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - The card has reached the credit limit."
+    },
+    "211": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - Invalid Card Verification Number (CVN)."
+    },
+    "220": {
+        "flag": "DCHECKREFUSED",
+        "description": "Decline - Generic Decline."
+    },
+    "221": {
+        "flag": "DCHECKREFUSED",
+        "description": "Decline - The customer matched an entry on the processor's negative file."
+    },
+    "222": {
+        "flag": "DCHECKREFUSED",
+        "description": "Decline - customer's account is frozen"
+    },
+    "230": {
+        "flag": "DCV",
+        "description": "Soft Decline - The authorization request was approved by the issuing bank but declined by CyberSource because it did not pass the card verification number (CVN) check."
+    },
+    "231": {
+        "flag": "DINVALIDCARD",
+        "description": "Decline - Invalid account number"
+    },
+    "232": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - The card type is not accepted by the payment processor."
+    },
+    "233": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - General decline by the processor."
+    },
+    "234": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - There is a problem with your CyberSource merchant configuration."
+    },
+    "235": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - The requested amount exceeds the originally authorized amount. Occurs, for example, if you try to capture an amount larger than the original authorization amount."
+    },
+    "236": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - Processor failure."
+    },
+    "237": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - The authorization has already been reversed."
+    },
+    "238": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - The transaction has already been settled."
+    },
+    "239": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - The requested transaction amount must match the previous transaction amount."
+    },
+    "240": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - The card type sent is invalid or does not correlate with the credit card number."
+    },
+    "241": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - The referenced request id is invalid for all follow-on transactions."
+    },
+    "242": {
+        "flag": "DNOAUTH",
+        "description": "Decline - The request ID is invalid.\n\nYou requested a capture, but there is no corresponding, unused authorization record. Occurs if there was not a previously successful authorization request or if the previously successful authorization has already been used in another capture request."
+    },
+    "243": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - The transaction has already been settled or reversed.\n\nThis reason code is specifically for Japan."
+    },
+    "246": {
+        "flag": "DNOTVOIDABLE",
+        "description": "Decline - The capture or credit is not voidable because the capture or credit information has already been submitted to your processor. Or, you requested a void for a type of transaction that cannot be voided."
+    },
+    "247": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - You requested a credit for a capture that was previously voided."
+    },
+    "248": {
+        "flag": "DBOLETODECLINED",
+        "description": "Decline - The boleto request was declined by your processor."
+    },
+    "250": {
+        "flag": "ETIMEOUT",
+        "description": "Error - The request was received, but there was a timeout at the payment processor."
+    },
+    "251": {
+        "flag": "DCARDREFUSED",
+        "description": "Decline - The Pinless Debit card's use frequency or maximum amount per use has been exceeded."
+    },
+    "254": {
+        "flag": "DINVALIDDATA",
+        "description": "Decline - Account is prohibited from processing stand-alone refunds."
+    },
+    "400": {
+        "flag": "DSCORE",
+        "description": "Soft Decline - Fraud score exceeds threshold."
+    },
+    "450": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Apartment number missing or not found."
+    },
+    "451": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Insufficient address information."
+    },
+    "452": {
+        "flag": "DINVALIDADDRESS",
+        "description": "House/Box number not found on street."
+    },
+    "453": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Multiple address matches were found."
+    },
+    "454": {
+        "flag": "DINVALIDADDRESS",
+        "description": "P.O. Box identifier not found or out of range."
+    },
+    "455": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Route service identifier not found or out of range."
+    },
+    "456": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Street name not found in Postal code."
+    },
+    "457": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Postal code not found in database."
+    },
+    "458": {
+        "flag": "addressIDADDRESS",
+        "description": "Unable to verify or correct address."
+    },
+    "459": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Multiple addres matches were found (international)"
+    },
+    "460": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Address match not found (no reason given)"
+    },
+    "461": {
+        "flag": "DINVALIDADDRESS",
+        "description": "Unsupported character set"
+    },
+    "475": {
+        "flag": "DAUTHENTICATE",
+        "description": "The cardholder is enrolled in Payer Authentication. Please authenticate the cardholder before continuing with the transaction."
+    },
+    "476": {
+        "flag": "DAUTHENTICATIONFAILED",
+        "description": "Encountered a Payer Authentication problem. Payer could not be authenticated."
+    },
+    "480": {
+        "flag": "DREVIEW",
+        "description": "The order is marked for review by Decision Manager"
+    },
+    "481": {
+        "flag": "DREJECT",
+        "description": "The order has been rejected by Decision Manager"
+    },
+    "520": {
+        "flag": "DSETTINGS",
+        "description": "Soft Decline - The authorization request was approved by the issuing bank but declined by CyberSource based on your Smart Authorization settings."
+    },
+    "700": {
+        "flag": "DRESTRICTED",
+        "description": "The customer matched the Denied Parties List"
+    },
+    "701": {
+        "flag": "DRESTRICTED",
+        "description": "Export bill_country/ship_country match"
+    },
+    "702": {
+        "flag": "DRESTRICTED",
+        "description": "Export email_country match"
+    },
+    "703": {
+        "flag": "DRESTRICTED",
+        "description": "Export hostname_country/ip_country match"
+    }
+}

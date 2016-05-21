@@ -1,0 +1,30 @@
+language: php
+
+branches:
+  only:
+    - master
+    - dev
+    - qa
+    - stage
+
+php:
+  - 5.5
+
+before_script:
+  - curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+# - curl -OL http://static.phpmd.org/php/latest/phpmd.phar
+
+script:
+  - php phpcs.phar --colors --warning-severity=0 --standard=dev/standard/phpcs.xml --encoding=utf-8 app/code/local/SDM
+#  - php phpmd.phar app/code/local/SDM text dev/standard/phpmd.xml
+
+notifications:
+  hipchat: QbCmHqvh3OBTgRIOmg0qjC1Kb36QEO757GRzSZl3@1738188
+  email:
+    recipients:
+      - alessandro.bassi@separationdegrees.com
+      - juito.hartanto@separationdegrees.com
+      - steve.robbins@separationdegrees.com
+      - youn.kim@separationdegrees.com
+    on_success: change
+    on_failure: always

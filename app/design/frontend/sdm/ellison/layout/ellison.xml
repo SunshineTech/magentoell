@@ -1,0 +1,315 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Ellison.xml
+ *
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @category  Separation Degrees Media
+ * @package   sdm
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+<!--
+Default layout, loads all of the pages
+-->
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/global.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/video.js</script>
+            </action>
+            <action method="removeItem">
+                <type>skin_js</type>
+                <script>js/slideshow.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>magestore/sociallogin/sociallogin.js</script>
+            </action>
+            <action method="addJs">
+                <script>sdm/sociallogin/sociallogin.js</script>
+            </action>
+        </reference>
+        <remove name="footer_links"/>
+        <remove name="footer_links2"/>
+        <remove name="footer.newsletter"/>
+        <reference name="cms_footer_links">
+            <!--
+                The content of this block is taken from the database by its block_id.
+                You can manage it in admin CMS -> Static Blocks
+            -->
+            <action method="setBlockId"><block_id>footer_links</block_id></action>
+        </reference>
+        <reference name="content">
+            <block type="itoris_mwishlist/popup" name="mwishlist_popup" template="itoris/mwishlist/popup.phtml"/>
+        </reference>
+        <reference name="footer">
+            <block type="newsletter/subscribe" name="footer.newsletter2" as="newsletter" after="footer_links2" template="newsletter/subscribe.phtml"/>
+        </reference>
+    </default>
+    <!-- Account Page -->
+    <customer_account>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left-account.phtml</template></action>
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="removeLinkByName"><name>tags</name></action>
+            <action method="removeLinkByName"><name>billing_agreements</name></action>
+            <action method="removeLinkByName"><name>OAuth Customer Tokens</name></action>
+            <action method="removeLinkByName"><name>downloadable_products</name></action>
+            <action method="removeLinkByName"><name>reviews</name></action>
+            <action method="removeLinkByName"><name>recurring_profiles</name></action>
+            <action method="removeLinkByName"><name>newsletter</name></action>
+        </reference>
+    </customer_account>
+    <customer_account_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left-account.phtml</template></action>
+        </reference>
+    </customer_account_index>
+    <!-- CMS Page -->
+    <cms_page>
+        <reference name="head">
+            <action method="removeItem">
+                <type>js</type>
+                <name>auguria/sliders/jquery-1.7.2.min.js</name>
+            </action>
+        </reference>
+    </cms_page>
+    <customer_logged_in>
+        <reference name="top.links">
+            <action method="removeLinkByUrl"><url helper="checkout/url/getCartUrl" /></action>
+            <remove name="wishlist_link"/>
+        </reference>
+    </customer_logged_in>
+    <customer_logged_out>
+        <reference name="top.links">
+            <remove name="wishlist_link"/>
+            <remove name="checkout_cart_link"/>
+            <action method="removeLinkByUrl"><url helper="customer/getLoginUrl"/></action>
+            <action method="removeLinkByUrl"><url helper="customer/getAccountUrl" /></action>
+            <action method="removeLinkByUrl"><url helper="checkout/url/getCartUrl" /></action>
+            <action method="removeLinkByUrl"><url helper="customer/getRegisterUrl" /></action>
+            <action method="addLink" translate="label title" module="customer">
+                <label>Login</label>
+                <url helper="customer/getLoginUrl"/>
+                <title>Login</title>
+                <prepare/>
+                <urlParams/>
+                <position>1</position>
+                <liParams>
+                    <id>login</id>
+                </liParams>
+            </action>
+            <action method="addLink" translate="label title" module="customer">
+                <label>Signup</label>
+                <url helper="customer/getRegisterUrl" />
+                <title>Signup</title>
+                <prepare/>
+                <urlParams/>
+                <position>2</position>
+                <liParams>
+                    <id>signup</id>
+                </liParams>
+                <a/>
+            </action>
+        </reference>
+    </customer_logged_out>
+    <!-- Category -->
+    <catalog_category_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/catalog.js</script>
+            </action>
+        </reference>
+        <reference name="product_list">
+            <action method="setColumnCount">
+                <count>3</count>
+            </action>
+        </reference>
+    </catalog_category_view>
+    <catalog_category_default>
+        <label>Catalog Category (Non-Anchor)</label>
+        <reference name="head">
+            <action method="removeItem">
+                <type>js</type>
+                <name>auguria/sliders/jquery-1.7.2.min.js</name>
+            </action>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <label>Catalog Category (Anchor)</label>
+        <reference name="head">
+            <action method="removeItem">
+                <type>js</type>
+                <name>auguria/sliders/jquery-1.7.2.min.js</name>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="product_list">
+            <action method="setColumnCount">
+                <count>3</count>
+            </action>
+        </reference>
+    </catalog_category_layered>
+    <!-- Product -->
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/jquery.pin.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/jquery.zoom.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/product.js</script>
+            </action>
+            <action method="removeItem" ifconfig="advancedmedia/general/enabled">
+                <type>js</type>
+                <script>advancedmedia/jquery-1.8.3.min.js</script>
+            </action>
+            <action method="addItem" ifconfig="advancedmedia/general/enabled">
+                <type>skin_js</type>
+                <script>js/advancedmedia/jquery.js</script>
+            </action>
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate" ifconfig="advancedmedia/general/enabled"><template>catalog/product/view/tabs/tab-media.phtml</template></action>
+        </reference>
+    </catalog_product_view>
+    <sendfriend_product_send>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </sendfriend_product_send>.
+    <!-- IF Product type is simple display this Block -->
+    <PRODUCT_TYPE_simple translate="label" module="catalog">
+        <reference name="product.info">
+            <!-- Tabs -->
+            <block type="catalog/product_view_media" name="product.media" as="tab.media" template="catalog/product/view/tabs/tab-media.phtml">
+                <action method="addToParentGroup"><group>detailed_tab</group></action>
+                <action method="setTitle" translate="value"><value>Overview</value></action>
+            </block>
+            <block type="catalog/product_view" name="product.projects" as="tab.projects" template="catalog/product/view/tabs/tab-projects.phtml">
+                <action method="addToParentGroup"><group>detailed_tab</group></action>
+                <action method="setTitle" translate="value"><value>Projects</value></action>
+            </block>
+            <block type="catalog/product_view" name="product.designers" as="tab.designers" template="catalog/product/view/tabs/tab-designers.phtml">
+                <action method="addToParentGroup"><group>detailed_tab</group></action>
+                <action method="setTitle" translate="value"><value>Designers</value></action>
+            </block>
+            <block type="catalog/product_view" name="product.instructions" as="tab.instructions" template="catalog/product/view/tabs/tab-instructions.phtml">
+                <action method="addToParentGroup"><group>detailed_tab</group></action>
+                <action method="setTitle" translate="value"><value>Instructions</value></action>
+            </block>
+            <block type="catalog/product_view" name="product.accessories" as="tab.accessories" template="catalog/product/view/tabs/tab-accessories.phtml">
+                <action method="addToParentGroup"><group>detailed_tab</group></action>
+                <action method="setTitle" translate="value"><value>Accessories</value></action>
+            </block>
+            <block type="catalog/product_view" name="product.sizzix101" as="tab.sizzix101" template="catalog/product/view/tabs/tab-sizzix101.phtml">
+                <action method="addToParentGroup"><group>detailed_tab</group></action>
+                <action method="setTitle" translate="value"><value>Sizzix 101</value></action>
+            </block>
+            <block type="catalog/product_view" name="product.compatibility" as="tab.compatibility" template="catalog/product/view/tabs/tab-compatibility.phtml">
+                <action method="addToParentGroup"><group>detailed_tab</group></action>
+                <action method="setTitle" translate="value"><value>Compatibility</value></action>
+            </block>
+            <!-- Content -->
+            <block type="catalog/product_view_description" name="product.description" as="content.description" template="catalog/product/view/content-description.phtml">
+                <action method="addToParentGroup"><group>detailed_content</group></action>
+                <action method="setTitle" translate="value"><value>product-description</value></action>
+            </block>
+            <block type="catalog/product_view" name="related.projects" as="related.projects" template="catalog/product/view/content-projects.phtml">
+                <action method="addToParentGroup"><group>detailed_content</group></action>
+                <action method="setTitle" translate="value"><value>related-projects</value></action>
+            </block>
+            <block type="catalog/product_view" name="related.accessories" as="related.accessories" template="catalog/product/view/content-accessories.phtml">
+                <action method="addToParentGroup"><group>detailed_content</group></action>
+                <action method="setTitle" translate="value"><value>related-accessories</value></action>
+            </block>
+            <block type="catalog/product_view" name="designer.product" as="designer.product" template="catalog/product/view/content-designers.phtml">
+                <action method="addToParentGroup"><group>detailed_content</group></action>
+                <action method="setTitle" translate="value"><value>designer-product</value></action>
+            </block>
+            <block type="catalog/product_view" name="machine.compatibility" as="compatibility" template="catalog/product/view/content-compatibility.phtml">
+                <action method="addToParentGroup"><group>detailed_content</group></action>
+                <action method="setTitle" translate="value"><value>compatibility</value></action>
+            </block>
+            <block type="catalog/product_view" name="sizzix.content" as="sizzix.content" template="catalog/product/view/content-sizzix101.phtml">
+                <action method="addToParentGroup"><group>detailed_content</group></action>
+                <action method="setTitle" translate="value"><value>sizzix101</value></action>
+            </block>
+        </reference>
+        <remove name="product.info.simple.extra"/>
+    </PRODUCT_TYPE_simple>
+    <PRODUCT_TYPE_grouped>
+        <remove name="product.info.grouped.extra" />
+    </PRODUCT_TYPE_grouped>
+    <!-- Search Result -->
+    <catalogsearch_result_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/catalog.js</script>
+            </action>
+        </reference>
+        <reference name="product_list">
+            <action method="setColumnCount">
+                <count>3</count>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+    <!-- Auguria Slider in Homepage Layout -->
+    <custom_homepage_column>
+        <reference name="auguria_sliders">
+            <action method="setPageType"><type>one</type></action>
+        </reference>
+    </custom_homepage_column>
+    <!-- Shopping Cart -->
+    <checkout_cart_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/cart.js</script>
+            </action>
+        </reference>
+        <remove name="saveforlater.items"/>
+        <reference name="content">
+            <block type="saveforlater/items" ifconfig="saveforlater/settings/active" after="-" name="saveforlater-items" template="redstage_saveforlater/items.phtml" />
+        </reference>
+<!--         <reference name="checkout.cart">
+            <remove name="checkout.cart.crosssell"/>
+            <block type="checkout/cart_crosssell" name="checkout.cart.crosssells" as="crosssell" template="checkout/cart/crosssell.phtml">
+                <action method="setItemLimit">
+                    <type>crosssell</type>
+                    <limit>10</limit>
+                </action>
+            </block>
+        </reference> -->
+    </checkout_cart_index>
+    <!-- Helpdesk Contact Page -->
+    <contacts_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </contacts_index_index>
+</layout>

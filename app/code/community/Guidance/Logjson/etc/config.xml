@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Guidance_Logjson>
+            <version>0.1.0</version>
+        </Guidance_Logjson>
+    </modules>
+    <global>
+        <helpers>
+            <guidance_logjson>
+                <class>Guidance_Logjson_Helper</class>
+            </guidance_logjson>
+        </helpers>
+        <log>
+            <core>
+                <writer_model>Guidance_Logjson_Model_Writer_Jsonstream</writer_model>
+            </core>
+        </log>
+    </global>
+    <default>
+        <dev>
+            <log>
+                <active>1</active>
+            </log>
+        </dev>
+    </default>
+</config>

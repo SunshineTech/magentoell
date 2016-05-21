@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+
+<layout>
+    <adminhtml_savedquote_index>
+        <reference name="content">
+            <block type="savedquote/adminhtml_savedquote" name="savedquote_adminhtml_savedquote" />
+        </reference>
+    </adminhtml_savedquote_index>
+    <adminhtml_savedquote_view>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/jquery-1.11.3.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/sdm_savedquote.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/sdm_savedquote.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="savedquote/adminhtml_savedquote_view" name="adminhtml.savequote.view" template="savedquote/view.phtml" />
+        </reference>
+    </adminhtml_savedquote_view>
+</layout>

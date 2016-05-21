@@ -1,0 +1,29 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * eClips Software Download
+ *
+ * @category  SDM
+ * @package   SDM_Eclips
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+?>
+<?php if (Mage::registry('download') === true) : ?>
+    <div class="download-links">
+        <h2>Download:</h2>
+        <ul>
+            <li>
+                <a href="<?php echo $this->getWindows32BitSoftware() ?>"><span>Microsoft Windows 32-bit 3.1</span></a>
+            </li>
+            <li>
+                <a href="<?php echo $this->getWindows64BitSoftware() ?>"><span>Microsoft Windows 64-bit 3.1</span></a>
+            </li>
+            <li>
+                <a href="<?php echo $this->getOsXSoftware() ?>"><span>Apple Macintosh 3.1</span></a>
+            </li>
+        </ul>
+        <div class="close"><i class="fa fa-times"></i></div>
+    </div>
+<?php endif; ?>

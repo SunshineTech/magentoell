@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Allows customers to follow an item
+ *
+ * @category  SDM
+ * @package   SDM_FollowItem
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_FollowItem>
+            <version>0.1.0</version>
+        </SDM_FollowItem>
+    </modules>
+    <global>
+        <models>
+            <followitem>
+                <class>SDM_FollowItem_Model</class>
+                <resourceModel>followitem_resource</resourceModel>
+            </followitem>
+            <followitem_resource>
+                <class>SDM_FollowItem_Model_Resource</class>
+                <entities>
+                    <follow>
+                        <table>sdm_followitem</table>
+                    </follow>
+                </entities>
+            </followitem_resource>
+        </models>
+        <resources>
+            <sdm_followitem>
+                <setup>
+                    <module>SDM_FollowItem</module>
+                </setup>
+            </sdm_followitem>
+        </resources>
+        <helpers>
+            <followitem>
+                <class>SDM_FollowItem_Helper</class>
+            </followitem>
+        </helpers>
+        <blocks>
+            <followitem>
+                <class>SDM_FollowItem_Block</class>
+            </followitem>
+        </blocks>
+    </global>
+    <frontend>
+        <secure_url>
+            <followitem_account_list>/followitem/account/list</followitem_account_list>
+        </secure_url>
+        <routers>
+            <sdm_followitem>
+                <use>standard</use>
+                <args>
+                    <module>SDM_FollowItem</module>
+                    <frontName>followitem</frontName>
+                </args>
+            </sdm_followitem>
+        </routers>
+        <layout>
+            <updates>
+                <followitem>
+                    <file>sdm/followitem.xml</file>
+                </followitem>
+            </updates>
+        </layout>
+    </frontend>
+</config>

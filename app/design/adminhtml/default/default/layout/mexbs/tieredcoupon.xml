@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_tieredcoupon_index>
+        <reference name="content">
+            <block type="mexbs_tieredcoupon/adminhtml_tieredcoupon" name="tieredcoupon" />
+        </reference>
+    </adminhtml_tieredcoupon_index>
+    <adminhtml_tieredcoupon_grid>
+        <update handle="formkey"/>
+        <block type="mexbs_tieredcoupon/adminhtml_tieredcoupon_grid" name="tieredcoupon.grid" output="toHtml" />
+    </adminhtml_tieredcoupon_grid>
+    <adminhtml_tieredcoupon_edit>
+        <reference name="left">
+            <block type="mexbs_tieredcoupon/adminhtml_tieredcoupon_edit_tabs" name="tieredcoupon_edit_tabs">
+                <block type="mexbs_tieredcoupon/adminhtml_tieredcoupon_edit_tab_main" name="tieredcoupon_edit_tab_main" />
+                <block type="mexbs_tieredcoupon/adminhtml_tieredcoupon_edit_tab_subcoupons" name="tieredcoupon_edit_tab_subcoupons">
+                    <block type="mexbs_tieredcoupon/adminhtml_tieredcoupon_edit_tab_subcoupons_grid" name="tieredcoupon_edit_tab_subcoupons_grid"/>
+                    <block type="adminhtml/widget_grid_serializer" name="tieredcoupon_grid_serializer">
+                        <reference name="tieredcoupon_grid_serializer">
+                            <action method="initSerializerBlock">
+                                <grid_block_name>tieredcoupon_edit_tab_subcoupons_grid</grid_block_name>
+                                <data_callback>getSelectedSubCoupons</data_callback>
+                                <hidden_input_name>sub_coupon_codes</hidden_input_name>
+                                <reload_param_name>selected_subcoupons</reload_param_name>
+                            </action>
+                        </reference>
+                    </block>
+                </block>
+                <action method="addTab"><name>main_section</name><block>tieredcoupon_edit_tab_main</block></action>
+                <action method="addTab"><name>coupons_section</name><block>tieredcoupon_edit_tab_subcoupons</block></action>
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="mexbs_tieredcoupon/adminhtml_tieredcoupon_edit" name="tieredcoupon_edit" />
+        </reference>
+    </adminhtml_tieredcoupon_edit>
+    <adminhtml_tieredcoupon_subcouponsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mexbs_tieredcoupon/adminhtml_tieredcoupon_edit_tab_subcoupons_grid" name="tieredcoupon_edit_tab_subcoupons_grid" />
+        </block>
+    </adminhtml_tieredcoupon_subcouponsgrid>
+</layout>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's custom Landing Page Management System (LPMS).
+ *
+ * @category  SDM
+ * @package   SDM_Lpms
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Lpms>
+            <version>0.4.0</version>
+        </SDM_Lpms>
+    </modules>
+    <global>
+        <blocks>
+            <cms>
+                <rewrite>
+                    <page>SDM_Lpms_Block_Page</page>
+                </rewrite>
+            </cms>
+            <lpms>
+                <class>SDM_Lpms_Block</class>
+            </lpms>
+            <adminhtml>
+                <rewrite>
+                    <cms_page_edit_form>SDM_Lpms_Block_Adminhtml_Cms_Page_Edit_Form</cms_page_edit_form>
+                    <cms_page_edit_tab_content>SDM_Lpms_Block_Adminhtml_Cms_Page_Edit_Tab_Content</cms_page_edit_tab_content>
+                    <cms_page_edit_tab_main>SDM_Lpms_Block_Adminhtml_Cms_Page_Edit_Tab_Main</cms_page_edit_tab_main>
+                    <cms_page_grid>SDM_Lpms_Block_Adminhtml_Cms_Page_Grid</cms_page_grid>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <lpms>
+                <class>SDM_Lpms_Helper</class>
+            </lpms>
+        </helpers>
+        <models>
+            <cms_resource>
+                <rewrite>
+                    <page>SDM_Lpms_Model_Resource_Page</page>
+                </rewrite>
+            </cms_resource>
+            <lpms>
+                <class>SDM_Lpms_Model</class>
+                <resourceModel>lpms_resource</resourceModel>
+            </lpms>
+            <lpms_resource>
+                <class>SDM_Lpms_Model_Resource</class>
+                <entities>
+                    <lpms_asset>
+                        <table>cms_landing_page_asset</table>
+                    </lpms_asset>
+                    <lpms_asset_store>
+                        <table>cms_landing_page_asset_store</table>
+                    </lpms_asset_store>
+                    <lpms_asset_image>
+                        <table>cms_landing_page_asset_image</table>
+                    </lpms_asset_image>
+                    <lpms_asset_image_store>
+                        <table>cms_landing_page_asset_image_store</table>
+                    </lpms_asset_image_store>
+                </entities>
+            </lpms_resource>
+        </models>
+        <resources>
+            <sdm_lpms>
+                <setup>
+                    <module>SDM_Lpms</module>
+                </setup>
+            </sdm_lpms>
+            <lpms_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </lpms_write>
+            <lpms_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </lpms_read>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_Lpms before="Mage_Adminhtml">SDM_Lpms_Adminhtml</SDM_Lpms>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <lpms>
+                    <file>lpms.xml</file>
+                </lpms>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

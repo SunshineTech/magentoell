@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Perm
+ */
+-->
+<config>
+    <sections>
+        <amperm translate="label" module="amperm">
+            <label>Sales Reps and Dealers</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>190118</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <role translate="label comment">
+                            <label>Role ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Restrictions for viewing customers and orders will be applied for this role only.]]></comment>                            
+                        </role>
+                        <default_dealer translate="label comment">
+                            <label>Default Dealer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amperm/source_dealer</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[All new orders will be assigned to this dealer except if a specific customer is already assigned to another dealer.]]></comment>
+                        </default_dealer>
+                        <send_email translate="label comment">
+                            <label>Send New Order Email to the Dealer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Indicate `Yes` to send a copy of the order email to the associated dealer.]]></comment>
+                        </send_email>
+                        <reassign_fields translate="label comment">
+                            <label>Show Re-assign Fields</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[On the order view page in Backend.]]></comment>
+                        </reassign_fields>
+                        <from_to translate="label comment">
+                            <label>Show From To</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[From whom to whom re-assigned order.]]></comment>
+                            <depends>
+                                <reassign_fields>1</reassign_fields>
+                            </depends>
+                        </from_to>
+                        <author translate="label">
+                            <label>Show Author of Message</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>42</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <reassign_fields>1</reassign_fields>
+                            </depends>
+                        </author>
+                        <edit_no_grid translate="label">
+                            <label>Hide the `Manage Customers` tab</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[On the `Edit User` page (the `Edit Dealer` page).]]></comment>
+                        </edit_no_grid>
+                    </fields>
+                </general>           
+                <messages translate="label">
+                    <label>Re-assigned Order Notifications</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                         <enabled translate="label comment">
+                            <label>Send Emails</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Indicate `Yes` to send a notification about re-assigned order to the new and old dealers.]]></comment>
+                        </enabled> 
+                        <see_other_dealers translate="label comment">
+                            <label>Dealer Can Assign Order to Other Dealers</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Indicate `No` if you want dealer to assign orders to the store administrator only.]]></comment>
+                        </see_other_dealers>                        
+                        <admin_email translate="label comment">
+                            <label>Admin Email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[If an order assigned from a dealer to the store admin, email will be sent to this address.]]></comment>
+                        </admin_email>                        
+                        <identity translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </identity>                         
+                        <template translate="label">
+                            <label>Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </template>                        
+                    </fields>
+                </messages>
+                <frontend translate="label">
+                    <label>Frontend</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <on_registration translate="label">
+                            <label>Allow Customers to select a Dealer on Registration</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </on_registration>
+                        <in_account translate="label">
+                            <label>Allow Customers to select a Dealer in Customer Account</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </in_account>
+                        <description_checkout translate="label">
+                            <label>Show Dealer description at checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </description_checkout>
+                        <description_customer translate="label">
+                            <label>Show Dealer description in customer dashboard</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </description_customer>
+                    </fields>
+                </frontend>
+                <other_extensions translate="label">
+                    <label>Other</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <delivery_date_reminder_enabled translate="label comment">
+                            <label>Delivery Reminder</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[The <a href="https://amasty.com/delivery-date.html" target="_blank">Delivery Date</a> extension will send email to a dealer too, if Delivery Date Reminder enabled.]]></comment>
+                        </delivery_date_reminder_enabled>
+                    </fields>
+                </other_extensions>
+            </groups>
+        </amperm>
+    </sections>
+</config>

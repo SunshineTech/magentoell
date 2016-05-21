@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <promo>
+            <children>
+                <tieredcoupon translate="title" module="mexbs_tieredcoupon">
+                    <title>Tiered Coupons</title>
+                    <action>adminhtml/tieredcoupon/</action>
+                    <depends><module>Mexbs_Tieredcoupon</module></depends>
+                </tieredcoupon>
+            </children>
+        </promo>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <promo>
+                        <children>
+                            <tieredcoupon translate="title" module="salesrule">
+                                <title>Tiered Coupons</title>
+                            </tieredcoupon>
+                        </children>
+                    </promo>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

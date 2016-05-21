@@ -1,0 +1,152 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Grouped product data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ * @see Mage_Catalog_Block_Product_View_Type_Grouped
+ */
+
+$this->setPreconfiguredValue();
+$_product = $this->getProduct();
+$_associatedProducts = $this->getAssociatedProducts();
+$_hasAssociatedProducts = count($_associatedProducts) > 0;
+$_saleLabelHelper = $this->helper('sdm_catalog/salelabel');
+$_canBuy = false;
+
+?>
+
+<?php echo $this->getChildHtml('product_type_data_extra'); ?>
+
+<div class="grouped-items-table-wrapper">
+    <table class="data-table grouped-items-table" id="super-product-table">
+        <thead>
+            <tr>
+                <td><?php echo $this->__('Product')?></td>
+                <td></td>
+                <td><?php echo $this->__('Price')?></td>
+                <td><?php echo $this->__('Quantity')?></td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if ($_hasAssociatedProducts): ?>
+            <?php foreach ($_associatedProducts as $_item): ?>
+                <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+                <tr>
+                    <td class='image'>
+                        <a href="<?php echo $_item->getProductUrl() ?>">
+                            <img class="thumbnail"
+                                 src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->constrainOnly(true)->resize(75); ?>"
+                                 alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>"
+                                 title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>" />
+                         </a>
+                    </td>
+                    <td class="name">
+                        <p class="name-wrapper">
+                            <a href="<?php echo $_item->getProductUrl() ?>">
+                                <?php echo $this->escapeHtml($_item->getName()) ?>
+                            </a>
+                        </p>
+                        <p class="sku">
+                            <?php echo Mage::helper('sdm_catalog')->getSkuLabel($_item) . $_item->getSku() ?>
+                        </p>
+                        <?php // Show sale label ?>
+                        <?php echo $_saleLabelHelper->getSaleLabelHtml($_item, 'text'); ?>
+                        <?php if($this->helper('wishlist')->isAllow()): ?>
+                            <p class="wishlist">
+                                <a href="<?php echo $this->helper('wishlist')->getAddUrl($_item) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a>
+                            </p>
+                        <?php endif; ?>
+                    </td>
+                    <?php if($_item->getButtonType() == 'text'): ?>
+                        <?php if ($_item->getButtonLogicRetailerOverride()): ?>
+                            <?php // Retailer override active ?>
+                            <td>
+                                <?php if ($this->getCanShowProductPrice($_product)): ?>
+                                    <?php if ($this->getCanShowProductPrice($_item)): ?>
+                                    <?php echo $this->getPriceHtml($_item, true) ?>
+                                    <?php echo $this->getTierPriceHtml($_item) ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </td>
+                            <td></td>
+                        <?php else: ?>
+                            <?php // Normal text output ?>
+                            <td class="a-right" colspan="2">
+                                <p class="availability">
+                                    <span><?php echo $_item->getButtonValue() ?></span>
+                                </p>
+                            </td>
+                        <?php endif; ?>
+                    <?php elseif($_item->getButtonType() == 'add-to-cart'): ?>
+                        <td>
+                            <?php if ($this->getCanShowProductPrice($_product)): ?>
+                                <?php if ($this->getCanShowProductPrice($_item)): ?>
+                                <?php echo $this->getPriceHtml($_item, true) ?>
+                                <?php echo $this->getTierPriceHtml($_item) ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </td>
+                        <?php if ($_item->isPreorderable()): ?>
+                            <td class="a-right" colspan="2">
+                                <p class="availability">
+                                    <span>Available for Pre Order Only</span>
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <?php $_canBuy = true; ?>
+                            <td class="a-right">
+                                <input id="super_group_<?php echo $_item->getId(); ?>" type="text" pattern="\d*" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+                            </td>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <td class="a-right" colspan="2">
+                            <p class="availability">
+                                <span><?php echo $this->__('Not Available') ?></span>
+                            </p>
+                        </td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+           <tr>
+               <td colspan="<?php if ($_product->isSaleable()): ?>4<?php else : ?>3<?php endif; ?>"><?php echo $this->__('No options of this product are available.') ?></td>
+           </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+<?php if ($_canBuy): ?>
+    <div class="add-to-cart">
+        <div class="add-to-cart-buttons">
+            <button type="button" class="button btn-cart ajax-cart">
+                <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+            </button>
+        </div>
+    </div>
+<?php endif; ?>
+<script type="text/javascript">decorateTable('super-product-table')</script>

@@ -1,0 +1,11 @@
+<?php $_isUsingGuestAxIds = $this->isUsingGuestAxIds();  ?>
+<!-- AX Invoice Account ID -->
+<tr id="ax_invoice_id_block">
+    <td class="label">
+        <label><?php echo Mage::helper('sales')->__('Invoice Account ID') ?></label>
+    </td>
+    <td class="value">
+        <input class="adminhtml_ax_invoice_id" id="ax_invoice_id" name="order[ax_invoice_id]" value="<?php echo $this->getAxInvoiceId() ?>" class="input-text" type="text" <?php echo $_isUsingGuestAxIds ? 'readonly' : '' ?>>
+        <?php echo $_isUsingGuestAxIds ? '' : $this->getChildHtml('ax_invoice_button') ?>
+    </td>
+</tr>

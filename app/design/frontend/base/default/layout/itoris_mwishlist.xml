@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="content">
+			<block type="itoris_mwishlist/popup" name="mwishlist_popup" template="itoris/mwishlist/popup.phtml"/>
+		</reference>
+	</default>
+</layout>

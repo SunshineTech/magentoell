@@ -1,0 +1,25 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_YoutubeFeed_Block_Channel_View_Filter $this
+ */
+$_playlistId = $this->getCurrentPlaylistId();
+?>
+<div class="filter-tab channel-view-filter">
+    <ul>
+        <li<?php echo $_playlistId === false ? ' class="selected"' : '' ?>><a href="<?php echo $this->getUrl('*/*/*', array('id' => $this->getChannel()->getId())) ?>"><?php echo $this->__('%s Videos Home', $this->getChannel()->getName()) ?></a></li>
+        <?php foreach ($this->getPlaylists() as $_playlist): ?>
+        <li<?php echo $_playlistId == $_playlist->getId() ? ' class="selected"' : '' ?>><a href="<?php echo $this->getUrl('*/*/*', array('id' => $this->getChannel()->getId(), 'playlist' => $_playlist->getId())) ?>"><?php echo $_playlist->getName() ?></a></li>
+        <?php endforeach ?>
+    </ul>
+</div>

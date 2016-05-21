@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<info>
+    <product>Multi-Location Inventory</product>
+    <product_id>100</product_id>
+    <category>Aitoc</category>
+    <package>Aitoc_Aitquantitymanager</package>
+    <version>2.2.3</version>
+    <platform>community</platform>
+    <license>rJhV4acfvLy4sPgpe7MoLJnfOEhDVfWVuKRvbpcv30</license>
+    <copyright>Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)</copyright>
+</info>

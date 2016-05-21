@@ -1,0 +1,62 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Collection Rendering Widget
+ *
+ * @category  SDM
+ * @package   SDM_RenderCollection
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+?>
+<?php
+    $_articles = $this->getCollection();
+    $_collectionSize = is_array($_articles) ? count($_articles) : $_articles->count();
+?>
+<?php if($_collectionSize): ?>
+<div class="render-collection news-article-listing">
+    <p class="result-count"><?php echo $this->__('%s Results', $_collectionSize) ?></p>
+    <?php echo $this->getToolbarHtml() ?>
+    <ul>
+    <?php foreach ($_articles as $_article): ?>
+        <?php $_content = $_article->getContentExcerpt(); ?>
+        <?php $_contentTrimmed = strip_tags($_content); ?>
+        <?php $_contentTrimmed = Mage::helper('core/string')->truncate($_contentTrimmed, 270, '...', $remainder, false); ?>
+        <?php $_cover = $_article->getHeroImage()?>
+        <?php $_url = Mage::getUrl($_article->getData('identifier')); ?>
+            <li>
+                <div class="cover-photo">
+                    <?php if ($_cover): ?>
+                        <a href="<?php echo $_url ?>" class="product-image">
+                            <img id="product-collection-image-<?php echo $_article->getId(); ?>"
+                                 src="<?php echo $this->helper('sdm_core')->resizeImg($_cover, 800); ?>" />
+                        </a>
+                    <?php endif; ?>
+                    <div class="clear"></div>
+                </div>
+                <div class="article-info">
+                    <h3><?php echo $_article->getContentHeading() ?></h3>
+                    <p><?php echo $_contentTrimmed ?></p>
+                </div>
+                <div class="article-actions">
+                    <a title="Learn More" class="button" href="<?php echo $_url ?>">
+                        <?php echo $this->__('Learn More') ?>
+                    </a>
+                </div>
+                <?php if ($_article->getPublishTime()): ?>
+                    <div class="post">
+                        <div class="month"><?php echo date('F', strtotime($_article->getPublishTime())); ?></div>
+                        <div class="date"><?php echo date('j', strtotime($_article->getPublishTime())); ?></div>
+                        <div class="year"><?php echo date('Y', strtotime($_article->getPublishTime())); ?></div>
+                    </div>
+                <?php endif; ?>
+            </li>
+    <?php endforeach ?>
+    </ul>
+    <?php echo $this->getToolbarHtml() ?>
+</div>
+<?php else: ?>
+    <p><?php echo $this->__('No articles found.') ?></p>
+<?php endif; ?>
+

@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_SavedQuote>
+            <version>0.6.0</version>
+        </SDM_SavedQuote>
+    </modules>
+    <global>
+        <models>
+            <savedquote>
+                <class>SDM_SavedQuote_Model</class>
+                <resourceModel>savedquote_resource</resourceModel>
+            </savedquote>
+            <savedquote_resource>
+                <class>SDM_SavedQuote_Model_Resource</class>
+                <entities>
+                    <savedquote>
+                        <table>sdm_sales_flat_saved_quote</table>
+                    </savedquote>
+                    <savedquote_item>
+                        <table>sdm_sales_flat_saved_quote_item</table>
+                    </savedquote_item>
+                    <savedquote_address>
+                        <table>sdm_sales_flat_saved_quote_address</table>
+                    </savedquote_address>
+                </entities>
+            </savedquote_resource>
+            <sales>
+                <rewrite>
+                    <service_quote>SDM_SavedQuote_Model_Service_Quote</service_quote>
+                </rewrite>
+            </sales>
+        </models>
+        <resources>
+            <sdm_saved_quote_setup>
+                <setup>
+                    <module>SDM_SavedQuote</module>
+                </setup>
+            </sdm_saved_quote_setup>
+        </resources>
+        <blocks>
+            <savedquote>
+                <class>SDM_SavedQuote_Block</class>
+            </savedquote>
+        </blocks>
+        <helpers>
+            <savedquote>
+                <class>SDM_SavedQuote_Helper</class>
+            </savedquote>
+        </helpers>
+        <fieldsets>
+            <sales_convert_quote>
+                <saved_quote_id>
+                    <to_order>*</to_order>
+                </saved_quote_id>
+            </sales_convert_quote>
+            <sales_convert_order>
+                <saved_quote_id>
+                    <to_quote>*</to_quote>
+                </saved_quote_id>
+            </sales_convert_order>
+        </fieldsets>
+        <template>
+            <email>
+                <sdm_savedquote_confirmation>
+                    <label>Saved Quote Confirmation</label>
+                    <file>sdm/savedquote/confirmation.html</file>
+                    <type>html</type>
+                </sdm_savedquote_confirmation>
+            </email>
+        </template>
+    </global>
+    <frontend>
+        <secure_url>
+            <savedquote>/savedquote</savedquote>
+        </secure_url>
+        <routers>
+            <savedquote>
+                <use>standard</use>
+                <args>
+                    <module>SDM_SavedQuote</module>
+                    <frontName>savedquote</frontName>
+                </args>
+            </savedquote>
+        </routers>
+        <events>
+            <sales_quote_add_item>
+                <observers>
+                    <productAddAfter>
+                        <class>savedquote/observer</class>
+                        <method>productAddAfter</method>
+                    </productAddAfter>
+                </observers>
+            </sales_quote_add_item>
+            <controller_action_layout_load_before>
+                <observers>
+                    <beforeLayoutLoad>
+                        <class>savedquote/observer</class>
+                        <method>beforeLayoutLoad</method>
+                    </beforeLayoutLoad>
+                </observers>
+            </controller_action_layout_load_before>
+            <checkout_submit_all_after>
+                <observers>
+                    <checkoutSubmitAllAfter>
+                        <class>savedquote/observer</class>
+                        <method>checkoutSubmitAllAfter</method>
+                    </checkoutSubmitAllAfter>
+                </observers>
+            </checkout_submit_all_after>
+        </events>
+        <layout>
+            <updates>
+                <savedquote>
+                    <file>sdm/savedquote.xml</file>
+                </savedquote>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <savedquote module="SDM_SavedQuote">
+                    <file>sdm/savedquote.xml</file>
+                </savedquote>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_SavedQuote after="Mage_Adminhtml">SDM_SavedQuote_Adminhtml</SDM_SavedQuote>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <default>
+        <savedquote>
+            <system>
+                <increment_id>29812</increment_id><!-- Last quote number used prior to Magento -->
+            </system>
+            <general>
+                <enabled>0</enabled>
+                <valid_days>90</valid_days>
+                <log_filename>sdm_savedquote.log</log_filename>
+            </general>
+        </savedquote>
+    </default>
+</config>

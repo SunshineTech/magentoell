@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Mage_Sales customizations
+ *
+ * @category  SDM
+ * @package   SDM_Customer
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Customer>
+            <version>0.3.7</version>
+        </SDM_Customer>
+    </modules>
+    <global>
+        <models>
+            <sdm_customer>
+                <class>SDM_Customer_Model</class>
+                <resourceModel>sdm_customer_resource</resourceModel>
+            </sdm_customer>
+            <customer>
+                <rewrite>
+                    <session>SDM_Customer_Model_Session</session>
+                    <customer>SDM_Customer_Model_Customer</customer>
+                </rewrite>
+            </customer>
+        </models>
+        <resources>
+            <sdm_customer_setup>
+                <setup>
+                    <module>SDM_Customer</module>
+                    <class>Mage_Customer_Model_Resource_Setup</class>
+                </setup>
+            </sdm_customer_setup>
+        </resources>
+        <blocks>
+            <sdm_customer>
+                <class>SDM_Customer_Block</class>
+            </sdm_customer>
+            <adminhtml>
+                <rewrite>
+                    <customer_group_grid>SDM_Customer_Block_Adminhtml_Customer_Group_Grid</customer_group_grid>
+                    <customer_group_edit_form>SDM_Customer_Block_Adminhtml_Customer_Group_Edit_Form</customer_group_edit_form>
+                    <customer_edit_tab_account>SDM_Customer_Block_Adminhtml_Customer_Edit_Tab_Account</customer_edit_tab_account>
+                </rewrite>
+            </adminhtml>
+            <customer>
+                <rewrite>
+                    <account_navigation>SDM_Customer_Block_Account_Navigation</account_navigation>
+                </rewrite>
+            </customer>
+        </blocks>
+        <helpers>
+            <sdm_customer>
+                <class>SDM_Customer_Helper</class>
+            </sdm_customer>
+        </helpers>
+        <events>
+            <customer_save_before>
+                <observers>
+                    <flag_customer>
+                        <type>singleton</type>
+                        <class>sdm_customer/observer</class>
+                        <method>flagCustomer</method>
+                    </flag_customer>
+                </observers>
+            </customer_save_before>
+            <customer_save_after>
+                <observers>
+                    <set_retailer_customer_group>
+                        <type>singleton</type>
+                        <class>sdm_customer/observer</class>
+                        <method>setRetailCustomerGroup</method>
+                    </set_retailer_customer_group>
+                </observers>
+            </customer_save_after>
+            <admin_user_save_before>
+                <observers>
+                    <amperm>
+                        <type>singleton</type>
+                        <class>sdm_customer/observer</class>
+                        <method>handleAdminUserSaveBefore</method>
+                    </amperm>
+                </observers>
+            </admin_user_save_before>
+            <controller_action_predispatch_sociallogin_popup_login>
+                <observers>
+                    <persistent>
+                        <class>persistent/observer_session</class>
+                        <method>setRememberMeCheckedStatus</method>
+                    </persistent>
+                </observers>
+            </controller_action_predispatch_sociallogin_popup_login>
+        </events>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_Customer before="SFC_CyberSource_Override">SDM_Customer_Adminhtml</SDM_Customer>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <sociallogin>
+                <args>
+                    <modules>
+                        <SDM_Customer before="Magestore_Sociallogin">SDM_Customer</SDM_Customer>
+                    </modules>
+                </args>
+            </sociallogin>
+            <customer>
+                <args>
+                    <modules>
+                        <SDM_Customer before="Mage_Customer">SDM_Customer</SDM_Customer>
+                    </modules>
+                </args>
+            </customer>
+        </routers>
+    </frontend>
+    <default>
+        <sdm_customer>
+            <min_order>
+                <amount>100</amount>
+                <first_amount>300</first_amount>
+            </min_order>
+        </sdm_customer>
+    </default>
+</config>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's navigation links
+ *
+ * @category  SDM
+ * @package   SDM_Navigation
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Navigation>
+            <version>0.1.1</version>
+        </SDM_Navigation>
+    </modules>
+    <global>
+        <blocks>
+            <navigation>
+                <class>SDM_Navigation_Block</class>
+            </navigation>
+            <page>
+                <rewrite>
+                    <html_topmenu_renderer>SDM_Navigation_Block_Html_Topmenu_Renderer</html_topmenu_renderer>
+                </rewrite>
+            </page>
+        </blocks>
+        <models>
+            <navigation>
+                <class>SDM_Navigation_Model</class>
+                <resourceModel>navigation_resource</resourceModel>
+            </navigation>
+            <catalog>
+                <rewrite>
+                    <observer>SDM_Navigation_Model_Observer</observer>
+                </rewrite>
+            </catalog>
+        </models>
+        <resources>
+            <sdm_navigation_setup>
+                <setup>
+                    <module>SDM_Navigation</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                </setup>
+            </sdm_navigation_setup>
+        </resources>
+        <!-- <blocks>
+            <navigation>
+                <class>SDM_Navigation_Block</class>
+            </navigation>
+        </blocks> -->
+        <helpers>
+            <navigation>
+                <class>SDM_Navigation_Helper</class>
+            </navigation>
+        </helpers>
+    </global>
+    <frontend>
+        <category>
+            <collection>
+                <!-- List of attributes to be used for the Mage_Catalog_Model_Resource_Category_Tree::_getDefaultCollection() -->
+                <attributes>
+                    <name />
+                    <url_key />
+                    <is_active />
+                    <filtering_parameter />
+                    <is_divider />
+                    <is_bold />
+                </attributes>
+            </collection>
+        </category>
+    </frontend>
+    <default>
+        <navigation>
+            <general>
+                <catalog_category_id>catalog</catalog_category_id>
+            </general>
+        </navigation>
+    </default>
+</config>

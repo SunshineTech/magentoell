@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Magento catalog rule customizations
+ *
+ * @category  SDM
+ * @package   SDM_CatalogRule
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CatalogRule>
+            <version>0.1.0</version>
+        </SDM_CatalogRule>
+    </modules>
+    <global>
+        <models>
+            <sdm_catalogrule>
+                <class>SDM_CatalogRule_Model</class>
+            </sdm_catalogrule>
+        </models>
+        <resources>
+            <sdm_catalogrule>
+                <setup>
+                    <module>SDM_CatalogRule</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </sdm_catalogrule>
+        </resources>
+        <blocks>
+            <sdm_catalogrule>
+                <class>SDM_CatalogRule_Block</class>
+            </sdm_catalogrule>
+            <adminhtml>
+                <rewrite>
+                    <promo_catalog_edit_tab_main>SDM_CatalogRule_Block_Adminhtml_Promo_Catalog_Edit_Tab_Main</promo_catalog_edit_tab_main>
+                    <promo_catalog_edit_form>SDM_CatalogRule_Block_Adminhtml_Promo_Catalog_Edit_Form</promo_catalog_edit_form>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <sdm_catalogrule>
+                <class>SDM_CatalogRule_Helper</class>
+            </sdm_catalogrule>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <promo_catalog before="Mage_Adminhtml">SDM_CatalogRule_Adminhtml</promo_catalog>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

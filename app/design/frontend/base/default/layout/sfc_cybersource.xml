@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * StoreFront CyberSource Tokenized Payment Extension for Magento
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to commercial source code license of StoreFront Consulting, Inc.
+ *
+ * @category  SFC
+ * @package   SFC_CyberSource
+ * @author    Garth Brantley <garth@storefrontconsulting.com>
+ * @copyright 2009-2013 StoreFront Consulting, Inc. All Rights Reserved.
+ * @license   http://www.storefrontconsulting.com/media/downloads/ExtensionLicense.pdf StoreFront Consulting Commercial License
+ * @link      http://www.storefrontconsulting.com/cybersource-saved-credit-cards-extension-for-magento/
+ *
+ */
+-->
+<layout version="0.1.0">
+    <!-- CIM Payment Profile grid-->
+    <sfc_cybersource_index_index>
+        <label>Payment Profiles</label>
+        <update handle="customer_account"/>
+        <reference name="customer_account_navigation">
+            <action method="setActive">
+                <path>creditcards/</path>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="sfc_cybersource/payment_profile_grid" name="payment_profile_index"
+                   template="sfc_cybersource/payment/profile/grid.phtml"/>
+        </reference>
+    </sfc_cybersource_index_index>
+
+    <!-- CIM Payment Profile customer dashboard link -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="sfc_cybersource">
+                <name>creditcards</name>
+                <path>creditcards/</path>
+                <label>My Credit Cards</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <!-- Edit CIM Payment Profile -->
+    <sfc_cybersource_index_edit>
+        <label>Edit Payment Profile</label>
+        <update handle="customer_account"/>
+        <reference name="customer_account_navigation">
+            <action method="setActive">
+                <path>creditcards/</path>
+            </action>
+        </reference>
+        <reference name="head">
+            <block type="core/template" name="external.includes" template="sfc_cybersource/head/external_includes.phtml"/>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="sfc_cybersource/payment_profile_edit" name="payment_profile_edit"
+                   template="sfc_cybersource/payment/profile/edit.phtml">
+                <action method="setTemplate" ifconfig="payment/sfc_cybersource/enable_secure_acceptance">
+                    <template>sfc_cybersource/payment/profile/edit/sop.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </sfc_cybersource_index_edit>
+
+    <!-- New CIM Payment Profile -->
+    <sfc_cybersource_index_new>
+        <label>New Payment Profile</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <block type="core/template" name="external.includes" template="sfc_cybersource/head/external_includes.phtml"/>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="sfc_cybersource/payment_profile_edit" name="payment_profile_edit"
+                   template="sfc_cybersource/payment/profile/edit.phtml">
+                <action method="setTemplate" ifconfig="payment/sfc_cybersource/enable_secure_acceptance">
+                    <template>sfc_cybersource/payment/profile/edit/sop.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </sfc_cybersource_index_new>
+
+    <!-- Include device fingerprint in checkout pages -->
+    <checkout_multishipping_overview translate="label">
+        <label>Device Fingerprint</label>
+        <reference name="content">
+            <block type="sfc_cybersource/checkout_deviceFingerprint" name="device_fingerprint" template="sfc_cybersource/checkout/device_fingerprint.phtml" before="-"/>
+        </reference>
+    </checkout_multishipping_overview>
+    <checkout_onepage_index translate="label">
+        <label>Device Fingerprint</label>
+        <reference name="content">
+            <block type="sfc_cybersource/checkout_deviceFingerprint" name="device_fingerprint" template="sfc_cybersource/checkout/device_fingerprint.phtml" before="-"/>
+        </reference>
+    </checkout_onepage_index>
+    <onestepcheckout_index_index>
+        <label>Device Fingerprint</label>
+        <reference name="content">
+            <block type="sfc_cybersource/checkout_deviceFingerprint" name="device_fingerprint" template="sfc_cybersource/checkout/device_fingerprint.phtml" before="-"/>
+        </reference>
+    </onestepcheckout_index_index>
+
+    <!-- Include SOP code in one page checkout -->
+    <checkout_onepage_index>
+        <reference name="head">
+            <block type="core/template" name="external.includes" template="sfc_cybersource/head/external_includes.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="sfc_cybersource/checkout_sop" name="sop" template="sfc_cybersource/checkout/sop.phtml" after="-"/>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_review>
+        <reference name="checkout.onepage.review.info.items.after">
+            <block type="sfc_cybersource/checkout_sop" name="sop" template="sfc_cybersource/checkout/sop_form.phtml" after="-"/>
+        </reference>
+    </checkout_onepage_review>
+
+</layout>
+
+

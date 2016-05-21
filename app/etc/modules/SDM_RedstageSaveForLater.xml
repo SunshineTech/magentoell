@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Fixes for RedStage_SaveForLater
+ *
+ * @category  SDM
+ * @package   SDM_RedStageSaveForLater
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_RedStageSaveForLater>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Redstage_SaveForLater />
+            </depends>
+        </SDM_RedStageSaveForLater>
+    </modules>
+</config>

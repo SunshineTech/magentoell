@@ -1,0 +1,27 @@
+<?php
+$placeholder = $this->__('Global Search');
+$q = Mage::registry('helpdesk_search_query');
+?>
+<script>
+function postHelpdeskSearch(obj, e) {
+	var el = $('helpdesk_grid_filter_search');
+	var grid;
+	if (el) {
+		grid = helpdesk_gridJsObject;
+	} else {
+		el = $('helpdesk_grid_archive_filter_search');
+		grid = helpdesk_grid_archiveJsObject;
+	}
+	// console.log(obj.getValue());
+	el.setValue(obj.getValue());
+	if(e.which == 10 || e.which == 13) {
+		grid.doFilter();
+	}
+}
+</script>
+<input id='helpdesk-searchbox' type="text" class="input-text" name="q"
+onfocus="if(this.value=='<?php echo $placeholder ?>')this.value=''; "
+onblur="if(this.value=='')this.value='<?php echo $placeholder ?>';"
+value="<?php echo $q? $q: $placeholder ?>"
+onkeyup="postHelpdeskSearch(this, event)"
+>

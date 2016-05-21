@@ -1,0 +1,90 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var $this SDM_SavedQuote_Block_Savedquote
+ */
+
+$_quote   = $this->getPendingSavedQuote();
+$_address = $_quote->getShippingAddress();
+?>
+
+<div>
+    <h3><?php echo $this->__('Pre-Order Details') ?></h3>
+    <table>
+        <tr>
+            <th><?php echo $this->__('Pre-Order Name') ?></th>
+            <td><?php echo $_quote->getName() ?></td>
+        </tr>
+        <tr>
+            <th><?php echo $this->__('Pre-Order Number') ?></th>
+            <td><?php echo $_quote->getIncrementId() ?></td>
+        </tr>
+        <tr>
+            <th><?php echo $this->__('Customer Account') ?></th>
+            <td><?php echo $_quote->getCustomerId() ?></td>
+        </tr>
+        <tr>
+            <th><?php echo $this->__('Web Customer') ?></th>
+            <td><?php echo $_quote->getCustomerEmail() ?></td>
+        </tr>
+        <tr>
+            <th><?php echo $this->__('Order Date') ?></th>
+            <td><?php echo Mage::getSingleton('core/date')->date('m/d/Y H:iA', $_quote->getCreatedAt()) ?></td>
+        </tr>
+        <tr>
+            <th><?php echo $this->__('Expires at') ?></th>
+            <td><?php echo Mage::getSingleton('core/date')->date('m/d/Y H:iA', $_quote->getExpiresAt()) ?></td>
+        </tr>
+    </table>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Item #') ?></th>
+            <th><?php echo $this->__('Item Name') ?></th>
+            <th style="text-align: right;"><?php echo $this->__('Quantity') ?></th>
+            <th style="text-align: right;"><?php echo $this->__('Price') ?></th>
+            <th style="text-align: right;"><?php echo $this->__('Item Total') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($_quote->getItemCollection() as $_item): ?>
+        <tr>
+            <td><?php echo $_item->getSku() ?></td>
+            <td><?php echo $_item->getName() ?></td>
+            <td style="text-align: right;"><?php echo round($_item->getQty()) ?></td>
+            <td style="text-align: right;"><?php echo $this->helper('core')->currency($_item->getPrice(), true, false) ?></td>
+            <td style="text-align: right;"><?php echo $this->helper('core')->currency($_item->getRowTotal(), true, false) ?></td>
+        </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
+
+<table class="totals">
+    <tbody>
+        <tr>
+            <th><?php echo $this->__('Subtotal') ?></th>
+            <td><?php echo $this->helper('core')->currency($_quote->getSubtotal(), true, false) ?></td>
+        </tr>
+    </tbody>
+</table>
+
+<ol>
+    <li><?php echo $this->__('Your pre-order will be saved for 180 days.  Any changes to product availability or any other factors beyound our control will void the pre-order.') ?></li>
+    <li><?php echo $this->__('Products placed for pre-order are final.  Pre-order cannot be altered after being submitted.') ?></li>
+</ol>
+<script type="text/javascript">window.print();</script>

@@ -1,0 +1,28 @@
+<?php
+
+$headerHtml = $this->getHeaderHtml();
+$buttonsHtml = $this->getButtonsHtml();
+$gridHtml = $this->getGridHtml();
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $headerHtml ?></td>
+            <td>
+            </td>
+            <td class="form-buttons"><?php echo $buttonsHtml ?></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <?php echo $this->getChildHtml('search_form') ?>
+    <?php echo $gridHtml ?>
+</div>
+
+<script>
+//we need this if client has extension 'BL_CustomGrid'
+var MyRows = jQuery('#helpdesk_grid_table').find('tbody').find('tr');
+for (var i = 0; i < MyRows.length; i++) {
+var MyIndexValue = jQuery(MyRows[i]).find('td:eq(1)').hide();
+}
+</script>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Implements the product compatibility functionality.
+ *
+ * @category  SDM
+ * @package   SDM_Compatibility
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <sdm_compatibility>
+                    <title>Manage Compatibility</title>
+                    <sort_order>15</sort_order>
+                    <children>
+                        <sdm_compatibility_productline translate="title" module="compatibility">
+                            <title>Product Lines</title>
+                            <action>adminhtml/compatibility/productline</action>
+                        </sdm_compatibility_productline>
+                        <sdm_compatibility_compatibility translate="title" module="compatibility">
+                            <title>Compatibilities</title>
+                            <action>adminhtml/compatibility/index</action>
+                        </sdm_compatibility_compatibility>
+                    </children>
+                </sdm_compatibility>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <sdm_compatibility>
+                                <title>Manage Compatibility</title>
+                                <sort_order>10</sort_order>
+                                <children>
+                                    <sdm_compatibility_productline>
+                                        <title>Product Lines</title>
+                                        <sort_order>10</sort_order>
+                                    </sdm_compatibility_productline>
+                                    <sdm_compatibility_compatibility>
+                                        <title>Compatibility</title>
+                                        <sort_order>20</sort_order>
+                                    </sdm_compatibility_compatibility>
+                                </children>
+                            </sdm_compatibility>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Mage_Catalog-related customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <sections>
+        <sdm_catalog translate="label" module="sdm_catalog">
+            <label>Related Products</label>
+            <tab>sdm_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <limit translate="label">
+                            <label>Number of related products to show</label>
+                            <comment><![CDATA[Default: 5]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </limit>
+<!--                         <interval translate="label">
+                            <label>Refresh Interval (in hours)</label>
+                            <comment><![CDATA[Default: 24 hours]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </interval> -->
+                    </fields>
+                </general>
+            </groups>
+        </sdm_catalog>
+        <sdm_lifecycle translate="label" module="sdm_catalog">
+            <label>Product Lifecycle</label>
+            <tab>sdm_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>180</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <options translate="label">
+                    <label>Lifecycle Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <enabled>
+                            <label>Enable Lifecycle Processing</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Disabling this will prevent product visibility and related attributes from changing based off the product's current lifecycle settings</comment>
+                        </enabled>
+                    </fields>
+                </options>
+            </groups>
+        </sdm_lifecycle>
+    </sections>
+</config>

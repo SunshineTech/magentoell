@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog rule customizations
+ *
+ * @category  SDM
+ * @package   SDM_CatalogRule
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CatalogRule>
+            <active>false</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_CatalogRule />
+                <SDM_Catalog />
+                <SDM_Core />
+                <SDM_Compatibility />
+            </depends>
+        </SDM_CatalogRule>
+    </modules>
+</config>

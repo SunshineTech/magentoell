@@ -1,0 +1,28 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Checkout-related customization
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Checkout
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+/**
+ * @var SDM_Checkout_Block_Onepage_Success $this
+ */
+?>
+<?php if ($this->getPaymentMethod() === SDM_Checkout_Helper_Data::PURCHASE_ORDER_PAYMENT_CODE) : ?>
+<div class="checkout-success-purchaseorder">
+    <ul class="messages">
+        <li class="error-msg">
+            <ul>
+                <li><span>Please <a href="<?php echo $this->getOrderUrl($this->getEntityId()) ?>"><u>click here</u></a> to upload a purchase order. Your order will not be processed until a purchase order has been uploaded.</span></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<?php endif; ?>

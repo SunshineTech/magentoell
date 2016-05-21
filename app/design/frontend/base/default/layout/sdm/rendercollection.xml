@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+<!--
+-->
+    <default>
+    	<reference name="head">
+            <action method="addItem"><type>skin_js</type><script>js/sdm/owlcarousel.js</script></action>
+            <action method="addItem"><type>skin_css</type><script>css/sdm/owlcarousel.css</script></action>
+        </reference>
+    </default>
+</layout>

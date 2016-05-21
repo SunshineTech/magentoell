@@ -1,0 +1,38 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Lyris_Block_Adminhtml_System_Config_Form_Field_Api_Interest $this
+ */
+?>
+<div id="lyris_interest_list">
+<ul>
+<?php foreach ($this->getConfigData() as $_value): ?>
+    <li><?php echo $_value['name'] ?></li>
+<?php endforeach ?>
+</ul>
+</div>
+<script type="text/javascript">
+    function lyrisUpdateInterests() {
+        var elem = $('<?php echo $this->getHtmlId() ?>');
+        new Ajax.Request('<?php echo $this->getAjaxUrl() ?>', {
+            onSuccess: function(response) {
+                $('lyris_interest_list').update(response.responseText);
+            }
+        });
+    }
+</script>
+<button onclick="javascript:lyrisUpdateInterests(); return false;" class="scalable" type="button" id="<?php echo $this->getHtmlId() ?>">
+    <span><span><span id="lyris_update_interests"><?php echo $this->escapeHtml($this->getButtonLabel()) ?></span></span></span>
+</button>

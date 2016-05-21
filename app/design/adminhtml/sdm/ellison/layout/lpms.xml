@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's custom Landing Page Management System (LPMS).
+ *
+ * @category  SDM
+ * @package   SDM_Lpms
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+
+<layout>
+    <adminhtml_cms_page_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/jquery-1.11.3.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/lpms_asset_edit.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/lpms_asset_edit.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/lpms_general.js</name>
+            </action>
+            <!-- jQuery TE -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>jquery-te/jquery-te-1.4.0.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>jquery-te/jquery-te-1.4.0.min.js</name>
+            </action>
+        </reference>
+        <reference name="cms_page_edit_tabs">
+            <block type="lpms/adminhtml_page_edit_tab_assets" name="lpms_page_edit_tab_assets" />
+            <action method="addTab"><name>assets_section</name><block>lpms_page_edit_tab_assets</block></action>
+        </reference>
+    </adminhtml_cms_page_edit>
+</layout>

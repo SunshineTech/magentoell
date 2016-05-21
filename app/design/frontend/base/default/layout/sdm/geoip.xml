@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * IP Address Based Messaging
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_GeoIP
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <default>
+        <reference name="top.container">
+            <block type="geoip/sitemessage" name="geoip.sitemessage" template="sdm/geoip/sitemessage.phtml"/>
+        </reference>
+    </default>
+</layout>

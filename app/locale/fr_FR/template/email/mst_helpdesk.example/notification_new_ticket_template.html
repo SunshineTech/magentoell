@@ -1,0 +1,50 @@
+<!--@subject {{var ticket.getEmailSubject('Nouveau billet créé')}} @-->
+<!--@vars
+{"htmlescape var=$customer.name":"Nom du Client",
+"var customer.email":"Adresse e-mail"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f;  }
+@-->
+{{var hidden_separator}}
+<div style="font:13px/1.45em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p><strong>Bonjour {{htmlescape var=$customer.name}}</strong>, <br/> Merci de nous contacter.</p>
+
+                           C'est une réponse automatique confirmant la réception de votre billet. Un de nos agents va revenir vers vous dès que possible.<br><br>
+
+							   Billet ID: {{var ticket.code}}<br>
+							   Sujet: {{var ticket.name}}<br>
+							   Département: {{var ticket.department}}<br>
+							   Statut: {{var ticket.status}}<br>
+							   Priorite: {{var ticket.priority}}<br>
+							   Détails: <br><i>{{var ticket.getLastMessageHtmlText()}}</i></br>
+							<br>
+							Vous pouvez vérifier l'état de réponse de cet billet en ligne sur: {{var ticket.getExternalUrl() }}
+							<br><br>
+							Merci encore,<br>
+							<strong>{{var store.getFrontendName()}}</strong>
+							{{var ticket.getHiddenCodeHtml()}}
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>

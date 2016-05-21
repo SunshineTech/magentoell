@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Mage_Customer customizations
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Customer
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sdm_customer>
+                        <title>Customer</title>
+                        <sort_order>5</sort_order>
+                    </sdm_customer>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <sdm_customer translate="title" module="sdm_customer">
+                                        <title>Customer</title>
+                                    </sdm_customer>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

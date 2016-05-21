@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees
+ *
+ * SDM's core extension
+ *
+ * @category  SDM
+ * @package   SDM_Core
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <tabs>
+        <sdm_core translate="label" module="sdm_core">
+            <label>Separation Degrees</label>
+            <sort_order>10010000</sort_order>
+        </sdm_core>
+    </tabs>
+    <sections>
+        <general>
+            <sort_order>-100</sort_order>
+        </general>
+    </sections>
+    <!-- SDM_Core doesn't have any configurations on its own -->
+<!--     <sections>
+        <general translate="label" module="sdm_core">
+            <label>General</label>
+            <tab>sdm_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+        </general>
+    </sections> -->
+</config>

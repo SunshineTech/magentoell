@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_YoutubeFeed>
+            <version>1.4.0</version>
+        </SDM_YoutubeFeed>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_youtubefeed>
+                <class>SDM_YoutubeFeed_Block</class>
+            </sdm_youtubefeed>
+        </blocks>
+        <helpers>
+            <sdm_youtubefeed>
+                <class>SDM_YoutubeFeed_Helper</class>
+            </sdm_youtubefeed>
+        </helpers>
+        <models>
+            <sdm_youtubefeed>
+                <class>SDM_YoutubeFeed_Model</class>
+                <resourceModel>sdm_youtubefeed_resource</resourceModel>
+            </sdm_youtubefeed>
+            <sdm_youtubefeed_resource>
+                <class>SDM_YoutubeFeed_Model_Resource</class>
+                <entities>
+                    <channel>
+                        <table>sdm_youtubefeed_channel</table>
+                    </channel>
+                    <playlist>
+                        <table>sdm_youtubefeed_playlist</table>
+                    </playlist>
+                    <playlist_video>
+                        <table>sdm_youtubefeed_playlist_video</table>
+                    </playlist_video>
+                    <video>
+                        <table>sdm_youtubefeed_video</table>
+                    </video>
+                </entities>
+            </sdm_youtubefeed_resource>
+        </models>
+        <resources>
+            <sdm_youtubefeed_setup>
+                <setup>
+                    <module>SDM_YoutubeFeed</module>
+                </setup>
+            </sdm_youtubefeed_setup>
+        </resources>
+        <events>
+            <sdm_youtubefeed_channel_save_before>
+                <observers>
+                    <sdm_youtubefeed_update_channel_image_url>
+                        <class>sdm_youtubefeed/observer</class>
+                        <method>updateChannelImageUrl</method>
+                    </sdm_youtubefeed_update_channel_image_url>
+                </observers>
+            </sdm_youtubefeed_channel_save_before>   
+        </events>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_YoutubeFeed before="Mage_Adminhtml">SDM_YoutubeFeed_Adminhtml</SDM_YoutubeFeed>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sdm_youtubefeed>
+                    <file>sdm/youtubefeed.xml</file>
+                </sdm_youtubefeed>
+            </updates>
+        </layout>
+    </adminhtml>
+    <frontend>
+        <routers>
+            <sdm_youtubefeed>
+                <use>standard</use>
+                <args>
+                    <module>SDM_YoutubeFeed</module>
+                    <frontName>videos</frontName>
+                </args>
+            </sdm_youtubefeed>
+        </routers>
+        <layout>
+            <updates>
+                <sdm_youtubefeed module="SDM_YoutubeFeed">
+                    <file>sdm/youtubefeed.xml</file>
+                </sdm_youtubefeed>
+            </updates>
+        </layout>
+    </frontend>
+    <default>
+        <sdm_youtubefeed>
+            <api>
+                <video_import_status>0</video_import_status>
+                <video_import_position>1000</video_import_position>
+            </api>
+        </sdm_youtubefeed>
+    </default>
+    <crontab>
+        <jobs>
+            <sdm_youtubefeed_update>
+                <schedule>
+                    <cron_expr>0 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>sdm_youtubefeed/cron::update</model>
+                </run>
+            </sdm_youtubefeed_update>
+        </jobs>
+    </crontab>
+</config>

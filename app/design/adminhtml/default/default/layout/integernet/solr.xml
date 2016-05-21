@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss">
+                <script>integernet/solr/style.css</script>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+
+    <adminhtml_cache_index>
+        <reference name="cache.additional">
+            <block type="integernet_solr/adminhtml_cache" name="cache.additional.integernet.solr"
+                   template="integernet/solr/cache/additional.phtml"></block>
+        </reference>
+    </adminhtml_cache_index>
+</layout>

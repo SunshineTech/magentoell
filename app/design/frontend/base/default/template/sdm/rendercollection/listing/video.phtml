@@ -1,0 +1,50 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Collection Rendering Widget
+ *
+ * @category  SDM
+ * @package   SDM_RenderCollection
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+$_collection = $this->getCollection();
+$_count      = $this->getCollectionSize();
+$_helper     = $this->helper('sdm_youtubefeed');
+$_string     = $this->helper('core/string');
+?>
+<?php if ($_count): ?>
+<div class="render-collection video-listing">
+    <p class="result-count"><?php echo $this->__('%s Results', $_count) ?></p>
+    <?php echo $this->getToolbarHtml() ?>
+    <ul class="products-grid">
+        <?php foreach ($_collection as $_item): ?>
+        <li class="item">
+            <a href="#" onclick="jQuery(this).next().show(); return false;" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>" class="video-image">
+                <div class="play"><i class="fa fa-youtube-play"></i></div>
+                <img src="<?php echo $_helper->getVideoImage($_item); ?>" alt="<?php echo $this->stripTags($_item->getName(), null, true) ?>" />
+            </a>
+            <div class="video-embed" style="display: none;">
+                <div class="video-overlay"></div>
+                <div class="video-wrap">
+                    <div class="close"><i class="fa fa-times"></i></div>
+                    <h2><?php echo $_item->getName() ?></h2>
+                    <?php echo $_helper->getVideoIframe($_item) ?>
+                </div>
+            </div>
+            <div class="details">
+                <h3 class="video-name"><?php echo $_item->getName() ?></h3>
+                <?php if ($_item->getFileUrl()): ?>
+                <p class="video-file-url"><a target="_blank" href="<?php echo $_item->getFileUrl() ?>"><?php echo $this->__('Download Instructions') ?></a></p>
+                <?php endif ?>
+                <p class="video-description"><?php echo nl2br($_string->truncate($_item->getDescription(), 125, '...')) ?></p>
+                <a href="#" onclick="jQuery(this).parent().parent().children('.video-embed').show(); return false;" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>" class="video-button"><?php echo $this->__('Watch Video') ?></a>
+                </div>
+        </li>
+        <?php endforeach ?>
+    </ul>
+    <?php echo $this->getToolbarHtml() ?>
+</div>
+<?php endif; ?>
+

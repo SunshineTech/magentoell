@@ -1,0 +1,16 @@
+Note: This description of the retialer pricing comparison may not be up-to-date.
+For the latest description, please see https://yettoknow.atlassian.net/browse/ELSN-133.
+
+
+With the "retailer discount" and "negotiated product pricing" (see below for more information) established, the price comparison logic can be implemented.
+
+First, the catalog prices are compared displayed on the frontend (not in cart). These include "promotion" (equivalent to catalog rules but may not be implemented with catalog rules) prices, negotiated prices, and retailer discounted prices.
+
+Then, cart discounts can be compared to the above once products are added to the cart. Cart discounts include volume discount and coupon discounts.
+
+Additional information:
+- "Retailer discount" information is conveyed in the "retailer discount matrix".
+- "Negotiated product pricing" is per customer, and each customer can a have a list of products with predetermined prices. This will be manually updated by Ellison, as the account managers individually possess this data.
+- "Volume discounts" are to be described in "Tiered Pricing.xlsx". This is a short list that can be updated manually from the admin.
+- Promotion applies to arbitrary sets of products with each set having an arbitrary discount. The promotion is determined by Ellison.
+- Coupon discounts also apply to an arbitrary set of products with the possibility of each product getting an arbitrary amount of discount with any number of coupons. Too cryptic? It is just as described.

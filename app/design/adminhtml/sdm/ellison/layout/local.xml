@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Admin global xml
+ *
+ * @category  SDO
+ * @package   SDO
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/jquery-1.11.3.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/global.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/global.js</name>
+            </action>
+        </reference>
+    </default>
+</layout>

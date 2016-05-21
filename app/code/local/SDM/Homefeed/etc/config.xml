@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison Homefeed
+ *
+ * @category  SDM
+ * @package   SDM_Homefeed
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2016 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <sdm_homefeed>
+            <version>0.2.0</version>
+        </sdm_homefeed>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_homefeed>
+                <class>SDM_Homefeed_Block</class>
+            </sdm_homefeed>
+        </blocks>
+        <helpers>
+            <sdm_homefeed>
+                <class>SDM_Homefeed_Helper</class>
+            </sdm_homefeed>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <homefeed>
+                    <file>homefeed.xml</file>
+                </homefeed>
+            </updates>
+        </layout>
+    </frontend>
+    <default>
+        <sdm_homefeed>
+            <general>
+                <title>Trends</title>
+            </general>
+        </sdm_homefeed>
+    </default>
+</config>

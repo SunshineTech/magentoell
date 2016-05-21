@@ -1,0 +1,76 @@
+<?php
+/**
+ * @category   Auguria
+ * @package    Auguria_Sliders
+ * @author     Auguria
+ * @license    http://opensource.org/licenses/gpl-3.0.html GNU General Public License version 3 (GPLv3)
+ */
+?>
+<?php
+$slides = $this->getSlides();
+$imageWidth = "2400";
+$imageHeight = "650";
+$imageWidthMobile = "700";
+$imageHeightMobile = "550";
+$captionHeight = $this->getCaptionHeight();
+// Config
+$nextPrev   = Mage::getStoreConfig('auguria_sliders/general/generate_next_prev');
+$slideSpeed = Mage::getStoreConfig('auguria_sliders/general/slide_speed');
+$hoverPause = Mage::getStoreConfig('auguria_sliders/general/hover_pause');
+$autoPlay   = Mage::getStoreConfig('auguria_sliders/general/play');
+?>
+
+<?php if ($slides && $slides->count()>0): ?>
+<div id="owl-auguria-slider" class="clearer owl-carousel">
+    <?php foreach ($slides as $slide): ?>
+        <div class="slide">
+            <?php
+                $displayLink = $this->displayLink($slide);
+                $displayImage = $this->displayImage($slide);
+                $displayImageMobile = $this->displayImageMobile($slide);
+                $displayCmsContent = $this->displayCmsContent($slide);
+            ?>
+            <?php if ($displayLink): ?>
+                <a class="owl-auguria-slider-link"
+                    href="<?php echo $slide->getLink(); ?>"
+                    title="<?php echo $slide->getName(); ?>">
+            <?php endif; ?>
+                <?php if ($displayImage): ?>
+                    <img class="owl-auguria-slider-image <?php if ($displayImageMobile): ?>size-desktop<?php endif ?>"
+                        alt="<?php echo $slide->getName(); ?>"
+                        src="<?php echo $this->getResizedImage($slide, $imageWidth, $imageHeight); ?>" />
+                <?php endif; ?>
+                <?php if ($displayImageMobile): ?>
+                    <img class="owl-auguria-slider-image <?php if ($displayImage): ?>size-mobile<?php endif ?>"
+                        alt="<?php echo $slide->getName(); ?>"
+                        src="<?php echo $this->getResizedMobileImage($slide, $imageWidthMobile, $imageHeightMobile); ?>" />
+                <?php endif; ?>
+            <?php if ($displayLink): ?>
+                </a>
+            <?php endif; ?>
+            <?php if ($displayCmsContent): ?>
+                <div class="caption" style="height: <?php echo $captionHeight; ?>px;">
+                    <?php echo $slide->getCmsContent(); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    jQuery(document).ready(function(){
+        jQuery("#owl-auguria-slider").owlCarousel({
+            navigation : <?php echo $nextPrev === 'true' ? 'true' : 'false'; ?>,
+            stopOnHover : <?php echo $hoverPause === 'true' ? 'true' : 'false';; ?>,
+            slideSpeed : <?php echo $slideSpeed; ?>,
+            autoPlay : <?php echo $autoPlay ?>,
+            paginationSpeed : 400,
+            singleItem: true,
+            pagination: false,
+            navigationText: ["&laquo;", "&raquo;"]
+        });
+    });
+//]]>
+</script>
+<?php endif; ?>

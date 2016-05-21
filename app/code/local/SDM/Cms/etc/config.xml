@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Changes to CMS module to allow for special page rendering
+ *
+ * @category  SDM
+ * @package   SDM_Cms
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Cms>
+            <version>0.1.0</version>
+        </SDM_Cms>
+    </modules>
+    <global>
+        <helpers>
+            <cms>
+                <rewrite>
+                    <page>SDM_Cms_Helper_Page</page>
+                </rewrite>
+            </cms>
+        </helpers>
+    </global>
+</config>

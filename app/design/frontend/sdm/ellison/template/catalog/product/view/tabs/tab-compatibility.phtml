@@ -1,0 +1,27 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Tabs - Compatibility template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_product = $this->getProduct();
+$_staticBlock = $this->getLayout()->createBlock('cms/block')->setBlockId('pdp_compatibility')->toHtml();
+$_productType = $_product->getAttributeText('product_type');
+$_typeMatch = $_productType == "Die";
+
+?>
+<?php if($_typeMatch): ?>
+    <div id="mediabox" class="static">
+        <?php if(!empty($_staticBlock)): ?>
+            <?php echo $_staticBlock; ?>
+        <?php else : ?>
+            <img src="<?php echo $this->getSkinUrl('images/catalog/product/placeholder/image.jpg'); ?>" />
+        <?php endif;?>
+    </div>
+<?php endif?>

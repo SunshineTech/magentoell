@@ -1,0 +1,263 @@
+<?php $media = $this->getMediaByProduct() ?>
+<div>
+	<div class="entry-edit">
+		<div class="entry-edit-head">
+			<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Video') ?></h4>
+		</div>
+    <div class="fieldset fieldset-wide">
+		<div class="hor-scroll">
+			<ul class="messages">
+				<li class="notice-msg">
+					<ul>
+						<li>File types: flv, mp4. </li>
+					</ul>
+				</li>
+			</ul>
+            <div class="grid">
+				<table cellspacing="0" class="data border" width="100%">
+				<col width="70" />
+				<col />
+				<col />
+				<col width="7" />
+				<col width="70" />
+				<col width="70" />
+				<col width="70" />
+				<col width="70" />
+				<thead>
+					<tr class="headings">
+						<th><?php echo Mage::helper('catalog')->__('Video') ?></th>
+						<th><?php echo Mage::helper('catalog')->__('Label') ?></th>
+						<th><?php echo Mage::helper('catalog')->__('Embed Code') ?></th>
+						<th><?php echo Mage::helper('catalog')->__('Use File Upload') ?></th>
+						<th><?php echo Mage::helper('catalog')->__('Use Embed') ?></th>
+						<th><?php echo Mage::helper('catalog')->__('Sort Order') ?></th>
+						<th><?php echo Mage::helper('catalog')->__('Exclude') ?></th>
+						<th class="last"><?php echo Mage::helper('catalog')->__('Remove') ?></th>
+					</tr>
+				</thead>
+				
+				<tbody id="video_media_gallery_content_list">
+					<tr>
+						<td class="cell-video"><?php echo Mage::helper('catalog')->__('No video') ?></td>
+						<td class="cell-video-label">&nbsp;</td>
+						<td class="cell-video-label">&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td class="cell-video-position">&nbsp;</td>
+						<td class="cell-disable">&nbsp;</td>
+						<td class="cell-remove last">&nbsp;</td>
+					</tr>
+					<?php if(count($media)>0):?>
+						<?php foreach($media as $_media): ?>
+						<tr>
+							<td>
+								<?php if($_media->getMediaSrc()!=''):?>
+								<a id="lightbox_<?php echo $_media->getId() ?>" href="#inline_<?php echo $_media->getId() ?>" title=""><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>advancedmedia/media.gif" alt="Video Thumb"/></a>
+								<input type="hidden" value="<?php echo $_media->getMediaSrc() ?>" name="video[src][]">
+								<div style="display: none;">
+									<div id="inline_<?php echo $_media->getId() ?>" style="width:520px; height:335px; overflow:auto;">
+										<a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$_media->getMediaSrc() ?>" style="display:block;width:520px;height:330px" id="player_<?php echo $_media->getId() ?>"></a> 
+										<script type="text/javascript">
+											flowplayer("player_<?php echo $_media->getId() ?>", "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>advancedmedia/flowplayer-3.2.7.swf");
+										</script>
+									</div>
+								</div>
+								<script type="text/javascript">
+									ahtjQuery("#lightbox_<?php echo $_media->getId() ?>").fancybox({
+										'titlePosition'		: 'inside',
+										'transitionIn'		: 'none',
+										'transitionOut'		: 'none'
+									});
+								</script>
+								<?php else: ?>
+									&nbsp;
+									<input type="hidden" value="" name="video[src][]">
+								<?php endif ?>
+							</td>
+							<td class="cell-label"><input type="text" id="label-<?php echo $_media->getId() ?>" onchange="changeLabel(<?php echo $_media->getId() ?>)" class="input-text" name="video[label][]" value="<?php echo $_media->getMediaLabel() ?>"/></td>
+							<td class="cell-label"><textarea name="video[embed][]" id="embed-<?php echo $_media->getId() ?>" style="width:98%; height:60px" onchange="changeEmbed(<?php echo $_media->getId() ?>)"><?php echo $_media->getMediaEmbed() ?></textarea></td>
+							<td class="a-center">
+								<?php if($_media->getMediaSrc()!=''):?>
+									<input type="radio" onclick="setUse(<?php echo $_media->getId() ?>)" id="use_upload_<?php echo $_media->getId() ?>" name="use_type_<?php echo $_media->getId() ?>" <?php if($_media->getUseType()==1):?>checked="checked"<?php endif ?>/>
+								<?php else: ?>
+									&nbsp;
+								<?php endif ?>
+							</td>
+							<td class="a-center">
+								<input type="radio" onclick="setUse(<?php echo $_media->getId() ?>)" id="use_embed_<?php echo $_media->getId() ?>" name="use_type_<?php echo $_media->getId() ?>" <?php if($_media->getUseType()==2):?>checked="checked"<?php endif ?>/>
+								<input type="hidden" name="video[use_type][]" id="use_type_hidden_<?php echo $_media->getId() ?>" value="<?php echo $_media->getUseType() ?>" />
+							</td>
+							<td class="a-center cell-position"><input type="text" class="input-text validate-number" name="video[position][]" value="<?php echo $_media->getMediaPosition() ?>" id="position-<?php echo $_media->getId() ?>" onchange="changePosition(<?php echo $_media->getId() ?>)"/></td>
+							<td class="a-center">
+								<input type="checkbox" onclick="setExclude(<?php echo $_media->getId() ?>)" id="exclude_<?php echo $_media->getId() ?>" <?php if($_media->getIsExclude()==1):?>checked="checked"<?php endif ?>/>
+								<input type="hidden" name="video[exclude][]" id="exclude_hidden_<?php echo $_media->getId() ?>" value="<?php echo $_media->getIsExclude() ?>"/>
+							</td>
+							<td class="a-center">
+								<input type="checkbox" onclick="setRemove(<?php echo $_media->getId() ?>)" id="remove_<?php echo $_media->getId() ?>" />
+								<input type="hidden" value="0" name="video[remove][]" id="remove_hidden_<?php echo $_media->getId() ?>" />
+							</td>
+						</tr>
+						<?php endforeach ?>
+					<?php endif ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="100" class="last" style="padding:8px">
+							<div style="text-align:right">
+								<a href="#" onclick="addField(); return false;" id="embed_button">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>advancedmedia/uploadify/embed-image.png" alt="<?php echo $this->__('Add Embed Code') ?>" />
+								</a>
+								<input id="video_upload" name="video_upload" type="file" />
+								<a href="javascript:ahtjQuery('#video_upload').uploadifyUpload()" id="upload_button">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>advancedmedia/uploadify/upload-image.png" alt="<?php echo $this->__('Upload') ?>" />
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+			</div>
+			<script type="text/javascript">
+				var lastId = <?php echo $this->getLastedId() ?>;
+				mediaUrl = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>';
+				mediaImage = mediaUrl+'advancedmedia/media.gif';
+				var ids = new Array();
+				var id =-1;
+				var arrEmbed = new Array();
+				var arrTitle = new Array();
+				var arrPosition = new Array();
+				ahtjQuery('#video_upload').uploadify({
+					'uploader'  : '<?php echo $this->getUploaderSwfUrl() ?>',
+					'script'    : '<?php echo $this->getScriptAction() ?>',
+					'cancelImg' : '<?php echo $this->getCancelImg() ?>',
+					'folder'    : 'media',
+					'auto'      : false,
+					'buttonText' : 'Browse File...',
+					'fileExt'	: '*.flv;*.mp4',
+					'fileDesc' : 'Video Files (.FLV, .MP4)',
+					'sizeLimit': 1024000000,
+					'onComplete'  : function(event, ID, fileObj, response, data) {
+							if(response!='catalog/product///'){
+								html = ahtjQuery('#video_media_gallery_content_list').html();
+								lastId++;
+								id++;
+								ids[id] = lastId;
+								html+='<tr>';
+								html+='<td><a id="lightbox_'+lastId+'" href="#inline_'+lastId+'" title=""><img src="'+mediaImage+'" alt="Video Thumb"></a><input type="hidden" name="video[src][]" value="'+response+'">';
+								html+='<div style="display: none;"><div id="inline_'+lastId+'" style="width:520px; height:335px; overflow:auto;">';
+								html+='<a href="'+mediaUrl+response+'" style="display:block;width:520px;height:330px" id="player_'+lastId+'"></a>';
+								html+='</div></div></td>';
+								html+='<td class="cell-label"><input type="text" name="video[label][]" class="input-text" value="" id="label-'+lastId+'" onchange="changeLabel('+lastId+')"></td>';
+								html+='<td class="cell-label"><textarea id="embed-'+lastId+'" name="video[embed][]" onchange="changeEmbed('+lastId+')" style="width:98%; height:60px"></textarea></td>';
+								html+='<td class="a-center"><input type="radio" name="use_type_'+lastId+'" id="use_upload_'+lastId+'" onclick="setUse('+lastId+')" checked="checked"></td>';
+								html+='<td class="a-center"><input type="radio" name="use_type_'+lastId+'" id="use_embed_'+lastId+'" onclick="setUse('+lastId+')">';
+								html+='<input type="hidden" id="use_type_hidden_'+lastId+'" name="video[use_type][]" value="1"></td>';
+								html+='<td class="a-center cell-position"><input type="text" name="video[position][]" class="input-text validate-number" id="position-'+lastId+'" onchange="changePosition('+lastId+')"></td>';
+								html+='<td class="a-center"><input type="checkbox" id="exclude_'+lastId+'" onclick="setExclude('+lastId+')">';
+								html+='<input type="hidden" id="exclude_hidden_'+lastId+'" name="video[exclude][]" value="0"></td>';
+								html+='<td class="a-center"><input type="checkbox" id="remove_'+lastId+'" onclick="setRemove('+lastId+')">';
+								html+='<input type="hidden" id="remove_hidden_'+lastId+'" name="video[remove][]" value="0"></td>';
+								html+='</tr>';
+								
+								ahtjQuery('#video_media_gallery_content_list').html(html);
+								
+								fillVal();
+								
+								for (x=0; x<ids.length; x++)
+								{
+									ahtjQuery("#lightbox_"+ids[x]).fancybox({
+										'titlePosition'		: 'inside',
+										'transitionIn'		: 'none',
+										'transitionOut'		: 'none'
+									});
+									flowplayer("player_"+ids[x], mediaUrl+"advancedmedia/flowplayer-3.2.7.swf");
+								} 
+							}
+							else{
+								alert('Upload failed');
+							}
+						}
+					});
+				
+				
+				
+				function setUse(id){
+					if($('use_upload_'+id).checked)
+						$('use_type_hidden_'+id).value = 1;
+					else
+						$('use_type_hidden_'+id).value = 2;
+				}
+				
+				function setExclude(id){
+					if($('exclude_'+id).checked)
+						$('exclude_hidden_'+id).value = 1;
+					else
+						$('exclude_hidden_'+id).value = 0;
+				}
+				
+				function setRemove(id){
+					if($('remove_'+id).checked)
+						$('remove_hidden_'+id).value = 1;
+					else
+						$('remove_hidden_'+id).value = 0;
+				}
+				
+				function appendHtml(id){
+					html = ahtjQuery('#video_media_gallery_content_list').html();
+					html+='<tr id="field-'+id+'">';
+					html+='<td id="row-'+id+'">&nbsp;<input id="hidden-'+id+'" type="hidden" value="" name="video[src][]"></td>';
+					html+='<td class="cell-label"><input type="text" name="video[label][]" class="input-text" value="" id="label-'+id+'" onchange="changeLabel('+id+')"></td>';
+					html+='<td class="cell-label"><textarea id="embed-'+id+'" name="video[embed][]" onchange="changeEmbed('+id+')" style="width:98%; height:60px"></textarea></td>';
+					html+='<td class="a-center">&nbsp;</td>';
+					html+='<td class="a-center"><input type="radio" name="use_type_'+id+'" id="use_embed_'+id+'" onclick="setUse('+id+')" checked="checked">';
+					html+='<input type="hidden" id="use_type_hidden_'+id+'" name="video[use_type][]" value="2"></td>';
+					html+='<td class="a-center cell-position"><input type="text" name="video[position][]" class="input-text validate-number" id="position-'+id+'" onchange="changePosition('+id+')"></td>';
+					html+='<td class="a-center"><input type="checkbox" id="exclude_'+id+'" onclick="setExclude('+id+')">';
+					html+='<input type="hidden" id="exclude_hidden_'+id+'" name="video[exclude][]" value="0"></td>';
+					html+='<td class="a-center"><input type="checkbox" id="remove_'+id+'" onclick="setRemove('+id+')">';
+					html+='<input type="hidden" id="remove_hidden_'+id+'" name="video[remove][]" value="0"></td>';
+					html+='</tr>';
+					ahtjQuery('#video_media_gallery_content_list').html(html);
+				}
+				
+				function addField(){
+					lastId++;
+					appendHtml(lastId);
+					fillVal();
+				}
+				
+				function changeEmbed(id){
+					arrEmbed[id] = ahtjQuery('#embed-'+id).val();
+				}
+				
+				function changeLabel(id){
+					arrTitle[id] = ahtjQuery('#label-'+id).val();
+				}
+				
+				function changePosition(id){
+					arrPosition[id] = ahtjQuery('#position-'+id).val();
+				}
+				
+				function fillVal(){
+					for (i=0; i<5000; i++)
+					{
+						if($('embed-'+i)){
+							if(arrEmbed[i]){
+								ahtjQuery('#embed-'+i).val(arrEmbed[i]);
+							}
+							if(arrTitle[i]){
+								ahtjQuery('#label-'+i).val(arrTitle[i]);
+							}
+							if(arrPosition[i]){
+								ahtjQuery('#position-'+i).val(arrPosition[i]);
+							}
+						}
+						
+					} 
+				}
+				
+			</script>            
+		</div>
+	</div>
+</div>
+			

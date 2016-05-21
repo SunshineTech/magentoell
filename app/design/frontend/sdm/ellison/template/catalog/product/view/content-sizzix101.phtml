@@ -1,0 +1,22 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Sizzix 101 template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_blockName = Mage::helper('sdm_catalog')
+	->getSizzix101BlockName(Mage::registry('current_product'), 'content');
+$_staticBlock = $this->getLayout()->createBlock('cms/block')->setBlockId($_blockName)->toHtml();
+
+?>
+<?php if(!empty($_staticBlock)): ?>
+	<div class="content-box">
+	    <?php echo $_staticBlock; ?>
+	</div>
+<?php endif;?>

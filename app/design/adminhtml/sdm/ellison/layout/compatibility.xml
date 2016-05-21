@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Implements the product compatibility functionality.
+ *
+ * @category  SDM
+ * @package   SDM_Compatibility
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <adminhtml_compatibility_pedit>
+        <reference name="head">
+            <!-- For the WYSIWIG editor (copied from taxonomy.js) -->
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadTinyMce"><flag>1</flag></action>
+            <action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+            <action method="addJs"><script>lib/flex.js</script></action>
+            <action method="addJs"><script>lib/FABridge.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <action method="addJs"><script>prototype/prototype.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+        </reference>
+    </adminhtml_compatibility_pedit>
+    <!-- {$_controller}_{action name}> -->
+    <adminhtml_compatibility_index>
+        <reference name="content">
+            <block type="compatibility/adminhtml_compatibility" name="compatibility_compatibility" />
+        </reference>
+    </adminhtml_compatibility_index>
+    <adminhtml_compatibility_productline>
+        <reference name="content">
+            <block type="compatibility/adminhtml_productline" name="compatibility_productline" />
+        </reference>
+    </adminhtml_compatibility_productline>
+</layout>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison and Sizzix Shipping Rules
+ *
+ * @category  SDM
+ * @package   SDM_Shipping
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Shipping>
+            <version>1.2.0</version>
+        </SDM_Shipping>
+    </modules>
+    <global>
+        <helpers>
+            <sdm_shipping>
+                <class>SDM_Shipping_Helper</class>
+            </sdm_shipping>
+        </helpers>
+        <models>
+            <sdm_shipping>
+                <class>SDM_Shipping_Model</class>
+                <resourceModel>sdm_shipping_resource</resourceModel>
+            </sdm_shipping>
+            <sdm_shipping_resource>
+                <class>SDM_Shipping_Model_Resource</class>
+                <entities>
+                    <rate_eu>
+                        <table>sdm_shipping_rate_eu</table>
+                    </rate_eu>
+                </entities>
+            </sdm_shipping_resource>
+            <usa>
+                <rewrite>
+                    <shipping_carrier_fedex>SDM_Shipping_Model_Usa_Shipping_Carrier_Fedex</shipping_carrier_fedex>
+                </rewrite>
+            </usa>
+            <avatax>
+                <rewrite>
+                    <avatax_estimate>SDM_Shipping_Model_OnePica_AvaTax_Estimate</avatax_estimate>
+                </rewrite>
+            </avatax>
+        </models>
+        <resources>
+            <sdm_shipping_setup>
+                <setup>
+                    <module>SDM_Shipping</module>
+                    <class>Mage_Sales_Model_Resource_Setup</class>
+                </setup>
+            </sdm_shipping_setup>
+        </resources>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <sdm_shipping_surcharge>
+                    <to_order_address>*</to_order_address>
+                </sdm_shipping_surcharge>
+                <base_sdm_shipping_surcharge>
+                    <to_order_address>*</to_order_address>
+                </base_sdm_shipping_surcharge>
+            </sales_convert_quote_address>
+        </fieldsets>
+        <sales>
+            <quote>
+                <item>
+                    <product_attributes>
+                        <sdm_shipping_surcharge />
+                        <base_sdm_shipping_surcharge />
+                    </product_attributes>
+                </item>
+                <totals>
+                    <sdm_shipping_surcharge>
+                        <class>sdm_shipping/total_quote_surcharge</class>
+                        <after>weee,tax,tax_subtotal</after>
+                    </sdm_shipping_surcharge>
+                </totals>
+            </quote>
+            <order_invoice>
+                <totals>
+                    <sdm_shipping_surcharge>
+                        <class>sdm_shipping/total_invoice_surcharge</class>
+                        <after>tax</after>
+                    </sdm_shipping_surcharge>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <sdm_shipping_surcharge>
+                        <class>sdm_shipping/total_creditmemo_surcharge</class>
+                        <after>tax</after>
+                    </sdm_shipping_surcharge>
+                </totals>
+            </order_creditmemo>
+        </sales>
+        <events>
+            <sales_quote_item_set_product>
+                <observers>
+                    <sdm_shipping_surcharge>
+                        <class>sdm_shipping/observer</class>
+                        <method>setQuoteItemSurcharge</method>
+                    </sdm_shipping_surcharge>
+                </observers>
+            </sales_quote_item_set_product>
+            <paypal_prepare_line_items>
+                <observers>
+                    <sdm_shipping_surcharge_paypal>
+                        <class>sdm_shipping/observer</class>
+                        <method>preparePaypal</method>
+                    </sdm_shipping_surcharge_paypal>
+                </observers>
+            </paypal_prepare_line_items>
+            <sales_quote_address_save_before>
+                <observers>
+                    <unset_paypal_billing_address_surcharge>
+                        <class>sdm_shipping/observer</class>
+                        <method>unsetBillingAddressSurcharge</method>
+                    </unset_paypal_billing_address_surcharge>
+                </observers>
+            </sales_quote_address_save_before>
+        </events>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sdm_shipping module="sdm_shipping">
+                    <file>sdm/shipping.xml</file>
+                </sdm_shipping>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <sales>
+            <totals_sort>
+                <!-- Shipping is 30 and tax is 40 -->
+                <sdm_shipping_surcharge>35</sdm_shipping_surcharge>
+            </totals_sort>
+        </sales>
+        <carriers>
+            <sdm_shipping_savedquote>
+                <active>1</active>
+                <model>sdm_shipping/carrier_savedquote</model>
+                <title>Saved Quote</title>
+                <sort_order>100</sort_order>
+                <sallowspecific>0</sallowspecific>
+            </sdm_shipping_savedquote>
+            <sdm_shipping_table_us>
+                <model>sdm_shipping/carrier_table_us</model>
+                <title>Standard</title>
+                <method_title>Ground Shipping</method_title>
+                <low_tier_cutoff>120</low_tier_cutoff>
+                <low_tier_price>6</low_tier_price>
+                <high_tier_price_modifier>0.06</high_tier_price_modifier>
+                <state>AL,AZ,AR,CA,CO,CT,DE,FL,GA,ID,IL,IN,IA,KS,KY,LA,ME,MD,MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,NM,NY,NC,ND,OH,OK,OR,PW,PA,RI,SC,SD,TN,TX,UT,VT,VA,WA,WV,WI,WY</state>
+                <sort_order>110</sort_order>
+                <free_method>standard</free_method>
+            </sdm_shipping_table_us>
+            <sdm_shipping_table_us_noncontinental>
+                <model>sdm_shipping/carrier_table_us_noncontinental</model>
+                <title>Standard</title>
+                <method_title>Ground Shipping</method_title>
+                <low_tier_cutoff>120</low_tier_cutoff>
+                <low_tier_price>10</low_tier_price>
+                <high_tier_price_modifier>0.18</high_tier_price_modifier>
+                <state>AK,HI</state>
+                <low_tier_cutoff_military>120</low_tier_cutoff_military>
+                <low_tier_price_military>10</low_tier_price_military>
+                <high_tier_price_modifier_military>0.1</high_tier_price_modifier_military>
+                <state_military>AF,AA,AC,AE,AM,AP</state_military>
+                <sort_order>120</sort_order>
+                <free_method>standard</free_method>
+            </sdm_shipping_table_us_noncontinental>
+            <sdm_shipping_table_eu>
+                <model>sdm_shipping/carrier_table_eu</model>
+                <title>Standard</title>
+                <method_title>Ground Shipping</method_title>
+                <sort_order>130</sort_order>
+                <free_method>standard</free_method>
+            </sdm_shipping_table_eu>
+        </carriers>
+    </default>
+</config>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Separation Degrees Media
+ *
+ * Changes to CatalogInventory
+ *
+ * @category  SDM
+ * @package   SDM_CatalogInventory
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CatalogInventory>
+            <version>0.1.0</version>
+        </SDM_CatalogInventory>
+    </modules>
+    <global>
+        <models>
+            <cataloginventory>
+                <rewrite>
+                    <stock_item>SDM_CatalogInventory_Model_Stock_Item</stock_item>
+                    <stock_item_api>SDM_CatalogInventory_Model_Stock_Item_Api</stock_item_api>
+                </rewrite>
+            </cataloginventory>
+        </models>
+    </global>
+</config>

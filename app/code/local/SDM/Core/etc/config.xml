@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * SDM's core extension
+ *
+ * @category  SDM
+ * @package   SDM_Core
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Core>
+            <version>0.5.0</version>
+        </SDM_Core>
+    </modules>
+    <global>
+        <models>
+            <sdm_core>
+                <class>SDM_Core_Model</class>
+            </sdm_core>
+        </models>
+        <resources>
+            <sdm_core>
+                <setup>
+                    <module>SDM_Core</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </sdm_core>
+        </resources>
+        <blocks>
+            <sdm_core>
+                <class>SDM_Core_Block</class>
+            </sdm_core>
+        </blocks>
+        <helpers>
+            <sdm_core>
+                <class>SDM_Core_Helper</class>
+            </sdm_core>
+        </helpers>
+    </global>
+    <stores>
+        <admin>
+            <!-- default admin design package and theme -->
+            <design>
+                <package>
+                    <name>sdm</name>
+                </package>
+                <theme>
+                    <default>ellison</default>
+                </theme>
+            </design>
+        </admin>
+    </stores>
+    <frontend>
+        <translate>
+            <modules>
+                <SDM_Core>
+                    <files>
+                        <default>SDM_Core.csv</default>
+                    </files>
+                </SDM_Core>
+            </modules>
+        </translate>
+        <routers>
+            <contacts>
+                <args>
+                    <!-- Change contact form frontname -->
+                    <frontName>contact</frontName>
+                </args>
+            </contacts>
+        </routers>
+    </frontend>
+</config>

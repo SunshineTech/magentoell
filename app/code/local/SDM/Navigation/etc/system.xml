@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's navigation links
+ *
+ * @category  SDM
+ * @package   SDM_Navigation
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <sections>
+        <navigation translate="label" module="navigation">
+            <label>Navigation Links</label>
+            <tab>sdm_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>160</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <catalog_category_id translate="label">
+                            <label>Catalog Category URL Key</label>
+                            <comment><![CDATA[Default: "catalog". Must match the "Catalog" category URL key]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </catalog_category_id>
+                    </fields>
+                </general>
+            </groups>
+        </navigation>
+    </sections>
+</config>

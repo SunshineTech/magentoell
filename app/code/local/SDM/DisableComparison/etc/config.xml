@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Disable Product/Project Comparison
+ *
+ * @category  SDM
+ * @package   SDM_DisableComparison
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_DisableComparison>
+            <version>1.0.0</version>
+        </SDM_DisableComparison>
+    </modules>
+    <global>
+        <helpers>
+            <sdm_disablecomparison>
+                <class>SDM_DisableComparison_Helper</class>
+            </sdm_disablecomparison>
+            <catalog>
+                <rewrite>
+                    <product_compare>SDM_DisableComparison_Helper_Compare</product_compare>
+                </rewrite>
+            </catalog>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <sdm_disablecomparison>
+                    <file>sdm/disablecomparison.xml</file>
+                </sdm_disablecomparison>
+            </updates>
+        </layout>
+    </frontend>
+</config>

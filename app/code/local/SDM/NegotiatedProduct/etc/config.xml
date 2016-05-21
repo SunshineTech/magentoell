@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's negotiated product prices
+ *
+ * @category  SDM
+ * @package   SDM_NegotiatedProduct
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_NegotiatedProduct>
+            <version>0.1.0</version>
+        </SDM_NegotiatedProduct>
+    </modules>
+    <global>
+        <models>
+            <negotiatedproduct>
+                <class>SDM_NegotiatedProduct_Model</class>
+                <resourceModel>negotiatedproduct_resource</resourceModel>
+            </negotiatedproduct>
+            <negotiatedproduct_resource>
+                <class>SDM_NegotiatedProduct_Model_Resource</class>
+                <entities>
+                    <negotiatedproduct>
+                        <table>sdm_customer_negotiated_product</table>
+                    </negotiatedproduct>
+                </entities>
+            </negotiatedproduct_resource>
+        </models>
+        <resources>
+            <sdm_negotiatedproduct_setup>
+                <setup>
+                    <module>SDM_NegotiatedProduct</module>
+                    <class>Mage_Customer_Model_Resource_Setup</class>
+                </setup>
+            </sdm_negotiatedproduct_setup>
+        </resources>
+        <blocks>
+            <negotiatedproduct>
+                <class>SDM_NegotiatedProduct_Block</class>
+            </negotiatedproduct>
+        </blocks>
+        <helpers>
+            <negotiatedproduct>
+                <class>SDM_NegotiatedProduct_Helper</class>
+            </negotiatedproduct>
+        </helpers>
+    </global>
+    <adminhtml>
+        <layout>
+           <updates>
+               <negotiated_product_tab>
+                  <file>negotiated_product_tab.xml</file>
+               </negotiated_product_tab>
+           </updates>
+       </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <negotiatedproduct after="Mage_Adminhtml">SDM_NegotiatedProduct_Adminhtml</negotiatedproduct>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

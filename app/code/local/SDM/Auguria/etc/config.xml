@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Updates to Auguria_Sliders
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Auguria
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Auguria>
+            <version>0.1.0</version>
+        </SDM_Auguria>
+    </modules>
+    <global>
+        <blocks>
+            <auguria_sliders>
+                <rewrite>
+                    <cms_page_slider>SDM_Auguria_Block_Cms_Page_Slider</cms_page_slider>
+                    <catalog_category_slider>SDM_Auguria_Block_Cms_Page_Slider</catalog_category_slider>
+                    <adminhtml_sliders_edit_tab_content>SDM_Auguria_Block_Adminhtml_Sliders_Edit_Tab_Content</adminhtml_sliders_edit_tab_content>
+                </rewrite>
+            </auguria_sliders>
+        </blocks>
+        <resources>
+            <sdm_auguria>
+                <setup>
+                    <module>SDM_Auguria</module>
+                </setup>
+            </sdm_auguria>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_Auguria before="Auguria_Sliders">SDM_Auguria_Adminhtml</SDM_Auguria>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

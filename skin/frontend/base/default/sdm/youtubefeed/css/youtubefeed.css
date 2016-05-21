@@ -1,0 +1,79 @@
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+#channel-view-search {
+    margin-top: 100px;
+}
+
+.channel-view-filter .selected a {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.channel-view-featured h2,
+.channel-view-list h2 {
+    border-bottom: 1px solid black;
+}
+
+.channel-view-featured a {
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+.channel-view-list {
+    clear: both;
+    margin-top: 20px;
+}
+
+.channel-view-list .video-grid > li {
+    float: left;
+    width: 233px;
+    margin: 20px 0 0 20px;
+    padding: 10px;
+    background: white;
+    border: 1px solid black;
+}
+
+.channel-view-list .video-grid > li:nth-child(3n+1) {
+    clear: both;
+    margin-left: 0;
+}
+
+.channel-view-list li img {
+    width: 100%;
+}
+
+.render-collection.video-listing .pages strong {
+    display: initial;
+}
+
+.render-collection.video-listing .pages > ol,
+.render-collection.video-listing .pages > ol > * {
+    display: inline;
+    float: none;
+}
+
+.render-collection.video-listing .pages > ol .i-next,
+.render-collection.video-listing .pages > ol .i-previous {
+    width: 10px;
+    overflow: hidden;
+    background: black;
+}
+
+.render-collection.video-listing .pages input[type=text] {
+    width: 35px;
+}
+
+.render-collection.video-listing .next_jump,
+.render-collection.video-listing .pages > ol a.last {
+    display: none;
+}

@@ -1,0 +1,44 @@
+<h1>UK/ EU Cookie Law Notice Magento Module</h1>
+
+<p>&quot;Implied consent is a valid form of consent and can be used in the context of compliance with the revised rules on cookies.&quot; - ICO Website</p>
+
+<p>The Information Commissioner's Office stated that 'implied consent' is sufficient to comply with the EU Cookie Law. Now, you do not have to use other Magento Cookie Law extensions that make you wait for your visitors to agree to be tracked before you can get any Analytics data from them. Use this Cookie Law extension to show your visitors that by using your website, they permit you to set cookies in their browser. This extension displays a fully customisable message for your Magento website to comply with the EU cookie law.</p>
+
+<h2>1. Installation</h2>
+
+<ol>
+<li>Get the Magento Connect extension key and install it through Magento Connect (recommended)</li>
+<li>Download the app and skin folders from GitHub and upload them to your Magento root folder</li>
+</ol>
+
+<h3>PLEASE NOTE</h3>
+
+<ul>
+<li><p><strong>Backup Magento's files and database.</strong> It is best practice to backup the database and files, just in case something goes wrong and you need to rollback. Always try the module on a development site and deploy to a live site only after you have fully tested it.</p></li>
+<li><p><strong>Disable Compilation.</strong> Magento's compilation feature is wonderful! However, it needs to be switched off before installing new modules. If you forget to do so, use the command line to recompile. <a href="http://www.kathirvel.com/magento-compile-clear-enable-and-disable-compilation-via-ssh/">http://www.kathirvel.com/magento-compile-clear-enable-and-disable-compilation-via-ssh/</a></p></li>
+<li><p><strong>Getting a 404 error.</strong> As with the installation of all Magento modules, please clear the cache folders before and after module installation. Log out of the Admin area and log back in. Please also flush your CSS and JS caches.</p></li>
+</ul><p>This module has been tested and big fixed to the best possible extent. Let us know if you come across any problems or issues and we will endeavour to fix it in an upcoming release.</p>
+
+<h2>2. Configuration</h2>
+
+<p>The settings for this module can be accesses through the Admin menu - <strong>Optimise Web &gt;&gt; Cookie Notice Settings</strong> or through <strong>System &gt;&gt; Configuration &gt;&gt; Optimise Web &gt;&gt; Cookie Law (EU / UK) Notice</strong>.</p>
+
+<p>After installation, you will see a message appear on the front-end of your website. The settings are straight forward and self explanatory.</p>
+
+<p>This extension does not add additional jQuery or any other javascript libraries. It uses Magento's core cookie class and the javascript libraries bundled with Magento.</p>
+
+<h2>3. Customisation</h2>
+
+<p>We have set the colours and fonts to inherit the site's look and feel. The background colour of the notice is set to grey. Your designer or developer would be able to customise this further to suit your desired look and feel.</p>
+
+<p><strong>Template file - /app/design/frontend/base/default/template/optimiseweb/cookienotice/cookienotice.phtml</strong></p>
+
+<p><strong>CSS file - /skin/frontend/base/default/css/cookienotice.css</strong></p>
+
+<p>Please make a copy of the files and drop your customisation under your template or theme folder. If you edit this file directly, you might lose all customisations when upgrading this extension.</p>
+
+<h3><b><u>Important:</u></b></h3>
+
+<p>To be able to develop the module further and provide better support, we capture your Magento version, module version, admin URL and admin email address when you access the admin &gt; module settings page. We do not share this data with anyone. We do not use this data to send you marketing communication. We do this purely for support and statistical purposes.</p>
+
+<p>If you do not agree to this, please do not install the module. Or, write to us to request a bespoke version of the module.</p>

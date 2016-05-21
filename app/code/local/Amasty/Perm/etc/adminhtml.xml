@@ -1,0 +1,169 @@
+<?xml version="1.0"?> 
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Perm
+ */
+-->
+<config>
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <order>
+                                <children>
+                                    <actions>
+                                        <children>
+                                            <assign_order translate="title">
+                                                <title>Assign Order</title>
+                                            </assign_order>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </order>
+                        </children>
+                    </sales>
+                    <customer>
+                        <children>
+                            <manage>
+                                <children>
+                                    <login_as_customer translate="title">
+                                        <title>Log In as Customer</title>
+                                    </login_as_customer>
+                                    <assign_dealer translate="title">
+                                        <title>Mass Assign/Remove to/from Dealer</title>
+                                    </assign_dealer>
+                                </children>
+                            </manage>
+                        </children>
+                    </customer>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amperm translate="title" module="amperm">
+                                        <title>Sales Reps Settings</title>
+                                    </amperm>
+                                </children>
+                            </config>
+                        </children>
+                    </system> 
+                    <acl>
+                        <children>
+                            <amperm translate="title" module="amperm"> 
+                                <title>Sales Reps Settings</title>
+                            </amperm>
+                        </children>
+                    </acl>                     
+                 </children>
+            </admin>  			
+		</resources>
+	</acl>
+	<menu>
+	    <system>
+            <children>
+                <acl>
+                    <children>
+                        <amperm translate="title" module="amperm"> 
+                            <title>Sales Reps Settings</title>
+                            <action>adminhtml/system_config/edit/section/amperm</action>
+                            <sort_order>9000</sort_order>
+                        </amperm>
+                    </children>
+                </acl>
+            </children>
+        </system>
+	</menu>		
+    <translate>
+        <modules>
+            <Amasty_Perm>
+                <files>
+                    <default>Amasty_Perm.csv</default>
+                </files>
+            </Amasty_Perm>
+        </modules>
+    </translate>
+    <events>
+        <admin_user_save_after>
+            <observers>
+                <amperm>
+                    <type>singleton</type>
+                    <class>amperm/observer</class>
+                    <method>handleAdminUserSaveAfter</method>
+                </amperm>
+            </observers>
+        </admin_user_save_after>
+        <eav_collection_abstract_load_before>
+            <observers>
+                <amperm>
+                    <type>singleton</type>
+                    <class>amperm/observer</class>
+                    <method>handleCustomerCollectionLoadBefore</method>
+                </amperm>
+            </observers>
+        </eav_collection_abstract_load_before>
+
+        <sales_order_invoice_grid_collection_load_before>
+            <observers>
+                <amperm>
+                    <type>singleton</type>
+                    <class>amperm/observer</class>
+                    <method>handleOrderCollectionLoadBefore</method>
+                </amperm>
+            </observers>
+        </sales_order_invoice_grid_collection_load_before>
+
+        <sales_order_shipment_grid_collection_load_before>
+            <observers>
+                <amperm>
+                    <type>singleton</type>
+                    <class>amperm/observer</class>
+                    <method>handleOrderCollectionLoadBefore</method>
+                </amperm>
+            </observers>
+        </sales_order_shipment_grid_collection_load_before>
+
+        <sales_order_creditmemo_grid_collection_load_before>
+            <observers>
+                <amperm>
+                    <type>singleton</type>
+                    <class>amperm/observer</class>
+                    <method>handleOrderCollectionLoadBefore</method>
+                </amperm>
+            </observers>
+        </sales_order_creditmemo_grid_collection_load_before>
+
+        <sales_order_grid_collection_load_before>
+            <observers>
+                <amperm>
+                    <type>singleton</type>
+                    <class>amperm/observer</class>
+                    <method>handleOrderCollectionLoadBefore</method>
+                </amperm>
+            </observers>
+        </sales_order_grid_collection_load_before>
+
+        <core_collection_abstract_load_before>
+            <observers>
+                <amperm>
+                    <type>singleton</type>
+                    <class>amperm/observer</class>
+                    <method>handleCoreCollectionAbstractLoadBefore</method>
+                </amperm>
+            </observers>
+        </core_collection_abstract_load_before>
+    </events>
+    <layout>
+        <updates>
+            <amperm module="Amasty_Perm">
+                <file>amasty/amperm/amperm.xml</file>
+            </amperm>
+        </updates>
+    </layout>
+</config>

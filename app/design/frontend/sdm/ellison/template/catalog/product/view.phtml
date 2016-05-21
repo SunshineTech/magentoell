@@ -1,0 +1,319 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_helper    = $this->helper('catalog/output');
+$_product   = $this->getProduct();
+$_priceHtml = $this->getPriceHtml($_product); // Preload it for getSaleLabel()
+$_buybox    = $this->helper('sdm_catalog/buybox')->getBuyBoxData($_product);
+$_tabContents = $this->getTabContents();    // Get tabs without empty ones
+?>
+
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view">
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+</div>
+<div class="product-top-wrap">
+    <div class="addthis-wrap">
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-550083b37b032f8f" async="async"></script>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <div class="addthis_native_toolbox"></div>
+    </div>
+    <div class="product-name">
+        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+        <span><?php echo Mage::helper('sdm_catalog')->getSkuLabel($_product) . $_product->getSku();?></span>
+    </div>
+    <!-- PlaceHolder Follow Product -->
+    <div class='follow-top'>
+        <?php echo Mage::helper('followitem')->getProductFollowLinkHtml($_product) ?>
+        <?php echo $this->getChild('sharing')->setLocation('top')->toHtml(); ?>
+    </div>
+    <!-- End Follow Product -->
+</div>
+<div class="product-view">
+    <div class="pinned-wrap">
+    <div class="product-essential">
+        <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+            <?php echo $this->getBlockHtml('formkey') ?>
+            <div class="no-display">
+                <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                <input type="hidden" name="related_product" id="related-products-field" value="" />
+            </div>
+            <?php if($_product->getTypeId() == 'simple'): ?>
+                <div class="product-collateral toggle-content tabs">
+                    <?php if (!empty($_tabContents['tabs'])): ?>
+                        <dl id="collateral-tabs" class="collateral-tabs">
+                            <?php foreach ($_tabContents['tabs'] as $alias => $html): ?>
+                                <dt class="tab">
+                                    <span class="<?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?>">
+                                        <?php echo $this->escapeHtml(
+                                            $this->getChildData($alias, 'title_override')
+                                                ? $this->getChildData($alias, 'title_override')
+                                                : $this->getChildData($alias, 'title')
+                                        ) ?>
+                                    </span>
+                                </dt>
+                                <dd class="tab-container">
+                                    <div class="tab-content"><?php echo $html ?></div>
+                                </dd>
+                            <?php endforeach;?>
+                        </dl>
+                    <?php endif; ?>
+                </div>
+            <?php endif ?>
+            <?php if(!($_product->getTypeId() == 'simple')): ?>
+                <div class="product-img-box">
+                    <?php echo $this->getChildHtml('media') ?>
+                </div>
+            <?php endif ?>
+            <?php if(!($_product->getTypeId() == 'simple')): ?>
+                <div class="pinned product-shop" style="display: none;">
+            <?php else : ?>
+                <div class="spinned product-shop">
+            <?php endif ?>
+                <?php if($_product->getTypeId() == 'simple'): ?>
+                    <?php if (!empty($_buybox)): ?>
+                        <div class="buyboxmessage">
+                            <?php echo $_buybox ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="extra-info">
+                        <?php echo $this->getReviewsSummaryHtml($_product, 'default', false)?>
+                    </div>
+                    <div class="price-info">
+                        <?php echo $_priceHtml ?>
+                        <?php echo $this->getTierPriceHtml() ?>
+                    </div>
+                <?php endif ?>
+                <?php if($_product->getTypeId() == 'bundle'): ?>
+                    <div class="price-info">
+                        <?php echo $this->getChildHtml('bundle_prices') ?>
+                    </div>
+                <?php endif ?>
+                <?php echo $this->getChildHtml('product_type_data') ?>
+                <?php echo $this->getChildHtml('extrahint') ?>
+                <div class="add-to-box">
+                    <?php if ($_product->getButtonVisiblePDP()): ?>
+                        <?php if($_product->getButtonType() == 'text'): ?>
+                            <p class="availability">
+                                <span><?php echo $_product->getButtonValue() ?></span>
+                            </p>
+                        <?php elseif($_product->getButtonType() == 'add-to-cart'): ?>
+                            <div class="add-to-cart">
+                                <?php if(!$_product->isGrouped()): ?>
+                                <div class="qty-wrapper">
+                                    <label for="qty"><?php echo $this->__('Qty:') ?></label>
+                                    <input type="text" pattern="\d*" name="qty" id="qty" maxlength="12" value="<?php echo max($this->getProductDefaultQty() * 1, 1) ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+                                </div>
+                                <?php endif; ?>
+                                <div class="add-to-cart-buttons">
+                                    <button type="button" class="button btn-cart ajax-cart">
+                                        <span><span><?php echo $_product->getButtonValue() ?></span></span>
+                                    </button>
+                                </div>
+                                <?php echo $this->getChildHtml('product_min_qty') ?>
+                            </div>
+                        <?php else: ?>
+                            <p class="action">
+                                <a title="<?php echo $_product->getButtonValue() ?>" class="button" href="<?php echo $_product->getProductUrl() ?>">
+                                    <span><span><?php echo $_product->getButtonValue() ?></span></span>
+                                </a>
+                            </p>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php echo $this->getChildHtml('addto') ?>
+                    <?php echo $this->getChild('sharing')->setLocation('add-to')->toHtml(); ?>
+                </div>
+                <?php echo $this->getChildHtml('extra_buttons') ?>
+                <?php echo $this->getChildHtml('other');?>
+                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                    <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                <?php endif;?>
+            </div>
+            <div class="clearer"></div>
+            <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+            <?php endif;?>
+        </form>
+        <script type="text/javascript">
+        //<![CDATA[
+            var productAddToCartForm = new VarienForm('product_addtocart_form');
+            productAddToCartForm.submit = function(button, url) {
+                if (this.validator.validate()) {
+                    var form = this.form;
+                    var oldUrl = form.action;
+                    if (url) {
+                       form.action = url;
+                    }
+                    var e = null;
+                    try {
+                        this.form.submit();
+                    } catch (e) {
+                    }
+                    this.form.action = oldUrl;
+                    if (e) {
+                        throw e;
+                    }
+                    if (button && button != 'undefined') {
+                        button.disabled = true;
+                    }
+                }
+            }.bind(productAddToCartForm);
+            productAddToCartForm.submitLight = function(button, url){
+                if(this.validator) {
+                    var nv = Validation.methods;
+                    delete Validation.methods['required-entry'];
+                    delete Validation.methods['validate-one-required'];
+                    delete Validation.methods['validate-one-required-by-name'];
+                    // Remove custom datetime validators
+                    for (var methodName in Validation.methods) {
+                        if (methodName.match(/^validate-datetime-.*/i)) {
+                            delete Validation.methods[methodName];
+                        }
+                    }
+                    if (this.validator.validate()) {
+                        if (url) {
+                            this.form.action = url;
+                        }
+                        this.form.submit();
+                    }
+                    Object.extend(Validation.methods, nv);
+                }
+            }.bind(productAddToCartForm);
+        //]]>
+        </script>
+    </div>
+    <div class="product-detailed-wrap">
+        <?php if ($_tabContents['contents']): ?>
+            <div class="detailed-content">
+                <?php foreach ($_tabContents['contents'] as $alias => $html): ?>
+                    <div class="tab-container">
+                        <div id="<?php echo $this->escapeHtml($this->getChildData($alias, 'title'))?>" class="tab-content"><?php echo $html ?></div>
+                    </div>
+                <?php endforeach;?>
+            </div>
+        <?php endif; ?>
+    </div>
+    <?php if($_product->getTypeId() === 'grouped'): ?>
+        <div class="product-details">
+            <?php if ($_product->getDescription()): ?>
+                <div class="overview-wrap">
+                    <h2 class="related-title"><?php echo $this->__('Overview') ?></h2>
+                    <div class="content">
+                        <?php // Get Description ?>
+                        <?php echo $_product->getDescription() ?>
+                        <br><br>
+                        <?php // Get Curriculum and Grade Level ?>
+                        <?php $_curriculumn = $this->getTaxonomyCurriculumString(); ?>
+                        <?php $_gradeLevel = $this->getTaxonomyGradeLevelString(); ?>
+                        <?php if(!empty($_curriculumn) || !empty($_gradeLevel)): ?>
+                            <div class="grade-curriculum">
+                                <?php if(!empty($_gradeLevel)): ?>
+                                    <div class="wrapper">
+                                        <div class="title"><?php echo $this->__('Grade Level:') ?></div>
+                                        <div class="attributes">
+                                            <?php echo $_gradeLevel; ?>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if(!empty($_curriculumn)): ?>
+                                    <div class="wrapper">
+                                        <div class="title"><?php echo $this->__('Curriculum:') ?></div>
+                                        <div class="attributes">
+                                            <?php echo $_curriculumn; ?>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+                        <?php endif ?>
+                        <?php // Get Artists and Themes ?>
+                        <?php $_taxonomyArtists = $this->getTaxonomyArtistString(); ?>
+                        <?php $_taxonomyThemes = $this->getTaxonomyThemeString(); ?>
+                        <?php if (!empty($_taxonomyArtists) || !empty($_taxonomyThemes)): ?>
+                            <div class="artist-theme">
+                                <?php if(!empty($_taxonomyArtists)): ?>
+                                    <div class="wrapper">
+                                        <div class="title"><?php echo $this->__('Artist:') ?></div>
+                                        <div class="attributes">
+                                            <?php echo $_taxonomyArtists; ?>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if(!empty($_taxonomyThemes)): ?>
+                                    <div class="wrapper">
+                                        <div class="title"><?php echo $this->__('Themes:') ?></div>
+                                        <div class="attributes">
+                                            <?php echo $_taxonomyThemes; ?>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if($this->helper('sdm_core')->isSite(SDM_Core_Helper_Data::ELLISON_SYSTEM_CODE_ED, SDM_Core_Helper_Data::ELLISON_SYSTEM_CODE_RE)): ?>
+                <?php if($_product->getIdeaIntroduction()): ?>
+                    <div class="introduction-wrap">
+                        <h2 class="related-title"><?php echo $this->__('Introduction') ?></h2>
+                        <div class="content"><?php echo $_product->getIdeaIntroduction() ?></div>
+                    </div>
+                <?php endif ?>
+                <?php if($_product->getObjective()): ?>
+                    <div class="objective-wrap">
+                        <h2 class="related-title"><?php echo $this->__('Objective') ?></h2>
+                        <div class="content"><?php echo $_product->getObjective() ?></div>
+                    </div>
+                <?php endif ?>
+                <?php if($_product->getIdeaStandards()): ?>
+                    <div class="standards-wrap">
+                        <h2 class="related-title"><?php echo $this->__('Standards') ?></h2>
+                        <div class="content"><?php echo $_product->getIdeaStandards() ?></div>
+                    </div>
+                <?php endif ?>
+            <?php endif ?>
+            <?php if ($_product->getIdeaInstructions()): ?>
+                <div class="instruction-wrap">
+                    <h2 class="related-title"><?php echo $this->__('Instructions') ?></h2>
+                    <div class="content">
+                        <?php echo $_product->getIdeaInstructions() ?>
+                        <ul class="figure-images">
+                            <?php foreach ($_product->getInstructionImages() as $_figureImage): ?>
+                                <li>
+                                    <a href='<?php echo $_figureImage['url'] ?>' class='instruction-img'>
+                                        <img src="<?php echo $_figureImage['url'] ?>" width="125" height="125"/>
+                                    </a><br>
+                                    <span><?php echo $_figureImage['instruction_label']; ?></span>
+                                </li>
+                            <?php endforeach?>
+                        </ul>
+                        <div class="clear"></div>
+                        <?php $_instructionFile = $_product->getInstructionFile(); ?>
+                        <?php if($_instructionFile): ?>
+                            <div class="download-pdf">
+                                <a class="view-pdf" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_instructionFile ?>">
+                                    <?php echo $this->__('Download PDF instructions')?>
+                                </a>
+                            </div>
+                            <div class="clear"></div>
+                        <?php endif ?>
+                    </div>
+                </div>
+            <?php endif ?>
+        </div>
+    <?php endif ?>
+    </div>
+    <?php echo $this->getChildHtml('related_products') ?>
+    <?php echo $this->getChildHtml('upsell_products') ?>
+</div>

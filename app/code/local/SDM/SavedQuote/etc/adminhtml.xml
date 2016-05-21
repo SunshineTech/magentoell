@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+
+<config>
+    <menu>
+        <sales>
+            <children>
+                <savedquote translate="title" module="savedquote">
+                    <title><![CDATA[Saved Quotes &amp; Pre Orders]]></title>
+                    <sort_order>15</sort_order>
+                    <action>adminhtml/savedquote</action>
+                </savedquote>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <savedquote translate="title" module="savedquote">
+                                <title>Saved Quotes &amp; Pre Orders</title>
+                                <sort_order>75</sort_order>
+                            </savedquote>
+                        </children>
+                    </sales>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <savedquote translate="label" module="savedquote">
+                                        <title>Saved Quotes &amp; Pre Orders</title>
+                                    </savedquote>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

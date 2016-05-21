@@ -1,0 +1,34 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Lyris_Block_Popup $this
+ */
+?>
+
+<?php $_trackingEnabled = Mage::getStoreConfig("sdm_lyris/tracking/enabled"); ?>
+<?php $_trackingCode    = Mage::getStoreConfig("sdm_lyris/tracking/code"); ?>
+
+<?php if ($_trackingEnabled && !empty($_trackingCode)): ?>
+<script type="text/javascript"><!--
+    document.write('<'
+        + 'script type="text/javascript" src="'
+        + document.location.protocol
+        + '//stats1.clicktracks.com/cgi-bin/ctasp-server.cgi?i=<?php echo $_trackingCode ?>'
+        + '"><'
+        + '/script>');
+    // -->
+</script>
+<?php endif; ?>
+

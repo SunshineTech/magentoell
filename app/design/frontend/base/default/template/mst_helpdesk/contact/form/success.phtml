@@ -1,0 +1,16 @@
+<div class="helpdesk-contact-form success">
+    <div class="close" onclick="window.parent.helpdeskFormHide();">&times;</div>
+    <div class="dropbox">
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('helpdesk-contact-form', true);
+    function helpdeskFormHide()
+    {
+        $('helpdesk-contact-form').hide();
+        $('helpdesk-contact-form-overlay').hide();
+    }
+//]]>
+</script>

@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Banner Ads
+ *
+ * @category  SDM
+ * @package   SDM_Banner
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Banner>
+            <version>1.0.3</version>
+        </SDM_Banner>
+    </modules>
+    <global>
+        <blocks>
+            <slider>
+                <class>SDM_Banner_Block</class>
+            </slider>
+        </blocks>
+        <models>
+            <slider>
+                <class>SDM_Banner_Model</class>
+                <resourceModel>slider_resource</resourceModel>
+            </slider>
+            <slider_resource>
+                <class>SDM_Banner_Model_Resource</class>
+                <entities>
+                    <slider>
+                        <table>sdm_banner</table>
+                    </slider>
+                    <pages>
+                        <table>sdm_banner_pages</table>
+                    </pages>
+                    <stores>
+                        <table>sdm_banner_stores</table>
+                    </stores>
+                    <layouts>
+                        <table>sdm_banner_layouts</table>
+                    </layouts>
+                </entities>
+            </slider_resource>
+        </models>
+        <resources>
+            <sdm_banner_setup>
+                <setup>
+                    <module>SDM_Banner</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </sdm_banner_setup>
+            <slider_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </slider_write>
+            <slider_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </slider_read>
+        </resources>
+        <helpers>
+            <slider>
+                <class>SDM_Banner_Helper</class>
+            </slider>
+        </helpers>
+        <events>
+            <controller_action_layout_generate_xml_before>
+                <observers>
+                    <sdm_banner_layout_load_observer>
+                        <class>SDM_Banner_Model_Observer</class>
+                        <method>applyLayoutUpdateXml</method>
+                    </sdm_banner_layout_load_observer>
+                </observers>
+            </controller_action_layout_generate_xml_before>
+        </events>
+    </global>
+    <frontend>
+        <routers>
+            <slider>
+                <use>standard</use>
+                <args>
+                    <module>SDM_Banner</module>
+                    <frontName>slider</frontName>
+                </args>
+            </slider>
+        </routers>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <sdm_banner after="Mage_Adminhtml">SDM_Banner_Adminhtml</sdm_banner>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <slider>
+                    <file>banner.xml</file>
+                </slider>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <sdm_banner>
+            <general>
+                <enabled>1</enabled>
+                <limit>3</limit>
+            </general>
+        </sdm_banner>
+    </default>
+</config>

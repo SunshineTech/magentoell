@@ -1,0 +1,23 @@
+<?php
+
+?>
+
+<div id="summary">
+    <?php echo $this->__('Quote Summary') ?>
+</div>
+<div id="savedquote-totals">
+    <table id="savedquote-totals-table">
+        <col />
+        <col width="1" />
+        <tbody>
+            <?php echo $this->renderTotals(); ?>
+        </tbody>
+        <tfoot>
+            <?php echo $this->renderTotals('grand_total'); ?>
+        </tfoot>
+    </table>
+</div>
+<div>
+    <?php echo $this->renderTotals('discount', 1, 'Your Savings: ') ?>
+    <!-- <span>Your savings: $<?php echo '' ?></span> -->
+</div>

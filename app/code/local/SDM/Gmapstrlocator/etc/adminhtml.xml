@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * This module handles all the store locator functionality for Ellison.
+ * 
+ * The original code from this module is based off the FME_Gmapstrlocator module. We converted their
+ * module to an SDM module rather than extending from it because the amount of modifications and
+ * rewrites necessary for it to fit Ellison's spec were extensive, yet we still felt there was value
+ * in using FME's module as a starting point.
+ *
+ * @category  SDM
+ * @package   SDM_Gmapstrlocator
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <menu>
+        <cms module="gmapstrlocator">
+            <children>
+                <gmapstrlocator module="gmapstrlocator">
+                    <title>Store Locator</title>
+                    <sort_order>700</sort_order>
+                    <action>adminhtml/gmapstrlocator</action>
+                </gmapstrlocator>
+            </children>
+        </cms>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <gmapstrlocator>
+                                <title>Store Locator</title>
+                                <sort_order>10</sort_order>
+                            </gmapstrlocator>
+                        </children>
+                    </cms>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <gmapstrlocator translate="title" module="gmapstrlocator">
+                                        <title>Store Locator Settings</title>
+                                        <sort_order>39</sort_order>
+                                    </gmapstrlocator>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

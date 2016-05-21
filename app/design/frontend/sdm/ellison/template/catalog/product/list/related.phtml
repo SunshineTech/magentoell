@@ -1,0 +1,25 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Mage_Catalog-related customizations
+ *
+ * @category  design
+ * @package   sdm_ellison
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+$_products = $this->getProduct()->getRelatedProducts();
+
+?>
+<?php if(count($_products) > 0): ?>
+	<div class="block block-related">
+	    <div class="block-title">
+	        <h2><?php echo $this->__('Customers also loved') ?></h2>
+	    </div>
+	    <div class="block-content">
+	        <?php echo Mage::helper('rendercollection')->initNewCarousel($_products)->toHtml(); ?>
+	    </div>
+	</div>
+<?php endif ?>

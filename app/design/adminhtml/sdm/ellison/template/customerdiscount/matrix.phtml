@@ -1,0 +1,50 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Implements the customer/retailer discount logic for viewing and obtaining
+ * discounts and prices, as wel as managing the customer groups.
+ *
+ * @category  design
+ * @package   sdm_ellison
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+?>
+<?php $_matrix = $this->getMatrix() ?>
+<?php if($_matrix): ?>
+    <?php $_headers = array_keys(reset($_matrix)) ?>
+    <div class="grid">
+        <div class="hor-scroll">
+            <table class="data" id="" cellspacing="0">
+                <thead>
+                    <tr class="headings">
+                        <th><span>Discount Category</span></th>
+                        <?php foreach ($_headers as $_header): ?>
+                            <th><span><?php echo $_header ?></span></th>
+                        <?php endforeach; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i = 0 ?>
+                    <?php foreach ($_matrix as $_category => $_row): ?>
+                        <?php $evenRow = ( $i%2 === 0 ?  'even'  : '') ?>
+                        <tr class="<?php echo $evenRow ?>">
+                            <td class="a-left discount-category"><?php echo $_category ?></td>
+                            <?php foreach ($_row as $_col): ?>
+                                <td><?php echo $_col ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php $i++ ?>
+                    <?php ?>
+
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+         </div>
+    </div>
+<?php else: ?>
+    <div>
+        The matrix coulnd not be generated
+    </div>
+<?php endif; ?>

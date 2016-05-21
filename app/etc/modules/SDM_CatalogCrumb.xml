@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Custom breadcrumb functionality for Ellison's catalog
+ *
+ * @category  SDM
+ * @package   SDM_CatalogCrumb
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CatalogCrumb>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+            	<Mage_Catalog />
+            	<SDM_Core />
+                <SDM_Compatibility />
+            </depends>
+        </SDM_CatalogCrumb>
+    </modules>
+</config>

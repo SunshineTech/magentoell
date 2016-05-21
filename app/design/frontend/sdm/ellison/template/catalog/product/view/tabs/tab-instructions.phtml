@@ -1,0 +1,60 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Tabs - Instructions template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_product = $this->getProduct();
+$_instructionFile = $_product->getInstructionFile();
+$_instructionImages = array();
+$_instructionImages = $this->getProductInsturctionImages();
+$_productType = $_product->getAttributeText('product_type');
+$_typeDie = $_productType == "Die";
+$_typeAccessory = $_productType == "Accessory";
+$_typeMachine = $_productType == "Machine";
+?>
+<?php if (!empty($_instructionFile) || !empty($_instructionImages)): ?>
+    <ul id="mediabox" class="instruction-slider">
+        <?php if ($_instructionFile): ?>
+            <li class="pdf">
+                <div id="first-slide" class="parent-image">
+                    <img id="image-main"
+                     class="gallery-image visible" src="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>" alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>" title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>" />
+                </div>
+                <?php if($_typeDie): ?>
+                    <div class="verbeige"><?php echo $this->__('Need help assembling your die-cuts?')?></div>
+                    <a class="view-pdf" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_instructionFile ?>"><?php echo $this->__('Download PDF')?></a>
+                <?php elseif($_typeAccessory): ?>
+                    <div class="verbeige"><?php echo $this->__('Want to know how to use this accessory?')?></div>
+                    <a class="view-pdf" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_instructionFile ?>"><?php echo $this->__('Download PDF')?></a>
+                <?php elseif($_typeMachine): ?>
+                    <div class="verbeige"><?php echo $this->__('Want to know more about your machine?')?></div>
+                    <a class="view-pdf" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_instructionFile ?>"><?php echo $this->__('Download PDF')?></a>
+                <?php else : ?>
+                    <div class="verbeige"><?php echo $this->__('Want easy instructions?')?></div>
+                    <a class="view-pdf" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_instructionFile ?>"><?php echo $this->__('Download PDF')?></a>
+                <?php endif ?>
+            </li>
+        <?php endif ?>
+        <?php if ($_instructionImages): ?>
+            <?php foreach ($_instructionImages as $_i => $_img): ?>
+                <li>
+                    <div id="instruction-image-<?php echo $_i ?>" class="instruction-image image">
+                        <?php if(isset($_img['link']) && !empty($_img['link'])): ?>
+                            <img id="instruction-image-<?php echo $_i ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_img['link'] ?>" alt="<?php echo $this->stripTags($_img['alt']) ?>" />
+                            <div class="instruction-image-label"><?php echo $_img['title'] ?></div>
+                        <?php else : ?>
+                            <img id="instruction-image-<?php echo $_i ?>" src="<?php echo $this->getSkinUrl('images/catalog/product/placeholder/image.jpg'); ?>" alt="<?php echo $this->__('no product line image');?>" />
+                        <?php endif; ?>
+                    </div>
+                </li>
+            <?php endforeach?>
+        <?php endif ?>
+    </ul>
+<?php endif ?>

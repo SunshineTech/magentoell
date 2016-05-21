@@ -1,0 +1,14 @@
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+#resell_brands {
+    height: 80px;
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <adminhtml_sdm_youtubefeed_channel_index>
+        <reference name="content">
+            <block type="sdm_youtubefeed/adminhtml_channel" name="adminhtml.sdm.youtubefeed.channel" />
+        </reference>
+    </adminhtml_sdm_youtubefeed_channel_index>
+    <adminhtml_sdm_youtubefeed_playlist_index>
+        <reference name="content">
+            <block type="sdm_youtubefeed/adminhtml_playlist" name="adminhtml.sdm.youtubefeed.playlist" />
+        </reference>
+    </adminhtml_sdm_youtubefeed_playlist_index>
+    <adminhtml_sdm_youtubefeed_playlist_videos>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="sdm_youtubefeed/adminhtml_playlist_edit_tab_videos" name="adminhtml.sdm.youtubefeed.playlist.edit.tab.videos"/>
+        </block>
+    </adminhtml_sdm_youtubefeed_playlist_videos>
+    <adminhtml_sdm_youtubefeed_video_index>
+        <reference name="content">
+            <block type="sdm_youtubefeed/adminhtml_video" name="adminhtml.sdm.youtubefeed.video" />
+        </reference>
+    </adminhtml_sdm_youtubefeed_video_index>
+</layout>

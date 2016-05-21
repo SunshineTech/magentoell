@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * eClips Software Download
+ *
+ * @category  SDM
+ * @package   SDM_Eclips
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Eclips>
+            <version>0.1.0</version>
+        </SDM_Eclips>
+    </modules>
+    <global>
+        <models>
+            <eclips>
+                <class>SDM_Eclips_Model</class>
+                <resourceModel>eclips_resource</resourceModel>
+            </eclips>
+            <eclips_resource>
+                <class>SDM_Eclips_Model_Resource</class>
+                <entities>
+                    <request>
+                        <table>sdm_eclips_request</table>
+                    </request>
+                </entities>
+            </eclips_resource>
+        </models>
+        <resources>
+            <sdm_eclips_setup>
+                <setup>
+                    <module>SDM_Eclips</module>
+                </setup>
+            </sdm_eclips_setup>
+        </resources>
+        <blocks>
+            <eclips>
+                <class>SDM_Eclips_Block</class>
+            </eclips>
+        </blocks>
+        <helpers>
+            <eclips>
+                <class>SDM_Eclips_Helper</class>
+            </eclips>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <eclips>
+                <use>standard</use>
+                <args>
+                    <module>SDM_Eclips</module>
+                    <frontName>eclipsware</frontName>
+                </args>
+            </eclips>
+        </routers>
+        <layout>
+            <updates>
+                <eclips>
+                    <file>sdm/eclips.xml</file>
+                </eclips>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_Eclips after="Mage_Adminhtml">SDM_Eclips_Adminhtml</SDM_Eclips>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <eclips>
+                    <file>sdm/eclips.xml</file>
+                </eclips>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

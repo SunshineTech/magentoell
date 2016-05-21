@@ -1,0 +1,101 @@
+<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" class="helpdesk-contacts-form" method="post" enctype="multipart/form-data">
+    <div class="fieldset">
+        <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
+                    <div class="input-box">
+                        <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="mail" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
+                    <div class="input-box">
+                         <input name="email" id="email" title="Email" value="" type="text" style='display:none;'/>
+
+                        <input name="mail" id="mail" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="text" />
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label for="telephone"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
+                <div class="input-box">
+                    <input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text" type="text" />
+                </div>
+            </li>
+            <li class="wide">
+                <div class="field">
+                    <label for="name" class="required"><em>*</em><?php echo Mage::helper('helpdesk')->__('Subject') ?></label>
+                    <div class="input-box">
+                        <input name="subject" id="subject" title="<?php echo Mage::helper('helpdesk')->__('Subject') ?>" value="" class="input-text required-entry" type="text" />
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <label for="comment" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Comment') ?></label>
+                <div class="input-box">
+                    <textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" class="required-entry input-text" cols="5" rows="3"></textarea>
+                </div>
+            </li>
+            <li class="fields">
+            <?php if ($this->getFrontendIsAllowPriority()): ?>
+                <div class="field">
+                    <label for="priority_id"><?php echo $this->__("Priority") ?></label>
+                    <div class="input-box">
+                        <select name="priority_id" id='priority_id'>
+                            <?php foreach ($this->getPriorityCollection() as $priority): ?>
+                            <option value="<?php echo $priority->getId()?>"><?php echo $priority->getName()?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                </div>
+            <?php endif;?>
+            <?php if ($this->getFrontendIsAllowDepartment()): ?>
+                <div class="field">
+                    <label for="department_id"><?php echo $this->__("Department") ?></label>
+                    <div class="input-box">
+                        <select name="department_id" id='department_id'>
+                            <?php foreach ($this->getDepartmentCollection() as $department): ?>
+                            <option value="<?php echo $department->getId()?>"><?php echo $department->getName()?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                </div>
+            <?php endif;?>
+            </li>
+        <?php foreach ($this->getCustomFields() as $field): ?>
+        <li class="fields <?php echo $field->getType()?>">
+            <label for="<?php echo $field->getCode()?>" <?php echo $field->getIsRequiredCustomer()?'class="required"><em>*</em>':'>'?><?php echo $this->__($field->getName()) ?></label>
+            <div class="input-box <?php echo $field->getType()?>">
+                <?php echo $this->getInputHtml($field)?>
+            </div>
+            <p><?php echo $field->getDescription() ?></p>
+        </li>
+        <?php endforeach; ?>
+        <li class="wide">
+            <label for="attachment"><?php echo $this->__("Attach files") ?></label>
+            <div class="input-box">
+                <input type='file' class='multi' name='attachment[]' id='attachment'></textarea>
+            </div>
+        </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
+        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+        <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button"
+            onclick="contactFormSubmit(this)" ><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+    function contactFormSubmit(button){
+        if(contactForm.validator &&  contactForm.validator.validate()){
+            Form.Element.disable(button);
+            contactForm.submit();
+        }
+    }
+//]]>
+</script>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Teachers' Planning Calendar
+ *
+ * @category  SDM
+ * @package   SDM_Calendar
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Calendar>
+            <version>1.4.2</version>
+        </SDM_Calendar>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_calendar>
+                <class>SDM_Calendar_Block</class>
+            </sdm_calendar>
+        </blocks>
+        <helpers>
+            <sdm_calendar>
+                <class>SDM_Calendar_Helper</class>
+            </sdm_calendar>
+        </helpers>
+        <models>
+            <sdm_calendar>
+                <class>SDM_Calendar_Model</class>
+                <resourceModel>sdm_calendar_resource</resourceModel>
+            </sdm_calendar>
+            <sdm_calendar_resource>
+                <class>SDM_Calendar_Model_Resource</class>
+                <entities>
+                    <calendar>
+                        <table>sdm_calendar_calendar</table>
+                    </calendar>
+                    <calendar_website>
+                        <table>sdm_calendar_calendar_website</table>
+                    </calendar_website>
+                    <event>
+                        <table>sdm_calendar_event</table>
+                    </event>
+                    <event_website>
+                        <table>sdm_calendar_event_website</table>
+                    </event_website>
+                    <!-- *_store tables are deprecated -->
+                    <calendar_store>
+                        <table>sdm_calendar_calendar_store</table>
+                    </calendar_store>
+                    <event_store>
+                        <table>sdm_calendar_event_store</table>
+                    </event_store>
+                </entities>
+            </sdm_calendar_resource>
+        </models>
+        <resources>
+            <sdm_calendar_setup>
+                <setup>
+                    <module>SDM_Calendar</module>
+                </setup>
+            </sdm_calendar_setup>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_Calendar before="Mage_Adminhtml">SDM_Calendar_Adminhtml</SDM_Calendar>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sdm_calendar>
+                    <file>sdm/calendar.xml</file>
+                </sdm_calendar>
+            </updates>
+        </layout>
+    </adminhtml>
+    <frontend>
+        <layout>
+            <updates>
+                <sdm_calendar>
+                    <file>sdm/calendar.xml</file>
+                </sdm_calendar>
+            </updates>
+        </layout>
+        <routers>
+            <sdm_calendar>
+                <use>standard</use>
+                <args>
+                    <module>SDM_Calendar</module>
+                    <frontName>calendar</frontName>
+                </args>
+            </sdm_calendar>
+        </routers>
+    </frontend>
+    <default>
+        <sdm_calendar>
+            <general>
+                <event_color backend_model="adminhtml/system_config_backend_serialized_array">a:8:{s:18:"_1430868690134_134";a:1:{s:5:"color";s:6:"336699";}s:18:"_1430868724463_463";a:1:{s:5:"color";s:6:"339933";}s:18:"_1430868725116_116";a:1:{s:5:"color";s:6:"ff9900";}s:18:"_1430868725588_588";a:1:{s:5:"color";s:6:"ff0000";}s:18:"_1430868726139_139";a:1:{s:5:"color";s:6:"ff00cc";}s:18:"_1430868726693_693";a:1:{s:5:"color";s:6:"3399cc";}s:18:"_1430868727219_219";a:1:{s:5:"color";s:6:"33cc33";}s:18:"_1430868727725_725";a:1:{s:5:"color";s:6:"993333";}}</event_color>
+            </general>
+        </sdm_calendar>
+        <web>
+            <routers>
+                <sdm_calendar>
+                    <area>frontend</area>
+                    <class>SDM_Calendar_Controller_Router</class>
+                </sdm_calendar>
+            </routers>
+        </web>
+    </default>
+    <stores>
+        <default>
+            <web>
+                <routers>
+                    <sdm_calendar>
+                        <area>frontend</area>
+                        <class>SDM_Calendar_Controller_Router</class>
+                    </sdm_calendar>
+                </routers>
+            </web>
+        </default>
+    </stores>
+</config>

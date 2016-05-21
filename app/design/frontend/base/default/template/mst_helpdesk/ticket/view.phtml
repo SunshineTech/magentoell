@@ -1,0 +1,113 @@
+<?php
+$ticket = $this->getTicket();
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="page-title">
+    <h1><?php echo $ticket->getName() ?></h1>
+</div>
+<div class="fieldset">
+    <h2 class="legend ticket_information"><?php echo $this->__("Ticket Information") ?></h2>
+    <table width='100%'>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <b><?php echo $this->__("ID") ?>:</b> <?php echo $ticket->getCode() ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b><?php echo $this->__("Department") ?>:</b> <?php echo $ticket->getDepartment() ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b><?php echo $this->__("Status") ?>:</b> <?php echo $ticket->getStatus() ?>
+                </td>
+            </tr>
+            <?php if ($ticket->getOrderId()): ?>
+            <tr>
+                <td>
+                    <b><?php echo $this->__("Order") ?>:</b> <?php echo Mage::helper('helpdesk')->getOrderLabel($ticket->getOrderId(), $this->getOrderUrl($ticket->getOrderId()))?>
+                </td>
+            </tr>
+            <?php endif; ?>
+        <?php foreach ($this->getCustomFields() as $field): ?>
+        <?php if (!$value = Mage::helper('helpdesk/field')->getValue($ticket, $field)) continue; ?>
+            <tr>
+                <td>
+                    <b><?php echo $this->__($field->getName()) ?>:</b> <?php echo $value ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<form action="<?php echo $this->getPostUrl()?>" method="POST" enctype="multipart/form-data"    id="helpdesk-form-validate" >
+<div class='fieldset'>
+    <h2 class="legend post_replay"><?php echo $this->__("Post a Reply") ?></h2>
+    <ul class="form-list">
+        <li class="wide">
+            <label for="message" class="required"><em>*</em><?php echo $this->__("Message") ?></label>
+            <div class="input-box">
+                <textarea name='message' id='message' class="input-text required-entry"></textarea>
+            </div>
+        </li>
+        <li class="wide">
+            <label for="attachment"><?php echo $this->__("Attach files") ?></label>
+            <div class="input-box">
+                <input type='file' class='multi' name='attachment[]' id='attachment'></textarea>
+            </div>
+        </li>
+<?php if ($ticket->isClosed()):?>
+    <button type="submit" title="<?php echo $this->__("Reopen Ticket") ?>" class="button"><span><span><?php echo $this->__("Reopen Ticket") ?></span></span></button>
+<?php else: ?>
+    <button type="submit" title="<?php echo $this->__("Submit Ticket") ?>" class="button"><span><span><?php echo $this->__("Submit Message") ?></span></span></button>
+    &nbsp;&nbsp;&nbsp;
+    <button type="button" title="<?php echo $this->__("Close Ticket") ?>" class="button" name='close' onclick="closeTicket()"><span><span><?php echo $this->__("Close Ticket") ?></span></span></button>
+<?php endif ?>
+</div>
+</form>
+<form id="helpdesk_form_close" action="<?php echo $this->getPostUrl()?>" method="POST">
+    <input type='hidden' name='close' value='1'>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('helpdesk-form-validate', true);
+    function closeTicket() {
+        $('helpdesk_form_close').submit();
+    }
+//]]>
+</script>
+
+<div class="fieldset ticket-history">
+    <h2 class="legend ticket_history"><?php echo $this->__("Ticket History") ?></h2>
+    <?php foreach($ticket->getMessages() as $message):?>
+    <div class="fieldset">
+        <h2 class="legend ticket_history_log">
+            <?php if ($message->getTriggeredBy() == Mirasvit_Helpdesk_Model_Config::CUSTOMER):?>
+                <?php echo $message->getCustomerName() ?>
+            <?php elseif ($message->getTriggeredBy() == Mirasvit_Helpdesk_Model_Config::USER): ?>
+                <?php echo $message->getFrontendUserName() ?>
+                <?php if ($message->isThirdParty()): ?>
+                    <?php echo $this->__('to %s (third party)', $message->getThirdPartyEmail()) ?>
+                <?php endif; ?>
+            <?php elseif ($message->getTriggeredBy() == Mirasvit_Helpdesk_Model_Config::THIRD): ?>
+                <?php echo $this->__('%s (third party)', $message->getThirdPartyName()) ?>
+            <?php endif ?>
+
+            | <?php echo Mage::helper('core')->formatDate($message->getCreatedAt(), 'medium') ?>  <?php echo Mage::helper('core')->formatTime($message->getCreatedAt(), 'short') ?>
+        </h2>
+
+        <?php echo $message->getBodyHtml() ?>
+
+        <?php if($attachments = $message->getAttachments()): ?>
+            <?php foreach($attachments as $attachment): ?>
+                <br><a href="<?php echo $attachment->getUrl()?>"><?php echo $attachment->getName() ?></a>
+            <?php endforeach;?>
+        <?php endif ?>
+    </div>
+    <?php endforeach ?>
+</div>
+<div class="buttons-set">
+    <p class="back-link"><a href="<?php echo Mage::getUrl('helpdesk/ticket')?>"><small>&laquo; </small><?php echo $this->__('Back to My Tickets') ?></a></p>
+</div>

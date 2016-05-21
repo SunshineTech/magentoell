@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Install required attributes
+ *
+ * Ifthe SDM_* dependencies cause problems, they can be disengaged once catalog
+ * is terminally migrated.
+ *
+ * @category  SDM
+ * @package   SDM_Migration
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2014 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Migration>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Eav />
+                <Mage_Catalog />
+                <SDM_Core />
+                <SDM_Taxonomy />
+                <SDM_Navigation />
+            </depends>
+        </SDM_Migration>
+    </modules>
+</config>

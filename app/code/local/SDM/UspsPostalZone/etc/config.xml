@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Usps postal zone API
+ *
+ * @category  SDM
+ * @package   SDM_UspsPostalZone
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_UspsPostalZone>
+            <version>1.0.0</version>
+        </SDM_UspsPostalZone>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_uspszone>
+                <class>SDM_UspsPostalZone_Block</class>
+            </sdm_uspszone>
+        </blocks>
+        <helpers>
+            <sdm_uspszone>
+                <class>SDM_UspsPostalZone_Helper</class>
+            </sdm_uspszone>
+        </helpers>
+        <models>
+            <sdm_uspszone>
+                <class>SDM_UspsPostalZone_Model</class>
+            </sdm_uspszone>
+        </models>
+    </global>
+</config>

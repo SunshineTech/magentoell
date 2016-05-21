@@ -1,0 +1,25 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_value = $this->getValue();
+
+?>
+
+<div class="field bool">
+	<label for="<?php echo $this->getId() ?>" class='required'>
+		<input type='checkbox' id="<?php echo $this->getId() ?>" class="required-entry" name='<?php echo $this->getId() ?>' <?php echo !empty($_value) ? ' checked="checked"' : '' ?> value='1' />
+		<?php echo $this->getName() ?>
+	</label>
+	<?php if($this->getNote()): ?>
+		<div class='note'><?php echo $this->getNote() ?></div>
+	<?php endif; ?>
+</div>

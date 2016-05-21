@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Custom Page Layout
+ *
+ * @category  SDM
+ * @package   SDM_CustomPageLayout
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CustomPageLayout>
+            <active>true</active>
+            <codePool>local</codePool>
+        </SDM_CustomPageLayout>
+    </modules>
+</config>

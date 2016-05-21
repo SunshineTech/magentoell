@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Teachers' Planning Calendar
+ *
+ * @category  SDM
+ * @package   SDM_Calendar
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <sections>
+        <sdm_calendar translate="label" module="sdm_calendar">
+            <label>Calendar</label>
+            <tab>sdm_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>130</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="sdm_calendar">
+                    <label>Calendar Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <event_color translate="label" module="sdm_calendar">
+                            <label>Event Colors</label>
+                            <frontend_model>sdm_calendar/adminhtml_system_config_form_field_event_color</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </event_color>
+                    </fields>
+                </general>
+            </groups>
+        </sdm_calendar>
+    </sections>
+</config>

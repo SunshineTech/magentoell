@@ -1,0 +1,15 @@
+<?php
+/**
+ * Removed website's converted currency display. Incorrectly displays in GBP when
+ * EUR orders are placed.
+ *
+ * @see Mage_Checkout_Block_Cart_Totals
+ */
+?>
+<?php if ($this->getTotals()): ?>
+<tfoot>
+    <?php $_colspan = $this->helper('tax')->displayCartBothPrices() ? 5 : 3; ?>
+    <?php echo $this->renderTotals(null, $_colspan); ?>
+    <?php echo $this->renderTotals('footer', $_colspan); ?>
+</tfoot>
+<?php endif; ?>

@@ -1,0 +1,38 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Valutec Giftcard Integration
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Valutec
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Valutec_Block_Payment_Method_Form_Giftcard $this
+ */
+$_cardNumber = $this->getCardNumber();
+$_cardPin    = $this->getCardPin();
+?>
+<ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
+    <li>
+        <div class="input-box">
+            <label for="card_number"><?php echo Mage::helper('sdm_valutec')->__('Gift Card Number') ?></label><br/>
+            <input type="text" id="card_number" name="payment[card_number]" title="<?php echo Mage::helper('sdm_valutec')->__('Card Number') ?>" class="required-entry input-text validate-digits required-entry validate-length maximum-length-19 minimum-length-19" maxlength="19" value="<?php echo $_cardNumber ?>"/>
+        </div>
+        <div class="input-box">
+            <label for="card_pin"><?php echo Mage::helper('sdm_valutec')->__('Gift Card Pin') ?></label><br/>
+            <input type="text" id="card_pin" name="payment[card_pin]" title="<?php echo Mage::helper('sdm_valutec')->__('Card Pin') ?>" class="required-entry input-text validate-digits required-entry validate-length maximum-length-8 minimum-length-8" maxlength="8" value="<?php echo $_cardPin ?>"/>
+        </div>
+        <div class="input-box" id="sdm-valutec-giftcard-balance">
+            <button type="button" class="button" onclick="sdm_valutec_giftcard.getBalance()" id="sdm-valutec-giftcard-balance-button"><span><span><?php echo $this->__('Check Balance') ?></span></span></button>
+            <button type="button" class="button" onclick="sdm_valutec_giftcard.apply()" id="sdm-valutec-giftcard-apply-button"<?php echo $_cardNumber ? ' style="display:none"' : ''?>><span><span><?php echo $this->__('Apply') ?></span></span></button>
+            <button type="button" class="button" onclick="sdm_valutec_giftcard.remove()" id="sdm-valutec-giftcard-remove-button"<?php echo !$_cardNumber ? ' style="display:none"' : ''?>><span><span><?php echo $this->__('Remove') ?></span></span></button>
+            <div id="sdm-valutec-giftcard-balance-response" style="display:none"></div>
+        </div>
+    </li>
+</ul>

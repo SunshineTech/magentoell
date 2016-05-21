@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Magento catalog Add Attribute (masterqty)
+ *
+ * @category  SDM
+ * @package   SDM_MasterQty
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2016 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_MasterQty>
+            <active>true</active>
+            <codePool>local</codePool>
+        </SDM_MasterQty>
+    </modules>
+</config>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Updates to Auguria_Sliders
+ *
+ * @category  SDM
+ * @package   SDM_Auguria
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Auguria>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Auguria_Sliders />
+            </depends>
+        </SDM_Auguria>
+    </modules>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Redstage_SaveForLater>
+			<active>true</active>
+			<codePool>community</codePool>
+		</Redstage_SaveForLater>
+	</modules>
+</config>

@@ -1,0 +1,505 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.ticket-history {
+  padding: 6px 15px 6px 15px;
+}
+.ticket-history > .legend {
+  margin: -16px 0 0 5px;
+}
+.ticket-history p {
+  margin-bottom: .5em;
+}
+.MultiFile-wrap .MultiFile-list .MultiFile-label {
+  margin: 6px 0px 0px 0px;
+}
+.MultiFile-wrap .MultiFile-list .MultiFile-label .MultiFile-remove {
+  text-decoration: none;
+  font-size: 14px;
+  color: #f00;
+  line-height: 14px;
+  margin-right: 5px;
+}
+.helpdesk-contact-form {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  *zoom: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 5px 15px 8px 15px;
+  position: relative;
+  width: 600px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 21.875px;
+  color: #333;
+  margin-left: 10px;
+}
+.helpdesk-contact-form:before,
+.helpdesk-contact-form:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.helpdesk-contact-form:after {
+  clear: both;
+}
+.helpdesk-contact-form a {
+  color: #1a6690;
+}
+.helpdesk-contact-form .dropbox h2 {
+  font-size: 20px;
+  line-height: 30px;
+  padding: 0;
+  margin: 0px 0px 5px 0px;
+  font-weight: normal;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.helpdesk-contact-form .dropbox .inside-form {
+  *zoom: 1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 8px;
+}
+.helpdesk-contact-form .dropbox .inside-form:before,
+.helpdesk-contact-form .dropbox .inside-form:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.helpdesk-contact-form .dropbox .inside-form:after {
+  clear: both;
+}
+.helpdesk-contact-form .dropbox .inside-form ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.helpdesk-contact-form .dropbox .inside-form ul li {
+  margin-bottom: 10px;
+}
+.helpdesk-contact-form .dropbox .inside-form ul li label {
+  display: block;
+  margin-bottom: 2px;
+}
+.helpdesk-contact-form .dropbox .inside-form ul li label em {
+  color: #e00;
+  margin-left: 5px;
+}
+.helpdesk-contact-form .dropbox .inside-form ul .customer-details {
+  display: flex;
+  width: 95%;
+}
+.helpdesk-contact-form .dropbox .inside-form ul .customer-details li.customer-name,
+.helpdesk-contact-form .dropbox .inside-form ul .customer-details li.customer-email {
+  float: left;
+  width: 50%;
+}
+.helpdesk-contact-form .dropbox .inside-form ul .customer-details li.customer-name input,
+.helpdesk-contact-form .dropbox .inside-form ul .customer-details li.customer-email input {
+  width: 262px;
+}
+.helpdesk-contact-form .dropbox .inside-form ul .customer-details li.customer-name {
+  margin-right: 20px;
+}
+.helpdesk-contact-form .dropbox .inside-form ul .fields {
+  display: flex;
+  width: 95%;
+}
+.helpdesk-contact-form .dropbox .inside-form ul .fields li.field1,
+.helpdesk-contact-form .dropbox .inside-form ul .fields li.field2 {
+  float: left;
+  width: 50%;
+}
+.helpdesk-contact-form .dropbox .inside-form ul .fields li.field1 select,
+.helpdesk-contact-form .dropbox .inside-form ul .fields li.field2 select {
+  width: 262px;
+}
+.helpdesk-contact-form .dropbox .inside-form ul .fields li.field1 {
+  margin-right: 20px;
+}
+.helpdesk-contact-form .dropbox .inside-form input[type="text"],
+.helpdesk-contact-form .dropbox .inside-form textarea {
+  background-color: white;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+  display: inline-block;
+  padding: 4px;
+  margin-bottom: 9px;
+  font-size: 14px;
+  line-height: 21.875px;
+  color: #555;
+  width: 555px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.helpdesk-contact-form .dropbox .inside-form input[type="text"]:focus,
+.helpdesk-contact-form .dropbox .inside-form textarea:focus {
+  border-color: rgba(244, 175, 26, 0.8);
+  outline: 0;
+}
+.helpdesk-contact-form .dropbox .inside-form input[type="text"].validation-failed,
+.helpdesk-contact-form .dropbox .inside-form textarea.validation-failed {
+  border-color: rgba(244, 26, 70, 0.8);
+}
+.helpdesk-contact-form .dropbox .inside-form .validation-advice {
+  display: none !important;
+}
+.helpdesk-contact-form .dropbox .inside-form textarea {
+  height: 80px;
+}
+.helpdesk-contact-form .dropbox .post-button {
+  border: 1px solid #ddd;
+  padding: 7px 12px;
+  float: right;
+  margin-top: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  font-weight: bold;
+  color: #1a6690;
+  cursor: pointer;
+}
+.helpdesk-contact-form .dropbox .post-button:hover {
+  background-color: #f0f0f0;
+  background-image: -moz-linear-gradient(top, #e6e6e6, #ffffff);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e6e6e6), to(#ffffff));
+  background-image: -webkit-linear-gradient(top, #e6e6e6, #ffffff);
+  background-image: -o-linear-gradient(top, #e6e6e6, #ffffff);
+  background-image: linear-gradient(to bottom, #e6e6e6, #ffffff);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe6e6e6', endColorstr='#ffffffff', GradientType=0);
+}
+.helpdesk-contact-form .close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 23px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+.helpdesk-contact-form .close:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.helpdesk-contact-form.success {
+  height: 80px;
+}
+.helpdesk-contact-form.success .dropbox {
+  padding: 33px 0px;
+}
+.helpdesk-contact-form.success .dropbox ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #00BD00;
+  font-weight: bold;
+  text-align: center;
+}
+.helpdesk-contact-form.form-kb .input-box input {
+  width: 480px;
+}
+.helpdesk-contact-form.form-kb .input-box button {
+  margin-top: 0px;
+}
+.helpdesk-contact-form.form-kb-result .article-item .detail {
+  color: #777;
+  font-size: 13px;
+  line-height: 18px;
+  margin-top: 5px;
+}
+.helpdesk-contact-form.form-kb-result a.more {
+  float: right;
+}
+.helpdesk-contact-form.form-kb-result a.back {
+  float: left;
+}
+.helpdesk-contact-form-overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100000px;
+  height: 10000000px;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 90000;
+}
+.helpdesk-contact-form-button {
+  cursor: pointer;
+}
+.helpdesk-contact-form-button.left {
+  *zoom: 1;
+  position: fixed;
+  top: 50%;
+  margin-top: -75px;
+  width: 150px;
+  left: -57px;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  font-weight: bold;
+  z-index: 1000000;
+}
+.helpdesk-contact-form-button.left:before,
+.helpdesk-contact-form-button.left:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.helpdesk-contact-form-button.left:after {
+  clear: both;
+}
+.helpdesk-contact-form-button.left .button-text {
+  line-height: 20px !important;
+  font-size: 16px !important;
+  padding: 8px 10px;
+  border: 1px solid #fff;
+  margin: 1px;
+  color: #fff;
+  text-align: center;
+}
+.helpdesk-contact-form-button.right {
+  *zoom: 1;
+  position: fixed;
+  top: 50%;
+  right: -26px;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  font-weight: bold;
+  z-index: 1000000;
+}
+.helpdesk-contact-form-button.right:before,
+.helpdesk-contact-form-button.right:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.helpdesk-contact-form-button.right:after {
+  clear: both;
+}
+.helpdesk-contact-form-button.right .button-text {
+  padding: 9px 10px;
+  border: 1px solid #fff;
+  margin: 1px;
+  color: #fff;
+}
+.helpdesk-contact-form-iframe {
+  *zoom: 1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 650px;
+  height: 660px;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.helpdesk-contact-form-iframe:before,
+.helpdesk-contact-form-iframe:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.helpdesk-contact-form-iframe:after {
+  clear: both;
+}
+html {
+  overflow-x: hidden;
+}
+@media (max-width: 680px) {
+  .helpdesk-contact-form-iframe {
+    width: 80%;
+    height: 84%;
+  }
+  .helpdesk-contact-form {
+    width: 90%;
+    margin-left: 0px;
+  }
+  .helpdesk-contact-form .dropbox .inside-form {
+    margin-bottom: 0px;
+    padding-bottom: 3px;
+  }
+  .helpdesk-contact-form .dropbox .inside-form ul {
+    padding-left: 10px;
+  }
+  .helpdesk-contact-form .dropbox .inside-form ul li {
+    margin-bottom: 0px;
+  }
+  .helpdesk-contact-form .dropbox .inside-form ul li .customer-email input {
+    width: 90%;
+  }
+  .helpdesk-contact-form .dropbox .inside-form input[type="text"],
+  .helpdesk-contact-form .dropbox .inside-form textarea {
+    width: 90%!important;
+    height: 100%!important;
+  }
+}
+.helpdesk-box-tickets .box-head h2 {
+  background-image: url(../../../images/mst_helpdesk/i_folder-table.gif);
+}
+.helpdesk-box-tickets .data-table td {
+  position: relative;
+}
+.helpdesk-box-tickets .unread {
+  display: inline-block;
+  margin-left: 5px;
+  width: 20px;
+  height: 11px;
+  background-image: url(../../../images/mst_helpdesk/i_unread2.png);
+  background-size: 20px 20px;
+  background-position: 0px -8px;
+}
+iframe.helpdesk-contact-form-iframe {
+  display: block;
+}
+.input-box.checkbox {
+  clear: none;
+  width: 30px !important;
+  float: left;
+  margin-left: 15px;
+}
+li.checkbox {
+  *zoom: 1;
+}
+li.checkbox:before,
+li.checkbox:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+li.checkbox:after {
+  clear: both;
+}
+li.checkbox > label {
+  float: left;
+}
+.helpdesk-contacts-form ul {
+  list-style: none;
+}
+/* @mirasvit for Magento 1.9.0.1 begin */
+/*---------------- Create New Ticket in Account ------------------*/
+h2.legend.create_new_ticket {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+form#helpdesk-form-validate.MultiFile-intercepted div.fieldset ul.form-list {
+  width: 50%;
+}
+form#helpdesk-form-validate.MultiFile-intercepted div.fieldset ul.form-list li.wide div.input-box select {
+  width: 100%;
+}
+form#helpdesk-form-validate.MultiFile-intercepted div.fieldset ul.form-list li.wide div.input-box input {
+  width: 100%;
+}
+form#helpdesk-form-validate.MultiFile-intercepted div.fieldset ul.form-list li.wide div.input-box textarea {
+  width: 100%;
+}
+form#helpdesk-form-validate.MultiFile-intercepted div.buttons-set p.required {
+  float: left;
+}
+/*---------------- Ticket Information in Account ------------------*/
+h2.legend.ticket_information {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+h2.legend.post_replay {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+h2.legend.ticket_history {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-left: 0px;
+}
+h2.legend.ticket_history_log {
+  font-size: 14px;
+  margin-top: 20px;
+}
+.ticket-history {
+  padding: 6px 0px 6px 0px;
+}
+form#helpdesk-form-validate.MultiFile-intercepted div.fieldset ul.form-list button.button {
+  margin-bottom: 2px;
+}
+/*---------------- Contact Form in Popup ------------------*/
+ul.form-list li div.input-box {
+  width: 106% !important;
+}
+form#helpdesk-contact-form.helpdesk-contact-form div.dropbox div.inside-form ul.form-list div.customer-details {
+  width: 98%;
+}
+/*---------------- Contacts Page ------------------*/
+form#contactForm.MultiFile-intercepted div.fieldset ul.form-list li.wide div.input-box textarea {
+  width: 50%;
+}
+form#contactForm.MultiFile-intercepted div.fieldset ul.form-list li.fields div.field div.input-box input {
+  width: 50%;
+}
+form#contactForm.MultiFile-intercepted div.fieldset ul.form-list li.wide div.field div.input-box input {
+  width: 50%;
+}
+form#contactForm.MultiFile-intercepted div.fieldset ul.form-list li div.input-box input {
+  width: 50%;
+}
+form#contactForm.MultiFile-intercepted div.fieldset ul.form-list li.fields div.field div.input-box select {
+  width: 50%;
+}
+/* @mirasvit for Magento 1.9.0.1 end */

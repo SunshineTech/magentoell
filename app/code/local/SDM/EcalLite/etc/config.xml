@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * eCal Lite download request extension
+ *
+ * @category  SDM
+ * @package   SDM_EcalLite
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_EcalLite>
+            <version>1.0.0</version>
+        </SDM_EcalLite>
+    </modules>
+    <global>
+        <models>
+            <ecallite>
+                <class>SDM_EcalLite_Model</class>
+                <resourceModel>ecallite_resource</resourceModel>
+            </ecallite>
+            <ecallite_resource>
+                <class>SDM_EcalLite_Model_Resource</class>
+                <entities>
+                    <request>
+                        <table>sdm_ecallite_request</table>
+                    </request>
+                </entities>
+            </ecallite_resource>
+        </models>
+        <resources>
+            <sdm_ecallite_setup>
+                <setup>
+                    <module>SDM_EcalLite</module>
+                </setup>
+            </sdm_ecallite_setup>
+        </resources>
+        <blocks>
+            <ecallite>
+                <class>SDM_EcalLite_Block</class>
+            </ecallite>
+        </blocks>
+        <helpers>
+            <ecallite>
+                <class>SDM_EcalLite_Helper</class>
+            </ecallite>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <ecallite>
+                <use>standard</use>
+                <args>
+                    <module>SDM_EcalLite</module>
+                    <frontName>ecallite</frontName>
+                </args>
+            </ecallite>
+        </routers>
+        <layout>
+            <updates>
+                <ecallite>
+                    <file>sdm/ecallite.xml</file>
+                </ecallite>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_EcalLite after="Mage_Adminhtml">SDM_EcalLite_Adminhtml</SDM_EcalLite>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <ecallite>
+                    <file>sdm/ecallite.xml</file>
+                </ecallite>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

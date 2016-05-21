@@ -1,0 +1,8 @@
+<?php if (Mage::getStoreConfig('payment/sfc_cybersource/active') == '1'): ?>
+<?php if (Mage::getStoreConfig('payment/sfc_cybersource/enable_secure_acceptance') == '1'): ?>
+<script type="text/javascript" src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>jQuery.noConflict();</script>
+<?php endif; ?>
+<?php endif; ?>

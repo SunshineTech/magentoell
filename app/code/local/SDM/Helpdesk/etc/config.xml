@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Modifications to Mirasvit_Helpdesk Extension
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Helpdesk
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Helpdesk>
+            <version>0.1.0</version>
+        </SDM_Helpdesk>
+    </modules>
+    <global>
+        <helpers>
+            <helpdesk>
+                <rewrite>
+                    <data>SDM_Helpdesk_Helper_Data</data>
+                </rewrite>
+            </helpdesk>
+        </helpers>
+    </global>
+    <frontend>
+        <secure_url>
+            <helpdesk_ticket>/helpdesk/ticket</helpdesk_ticket>
+        </secure_url>
+    </frontend>
+</config>

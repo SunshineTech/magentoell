@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * eClips Software Download
+ *
+ * @category  SDM
+ * @package   SDM_Eclips
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <action method="unsetChild"><name>product.tooltip</name></action>
+            <action method="unsetChild"><name>mwishlist_popup</name></action>
+        </reference>
+    </default>
+    <eclips_index_index>
+        <reference name="header">
+            <block type="core/template" name="eclips_preheader" as="postheader" template="sdm/eclips/preheader.phtml" />
+        </reference>
+        <reference name="content">
+            <block type="eclips/download" name="eclips_header" template="sdm/eclips/guide.phtml">
+                <block type="eclips/download" name="eclips_form" as="eclips_form" template="sdm/eclips/form.phtml" />
+                <block type="eclips/download" name="eclips_download_links" as="eclips_download_links" template="sdm/eclips/download_links.phtml" />
+            </block>
+        </reference>
+    </eclips_index_index>
+</layout>

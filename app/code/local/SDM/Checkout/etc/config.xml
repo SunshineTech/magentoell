@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Checkout-related customization
+ *
+ * @category  SDM
+ * @package   SDM_Checkout
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Checkout>
+            <version>0.3.1</version>
+        </SDM_Checkout>
+    </modules>
+    <global>
+        <models>
+            <sdm_checkout>
+                <class>SDM_Checkout_Model</class>
+            </sdm_checkout>
+            <checkout>
+                <rewrite>
+                    <cart>SDM_Checkout_Model_Cart</cart>
+                    <session>SDM_Checkout_Model_Session</session>
+                </rewrite>
+            </checkout>
+        </models>
+        <helpers>
+            <sdm_checkout>
+                <class>SDM_Checkout_Helper</class>
+            </sdm_checkout>
+        </helpers>
+        <blocks>
+            <checkout>
+                <rewrite>
+                    <cart>SDM_Checkout_Block_Cart</cart>
+                    <cart_minicart>SDM_Checkout_Block_Cart_Minicart</cart_minicart>
+                    <cart_shipping>SDM_Checkout_Block_Cart_Shipping</cart_shipping>
+                    <onepage_success>SDM_Checkout_Block_Onepage_Success</onepage_success>
+                    <onepage_payment_methods>SDM_Checkout_Block_Onepage_Payment_Methods</onepage_payment_methods>
+                </rewrite>
+            </checkout>
+            <payment>
+                <rewrite>
+                    <info_purchaseorder>SDM_Checkout_Block_Payment_Info_Purchaseorder</info_purchaseorder>
+                </rewrite>
+            </payment>
+        </blocks>
+        <sales>
+            <quote>
+                <item>
+                    <!-- Make these available when adding product to quote and in $item->getProduct() -->
+                    <product_attributes>
+                        <msrp /> <!-- Note: this node is already defined in CE 1.9 -->
+                        <min_qty />
+                        <tag_discount_category />
+                        <price_euro />
+                        <special_price_euro />
+                        <release_date />
+                        <allow_cart_backorder />
+                        <allow_checkout_backorder />
+                        <allow_cart />
+                        <allow_checkout />
+                        <allow_preorder />
+                        <allow_quote />
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <sdm_ajaxcart>
+                    <file>sdm/ajaxcart.xml</file>
+                </sdm_ajaxcart>
+            </updates>
+        </layout>
+        <routers>
+            <checkout>
+                <args>
+                    <modules>
+                        <!-- There are multiple controller action conflicts. SDM_Checkout fixes them -->
+                        <sdm_checkout before="Mage_Checkout">SDM_Checkout</sdm_checkout>
+                        <iwd_addressverification after="SDM_Checkout">IWD_AddressVerification</iwd_addressverification>
+                        <savedquote after="SDM_Checkout">SDM_SavedQuote</savedquote>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+        <events>
+            <!-- <checkout_cart_update_items_after> requires a cart object save -->
+            <!-- <checkout_cart_save_before> doesn't require a cart object save -->
+            <checkout_cart_index_save_before> <!-- Custom event -->
+                <observers>
+                    <check_all_cart_items>
+                        <class>sdm_checkout/observer</class>
+                        <method>checkQtysAfterQuoteUpdate</method>
+                    </check_all_cart_items>
+                </observers>
+            </checkout_cart_index_save_before>
+            <controller_action_predispatch_checkout_onepage_index>
+                <observers>
+                    <sdm_preorder_checkout_allowed>
+                        <class>sdm_checkout/observer</class>
+                        <method>giftcardCheck</method>
+                    </sdm_preorder_checkout_allowed>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_index>
+            <controller_action_predispatch_savedquote_quote_index>
+                <observers>
+                    <sdm_preorder_checkout_allowed>
+                        <class>sdm_checkout/observer</class>
+                        <method>giftcardCheck</method>
+                    </sdm_preorder_checkout_allowed>
+                </observers>
+            </controller_action_predispatch_savedquote_quote_index>
+            <controller_action_predispatch_paypal_express_start>
+                <observers>
+                    <sdm_preorder_checkout_allowed>
+                        <class>sdm_checkout/observer</class>
+                        <method>giftcardCheck</method>
+                    </sdm_preorder_checkout_allowed>
+                </observers>
+            </controller_action_predispatch_paypal_express_start>
+        </events>
+    </frontend>
+</config>

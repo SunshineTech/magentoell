@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Fixes an issue with wishlists
+ *
+ * @category  SDM
+ * @package   SDM_Wishlist
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Wishlist>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Wishlist />
+                <Itoris_MWishlist />
+            </depends>
+        </SDM_Wishlist>
+    </modules>
+</config>

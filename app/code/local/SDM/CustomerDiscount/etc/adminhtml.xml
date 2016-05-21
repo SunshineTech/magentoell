@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Implements the customer/retailer discount logic for viewing and obtaining
+ * discounts and prices, as wel as managing the customer groups.
+ *
+ * @category  SDM
+ * @package   SDM_CustomerDiscount
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <menu>
+        <customer>
+            <children>
+                <customerdiscount>
+                    <title>Manage Retailer Discounts</title>
+                    <sort_order>100</sort_order>
+                    <children>
+                        <customerdiscount_index translate="title" module="customerdiscount">
+                            <title>Discounts</title>
+                            <action>adminhtml/discountgroup</action>
+                        </customerdiscount_index>
+                        <customerdiscount_matrix translate="title" module="customerdiscount">
+                            <title>View Matrix</title>
+                            <action>adminhtml/discountgroup/matrix</action>
+                        </customerdiscount_matrix>
+                    </children>
+                </customerdiscount>
+            </children>
+        </customer>
+        <promo>
+            <title>Coupons</title>
+            <children>
+                <!-- Renaming "Shopping Cart Price Rules" -->
+                <quote translate="title" module="salesrule">
+                    <title>Manage Coupons</title>
+                    <action>adminhtml/promo_quote/</action>
+                    <depends><module>Mage_Sales</module></depends>
+                </quote>
+                <!-- Remove Mage_CatalogRule menu from the admin -->
+                <catalog>
+                    <disabled>1</disabled>
+                </catalog>
+                <tieredcoupon translate="title" module="mexbs_tieredcoupon">
+                    <title>Group Coupons</title>
+                    <action>adminhtml/tieredcoupon/</action>
+                    <depends><module>Mexbs_Tieredcoupon</module></depends>
+                </tieredcoupon>
+            </children>
+        </promo>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <customer>
+                        <children>
+                            <customerdiscount>
+                                <title>Retailer Discounts</title>
+                                <children>
+                                    <customerdiscount_index>
+                                        <title>Discounts</title>
+                                    </customerdiscount_index>
+                                    <customerdiscount_matrix>
+                                        <title>Matrix</title>
+                                    </customerdiscount_matrix>
+                                </children>
+                            </customerdiscount>
+                        </children>
+                    </customer>
+                    <promo>
+                        <children>
+                            <!-- Renaming "Tiered Coupon" -->
+                            <tieredcoupon translate="title" module="salesrule">
+                                <title>Group Coupon</title>
+                            </tieredcoupon>
+                        </children>
+                    </promo>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

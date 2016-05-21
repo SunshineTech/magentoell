@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * A Generic extension to include extension conflict resolutions
+ *
+ * @category  SDM
+ * @package   SDM_ConflictResolution
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_ConflictResolution>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <SFC_CyberSource />
+            </depends>>
+        </SDM_ConflictResolution>
+    </modules>
+</config>

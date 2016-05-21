@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Modifications to Mage_Paypal
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Paypal
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Paypal>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Paypal />
+                <SDM_Core />
+                <SDM_Checkout />
+            </depends>
+        </SDM_Paypal>
+    </modules>
+</config>

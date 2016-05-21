@@ -1,0 +1,44 @@
+<!--@subject {{var ticket.getEmailSubject()}} @-->
+<!--@vars
+{"htmlescape var=$customer.name":"Nom du Client",
+"var customer.email":"Adresse e-mail"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; }
+@-->
+{{var hidden_separator}}
+<div style="font:13px/1.45em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            {{var ticket.getLastMessageHtmlText()}}<br><br>
+
+                            Vous pouvez vérifier l'état ou répondre à ce message en ligne à: {{var ticket.getExternalUrl() }}
+                            <br><br>
+                            Merci bien,<br>
+                            <strong>{{var store.getFrontendName()}}</strong>
+
+                            {{block type='helpdesk/email_satisfaction' area='frontend' template='mst_helpdesk/email/satisfaction.phtml' ticket=$ticket}}
+
+                            {{var ticket.getHistoryHtml()}}
+                            {{var ticket.getHiddenCodeHtml()}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,76 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's custom product taxonomy implementation.
+ *
+ * Note:
+ * The select option HTML must match with HTMl from sdm/ellison/js/taxonomy.js
+ *
+ * @category  SDM
+ * @package   SDM_Taxonomy
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+?>
+<?php
+$_item = Mage::registry('current_item');
+$_selectOptions = array(
+    SDM_Taxonomy_Helper_Data::DISCOUNT_TYPE_PERCENT_CODE => SDM_Taxonomy_Helper_Data::DISCOUNT_TYPE_PERCENT_LABEL,
+    SDM_Taxonomy_Helper_Data::DISCOUNT_TYPE_ABSOLUTE_CODE => SDM_Taxonomy_Helper_Data::DISCOUNT_TYPE_ABSOLUTE_LABEL,
+    SDM_Taxonomy_Helper_Data::DISCOUNT_TYPE_FIXED_CODE => SDM_Taxonomy_Helper_Data::DISCOUNT_TYPE_FIXED_LABEL
+);
+?>
+<div id="special-products" class="grid">
+    <h3><?php echo $this->__('Promotional Produtcs') ?></h3>
+    <table class="special-product-table" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr class="headings">
+                <th class="sku">SKU<span class="required">*</span></th>
+                <th class="discount-type"><span class="required">*</span>Discount Type</th>
+                <th class="discount-value"><span class="required">*</span>Discount Value (% or $)</th>
+                <th class="type-butt last">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody id="select_option_type_row_1">
+            <?php
+            foreach ($_item->getProducts() as $i => $_product) {
+                // Generate select option HTML
+                $_optionHtml = '';
+                foreach ($_selectOptions as $_opt => $_label) {
+                    $_selected = '';
+                    if ($_product['discount_type'] == $_opt) {
+                        $_selected = 'selected="selected"';
+                    }
+                    $_optionHtml .= '<option value="' . $_opt . '" ' . $_selected . '>' . $_label. '</option>';
+                }
+                echo '<tr class="special-product-row">';
+                echo '<td><input class="required-entry input-text" name="taxonomyData[special_products][sku][]" value="' . $_product['sku'] . '" type="text"></td>';
+                echo '<td><select class="select-dropdown product-discount-type-field" name="taxonomyData[special_products][discount_type][]" class="" title="">' . $_optionHtml . '</select></td>';
+                echo '<td><input class="required-entry input-text validate-number product-discount-value-field" name="taxonomyData[special_products][discount_value][]" value="' . $_product['discount_value'] . '" type="text"></td>';
+                echo '<td class="last"><span title="Delete row"><button class="delete" title="Delete Row" type="button" class="scalable delete delete-select-row icon-btn" onclick="" style=""><span></span></button></span></td>';
+                echo '</tr>';
+            }
+            ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="100" class="a-right">
+                    <div class="upload_csv">
+                        <button class="import_btn">Import CSV</button>
+                        <input type="file" name="csv"/>
+                    </div>
+                    <button id="add-new-row-button" class="scalable add" title="Add New Row" type="button" onclick="" style="">
+                        <span>Add New Row</span>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="100" align="right">
+                    <b>Note:</b> 
+                    <a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>taxonomy/sample_csv.csv">Download sample CSV file</a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

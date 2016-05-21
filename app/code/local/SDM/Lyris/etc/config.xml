@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Lyris>
+            <version>1.0.2</version>
+        </SDM_Lyris>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_lyris>
+                <class>SDM_Lyris_Block</class>
+            </sdm_lyris>
+        </blocks>
+        <helpers>
+            <sdm_lyris>
+                <class>SDM_Lyris_Helper</class>
+            </sdm_lyris>
+        </helpers>
+        <models>
+            <sdm_lyris>
+                <class>SDM_Lyris_Model</class>
+                <resourceModel>sdm_lyris_resource</resourceModel>
+            </sdm_lyris>
+            <sdm_lyris_resource>
+                <class>SDM_Lyris_Model_Resource</class>
+                <entities>
+                    <ads>
+                        <table>sdm_lyris_ads</table>
+                    </ads>
+                </entities>
+            </sdm_lyris_resource>
+        </models>
+        <rewrite>
+            <sdm_lyris_new>
+                <from><![CDATA[/newsletter-signup/]]></from>
+                <to><![CDATA[newsletter/account/edit/]]></to>
+                <complete>1</complete>
+            </sdm_lyris_new>
+        </rewrite>
+        <resources>
+            <sdm_lyris_setup>
+                <setup>
+                    <module>SDM_Lyris</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </sdm_lyris_setup>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <sdm_lyris before="Mage_Adminhtml">SDM_Lyris_Adminhtml</sdm_lyris>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sdm_lyris>
+                    <file>sdm/lyris.xml</file>
+                </sdm_lyris>
+            </updates>
+        </layout>
+    </adminhtml>
+    <frontend>
+        <routers>
+            <sdm_lyris>
+                <use>standard</use>
+                <args>
+                    <module>SDM_Lyris</module>
+                    <frontName>newsletter</frontName>
+                </args>
+            </sdm_lyris>
+        </routers>
+        <layout>
+            <updates>
+                <sdm_lyris module="SDM_Lyris">
+                    <file>sdm/lyris.xml</file>
+                </sdm_lyris>
+            </updates>
+        </layout>
+    </frontend>
+    <default>
+        <sdm_lyris>
+            <api>
+                <url>https://www.elabs12.com/API/mailing_list.html</url>
+                <password backend_model="adminhtml/system_config_backend_encrypted" />
+            </api>
+            <popup>
+                <cookie_days_dismiss>90</cookie_days_dismiss>
+                <cookie_days_convert>365</cookie_days_convert>
+            </popup>
+            <newsletter>
+                <success>subscription-complete</success>
+            </newsletter>
+        </sdm_lyris>
+    </default>
+</config>

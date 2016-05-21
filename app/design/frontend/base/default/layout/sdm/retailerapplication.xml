@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+    <sdm_retailerapplication_application_view>
+        <update handle="customer_account" />
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><script>js/sdm/retailerapplication.js</script></action>
+            <action method="addItem"><type>skin_css</type><script>sdm/retailerapplication/css/form.css</script></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="retailerapplication/account_application_view" name="retailerapplication.account.application.view" template="sdm/retailerapplication/account/application/view.phtml" />
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive"><path>retailerapplication/application/view</path></action>
+        </reference>
+    </sdm_retailerapplication_application_view>
+</layout>

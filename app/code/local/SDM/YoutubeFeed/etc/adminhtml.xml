@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <menu>
+        <cms>
+            <children>
+                <sdm_youtubefeed translate="title" module="sdm_youtubefeed">
+                    <title>Youtube Feed</title>
+                    <sort_order>150</sort_order>
+                    <children>
+                        <channel translate="title" module="sdm_youtubefeed">
+                            <title>Manage Channels</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/sdm_youtubefeed_channel</action>
+                        </channel>
+                        <playlist translate="title" module="sdm_youtubefeed">
+                            <title>Manage Playlists</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/sdm_youtubefeed_playlist</action>
+                        </playlist>
+                        <video translate="title" module="sdm_youtubefeed">
+                            <title>Manage Videos</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/sdm_youtubefeed_video</action>
+                        </video>
+                    </children>
+                </sdm_youtubefeed>
+            </children>
+        </cms>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <sdm_youtubefeed translate="label" module="sdm_youtubefeed">
+                                <title>Youtube Feed</title>
+                                <sort_order>10</sort_order>
+                                <children>
+                                    <channel translate="label" module="sdm_youtubefeed">
+                                        <title>Channels</title>
+                                        <sort_order>10</sort_order>
+                                    </channel>
+                                    <playlist translate="label" module="sdm_youtubefeed">
+                                        <title>Playlists</title>
+                                        <sort_order>10</sort_order>
+                                    </playlist>
+                                    <video translate="label" module="sdm_youtubefeed">
+                                        <title>Videos</title>
+                                        <sort_order>10</sort_order>
+                                    </video>
+                                </children>
+                            </sdm_youtubefeed>
+                        </children>
+                    </cms>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <sdm_youtubefeed translate="label" module="sdm_youtubefeed">
+                                        <title>Youtube Feed</title>
+                                        <sort_order>10</sort_order>
+                                    </sdm_youtubefeed>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * ellison_edu.xml
+ *
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @category  Separation Degrees Media
+ * @package   sdm
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+
+    <!-- Default layout, loads all of the pages -->
+    <default>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/ellison_edu.css</name></action>
+            <action method="addLinkRel"><rel>stylesheet</rel><href>//fonts.googleapis.com/css?family=Nunito:400,700</href></action>
+            <action method="addLinkRel"><rel>stylesheet</rel><href>//fonts.googleapis.com/css?family=Open+Sans:400,700</href></action>
+        </reference>
+    </default>
+
+    <!-- Product View -->
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/ellison_edu.js</name></action>
+        </reference>
+    </catalog_product_view>
+
+    <!-- SAVED QUOTE: Frontend customer account tab update for saved quote -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="savedquote">
+                <name>saved_quote_list</name>
+                <path>savedquote/quote/list</path>
+                <label>Saved Quotes</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <!-- SAVED QUOTE: Add saved quote button to cart page -->
+    <checkout_cart_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="checkout.cart.methods">
+            <block type="savedquote/link" name="checkout.cart.methods.savequote" template="sdm/savedquote/button/reviewquote.phtml" />
+        </reference>
+    </checkout_cart_index>
+
+    <!-- <checkout_onepage_index> Purchase order payment block is overridden using directory fallback -->
+
+    <checkout_onepage_success>
+        <reference name="checkout.success">
+            <!-- See SDM_Checkout_Block_Payment_Info_Purchaseorder -->
+            <block type="checkout/onepage_success" name="checkout.success.purchaseorder" as="success_po_upload" template="checkout/success/purchaseorder.phtml" />
+        </reference>
+    </checkout_onepage_success>
+</layout>

@@ -1,0 +1,50 @@
+<!--@subject {{var ticket.getEmailSubject('New ticket created')}} @-->
+<!--@vars
+{"htmlescape var=$customer.name":"Customer Name",
+"var customer.email":"Customer Email"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f;  }
+@-->
+{{var hidden_separator}}
+<div style="font:13px/1.45em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p><strong>Dear {{htmlescape var=$customer.name}}</strong>, <br/> Thank you for contacting us.</p>
+
+                           This is an automated response confirming the receipt of your ticket. One of our agents will get back to you as soon as possible.<br><br>
+
+							   Ticket ID: {{var ticket.code}}<br>
+							   Subject: {{var ticket.name}}<br>
+							   Department: {{var ticket.department}}<br>
+							   Status: {{var ticket.status}}<br>
+							   Priority: {{var ticket.priority}}<br>
+							   Details: <br><i>{{var ticket.getLastMessageHtmlText()}}</i></br>
+							<br>
+							You can check the status of reply to this ticket online at: {{var ticket.getExternalUrl() }}
+							<br><br>
+							Thank you again,<br>
+							<strong>{{var store.getFrontendName()}}</strong>
+							{{var ticket.getHiddenCodeHtml()}}
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>

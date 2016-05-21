@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Email template customizations
+ *
+ * @category  SDM
+ * @package   SDM_Email
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Email>
+            <version>0.1.0</version>
+        </SDM_Email>
+    </modules>
+    <global>
+        <models>
+            <sdm_email>
+                <class>SDM_Email_Model</class>
+            </sdm_email>
+            <core>
+                <rewrite>
+                    <email_template_filter>SDM_Email_Model_Template_Filter</email_template_filter>
+                </rewrite>
+            </core>
+        </models>
+        <blocks>
+            <sdm_email>
+                <class>SDM_Email_Block</class>
+            </sdm_email>
+        </blocks>
+        <helpers>
+            <sdm_email>
+                <class>SDM_Email_Helper</class>
+            </sdm_email>
+        </helpers>
+    </global>
+</config>

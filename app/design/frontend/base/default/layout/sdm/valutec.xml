@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Valutec Giftcard Integration
+ *
+ * @category  SDM
+ * @package   SDM_Valutec
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <sdm_valutec_check_index>
+        <reference name="head">
+            <action method="setTitle" translate="title">
+                <title>Gift Card Balance</title>
+            </action>
+            <action method="addJs">
+                <script>sdm/valutec/giftcard.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>sdm/valutec/css/giftcard.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="sdm_valutec/check" name="sdm.valutec.check" template="sdm/valutec/check.phtml" />
+        </reference>
+        <reference name="footer.before">
+            <block type="sdm_valutec/page_html_head_js" name="sdm.valutec.js" template="sdm/valutec/page/html/head/js.phtml" />
+        </reference>
+    </sdm_valutec_check_index>
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>sdm/valutec/giftcard.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>sdm/valutec/css/giftcard.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="footer.before">
+            <block type="sdm_valutec/page_html_head_js" name="sdm.valutec.js" template="sdm/valutec/page/html/head/js.phtml" />
+        </reference>
+        <reference name="checkout.onepage.payment">
+            <action method="setTemplate">
+                <template>sdm/valutec/checkout/onepage/payment.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+        <sales_order_view>
+        <reference name="order_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" />
+        </reference>
+    </sales_order_view>
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" after="-"/>
+        </reference>
+    </sales_order_print>
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" after="-"/>
+        </reference>
+    </sales_email_order_items>
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" />
+        </reference>
+    </sales_order_invoice>
+    <sales_order_printinvoice>
+        <reference name="invoice_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" />
+        </reference>
+    </sales_order_printinvoice>
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" />
+        </reference>
+    </sales_email_order_invoice_items>
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" />
+        </reference>
+    </sales_order_creditmemo>
+    <sales_order_printcreditmemo>
+        <reference name="creditmemo_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" />
+        </reference>
+    </sales_order_printcreditmemo>
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="sdm_valutec/sales_order_giftcard" name="sdm.valutec.giftcard" template="sdm/valutec/order/giftcard.phtml" />
+        </reference>
+    </sales_email_order_creditmemo_items>
+</layout>

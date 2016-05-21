@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * SDM's core extension
+ *
+ * @category  SDM
+ * @package   SDM_Core
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Core>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Contacts />
+            </depends>
+        </SDM_Core>
+    </modules>
+</config>

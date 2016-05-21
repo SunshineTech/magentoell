@@ -1,0 +1,101 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_SavedQuote_Block_Account_List $this
+ */
+
+$_quotes = $this->getSavedQuotes();
+$_helper = Mage::helper('savedquote');
+$_isPreorder = $this->isPreorderListing();
+
+echo $this->getMessagesBlock()->toHtml();
+
+?>
+
+<div class="page-title">
+    <h1><?php echo $this->__($_isPreorder ? 'My Pre Orders' : 'My Saved Quotes') ?></h1>
+</div>
+
+<?php echo $this->getPagerHtml(); ?>
+<?php if($_quotes->getSize()): ?>
+    <table class="data-table" id="my-orders-table">
+        <col width="1" />
+        <col width="150" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <thead>
+            <tr>
+                <th><?php echo $this->__('Quote #') ?></th>
+                <th><?php echo $this->__('Expires At') ?></th>
+                <th><?php echo $this->__('Name') ?></th>
+                <th><?php echo $this->__('Total') ?></th>
+                <th><?php echo $this->__('Status') ?></th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $_odd = ''; ?>
+            <?php foreach ($_quotes as $_quote): ?>
+            <tr>
+                <td>
+                    <a href="<?php echo $this->getViewUrl($_quote) ?>" class='view-quote'>
+                        <?php echo $_quote->getIncrementId() ?>
+                    </a>
+                </td>
+                <td>
+                    <span class="nobr">
+                        <?php echo $this->formatDate($_quote->getExpiresAt(), 'short', true) ?>
+                    </span>
+                </td>
+                <td>
+                    <?php echo (empty($_quote->getName()) || is_null($_quote->getName())) ? 'N/A' : $_quote->getName() ?>
+                </td>
+                <td>
+                    <?php echo Mage::helper('core')->currency($_quote->getGrandTotal(), true, false) ?>
+                </td>
+                <td>
+                    <?php $_stateName = $_helper->getStateName($_quote->getIsActive()); ?>
+                    <em><?php echo $this->__($_stateName === 'Approved' ? 'Complete Order' : $_stateName) ?></em>
+                </td>
+                <td class="a-center">
+                    <span class="nobr">
+                        <a href="<?php echo $this->getViewUrl($_quote) ?>">
+                            <?php echo $this->__(
+                                'View ' . ($_isPreorder ? 'Pre-Order' : 'Quote')
+                            ) ?>
+                        </a>
+                    </span>
+                    <br>
+                    <span class="nobr">
+                        <a href="<?php echo $this->getReorderUrl($_quote) ?>" onclick="return confirm('<?php echo $this->__('This will clear your current shopping session and attempt to load the items from this '.($_isPreorder ? 'preorder' : 'saved quote').' into your cart. Do you wish to proceed?') ?>');">
+                            <?php echo $this->__('Reorder') ?>
+                        </a>
+                    </span>
+                    <!-- <br>
+                    <span class="nobr">
+                        <a href="<?php echo $this->getDeleteurl($_quote) ?>" onclick="return confirm('<?php echo $this->__('Are you sure you wish to delete this '.($_isPreorder ? 'preorder' : 'saved quote').'?') ?>');"><?php echo $this->__('Delete') ?></a>
+                    </span> -->
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have no '.($_isPreorder ? 'preorders' : 'saved quotes').'.'); ?></p>
+<?php endif ?>

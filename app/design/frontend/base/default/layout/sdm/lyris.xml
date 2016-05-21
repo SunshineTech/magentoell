@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>sdm/lyris/css/lyris.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="sdm_lyris/popup" name="sdm.lyris.popup" template="sdm/lyris/popup.phtml" />
+            <block type="core/template" name="sdm.lyris.tracking" template="sdm/lyris/tracking.phtml" />
+        </reference>
+    </default>
+    <newsletter_account_edit>
+        <reference name="head">
+            <action method="setTitle" translate="title">
+                <title>Newsletter Sign Up</title>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="sdm_lyris/account" template="sdm/lyris/account/edit.phtml" name="sdm.lyris.account.edit" />
+        </reference>
+    </newsletter_account_edit>
+    <newsletter_account_unsubscribe>
+        <reference name="head">
+            <action method="setTitle" translate="title">
+                <title>Unsubscribe from Newsletter</title>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="sdm_lyris/account" template="sdm/lyris/account/unsubscribe.phtml" name="sdm.lyris.account.unsubscribe" />
+        </reference>
+    </newsletter_account_unsubscribe>
+</layout>

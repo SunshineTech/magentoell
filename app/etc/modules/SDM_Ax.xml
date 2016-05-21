@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Mage_Customer customizations
+ *
+ * @category  SDM
+ * @package   SDM_AX
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Ax>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Sales />
+                <SDM_Catalog />
+                <SDM_Customer />
+                <SDM_Sales />
+            </depends>
+        </SDM_Ax>
+    </modules>
+</config>

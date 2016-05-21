@@ -1,0 +1,34 @@
+<div class="helpdesk-messages">
+<?php foreach($this->getMessages(true) as $message): ?>
+    <div class="message <?php if ($message->getIsInternal()): ?>internal<?php endif ?> <?php echo $message->getType()?> <?php if ($message->getCustomerEmail()): ?>user<?php else: ?>staff<?php endif ?> ">
+        <div class="message-header">
+                <?php if ($message->getTriggeredBy() == Mirasvit_Helpdesk_Model_Config::CUSTOMER): ?>
+                    <?php if ($message->getCustomerName() != ''): ?>
+                        <?php echo $message->getCustomerName() ?>,
+                    <?php endif; ?>
+                    <?php echo $message->getCustomerEmail() ?>
+                <?php elseif ($message->getTriggeredBy() == Mirasvit_Helpdesk_Model_Config::USER): ?>
+                    <?php echo $message->getUserName() ?>
+                    <?php if ($message->isThirdParty()): ?>
+                        <?php echo $this->__('to %s (third party)', $message->getThirdPartyEmail()) ?>
+                    <?php endif; ?>
+                <?php elseif ($message->getTriggeredBy() == Mirasvit_Helpdesk_Model_Config::THIRD): ?>
+                    <?php echo $this->__('%s (third party)', $message->getThirdPartyName()) ?>
+                <?php endif; ?>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <?php echo Mage::helper('core')->formatDate($message->getCreatedAt(), 'medium') ?> <?php echo Mage::helper('core')->formatTime($message->getCreatedAt(), 'short') ?>
+        </div>
+
+        <div class="message-text"><?php echo $message->getBodyHtml() ?></div>
+
+        <?php $_attachments = $message->getAttachments() ?>
+        <?php if(count($_attachments)): ?>
+            <div class="attachment <?php if ($message->getIsInternal()):?>internal<?php endif ?>">
+                <?php foreach($_attachments as $_attachment):?>
+                    <a href="<?php echo $_attachment->getBackendUrl()?>"><?php echo $_attachment->getName()?></a>
+                <?php endforeach ?>
+            </div>
+        <?php endif?>
+    </div>
+<?php endforeach ?>
+</div>

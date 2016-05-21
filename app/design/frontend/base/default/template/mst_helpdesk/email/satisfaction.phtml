@@ -1,0 +1,27 @@
+<div style="color:#777;font-size:10px;margin:0px 0px 15px 0px;overflow:hidden;width:500px">
+  <p style="font-size:14px;color:#000"><strong><?php echo $this->__('Please take a second to rate my reply...')?></strong></p>
+  <div style="width:130px;float:left;text-align:center;margin-right:20px">
+    <a href="<?php echo $this->getRateUrl(3) ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/mst_helpdesk/smile/3.png', array('_area'=>'frontend'))?>" width="40" height="40" alt="<?php echo $this->__('Great')?>" border="0"></a>
+    <h2 style="margin:0 0 5px 0">
+      <a href="<?php echo $this->getRateUrl(3) ?>" style="color:#690" target="_blank"><?php echo $this->__('It was great')?></a>
+    </h2><p style="line-height:normal;margin:0"><?php echo $this->__('Fast, friendly, helpful, pleasant. Great job!')?></p>
+  </div>
+
+  <div style="width:130px;float:left;text-align:center;margin-right:20px">
+    <a href="<?php echo $this->getRateUrl(2) ?>" tar=
+get="_blank">
+      <img src="<?php echo $this->getSkinUrl('images/mst_helpdesk/smile/2.png', array('_area'=>'frontend'))?>" width="40" height="40" alt="<?php echo $this->__('OK')?>" border="0">
+    </a>
+    <h2 style="margin:0 0 5px 0">
+   <a href="<?php echo $this->getRateUrl(2) ?>" target="_blank"><?php echo $this->__('It was OK')?></a>
+    </h2>
+    <p style="line-height:normal;margin:0"><?php echo $this->__('Fine, but definitely could have been better.')?></p>
+  </div>
+
+  <div style="width:130px;float:left;text-align:center;">
+    <a href="<?php echo $this->getRateUrl(1) ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/mst_helpdesk/smile/1.png', array('_area'=>'frontend'))?>" width="40" height="40" alt="<?php echo $this->__('Bad')?>" border="0"></a>
+    <h2 style="margin:0 0 5px 0"><a href="<?php echo $this->getRateUrl(1) ?>" style="color:#c00" target="_blank"><?php echo $this->__('It wasn\'t good')?></a>
+    </h2>
+    <p style="line-height:normal;margin:0"><?php echo $this->__('Unfortunately, I wasn\'t happy with it at all.')?></p>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <cataloginventory_stock_item translate="title" module="cataloginventory">
+                <model>cataloginventory/stock_item_api</model>
+                <title>Aitoc Multilocation Inventory API</title>
+                <acl>cataloginventory</acl>
+                <methods>
+                    <list translate="title" module="cataloginventory">
+                        <title>Retrieve stock data by product ids</title>
+                        <method>items</method>
+                        <acl>cataloginventory/info</acl>
+                    </list>
+                    <update translate="title" module="cataloginventory">
+                        <title>Update product stock data</title>
+                        <acl>cataloginventory/update</acl>
+                    </update>
+					<updateMultiple translate="title" module="cataloginventory">
+                        <title>Multiple update product stock data</title>
+                        <acl>cataloginventory/update</acl>
+                    </updateMultiple>
+                </methods>
+                <faults module="cataloginventory">
+                    <not_exists>
+                        <code>101</code>
+                        <message>Product not exists.</message>
+                    </not_exists>
+                    <not_updated>
+                        <code>102</code>
+                        <message>Product inventory not updated. Details in error message.</message>
+                    </not_updated>
+                </faults>
+            </cataloginventory_stock_item>
+        </resources>
+        <resources_alias>
+            <product_stock>cataloginventory_stock_item</product_stock>
+        </resources_alias>
+        <V2>
+            <resources_function_prefix>
+                <product_stock>catalogInventoryStockItem</product_stock>
+            </resources_function_prefix>
+        </V2>
+        <acl>
+            <resources>
+                <cataloginventory translate="title" module="cataloginventory">
+                    <title>Catalog Inventory</title>
+                    <sort_order>4</sort_order>
+                    <update translate="title" module="cataloginventory">
+                        <title>Update</title>
+                    </update>
+					<updateMultiple translate="title" module="cataloginventory">
+                        <title>Multiple update</title>
+                    </updateMultiple>
+                    <info translate="title" module="cataloginventory">
+                        <title>Retrieve stock data</title>
+                    </info>
+                </cataloginventory>
+            </resources>
+        </acl>
+    </api>
+</config>
+
+<!--
+/**
+ * Multi-Location Inventory
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitquantitymanager
+ * @version      2.2.3
+ * @license:     rJhV4acfvLy4sPgpe7MoLJnfOEhDVfWVuKRvbpcv30
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

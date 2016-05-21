@@ -1,0 +1,28 @@
+
+<?php $_page = Mage::getSingleton('cms/page'); ?>
+<?php $_heading = $this->getContentHeading(); ?>
+<?php $_hero = $_page->getHeroImage(); ?>
+<?php $_type = $_page->getType(); ?>
+
+<?php if ($_type == 'designer' && !empty($_hero)): ?>
+    <img src="<?php echo Mage::getBaseUrl('media') . $_hero; ?>" style='display: none;' class='article-hero' id='article-hero'>
+    <script type="text/javascript">
+        jQuery(function(){
+            jQuery('#article-hero').insertBefore(".main").show();
+        });
+    </script>
+<?php endif; ?>
+
+<div class="page-title">
+    <?php if($_heading):?>
+        <h1><?php echo $_heading; ?></h1>
+    <?php endif ?>
+    <?php if ($_page->getPublishAuthor() && $_page->getPublishTime()): ?>
+        <h4>
+            <?php echo $this->__('by'); ?>
+            <?php echo $_page->getPublishAuthor(); ?>
+            <?php echo $this->__('on'); ?>
+            <?php echo date('F j, Y', strtotime($_page->getPublishTime())); ?>
+        </h4>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,28 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's custom Landing Page Management System (LPMS).
+ *
+ * @category  SDM
+ * @package   SDM_Lpms
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+$_asset = $this->getAsset();
+$_name = $_asset->getName();
+
+?>
+
+<?php if (!empty($_name)): ?>
+	<h3><?php echo $_name; ?></h3>
+<?php endif; ?>
+
+<div class="lpms freeform-wrap">
+	<div class="freeform-content">
+		<?php echo $_asset->getContent(); ?>
+	</div>
+</div>
+
+<div class="clear"></div>

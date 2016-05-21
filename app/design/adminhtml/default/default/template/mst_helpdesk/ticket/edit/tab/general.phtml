@@ -1,0 +1,67 @@
+<?php $message = $this->getNoticeMessage() ?>
+<div id="helpdesk-notice" class="helpdesk-notice" <?php if (!$message) echo "style='display:none;'"?>><?php echo $message ?></div>
+
+<div class="entry-edit">
+	<div class="box-left">
+	    <div class="entry-edit">
+			<?php echo $this->getCustomerForm()->toHtml() ?>
+	    </div>
+    </div>
+	<div class="box-right">
+		<div class="entry-edit">
+	    	<?php echo $this->getGeneralForm()->toHtml() ?>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<?php echo $this->getMessageForm()->toHtml() ?>
+
+<?php
+$ticket=$this->getTicket();
+if ($ticket->getId()): ?>
+
+<script>
+var delayPeriod = 10;
+var isAllowDraft = true;
+var origText = $('reply').value;
+
+function updateActivity() {
+	if (!isAllowDraft) {
+		return;
+	}
+	var text = -1;
+
+	var currentText = '';
+	if(tinyMCE.activeEditor) {
+		currentText = tinyMCE.activeEditor.getContent();
+	} else {
+		currentText = $('reply').value;
+	}
+
+	if (currentText != origText) {
+		origText = currentText;
+		text = origText;
+		if ($('helpdesk-draft-status')) {
+			$('helpdesk-draft-status').fade();
+		}
+	}
+    new Ajax.Request('<?php echo Mage::helper("adminhtml")->getUrl('helpdesk/adminhtml_draft/update/') ?>', {
+		method : "post",
+		loaderArea: false,
+		parameters : {ticket_id: <?php echo $ticket->getId() ?>, text: text},
+		onSuccess : function(response) {
+			$('helpdesk-notice').update(response.responseText);
+			if (response.responseText == '') {
+				$('helpdesk-notice').hide();
+			} else {
+				$('helpdesk-notice').show();
+			}
+			updateActivity.delay(delayPeriod);
+		}
+    });
+}
+
+updateActivity.delay(delayPeriod);
+</script>
+
+<?php endif;?>

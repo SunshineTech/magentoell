@@ -1,0 +1,31 @@
+<?php
+$config = $this->getConfig();
+$customer = $this->getCustomer();
+if (!$config->getContactFormIsActive()) {
+	return;
+}
+?>
+<div class="helpdesk-contact-form-button <?php echo $config->getPosition()?>" style="background-color: <?php echo $config->getColor() ?>;" onclick="helpdeskFormShow();">
+    <div class="button-text"><?php echo $config->getTitle() ?></div>
+</div>
+<iframe class="helpdesk-contact-form-iframe" id="helpdesk-contact-form-iframe" frameborder="0" scrolling="auto" allowtransparency="true" style="display:none;"></iframe>
+<div class="helpdesk-contact-form-overlay" id="helpdesk-contact-form-overlay" style="display:none;">&nbsp;</div>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('helpdesk-contact-form', true);
+    function helpdeskFormShow()
+    {
+        if ($('helpdesk-contact-form-iframe').src == '') {
+            $('helpdesk-contact-form-iframe').src = "<?php echo $this->getContactUrl() ?>";
+        }
+        $('helpdesk-contact-form-iframe').show();
+        $('helpdesk-contact-form-overlay').show();
+    }
+    function helpdeskFormHide()
+    {
+        $('helpdesk-contact-form-iframe').hide();
+        $('helpdesk-contact-form-overlay').hide();
+        $('helpdesk-contact-form-iframe').src = "<?php echo $this->getContactUrl() ?>";
+    }
+//]]>
+</script>

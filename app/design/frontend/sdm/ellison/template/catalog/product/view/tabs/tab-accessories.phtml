@@ -1,0 +1,53 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Tabs - Accessories template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_product = $this->getProduct();
+$_accessoriesCollection = $this->getProduct()->getFeaturedAccessories();
+
+?>
+<?php if (!empty($_accessoriesCollection) && $_product->getTypeId() == 'simple'): ?>
+    <ul id="mediabox" class="accessories-slider">
+    <?php foreach ($_accessoriesCollection as $_accessoriesItem): ?>
+        <li>
+            <div id="accessories-image" class="image">
+                <?php $_imgSize = 300; ?>
+                <img id="accessories-collection-image-<?php echo $_accessoriesItem->getId(); ?>"
+                     src="<?php echo $this->helper('catalog/image')->init($_accessoriesItem, 'small_image')->keepFrame(false)->resize($_imgSize); ?>"
+                     alt="<?php echo $this->stripTags($this->getImageLabel($_accessoriesItem, 'small_image'), null, true) ?>" />
+            </div>
+            <div id="accessories-name" class="name"><?php echo $_accessoriesItem->getName();?></div>
+            <div class="description">
+                <?php
+                    $_description = $_accessoriesItem->getDescription();
+                    $phrase_array = explode(' ',$_description);
+                    if(count($phrase_array) > 15) {
+                        echo implode(' ',array_slice($phrase_array, 0, 15)).'...';
+                    } else {
+                        echo $_description;
+                    }
+                ?>
+            </div>
+            <div class="sku">
+                <?php echo Mage::helper('sdm_catalog')->getSkuLabel($_accessoriesItem) . $_accessoriesItem->getSku()?>
+            </div>
+            <?php
+                $_productUrl = $_accessoriesItem->getProductUrl();
+                if (!empty($_productUrl)):
+            ?>
+                <a id="accessories-url" class="url" href="<?php echo $_productUrl ?>">
+                    <?php echo $this->__('View Accessory')?>
+                </a>
+            <?php endif;?>
+        </li>
+    <?php endforeach;?>
+    </ul>
+<?php endif;?>

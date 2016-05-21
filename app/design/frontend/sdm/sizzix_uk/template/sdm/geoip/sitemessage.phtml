@@ -1,0 +1,38 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * IP Address Based Messaging
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_GeoIP
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+?>
+
+<?php if ($this->checkCountryCode('US')): ?>
+
+<div id="country-sitemessage-bg" onclick="return closeSiteMessagePopup();"></div>
+<div id="country-sitemessage">
+    <a href="#" onclick="return closeSiteMessagePopup();" class='close-me'>&times;</a>
+    <h3>Did you mean to visit Sizzix.com?</h3>
+    <a href="<?php echo Mage::app()->getStore(1)->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK); ?>" class='button'>Go to Sizzix US</a>
+</div>
+<script type="text/javascript">
+    // Function to show UK IP popup
+    var closeSiteMessagePopup = function() {
+        jQuery('#country-sitemessage, #country-sitemessage-bg').remove();
+        return false;
+    }
+
+    // Remove newsletter + cookie notice popup if they were triggered to display,
+    // since we don't want to show all three popups on page load
+    jQuery(function(){
+        jQuery('#newsletter-popup, #cookienotice-container, #cookienotice-background').remove();
+    });
+</script>
+
+<?php endif; ?>

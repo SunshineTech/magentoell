@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name helper="helpdesk/data/getCssFile" /><params/></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="helpdesk/contact_form" name="helpdesk.contact.button" template="mst_helpdesk/contact/button.phtml"></block>
+        </reference>
+    </default>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="helpdesk" ifconfig="helpdesk/frontend/is_active"><name>helpdesk</name><path>helpdesk/ticket</path><label>Help Desk</label></action>
+        </reference>
+    </customer_account>
+
+    <helpdesk_ticket_index translate="label"  module="helpdesk">
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/core/jquery.MultiFile.js</script></action>
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name></action>
+        </reference>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
+            <block type="helpdesk/ticket_list" name="helpdesk.ticket.list" template="mst_helpdesk/ticket/list.phtml"></block>
+        </reference>
+    </helpdesk_ticket_index>
+
+    <helpdesk_ticket_view>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/core/jquery.MultiFile.js</script></action>
+        </reference>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="helpdesk/ticket_view" name="helpdesk.ticket.view" as="helpdesk.ticket.view" template="mst_helpdesk/ticket/view.phtml">
+            </block>
+        </reference>
+    </helpdesk_ticket_view>
+    <helpdesk_ticket_external>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/core/jquery.MultiFile.js</script></action>
+        </reference>
+        <update handle="page_one_column"/>
+        <reference name="content">
+            <block type="helpdesk/ticket_view" name="helpdesk.ticket.view" as="helpdesk.ticket.view" template="mst_helpdesk/ticket/view.phtml">
+            </block>
+        </reference>
+    </helpdesk_ticket_external>
+
+
+    <helpdesk_contact>
+            <block type="helpdesk/contact_form" name="root" template="mst_helpdesk/contact/form.phtml" output="toHtml" >
+                <block type="page/html_head" name="head" as="head">
+                    <action method="addItem"><type>skin_css</type><name helper="helpdesk/data/getCssFile" /><params/></action>
+                    <!--- we need all this js to avoid js errors -->
+                    <action method="addJs"><script>prototype/prototype.js</script></action>
+                    <action method="addJs"><script>lib/ccard.js</script></action>
+                    <action method="addJs"><script>prototype/validation.js</script></action>
+                    <action method="addJs"><script>scriptaculous/builder.js</script></action>
+                    <action method="addJs"><script>scriptaculous/effects.js</script></action>
+                    <action method="addJs"><script>scriptaculous/dragdrop.js</script></action>
+                    <action method="addJs"><script>scriptaculous/controls.js</script></action>
+                    <action method="addJs"><script>scriptaculous/slider.js</script></action>
+                    <action method="addJs"><script>varien/js.js</script></action>
+                    <action method="addJs"><script>varien/form.js</script></action>
+                    <action method="addJs"><script>varien/menu.js</script></action>
+                    <action method="addJs"><script>mage/translate.js</script></action>
+                    <action method="addJs"><script>mage/cookies.js</script></action>
+                    <action method="addItem"><type>js</type><name>lib/ds-sleight.js</name><params/><if>lt IE 7</if></action>
+                    <action method="addItem"><type>skin_js</type><name>js/ie6.js</name><params/><if>lt IE 7</if></action>
+                    <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+                    <action method="addJs"><script>mirasvit/core/jquery.MultiFile.js</script></action>
+                </block>
+                <block type="core/text_list" name="content" as="content" translate="label"/>
+            </block>
+    </helpdesk_contact>
+
+
+    <helpdesk_contact_kb>
+        <update handle="helpdesk_contact"/>
+        <reference name="content">
+            <block type="helpdesk/contact_form" name="form" template="mst_helpdesk/contact/form/kb.phtml"/>
+        </reference>
+    </helpdesk_contact_kb>
+
+    <helpdesk_contact_kbresult>
+        <update handle="helpdesk_contact"/>
+        <reference name="content">
+            <block type="helpdesk/contact_form" name="form" template="mst_helpdesk/contact/form/kb_result.phtml"/>
+        </reference>
+    </helpdesk_contact_kbresult>
+
+    <helpdesk_contact_form>
+        <update handle="helpdesk_contact"/>
+        <reference name="content">
+            <block type="helpdesk/contact_form" name="form" template="mst_helpdesk/contact/form/form.phtml"/>
+        </reference>
+    </helpdesk_contact_form>
+
+    <helpdesk_contact_postmessage>
+        <update handle="helpdesk_contact"/>
+        <reference name="content">
+            <block type="helpdesk/contact_form" name="form" template="mst_helpdesk/contact/form/success.phtml"/>
+        </reference>
+    </helpdesk_contact_postmessage>
+
+    <helpdesk_satisfaction_form>
+        <update handle="page_one_column"/>
+        <reference name="content">
+            <block type="helpdesk/satisfaction_form" name="helpdesk.satisfaction.form" template="mst_helpdesk/satisfaction/form.phtml">
+            </block>
+        </reference>
+    </helpdesk_satisfaction_form>
+    <helpdesk_satisfaction_post>
+        <update handle="page_one_column"/>
+        <reference name="content">
+            <block type="helpdesk/satisfaction_form" name="helpdesk.satisfaction.form" template="mst_helpdesk/satisfaction/post.phtml">
+            </block>
+        </reference>
+    </helpdesk_satisfaction_post>
+
+
+
+    <!--we need cms_page only if we use widgets -->
+    <cms_page>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/core/jquery.MultiFile.js</script></action>
+        </reference>
+    </cms_page>
+
+    <contacts_index_index>
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/core/jquery.MultiFile.js</script></action>
+        </reference>
+        <reference name="content">
+            <action method="unsetChildren"/>
+            <block type="helpdesk/contacts_form" name="helpdesk_contacts" template="mst_helpdesk/contacts/contacts.phtml">
+                <block type="helpdesk/contacts_form" name="helpdesk_contacts_form_header" template="mst_helpdesk/contacts/header.phtml" />
+                <block type="helpdesk/contacts_form" name="helpdesk_contacts_form" template="mst_helpdesk/contacts/form.phtml" />
+                <block type="helpdesk/contacts_form" name="helpdesk_contacts_form_default" template="contacts/form.phtml" />
+            </block>
+        </reference>
+    </contacts_index_index>
+</layout>

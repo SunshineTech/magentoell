@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Modifications to Magento's Page Module
+ *
+ * @category  SDM
+ * @package   SDM_Page
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Page>
+            <version>0.0.1</version>
+        </SDM_Page>
+    </modules>
+    <global>
+        <blocks>
+            <page>
+                <rewrite>
+                    <html_pager>SDM_Page_Block_Html_Pager</html_pager>
+                </rewrite>
+            </page>
+        </blocks>
+    </global>
+</config>

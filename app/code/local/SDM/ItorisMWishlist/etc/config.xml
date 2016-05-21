@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Adds visibility filter to Itoris Multiple Wishlist
+ *
+ * @category  SDM
+ * @package   SDM_ItorisMWishlist
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+	<modules>
+		<SDM_ItorisMWishlist>
+			<version>0.1.0</version>
+		</SDM_ItorisMWishlist>
+	</modules>
+	<global>
+		<blocks>
+			<sdm_itorismwishlist>
+				<class>SDM_ItorisMWishlist_Block</class>
+			</sdm_itorismwishlist>
+			<itoris_mwishlist>
+				<rewrite>
+					<frontview>SDM_ItorisMWishlist_Block_Frontview</frontview>
+					<share_items>SDM_ItorisMWishlist_Block_Share_Items</share_items>
+				</rewrite>
+			</itoris_mwishlist>
+		</blocks>
+	</global>
+	<frontend>
+		<routers>
+			<wishlist>
+				<args>
+					<modules>
+						<SDM_ItorisMWishlist before="Itoris_MWishlist">SDM_ItorisMWishlist</SDM_ItorisMWishlist>
+					</modules>
+				</args>
+			</wishlist>
+		</routers>
+	</frontend>
+</config>

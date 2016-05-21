@@ -1,0 +1,65 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Teachers' Planning Calendar
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Calendar
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Calendar_Block_Event $this
+ */
+
+$_processor = Mage::helper('cms')->getBlockTemplateProcessor();
+$_event     = $this->getEvent();
+$_image     = $this->getImageUrl();
+$_showRange = $_event->getEnd() && $_event->getEnd() != $_event->getStart();
+?>
+<div class="calendar-view">
+    <div class="page-title">
+        <h1><?php echo $_event->getName() ?></h1>
+    </div>
+    <?php if ($_image): ?>
+    <img src="<?php echo $_image ?>" alt="" />
+    <?php endif ?>
+    <div class="calendar-right">
+        <div class="item">
+            <h3><?php echo $this->__('Location') ?></h3>
+            <p>
+                <?php echo $_event->getLocation() ? $_event->getLocation() . '<br />' : '' ?>
+                <?php echo $_event->getStreet() ?><br />
+                <?php echo $_event->getCity() ?>, <?php echo $_event->getState() ?> <?php echo $_event->getZip() ?><br />
+                <?php echo $_event->getCountry() ?><br />
+                <a href="https://www.google.com/maps/search/<?php echo urlencode($_event->getStreet() . ', ' . $_event->getZip() . ', ' . $_event->getCountry()) ?>" target="_blank" class="map"><i class="fa fa-map-marker"></i><?php echo $this->__(' Map Event') ?></a>
+            </p>
+        </div>
+        <div class="item">
+            <h3><?php echo $this->__('Event Dates') ?></h3>
+            <p>
+                <?php echo $this->getReadableDate($_event->getStart()) ?>
+                <?php if ($_showRange): ?>
+                <?php echo $this->__('through') ?> <?php echo $this->getReadableDate($_event->getEnd()) ?>
+                <?php endif ?>
+            </p>
+        </div>
+        <div style="clear:both"></div>
+        <div class="desc">
+            <?php echo $_processor->filter($_event->getDesc()) ?>
+        </div>
+        <?php $_sponsor = trim($_event->getSidebar()); ?>
+        <?php if (!empty($_sponsor)): ?>
+        <div class="sponsor">
+            <h3><?php echo $this->__('Event Manager/Sponsor') ?></h3>
+            <?php echo $_processor->filter($_sponsor) ?>
+        </div>
+    <?php endif; ?>
+    </div>
+    <div style="clear:both"></div>
+    <p class="go-back"><a href="<?php echo $this->getBackLink() ?>"><?php echo $this->getBackLabel() ?></a></p>
+</div>

@@ -1,0 +1,57 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Collection Rendering Widget
+ *
+ * @category  SDM
+ * @package   SDM_RenderCollection
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+$_collection     = $this->getCollection();
+$_collectionSize = $_collection->getSize();
+$_count          = $this->getCollectionSize();
+$_helper         = $this->helper('sdm_youtubefeed');
+$_string         = $this->helper('core/string');
+$_columnCount    = 4;
+?>
+<?php if ($_collectionSize): ?>
+<?php $i=0; foreach ($_collection as $_item): ?>
+    <?php $i++ ?>
+    <div class="video-embed video-embed<?php echo $i ?>" style="display: none;">
+        <div class="video-overlay"></div>
+        <div class="video-wrap">
+            <div class="close"><i class="fa fa-times"></i></div>
+            <h2><?php echo $_item->getName() ?></h2>
+            <?php echo $_helper->getVideoIframe($_item) ?>
+        </div>
+    </div>
+<?php endforeach ?>
+<div class="render-collection video-carousel">
+    <?php $i=0; foreach ($_collection as $_item): ?>
+        <?php if ($i++ === 0): ?>
+        <ul class="products-grid--max-4-col collection-carousel owl-carousel" id="<?php echo $this->getCarouselId() ?>">
+        <?php endif ?>
+            <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                <a href="#" onclick="jQuery('.video-embed<?php echo $i ?>').show(); return false;" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>" class="video-image">
+                    <img src="<?php echo $_helper->getVideoImage($_item); ?>" alt="<?php echo $this->stripTags($_item->getName(), null, true) ?>" width="229" />
+                </a>
+                <div class="details">
+                    <h3 class="video-name"><?php echo $_item->getName() ?></h3>
+                    <?php if ($_item->getFileUrl()): ?>
+                    <p class="video-file-url"><a target="_blank" href="<?php echo $_item->getFileUrl() ?>"><?php echo $this->__('Download Instructions') ?></a></p>
+                    <?php endif ?>
+                    <p class="video-description"><?php echo nl2br($_string->truncate($_item->getDescription(), 125, '...')) ?></p>
+                    <a href="#" onclick="jQuery('.video-embed<?php echo $i ?>').show(); return false;" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>" class="video-button"><?php echo $this->__('Watch Video') ?></a>
+                </div>
+            </li>
+        <?php if ($i == $_collectionSize): ?>
+        </ul>
+        <?php endif ?>
+    <?php endforeach ?>
+</div>
+<?php endif; ?>
+<script type='text/javascript'>
+    <?php echo $this->getCarouselInit() ?>
+</script>

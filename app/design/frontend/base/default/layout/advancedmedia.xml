@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <catalog_product_view>
+        <reference name="head">
+			<action method="addJs" ifconfig="advancedmedia/thumbnail/slide_of_thumbnail"><script>advancedmedia/carousel/carousel.js</script></action>
+			<action method="addJs" ifconfig="advancedmedia/general/enabled"><script>advancedmedia/jquery-1.8.3.min.js</script></action>
+			<action method="addItem" ifconfig="advancedmedia/general/use_lightbox"><type>skin_js</type><name>advancedmedia/js/jquery.fancybox.js</name></action>
+			<action method="addItem" ifconfig="advancedmedia/general/use_lightbox"><type>skin_js</type><name>advancedmedia/js/jquery.fancybox-buttons.js</name></action>
+			<action method="addItem" ifconfig="advancedmedia/general/use_lightbox"><type>skin_css</type><name>advancedmedia/css/jquery.fancybox.css</name></action>
+			<action method="addItem" ifconfig="advancedmedia/general/use_lightbox"><type>skin_css</type><name>advancedmedia/css/jquery.fancybox-buttons.css</name></action>
+            <action method="addItem" ifconfig="advancedmedia/general/enabled"><type>skin_js</type><name>advancedmedia/js/sortlist.js</name></action>
+			<action method="addJs" ifconfig="advancedmedia/general/enabled"><script>advancedmedia/flowplayer-3.2.6.min.js</script></action>
+			<action method="addItem" ifconfig="advancedmedia/general/enabled"><type>skin_css</type><name>advancedmedia/css/advancedmedia.css</name></action>
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate" ifconfig="advancedmedia/general/enabled"><template>aht/advancedmedia/media.phtml</template></action>
+        </reference>
+    </catalog_product_view>
+	
+	<review_product_list>
+        <reference name="head">
+			<action method="addJs" ifconfig="advancedmedia/thumbnail/slide_of_thumbnail"><script>advancedmedia/carousel/carousel.js</script></action>
+			<action method="addJs" ifconfig="advancedmedia/general/enabled"><script>advancedmedia/jquery-1.8.3.min.js</script></action>
+			<action method="addItem" ifconfig="advancedmedia/general/use_lightbox"><type>skin_js</type><name>advancedmedia/js/jquery.fancybox.js</name></action>
+			<action method="addItem" ifconfig="advancedmedia/general/use_lightbox"><type>skin_js</type><name>advancedmedia/js/jquery.fancybox-buttons.js</name></action>
+			<action method="addItem" ifconfig="advancedmedia/general/use_lightbox"><type>skin_css</type><name>advancedmedia/css/jquery.fancybox.css</name></action>
+			<action method="addItem" ifconfig="advancedmedia/general/use_lightbox"><type>skin_css</type><name>advancedmedia/css/jquery.fancybox-buttons.css</name></action>
+            <action method="addItem" ifconfig="advancedmedia/general/enabled"><type>skin_js</type><name>advancedmedia/js/sortlist.js</name></action>
+			<action method="addJs" ifconfig="advancedmedia/general/enabled"><script>advancedmedia/flowplayer-3.2.6.min.js</script></action>
+			<action method="addItem" ifconfig="advancedmedia/general/enabled"><type>skin_css</type><name>advancedmedia/css/advancedmedia.css</name></action>
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate" ifconfig="advancedmedia/general/enabled"><template>aht/advancedmedia/media.phtml</template></action>
+        </reference>
+    </review_product_list>
+	
+	<advancedmedia_index_iframe>
+		<reference name="root">
+            <action method="setTemplate"><template>aht/advancedmedia/page.phtml</template></action>
+        </reference>
+		<reference name="content">
+            <block type="core/template" name="advancedmedia.video" template="aht/advancedmedia/video.phtml"/>
+        </reference>
+	</advancedmedia_index_iframe>
+</layout> 

@@ -1,0 +1,83 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_application = $this->getApplication();
+$_fieldGroups = $this->getFrontendFieldGroups();
+?>
+<?php if($_application->getStatus() == SDM_RetailerApplication_Helper_Data::STATUS_PENDING): ?>
+	<h1>
+		<?php echo $this->__('Want To Be An Authorized Ellison Retailer?') ?>
+	</h1>
+	<p class='application-status'>
+		<?php echo $this->__("You're almost there! Just fill out this form, and we'll evaluate your request. While you're here, take a tour of the website, but remember, your special pricing can only be accessed once your application has been approved. Thanks for your patience, and we look forward to serving you.") ?>
+	</p>
+<?php elseif ($_application->getStatus() == SDM_RetailerApplication_Helper_Data::STATUS_DECLINED): ?>
+	<h1>
+		<?php echo $this->__('Retailer Application') ?>
+	</h1>
+	<p class='application-status'>
+		<?php echo $this->__("Your application has been declined. Please make any necessary changes and resubmit your application for approval. For further assistance, please contact customer support.") ?>
+	</p>
+<?php elseif ($_application->getStatus() == SDM_RetailerApplication_Helper_Data::STATUS_UNDER_REVIEW): ?>
+	<h1>
+		<?php echo $this->__('Retailer Application') ?>
+	</h1>
+	<p class='application-status'>
+		<?php echo $this->__("Your application is currently under review and cannot be modified at this time. Please contact customer support for assitance.") ?>
+	</p>
+<?php elseif ($_application->getStatus() == SDM_RetailerApplication_Helper_Data::STATUS_SUSPENDED): ?>
+	<h1>
+		<?php echo $this->__('Retailer Application') ?>
+	</h1>
+	<p class='application-status'>
+		<?php echo $this->__("Your retailer account has been suspended. Please contact customer support for assitance.") ?>
+	</p>
+<?php else: ?>
+	<h1>
+		<?php echo $this->__('Retailer Application') ?>
+	</h1>
+	<p class='application-status'>
+		<?php echo $this->__("Your application has been approved is in \"read only\" mode and cannot be modified.") ?>
+	</p>
+<?php endif; ?>
+<div class="clear"></div>
+<form id="retailer_application" method="post" action="<?php echo $this->getFormAction() ?>" enctype="multipart/form-data" data-application-status='<?php echo $_application->getStatus() ?>'>
+	<?php echo $this->getBlockHtml('formkey')?>
+
+	<?php foreach($_fieldGroups as $_block): ?>
+		<?php echo $_block->toHtml() ?>
+	<?php endforeach ?>
+
+	<button type="button" title="Search" class="button save-progress">
+		<span>
+			<span><?php echo $this->__('Save Progress'); ?></span>
+		</span>
+	</button>
+
+	<button type="button" title="Search" class="button submit-application">
+		<span>
+			<span><?php echo $this->__('Submit Application For Review'); ?></span>
+		</span>
+	</button>
+
+	<input type='hidden' id='application_submit_review' name='application_submit_review' value='' />
+
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+	var dataForm = null;
+	jQuery(function(){
+		dataForm = new VarienForm('retailer_application', true);
+	});
+//]]>
+</script>

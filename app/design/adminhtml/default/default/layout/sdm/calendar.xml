@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Teachers' Planning Calendar
+ *
+ * @category  SDM
+ * @package   SDM_Calendar
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <adminhtml_sdm_calendar_calendar_index>
+        <reference name="content">
+            <block type="sdm_calendar/adminhtml_calendar" name="adminhtml.sdm.youtubefeed.calendar" />
+        </reference>
+    </adminhtml_sdm_calendar_calendar_index>
+    <adminhtml_sdm_calendar_event_index>
+        <reference name="content">
+            <block type="sdm_calendar/adminhtml_event" name="adminhtml.sdm.youtubefeed.event" />
+        </reference>
+    </adminhtml_sdm_calendar_event_index>
+    <adminhtml_sdm_calendar_event_edit>
+        <update handle="editor"/>
+        <reference name="head">
+            <action method="setCanLoadTinyMce"><load>1</load></action>
+        </reference>
+    </adminhtml_sdm_calendar_event_edit>
+    <adminhtml_sdm_calendar_calendar_edit>
+        <update handle="editor"/>
+        <reference name="head">
+            <action method="setCanLoadTinyMce"><load>1</load></action>
+        </reference>
+    </adminhtml_sdm_calendar_calendar_edit>
+</layout>

@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Perm
+ */
+ 
+if ($dealer = $this->getDealer()): ?>
+<div class="block">
+	<div class="block-title">
+    	<strong><span><?php echo $this->__('Your Dealer Info') ?></span></strong>
+    </div>
+    <div class="block-content">
+    	<div class="empty"><?php echo $dealer->getDescription();?></div>     
+	</div>
+</div>
+<?php endif;?>

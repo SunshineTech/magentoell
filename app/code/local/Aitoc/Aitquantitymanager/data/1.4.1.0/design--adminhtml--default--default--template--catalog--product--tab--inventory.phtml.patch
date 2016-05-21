@@ -1,0 +1,241 @@
+diff -aurBb /home/httpd/htdocs/users2/rastorguev/mfin14/var/ait_patch_orig/compare26512671963544b87e1c27bbb1 /home/httpd/htdocs/users2/rastorguev/mfin14/var/ait_patch_modif/compare26512671963544b87e1c27bbb1
+--- inventory.phtml    2010-06-09 20:46:56 +0300
++++ inventory.new.phtml    2010-06-22 11:03:56 +0300
+@@ -37,6 +37,32 @@
+ 
+         <legend><?php echo Mage::helper('catalog')->__('Inventory') ?></legend>
+         <table cellspacing="0" class="form-list" id="table_cataloginventory">
++        
++<?php /* START AITOC CODE */ ?>
++
++<?php if (!$this->IsNew() AND !$this->isDefaultWebsite()) { ?>          
++
++        <tr>
++            <td class="label"><label for="inventory_use_default_website_stock"><?php echo Mage::helper('catalog')->__('Website Inventory') ?></label></td>
++            <td class="value">
++            
++            <?php $_checked = ($this->getFieldValue('use_default_website_stock') || $this->IsNew()) ? 'checked="checked"' : '' ?>
++            <input type="hidden" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_default_website_stock]" value="0" />
++            
++            <input type="checkbox" id="inventory_use_default_website_stock" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_default_website_stock]" value="1" <?php echo $_checked ?>  onclick="changeDefaultWebsiteStockOption();" class="checkbox" <?php echo $_readonly;?>/>
++            <label for="inventory_use_default_website_stock" class="normal"><?php echo Mage::helper('catalog')->__('Use Default Values') ?></label>
++
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
++        </tr>        
++        
++        <tr>
++            <td class="label" colspan="3"><br></td>
++        </tr>        
++        
++<?php } ?>          
++
++<?php /* FINISH AITOC CODE */ ?>          
++        
+         <tr>
+             <td class="label"><label for="inventory_manage_stock"><?php echo Mage::helper('catalog')->__('Manage Stock') ?></label></td>
+             <td class="value"><select id="inventory_manage_stock" name="<?php echo $this->getFieldSuffix() ?>[stock_data][manage_stock]" class="select" <?php echo $_readonly;?>>
+@@ -49,7 +75,10 @@
+             <input type="checkbox" id="inventory_use_config_manage_stock" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_config_manage_stock]" value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox" <?php echo $_readonly;?>/>
+             <label for="inventory_use_config_manage_stock" class="normal"><?php echo Mage::helper('catalog')->__('Use Config Settings') ?></label>
+             <?php if (!$this->isReadonly()):?><script type="text/javascript">toggleValueElements($('inventory_use_config_manage_stock'), $('inventory_use_config_manage_stock').parentNode);</script><?php endif; ?></td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+ 
+ <?php if(!$this->getProduct()->isComposite()): ?>
+@@ -61,7 +90,10 @@
+                 <?php endif;?>
+                 <input type="text" class="input-text required-entry validate-number" id="inventory_qty" name="<?php echo $this->getFieldSuffix() ?>[stock_data][qty]" value="<?php echo $this->getFieldValue('qty')*1 ?>" <?php echo $_readonly;?>/>
+             </td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+ 
+         <tr>
+@@ -72,7 +104,10 @@
+             <input type="checkbox" id="inventory_use_config_min_qty" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_config_min_qty]" value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);" <?php echo $_readonly;?> />
+             <label for="inventory_use_config_min_qty" class="normal"><?php echo Mage::helper('catalog')->__('Use Config Settings') ?></label>
+             <?php if (!$this->isReadonly()):?><script type="text/javascript">toggleValueElements($('inventory_use_config_min_qty'), $('inventory_use_config_min_qty').parentNode);</script><?php endif; ?></td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+ 
+         <tr>
+@@ -83,7 +118,10 @@
+             <input type="checkbox" id="inventory_use_config_min_sale_qty" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_config_min_sale_qty]" value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox" <?php echo $_readonly;?> />
+             <label for="inventory_use_config_min_sale_qty" class="normal"><?php echo Mage::helper('catalog')->__('Use Config Settings') ?></label>
+             <?php if (!$this->isReadonly()):?><script type="text/javascript">toggleValueElements($('inventory_use_config_min_sale_qty'), $('inventory_use_config_min_sale_qty').parentNode);</script><?php endif; ?></td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+ 
+         <tr>
+@@ -94,7 +132,10 @@
+             <input type="checkbox" id="inventory_use_config_max_sale_qty" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_config_max_sale_qty]" value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox" <?php echo $_readonly;?> />
+             <label for="inventory_use_config_max_sale_qty" class="normal"><?php echo Mage::helper('catalog')->__('Use Config Settings') ?></label>
+             <?php if (!$this->isReadonly()):?><script type="text/javascript">toggleValueElements($('inventory_use_config_max_sale_qty'), $('inventory_use_config_max_sale_qty').parentNode);</script><?php endif; ?></td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+ 
+         <?php if($this->canUseQtyDecimals()): ?>
+@@ -105,7 +146,10 @@
+                 <option value="1"<?php if($this->getFieldValue('is_qty_decimal')==1): ?> selected="selected"<?php endif; ?>><?php echo Mage::helper('catalog')->__('Yes') ?></option>
+             </select>
+             </td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+         <?php endif; ?>
+ 
+@@ -122,7 +166,10 @@
+             <input type="checkbox" id="inventory_use_config_backorders" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_config_backorders]" value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox" <?php echo $_readonly;?> />
+             <label for="inventory_use_config_backorders" class="normal"><?php echo Mage::helper('catalog')->__('Use Config Settings') ?></label>
+             <?php if (!$this->isReadonly()):?><script type="text/javascript">toggleValueElements($('inventory_use_config_backorders'), $('inventory_use_config_backorders').parentNode);</script><?php endif; ?></td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+         <tr>
+             <td class="label"><label for="inventory_notify_stock_qty"><?php echo Mage::helper('catalog')->__('Notify for Quantity Below') ?></label></td>
+@@ -132,7 +179,10 @@
+             <input type="checkbox" id="inventory_use_config_notify_stock_qty" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_config_notify_stock_qty]" value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox" <?php echo $_readonly;?>/>
+             <label for="inventory_use_config_notify_stock_qty" class="normal"><?php echo Mage::helper('catalog')->__('Use Config Settings') ?></label>
+             <?php if (!$this->isReadonly()):?><script type="text/javascript">toggleValueElements($('inventory_use_config_notify_stock_qty'), $('inventory_use_config_notify_stock_qty').parentNode);</script><?php endif; ?></td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+ <?php endif; ?>
+         <tr>
+@@ -147,7 +197,10 @@
+             <input type="checkbox" id="inventory_use_config_enable_qty_increments" name="<?php echo $this->getFieldSuffix() ?>[stock_data][use_config_enable_qty_increments]" value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox" <?php echo $_readonly;?>/>
+             <label for="inventory_use_config_enable_qty_increments" class="normal"><?php echo Mage::helper('catalog')->__('Use Config Settings') ?></label>
+             <?php if (!$this->isReadonly()):?><script type="text/javascript">toggleValueElements($('inventory_use_config_enable_qty_increments'), $('inventory_use_config_enable_qty_increments').parentNode);</script><?php endif; ?></td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+         <tr>
+             <td class="label"><label for="inventory_qty_increments"><?php echo Mage::helper('catalog')->__('Qty Increments') ?></label></td>
+@@ -158,7 +211,10 @@
+                 <label for="inventory_use_config_qty_increments" class="normal"><?php echo Mage::helper('catalog')->__('Use Config Settings') ?></label>
+                 <?php if (!$this->isReadonly()):?><script type="text/javascript">toggleValueElements($('inventory_use_config_qty_increments'), $('inventory_use_config_qty_increments').parentNode);</script><?php endif; ?></td>
+             </td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+         <tr>
+             <td class="label"><label for="inventory_stock_availability"><?php echo Mage::helper('catalog')->__('Stock Availability') ?></label></td>
+@@ -169,15 +225,25 @@
+             <?php endforeach; ?>
+             </select>
+             </td>
++            <?php /* START AITOC COMMENTING
+             <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[GLOBAL]') ?></td>
++            FINISH AITOC COMMENTING */ ?>            
++            <td class="value scope-label"><?php echo Mage::helper('catalog')->__('[WEBSITE]') ?></td>
+         </tr>
+         </table>
+     <script type="text/javascript">
+     //<![CDATA[
++    <?php /* START AITOC COMMENTING
+     var cataloginventoryNotManagestockFields = {
+         inventory_min_sale_qty: true,
+         inventory_max_sale_qty: true
+     };
++    FINISH AITOC COMMENTING */ ?> 
++    var cataloginventoryNotManagestockFields = {
++        inventory_min_sale_qty: true,
++        inventory_max_sale_qty: true,
++        inventory_use_default_website_stock: true
++    };
+     function changeManageStockOption()
+     {
+         $$('#table_cataloginventory tr').each(manageStockEach);
+@@ -211,6 +277,68 @@
+     Event.observe($('inventory_use_config_manage_stock'), 'change', changeManageStockOption);
+     changeManageStockOption();
+ 
++    
++    
++<?php /* START AITOC CODE */ ?>
++
++<?php if (!$this->IsNew() AND !$this->isDefaultWebsite()) { ?>          
++
++    function changeDefaultWebsiteStockOption()
++    {
++        $$('#table_cataloginventory tr').each(manageAitocStockEach);
++        
++//        changeManageStockOption();
++        return true;
++    }
++
++    function manageAitocStockEach(el)
++    {
++        if ($('inventory_use_default_website_stock').checked) {
++            var manageStock = 0;
++        }
++        else {
++            var manageStock = 1;
++            
++            if ($('inventory_use_config_manage_stock').checked) {
++                manageStock = $('inventory_manage_stock_default').value;
++            }
++            else {
++                manageStock = $('inventory_manage_stock').value;
++            }
++            
++            if (el == $('inventory_manage_stock').up(1)) {
++                manageStock = 1;
++            }
++            
++            for(field in cataloginventoryNotManagestockFields) {
++                if ($(field) && ($(field).up(1) == el)) {
++                    manageStock = 1;
++                }
++            }            
++            
++        }
++        if ($("inventory_use_default_website_stock") && el == $('inventory_use_default_website_stock').up(1)) {
++            return;
++        }
++        
++        if (manageStock == 1) {
++            el.show();
++        }
++        else {
++            el.hide();
++        }
++        return;
++    }
++    
++    changeDefaultWebsiteStockOption(); Event.observe(window, 'load', changeDefaultWebsiteStockOption);
++
++//    Event.observe($('inventory_use_default_website_stock'), 'onclick', changeDefaultWebsiteStockOption);
++
++<?php } ?>          
++
++<?php /* FINISH AITOC CODE */ ?>
++
++    
+     function applyEnableQtyIncrements() {
+         if ($('inventory_use_config_enable_qty_increments').checked) {
+             var enableQtyIncrements = $('inventory_enable_qty_increments_default').value;

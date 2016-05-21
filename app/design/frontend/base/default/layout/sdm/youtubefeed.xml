@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <sdm_youtubefeed_default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>sdm/youtubefeed/css/youtubefeed.css</stylesheet>
+            </action>
+        </reference>
+    </sdm_youtubefeed_default>
+    <sdm_youtubefeed_index_index>
+        <update handle="sdm_youtubefeed_default"/>
+        <reference name="head">
+            <action method="setTitle" translate="title">
+                <title>Videos</title>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="sdm_youtubefeed/index" template="sdm/youtubefeed/index.phtml" name="sdm.youtubefeed.index" />
+        </reference>
+    </sdm_youtubefeed_index_index>
+    <sdm_youtubefeed_channel_view>
+        <update handle="sdm_youtubefeed_default"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>sdm/youtubefeed/page/2columns-left.phtml</template>
+            </action>
+            <block type="sdm_youtubefeed/channel_view_search" template="sdm/youtubefeed/channel/view/search.phtml" name="sdm.youtubefeed.channel.view.search" />
+        </reference>
+        <reference name="left">
+            <block type="sdm_youtubefeed/channel_view_filter" template="sdm/youtubefeed/channel/view/filter.phtml" name="sdm.youtubefeed.channel.view.filter" />
+        </reference>
+        <reference name="content">
+            <block type="sdm_youtubefeed/channel_view_featured" template="sdm/youtubefeed/channel/view/featured.phtml" name="sdm.youtubefeed.channel.view.featured" />
+            <block type="sdm_youtubefeed/channel_view_list" template="sdm/youtubefeed/channel/view/list.phtml" name="sdm.youtubefeed.channel.view.list" />
+        </reference>
+    </sdm_youtubefeed_channel_view>
+</layout>

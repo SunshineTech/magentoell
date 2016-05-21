@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <!-- Disabling this since we now use AM_Perm -->
+        <Inchoo_LoginAsCustomer>
+            <active>false</active>
+            <codePool>community</codePool>
+        </Inchoo_LoginAsCustomer>
+    </modules>
+</config>

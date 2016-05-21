@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <sections>
+        <sdm_youtubefeed translate="label" module="sdm_youtubefeed">
+            <label>Youtube Feed</label>
+            <tab>sdm_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>240</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="sdm_youtubefeed">
+                    <label>Youtube Feed Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <channel translate="label">
+                            <label>Included Channels</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>sdm_youtubefeed/adminhtml_system_config_source_channel</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </channel>
+                    </fields>
+                </general>
+                <api translate="label" module="sdm_youtubefeed">
+                    <label>Youtube API Credentials</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment><![CDATA[
+<p>Get credentials at <a href="https://console.developers.google.com/">https://console.developers.google.com/</a></p>
+<p>You must enabled the <strong>YouTube Data API</strong>.</p>
+                    ]]></comment>
+                    <fields>
+                        <client_email translate="label">
+                            <label>Client Email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </client_email>
+                        <key_file translate="label">
+                            <label>p12 Key File</label>
+                            <frontend_type>file</frontend_type>
+                            <backend_model>sdm_youtubefeed/adminhtml_system_config_backend_file_key</backend_model>
+                            <base_url type="media" scope_info="1">favicon</base_url>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </key_file>
+                        <video_import_status translate="label">
+                            <label>Status to assign new videos</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sdm_youtubefeed/adminhtml_system_config_source_video_status</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </video_import_status>
+                        <video_import_position translate="label">
+                            <label>Position to assign new videos</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </video_import_position>
+                    </fields>
+                </api>
+            </groups>
+        </sdm_youtubefeed>
+    </sections>
+</config>

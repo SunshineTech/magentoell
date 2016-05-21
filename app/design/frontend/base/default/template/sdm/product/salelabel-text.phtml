@@ -1,0 +1,28 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+$_saleCode = $this->getSaleCode();
+$_salePercentage = $this->getSalePercentage();
+
+?>
+
+<?php if (!empty($_saleCode)): ?>
+	<p class='sales-label text-label <?php echo $_saleCode ?>'>
+	    <?php if ($_saleCode == 'starburst'): ?>
+	        <?php echo $this->getSalePercentage() . $this->__('% Off'); ?>
+	    <?php elseif ($_saleCode == 'sale-tag'): ?>
+	        <?php echo $this->__('On Sale!'); ?>
+	    <?php elseif ($_saleCode == 'new-label'): ?>
+	        <?php echo $this->__('New!'); ?>
+	    <?php endif; ?>
+	</p>
+<?php endif; ?>

@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aitoc_Aitquantitymanager>
+            <version>2.2.3</version>
+            <platform>community</platform>
+        </Aitoc_Aitquantitymanager>
+    </modules>
+    
+    <frontend>
+        <routers>
+        </routers>
+        <events></events>
+        <translate></translate>
+        <layout>
+        </layout>
+    </frontend>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <aitquantitymanager>
+                    <file>aitquantitymanager.xml</file>
+                </aitquantitymanager>
+            </updates>
+        </layout>
+    </adminhtml>
+    
+    
+    <admin>
+        <fieldsets>
+            <catalog_product_dataflow>
+                <use_default_website_stock>
+                    <inventory>1</inventory>                    
+                    <product_type>
+                        <simple />
+                        <virtual />
+                        <configurable />
+                        <grouped />
+                    </product_type>
+                </use_default_website_stock>
+            </catalog_product_dataflow>
+        </fieldsets>
+        <routers>
+            <aitquantitymanager>
+                <use>admin</use>
+                <args>
+                    <module>Aitoc_Aitquantitymanager</module>
+                    <frontName>aitquantitymanager</frontName>
+                </args>
+            </aitquantitymanager>
+        </routers>
+    </admin>
+    
+    <global>
+        <rewrite>
+            <aitoc_aitquantitymanager_attribute>
+                <from><![CDATA[#^/admin/catalog_product_action_attribute/#]]></from>
+                <to>/aitquantitymanager/attribute/</to>
+            </aitoc_aitquantitymanager_attribute>
+        </rewrite>
+    
+        <models>
+        
+		    <aitquantitymanager>
+                <class>Aitoc_Aitquantitymanager_Model</class>
+                <resourceModel>aitquantitymanager_mysql4</resourceModel>
+            </aitquantitymanager>
+		
+            <cataloginventory>
+                <class>Mage_CatalogInventory_Model</class>
+                <resourceModel>aitquantitymanager_mysql4</resourceModel>
+            </cataloginventory>
+        
+            <aitquantitymanager_mysql4>
+                <class>Aitoc_Aitquantitymanager_Model_Mysql4</class>
+                <entities>
+                    <stock>
+                        <table>cataloginventory_stock</table>
+                    </stock>
+                    <stock_item>
+                        <table>aitoc_cataloginventory_stock_item</table>
+                    </stock_item>
+                    <stock_status>
+                        <table>aitoc_cataloginventory_stock_status</table>
+                    </stock_status>
+                    <stock_settings>
+                        <table>aitoc_cataloginventory_stock_settings</table>
+                    </stock_settings>
+                    <stock_status_indexer_idx>
+                        <table>cataloginventory_stock_status_idx</table>
+                    </stock_status_indexer_idx>
+                    <stock_status_indexer_tmp>
+                        <table>cataloginventory_stock_status_tmp</table>
+                    </stock_status_indexer_tmp>
+                </entities>
+            </aitquantitymanager_mysql4>
+        
+<!--
+            <aitquantitymanager>
+                <class>Aitoc_Aitquantitymanager_Model</class>
+                <resourceModel>aitquantitymanager_mysql4</resourceModel>
+            </aitquantitymanager>
+-->        
+
+             <cataloginventory>
+                <rewrite>
+                    <observer>Aitoc_Aitquantitymanager_Model_Rewrite_FrontCatalogInventoryObserver</observer>
+                </rewrite>
+                <rewrite>
+                    <stock_item>Aitoc_Aitquantitymanager_Model_Rewrite_FrontCatalogInventoryStockItem</stock_item>
+                </rewrite>
+                <rewrite>
+                    <stock_status>Aitoc_Aitquantitymanager_Model_Rewrite_FrontCatalogInventoryStockStatus</stock_status>
+                </rewrite>
+                <rewrite>
+                    <stock>Aitoc_Aitquantitymanager_Model_Rewrite_FrontCatalogInventoryStock</stock>
+                </rewrite>
+                <rewrite>
+                    <stock_item_api>Aitoc_Aitquantitymanager_Model_Rewrite_CatalogInventoryStockItemApi</stock_item_api>
+                </rewrite>
+				<rewrite>
+                     <stock_item_api_v2>Aitoc_Aitquantitymanager_Model_Rewrite_CatalogInventoryStockItemApiV2</stock_item_api_v2>
+                 </rewrite>
+            </cataloginventory>
+
+             <core>
+                <rewrite>
+                    <website>Aitoc_Aitquantitymanager_Model_Rewrite_FrontCoreWebsite</website>
+                </rewrite>
+            </core>
+            
+            <core_resource>
+                <rewrite>
+                    <website_collection>Aitoc_Aitquantitymanager_Model_Rewrite_FrontCoreResourceWebsiteCollection</website_collection>
+                </rewrite>
+            </core_resource>
+
+            <bundle>
+                <rewrite>
+                    <mysql4_indexer_stock>Aitoc_Aitquantitymanager_Model_Rewrite_FrontBundleMysql4IndexerStock</mysql4_indexer_stock>
+                </rewrite>
+            </bundle>
+
+             <catalog>
+                <rewrite>
+                    <product_indexer_price>Aitoc_Aitquantitymanager_Model_Rewrite_FrontCatalogProductIndexerPrice</product_indexer_price>
+                </rewrite>
+            </catalog>
+
+        </models>
+        
+        <resources>
+            <aitquantitymanager_setup>
+                <setup>
+                    <module>Aitoc_Aitquantitymanager</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </aitquantitymanager_setup>
+        
+            <aitquantitymanager_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </aitquantitymanager_write>
+            
+            <aitquantitymanager_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </aitquantitymanager_read>
+        </resources>        
+        
+        <blocks>
+            <aitquantitymanager>
+                <class>Aitoc_Aitquantitymanager_Block</class>
+            </aitquantitymanager>
+            <adminhtml>
+                <rewrite>
+                        <catalog_product_edit_tab_inventory>Aitoc_Aitquantitymanager_Block_Rewrite_AdminCatalogProductEditTabInventory</catalog_product_edit_tab_inventory>
+                </rewrite>
+                <rewrite>
+                        <catalog_product_edit_action_attribute_tab_inventory>Aitoc_Aitquantitymanager_Block_Rewrite_AdminCatalogProductEditActionAttributeTabInventory</catalog_product_edit_action_attribute_tab_inventory>
+                </rewrite>
+                <rewrite>
+                        <report_product_lowstock_grid>Aitoc_Aitquantitymanager_Block_Rewrite_AdminReportProductLowstockGrid</report_product_lowstock_grid>
+                </rewrite>
+                <rewrite>
+                        <catalog_product_grid>Aitoc_Aitquantitymanager_Block_Rewrite_AdminCatalogProductGrid</catalog_product_grid>
+                </rewrite>
+                <rewrite>
+                        <review_product_grid>Aitoc_Aitquantitymanager_Block_Rewrite_AdminReviewProductGrid</review_product_grid>
+                </rewrite>
+                <rewrite>
+                        <urlrewrite_product_grid>Aitoc_Aitquantitymanager_Block_Rewrite_AdminUrlrewriteProductGrid</urlrewrite_product_grid>
+                </rewrite>
+            </adminhtml>            
+<!--            
+                <rewrite>
+                        <onepage_shipping>Aitoc_Aitquantitymanager_Block_Rewrite_FrontCheckoutOnepageShipping</onepage_shipping>
+                </rewrite>
+            </checkout>            
+-->            
+          <checkout>
+		        <rewrite>
+                    <cart_crosssell>Aitoc_Aitquantitymanager_Block_Rewrite_CheckoutCartCrosssell</cart_crosssell>
+                </rewrite>
+          </checkout>
+
+          <rss>
+              <rewrite>
+                  <catalog_notifyStock>Aitoc_Aitquantitymanager_Block_Rewrite_RssCatalogNotifyStock</catalog_notifyStock>
+              </rewrite>
+          </rss>
+        </blocks>
+        
+        <helpers>
+            <aitquantitymanager>
+                <class>Aitoc_Aitquantitymanager_Helper</class>
+            </aitquantitymanager>
+        </helpers>
+        
+        <events>
+          <aitoc_module_disable_before>
+            <observers>
+              <aitoc_aitquantitymanager_model_moduleobserver>
+                <type>singleton</type>
+                <class>Aitoc_Aitquantitymanager_Model_ModuleObserver</class>
+                <method>onAitocModuleDisableBefore</method>
+              </aitoc_aitquantitymanager_model_moduleobserver>
+            </observers>
+          </aitoc_module_disable_before>
+          
+          <adminhtml_sales_order_creditmemo_register_before>
+              <observers>
+                  <aitoc_aitquantitymanager_model_observer>
+                      <type>singleton</type>
+                      <class>Aitoc_Aitquantitymanager_Model_Observer</class>
+                      <method>onAdminhtmlSalesOrderCreditmemoRegisterBefore</method>
+                  </aitoc_aitquantitymanager_model_observer>
+              </observers>
+          </adminhtml_sales_order_creditmemo_register_before>
+          <cataloginventory_stock_item_save_commit_after>
+              <observers>
+                  <aitoc_aitquantitymanager_model_observer>
+                      <type>singleton</type>
+                      <class>Aitoc_Aitquantitymanager_Model_Observer</class>
+                      <method>onCataloginventoryStockItemSaveCommitAfter</method>
+                  </aitoc_aitquantitymanager_model_observer>
+              </observers>
+          </cataloginventory_stock_item_save_commit_after>
+          <rss_catalog_notify_stock_collection_select>
+              <observers>
+                  <aitoc_aitquantitymanager_model_observer>
+                      <type>singleton</type>
+                      <class>Aitoc_Aitquantitymanager_Model_Observer</class>
+                      <method>onRssCatalogNotifyStockCollectionSelect</method>
+                  </aitoc_aitquantitymanager_model_observer>
+              </observers>
+          </rss_catalog_notify_stock_collection_select>
+        </events>
+        
+        
+    </global>
+    
+</config>
+
+<!--
+/**
+ * Multi-Location Inventory
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitquantitymanager
+ * @version      2.2.3
+ * @license:     rJhV4acfvLy4sPgpe7MoLJnfOEhDVfWVuKRvbpcv30
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

@@ -1,0 +1,253 @@
+/**
+ * Separation Degrees Media
+ *
+ * global.css
+ *
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @category  Separation Degrees Media
+ * @package   sdm
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+@import "../../ellison/scss/framework";
+@import "uk-var";
+@import "../../ellison/scss/ellison";
+@import "../../ellison/scss/ellison-responsive";
+
+body {
+    .wrapper {
+        .page {
+            .header-wrap {
+                background: #f2f2f2;
+               .header-bg {
+                    background: $header-bg;
+                    .page-header {
+                        margin-top: 30px;
+                        .page-header-container {
+                            height: 100px;
+                            .logo {
+                                top: -15px;
+                            }
+                            #header-nav {
+                                #nav {
+                                    .nav-primary {
+                                        margin-top: 50px;
+                                    }
+                                }
+                            }
+                            #header-search {
+                                top: 40px;
+                            }
+                            .skip-links {
+                                .account-cart-wrapper {
+                                    .store-switcher{
+                                        display: inline-block;
+                                        vertical-align: top;
+                                        line-height: normal;
+                                        .currency-link{
+                                            height: 15px;
+                                            line-height: normal;
+                                            padding-left: 28px;
+                                            display: inline-block;
+                                            font-size: 16px;
+                                            &.currency-GBP{
+                                                background: url(../images/store-switcher/flag-GBP.jpg) center left no-repeat;
+                                            }
+                                            &.currency-EUR{
+                                                background: url(../images/store-switcher/flag-EUR.jpg) center left no-repeat;
+                                            }
+                                        }
+                                    }
+                                    .links {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                        .page-header-container.tiny {
+                            #header-nav {
+                                #nav {
+                                    .nav-primary {
+                                       margin-top: 30px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .button,
+        a.button,
+        button.button {
+            &:hover {
+                color: $widget-box-text !important;
+            }
+        }
+    }
+    .products-list,
+    .products-grid {
+        .actions {
+            .button {
+                &:hover {
+                    color: $widget-box-text !important;
+                }
+            }
+        }
+    }
+}
+.sdm-calendar-container table tbody tr td .button:hover {
+    color: white !important;
+}
+/**
+ * Remove category underline on hook pages
+ */
+body.catalog-category-view .col-main .hookpage > li h2,
+body.catalogsearch-result-index .col-main .hookpage > li h2 {
+    text-decoration: none !important;
+}
+/**
+ * UK Cookie Notice
+ */
+#cookienotice-background {
+    top: 0px;
+    left: 0px;
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    background: #000;
+    z-index: 5000;
+    cursor: pointer;
+}
+#cookienotice-container {
+    z-index: 5001;
+}
+.cookienotice-content {
+    overflow: visible;
+}
+.cookienotice-box {
+    width: 350px;
+}
+.cookienotice-page-link {
+    text-decoration: underline;
+}
+.cookienotice-message {
+    font-size: 18px;
+    width: 100%;
+}
+.cookienotice-button {
+    font-size: 26px;
+    text-decoration: none !important;
+}
+.cookienotice-button-container {
+    margin: 0px 5px -9px;
+}
+.cookienotice-bar .cookienotice-content {
+    width: 100%;
+    text-align: center;
+}
+body .wrapper .page #magestore-popup.fixed-page {
+    top: 230px !important;
+}
+
+div label[for="p_method_sagepaydirectpro"],
+div label[for="p_method_sagepayserver"],
+div label[for="p_method_sagepayform"] {
+    background: none;
+}
+
+div#direct3d-logos img {
+    float: left;
+}
+
+.order-total-vat-number {
+    float: right;
+    padding: 10px;
+}
+@media only screen and (min-width: 771px) {
+    body .wrapper .page .header-wrap .header-bg .page-header .page-header-container #header-search {
+        width: 25%;
+    }
+    body {
+        .wrapper {
+            .page {
+                .header-wrap {
+                    .page-header {
+                        .page-header-container.tiny {
+                            height: 80px;
+                            .logo {
+                                width: 80px;
+                                top: 0;
+                            }
+                            #header-search {
+                                top: 24px;
+                            }
+                        }
+                        .page-header-container {
+                            .skip-links {
+                                .account-cart-wrapper {
+                                   top: -23px;
+                                   .header-minicart #header-cart.skip-active .minicart-wrapper .cart-link {
+                                        font-size: 12px;
+                                        line-height: 20px;
+                                   }
+                                }
+                            }
+                        }
+                    }
+                }
+                .main-container {
+                    padding-top: 134px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 770px) {
+    body {
+        .wrapper {
+            .page {
+                .header-wrap {
+                   .header-bg {
+                        .page-header {
+                            .page-header-container {
+                                height: auto;
+                                .skip-links {
+                                    .account-cart-wrapper {
+                                        .store-switcher {
+                                            display: block;
+                                            position: absolute;
+                                            top: 6px;
+                                            margin: 0 20px;
+                                            right: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Message coloring
+ */
+body .messages .success-msg li {
+    border-left: 5px solid #80ccbd;
+    background-color: #dffcf6;
+}
+body .messages .success-msg li:before {
+    border-left: 6px solid #80ccbd;
+}
+
+/**
+ * Store Locator
+ */
+#tab-content-online .legend {
+    display: none;
+}

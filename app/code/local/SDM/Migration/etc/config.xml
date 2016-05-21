@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Install required attributes
+ *
+ * @category  SDM
+ * @package   SDM_Migration
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Migration>
+            <version>0.6.5</version>
+        </SDM_Migration>
+    </modules>
+    <global>
+        <models>
+            <sdm_migration>
+                <class>SDM_Migration_Model</class>
+            </sdm_migration>
+        </models>
+        <resources>
+            <sdm_migration>
+                <setup>
+                    <module>SDM_Migration</module>
+                    <class>SDM_Migration_Model_Resource_Catalog_Setup</class>
+                </setup>
+            </sdm_migration>
+        </resources>
+        <blocks>
+            <sdm_migration>
+                <class>SDM_Migration_Block</class>
+            </sdm_migration>
+        </blocks>
+        <helpers>
+            <sdm_migration>
+                <class>SDM_Migration_Helper</class>
+            </sdm_migration>
+        </helpers>
+    </global>
+</config>

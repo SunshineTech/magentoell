@@ -1,0 +1,126 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var $this SDM_SavedQuote_Block_Savedquote
+ */
+
+$_quote   = $this->getPendingSavedQuote() ?: $this->getQuote();
+$_address = $_quote->getShippingAddress();
+?>
+<table style="width: 100%;">
+    <tbody>
+        <tr>
+            <td class="shipping">
+                <h3 style="text-align: left"><?php echo $this->__('Shipping Address') ?></h3>
+                <p style="text-align: left">
+                    <?php if ($_address->getCompany()): ?>
+                    <?php echo $_address->getCompany() ?><br />
+                    <?php endif ?>
+                    <?php echo $_address->getFirstname() ?> <?php echo $_address->getLastname() ?><br />
+                    <?php echo nl2br(trim($_address->getStreet())) ?><br />
+                    <?php echo $_address->getCity() ?>, <?php echo $_address->getRegion() ?> <?php echo $_address->getPostcode() ?><br />
+                    <?php echo $_address->getCountryId() ?><br />
+                    <?php echo $_address->getTelephone() ?>
+                </p>
+            </td>
+            <td class="details" style="padding-left: 10px">
+                <h3 style="text-align: left"><?php echo $this->__('Quote Details') ?></h3>
+                <table>
+                    <tr>
+                        <th style="padding: 7px; font-weight: bold; text-align: left;"><?php echo $this->__('Quote Name') ?></th>
+                        <td style="padding: 7px; text-align: left"><?php echo $_quote->getName() ?></td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 7px; font-weight: bold; text-align: left;"><?php echo $this->__('Quote Number') ?></th>
+                        <td style="padding: 7px; text-align: left"><?php echo $_quote->getIncrementId() ?></td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 7px; font-weight: bold; text-align: left;"><?php echo $this->__('Customer Account') ?></th>
+                        <td style="padding: 7px; text-align: left"><?php echo $_quote->getCustomerId() ?></td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 7px; font-weight: bold; text-align: left;"><?php echo $this->__('Web Customer') ?></th>
+                        <td style="padding: 7px; text-align: left"><?php echo $_quote->getCustomerEmail() ?></td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 7px; font-weight: bold; text-align: left;"><?php echo $this->__('Order Date') ?></th>
+                        <td style="padding: 7px; text-align: left"><?php echo Mage::getSingleton('core/date')->date('m/d/Y H:iA', $_quote->getCreatedAt()) ?></td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 7px; font-weight: bold; text-align: left;"><?php echo $this->__('Expires at') ?></th>
+                        <td style="padding: 7px; text-align: left"><?php echo Mage::getSingleton('core/date')->date('m/d/Y H:iA', $_quote->getExpiresAt()) ?></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table style="width: 100%;">
+    <thead>
+        <tr>
+            <th style="padding: 5px; font-weight: bold; text-align: left;"><?php echo $this->__('Item #') ?></th>
+            <th style="padding: 5px; font-weight: bold; text-align: left;"><?php echo $this->__('Item Name') ?></th>
+            <th style="padding: 5px; font-weight: bold; text-align: right;"><?php echo $this->__('Quantity') ?></th>
+            <th style="padding: 5px; font-weight: bold; text-align: right;"><?php echo $this->__('Price') ?></th>
+            <th style="padding: 5px; font-weight: bold; text-align: right;"><?php echo $this->__('Item Total') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($_quote->getItemCollection() as $_item): ?>
+        <tr>
+            <td style="padding: 5px; text-align: left;"><?php echo $_item->getSku() ?></td>
+            <td style="padding: 5px; text-align: left;"><?php echo $_item->getName() ?></td>
+            <td style="padding: 5px; text-align: right;"><?php echo round($_item->getQty()) ?></td>
+            <td style="padding: 5px; text-align: right;"><?php echo $this->helper('core')->currency($_item->getPrice(), true, false) ?></td>
+            <td style="padding: 5px; text-align: right;"><?php echo $this->helper('core')->currency($_item->getRowTotal(), true, false) ?></td>
+        </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
+
+<table class="totals" style="width: 100%;" cellpadding="3">
+    <tbody>
+        <tr>
+            <th style="padding: 5px; font-weight: bold; text-align: right;"><?php echo $this->__('Subtotal') ?></th>
+            <td style="padding: 5px; text-align: right;"><?php echo $this->helper('core')->currency($_quote->getSubtotal(), true, false) ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 5px; font-weight: bold; text-align: right"><?php echo $this->__('Shipping &amp; Handling (%s)', $_quote->getShippingMethod()) ?></th>
+            <td style="padding: 5px; text-align: right;"><?php echo $this->helper('core')->currency($_quote->getShippingCost(), true, false) ?></td>
+        </tr>
+        <?php if ($_quote->getSdmShippingSurcharge()): ?>
+        <tr>
+            <th style="padding: 5px; font-weight: bold; text-align: right"><?php echo $this->__('Shipping &amp; Handling Surcharge') ?></th>
+            <td style="padding: 5px; text-align: right;"><?php echo $this->helper('core')->currency($_quote->getSdmShippingSurcharge(), true, false) ?></td>
+        </tr>
+        <?php endif ?>
+        <tr>
+            <th style="padding: 5px; font-weight: bold; text-align: right"><?php echo $this->__('Estimated Sales Tax') ?></th>
+            <td style="padding: 5px; text-align: right;"><?php echo $this->helper('core')->currency($_quote->getTaxAmount(), true, false) ?></td>
+        </tr>
+        <tr>
+            <th style="padding: 5px; font-weight: bold; text-align: right"><?php echo $this->__('ESTIMATED TOTAL') ?></th>
+            <td style="padding: 5px; text-align: right;"><?php echo $this->helper('core')->currency($_quote->getGrandTotal(), true, false) ?></td>
+        </tr>
+    </tbody>
+</table>
+
+<ol>
+    <li><?php echo $this->__('Your quote will be saved for 90 days.  Any changes to product availability or any other factors beyound our control will void the quote.') ?></li>
+    <li><?php echo $this->__('Products placed for quote are final.  Quote cannot be altered after being submitted.') ?></li>
+</ol>
+<script type="text/javascript">window.print();</script>

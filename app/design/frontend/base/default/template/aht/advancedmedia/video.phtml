@@ -1,0 +1,12 @@
+<?php $url = $this->getRequest()->getParam('url') ?>
+<div class="flowplayer" style="width:100%; height:100%; overflow: hidden;" data-ratio="0.640">
+   <video>
+      <source type="video/flv" src="<?php echo $url ?>"/>
+   </video>
+</div>
+
+<script>
+ahtjQuery(function() {
+   ahtjQuery(".player").flowplayer({ swf: "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>advancedmedia/flowplayer.swf" });
+ });
+</script>

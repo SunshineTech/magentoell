@@ -1,0 +1,64 @@
+<?php
+    $_hookCategories = $this->getHookCategories();
+    $_currentCat = $this->getCurrentCategory();
+    $_currentName = $_currentCat->getName();
+    $_currentDesc = trim($_currentCat->getDescription());
+    $_mediaDir = Mage::getBaseDir('media') . DS . 'catalog' . DS . 'category' . DS;
+    $_mediaUrl = Mage::getBaseUrl('media') . DS . 'catalog' . DS . 'category' . DS;
+    $_cacheDir = $_mediaDir . 'cache' . DS;
+    $_cacheUrl = $_mediaUrl . 'cache' . DS;
+
+    $_imageWidth = 400;
+    $_i = 0;
+?>
+<?php if(count($_hookCategories)): ?>
+<div class="current-cat">
+    <h1><?php echo $_currentName ?></h1>
+    <?php if (!empty($_currentDesc)): ?>
+        <p><?php echo $_currentDesc; ?></p>
+    <?php endif; ?>
+</div>
+<ul class='hookpage'>
+<?php foreach($_hookCategories as $_hookCategory): ?>
+    <?php $_imageFile = $_hookCategory->getImage(); ?>
+    <?php if (!empty($_imageFile)): ?>
+        <?php
+            $_i++;
+            if (!file_exists($_cacheDir . $_imageFile) && file_exists($_mediaDir . $_imageFile)) {
+                if (!is_dir($_cacheDir)) {
+                    mkdir($_cacheDir);
+                }
+                $_image = new Varien_Image($_mediaDir . $_imageFile);
+                $_image->constrainOnly(true);
+                $_image->keepAspectRatio(false);
+                $_image->keepFrame(false);
+                $_image->keepTransparency(true);
+                $_image->resize($_imageWidth);
+                $_image->save($_cacheDir . $_imageFile);
+            }
+        ?>
+    <?php endif; ?>
+    <li>
+        <?php if (!empty($_imageFile)): ?>
+            <div class="hook-img">
+                <img src="<?php echo $_cacheUrl . $_imageFile ?>" alt="" class="<?php if ($_i%2): ?>right<?php else: ?>left<?php endif; ?>">
+            </div>
+        <?php endif; ?>
+        <div class="hook-content<?php if (!empty($_imageFile)): ?> has-image<?php endif; ?>">
+            <h2>
+                <a href="<?php echo $_hookCategory->getUrl() ?>">
+                    <?php echo $_hookCategory->getName() ?>
+                </a>
+            </h2>
+            <?php $_desc = trim($_hookCategory->getDescription()) ?>
+            <?php if ($_desc): ?>
+                <div class="desc">
+                    <?php echo $_desc; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </li>
+<?php endforeach; ?>
+</ul>
+<script type="text/javascript">decorateGeneric($$('ul.hookpage li'), ['first','last'])</script>
+<?php endif; ?>

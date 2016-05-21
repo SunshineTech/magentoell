@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Changes to CatalogInventory
+ *
+ * @category  SDM
+ * @package   SDM_CatalogInventory
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CatalogInventory>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_CatalogInventory />
+                <Aitoc_Aitquantitymanager />
+            </depends>
+        </SDM_CatalogInventory>
+    </modules>
+</config>

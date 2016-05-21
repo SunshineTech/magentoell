@@ -1,0 +1,59 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php 
+	$_product = $this->getProduct();
+
+	// What do we want to show?
+	if ($this->getLocation() === 'top') {
+		// If top sharing link, only show for grouped products and don't show list elements
+		$_showList = false;
+		$_showLink = $_product->getTypeId() === 'grouped' && $this->canEmailToFriend();
+	} else {
+		// If normal sharing link, only show for simple products and show list elements
+		$_showList = true;
+		$_showLink = $_product->getTypeId() === 'simple' && $this->canEmailToFriend();
+	}
+
+	$_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); 
+?>
+
+<?php if ($_showLink): ?>
+	<?php if ($_showList): ?>
+		<li class="email-friend">
+	<?php endif; ?>
+	<div class="emailtoafriend">
+    	<a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" class="link-email-friend" title="<?php echo $this->__('Email to Friend') ?>"><?php echo $this->__('Email to Friend') ?></a>
+   	</div>
+    <?php if ($_showList): ?>
+		</li>
+	<?php endif; ?>
+<?php endif; ?>
+
+<?php if ($_showList): ?>
+	</ul>
+<?php endif; ?>

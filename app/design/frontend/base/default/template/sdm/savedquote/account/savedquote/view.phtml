@@ -1,0 +1,222 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_SavedQuote_Block_Account_Savedquote_View $this
+ */
+
+$_quote            = $this->getSavedQuote();
+$_address          = $_quote->getShippingAddress();
+$_quoteHelper      = Mage::helper('savedquote');
+$_preOrderHelper   = Mage::helper('sdm_preorder');
+$_isPreorder       = $_quoteHelper->isQuotePreOrder($_quote);
+
+?>
+
+<div class="page-title title-buttons">
+    <h1>
+        <?php if ($_isPreorder): ?>
+            <?php // Pre-Order ?>
+            <?php echo '#' . $_quote->getIncrementId() . ' - ' . ($_quote->getIsActive() == SDM_SavedQuote_Helper_Data::PREORDER_APPROVED_FLAG ? $this->__('Complete order') : Mage::helper('savedquote')->getStateName($_quote->getIsActive())) ?>
+            <?php echo ($_quote->getName()) ? ' (' . Mage::helper('core')->escapeHtml($_quote->getName()) . ')' : '' ?>
+        <?php else: ?>
+            <?php // Saved Quote ?>
+            <?php echo $this->__('Saved Quote #') . $_quote->getIncrementId() . ' - ' . Mage::helper('savedquote')->getStateName($_quote->getIsActive()) ?>
+            <?php echo ($_quote->getName()) ? ' (' . Mage::helper('core')->escapeHtml($_quote->getName()) . ')' : '' ?>
+        <?php endif; ?>
+    </h1>
+    <span style="float: right"><a href="<?php echo $this->getUrl('*/*/print', array('id' => $_quote->getId())) ?>" target="_blank"><?php echo $this->__('Print %s', $_isPreorder ? 'Pre-Order' : 'Quote') ?></a></span>
+</div>
+<div>
+    <?php if ($_isPreorder) : ?>
+        <dl class="order-info">
+            <dt><strong><?php echo $this->__('About This Pre-Order: '); ?></strong></dt>
+            <dd>
+                <ul id="order-info-tabs">
+                    <li class="current first last"><?php echo $this->aboutThisPreOrder() ?></li>
+                </ul>
+            </dd>
+        </dl>
+    <?php else: ?>
+        <dl class="order-info">
+            <dt><strong><?php echo $this->__('About This Quote: '); ?></strong></dt>
+            <dd>
+                <ul id="order-info-tabs">
+                    <li class="current first last"><?php echo $this->aboutThisQuote() ?></li>
+                </ul>
+            </dd>
+        </dl>
+    <?php endif; ?>
+</div>
+<p class="order-date">
+    <?php echo $this->__('Created Time: '); ?>
+    <?php echo $this->formatDate($_quote->getCreatedAt(), 'short', true) ?>
+</p>
+<p class="order-date">
+    <?php echo $this->__('Expiration Time: '); ?>
+    <?php echo $this->formatDate($_quote->getExpiresAt(), 'short', true) ?>
+</p>
+
+<?php if (!$_quote->getIsActive()) :?>
+    <p class="order-date">
+        <?php echo $this->__('Converted Time: '); ?>
+        <?php echo $this->formatDate($_quote->getConvertedAt(), 'short', true) ?>
+    </p>
+<?php endif; ?>
+
+<?php // Shipping Address for Saved Quotes ?>
+<?php if (!$_isPreorder): ?>
+    <div class="col2-set order-info-box">
+        <div class="col-1">
+            <div class="box">
+                <div class="box-title">
+                    <h2>Shipping Address</h2>
+                </div>
+                <div class="box-content">
+                    <address>
+                        <?php if ($_address->getCompany()): ?>
+                        <?php echo $_address->getCompany() ?><br>
+                        <?php endif ?>
+                        <?php echo $_address->getFirstname() . ' ' . $_address->getLastname() ?><br>
+                        <?php echo $_address->getStreet() ?><br>
+                        <?php echo $_address->getCity() . ', ' . $_address->getRegion() . ' ' . $_address->getPostcode()?><br>
+                        <?php echo Mage::getModel('directory/country')->load($_address->getCountryId())->getName() ?><br>
+                        <?php echo 'T: ' . $_address->getTelephone() ?><br>
+                        <?php if ($_address->getFax()): ?>
+                        <?php echo $this->__('F: %s', $_address->getFax()) ?>
+                        <?php endif ?>
+                    </address>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="box">
+                <div class="box-title">
+                    <h2><?php echo $this->__('Shipping Method') ?></h2>
+                </div>
+                <div class="box-content">
+                    <?php echo $_quote->getShippingMethod() ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<div class="order-items order-details">
+    <h2 class="table-caption"><?php echo $this->__('Items') ?></h2>
+    <table class="data-table linearize-table-large" id="my-orders-table">
+        <colgroup>
+            <col>
+            <col width="1">
+            <col width="1">
+            <col width="1">
+            <col width="1">
+        </colgroup>
+        <thead>
+            <tr class="first last">
+                <th><?php echo $this->__('Product') ?></th>
+                <th><?php echo $this->__('SKU') ?></th>
+                <th class="a-right"><?php echo $this->__('Price') ?></th>
+                <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                <th class="a-right"><?php echo $this->__('Subtotal') ?></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <?php foreach ($_quote->getTotals() as $_total): ?>
+                <?php if ($_total['render']) : ?>
+                <tr>
+                    <td colspan="4" class="a-right"><?php echo $_total['label'] ?></td>
+                    <td class="a-right">
+                        <span class="price">
+                            <?php echo Mage::helper('core')->currency($_total['value'], true, false) ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php endif ?>
+            <?php endforeach ?>
+            <?php $_discount = $_quote->getTotals('discount', 'Your Savings') ?>
+            <?php if ($_discount): ?>
+                <tr>
+                    <td colspan="4" class="a-right"><?php echo $_discount['label'] ?></td>
+                    <td class="a-right">
+                        <span class="price">
+                            <?php echo Mage::helper('core')->currency($_discount['value'], true, false) ?>
+                        </span>
+                    </td>
+                </tr>
+            <?php endif ?>
+        </tfoot>
+        <!-- Item list -->
+        <?php $_i = 0 ?>
+        <?php foreach ($_quote->getItemCollection() as $_item): ?>
+            <?php if ($_quote->getIsActive() == SDM_SavedQuote_Helper_Data::ACTIVE_FLAG) : ?>
+                <?php $oosMsg = ($_item->canBePurchased()) ? '' :  ' <font color="red">(Not available at this time)</font>' ?>
+            <?php else: ?>
+                <?php $oosMsg = '' ?>
+            <?php endif ?>
+            <?php $_tbodyClass = ($_i % 2) ? 'even' : 'odd' ?>
+            <tbody class="<?php echo $_tbodyClass ?>">
+                <tr class="border first" id="order-item-row">
+                    <td>
+                        <h3 class="product-name"><?php echo $this->escapeHtml($_item->getName()) . $oosMsg ?></h3>
+                    </td>
+                    <td data-rwd-label="SKU"><?php echo $_item->getSku() ?></td>
+                    <td class="a-right" data-rwd-label="Price">
+                        <span class="price-excl-tax">
+                            <span class="cart-price">
+                                <span class="price"><?php echo Mage::helper('core')->currency($_item->getPrice(), true, false) ?></span>
+                            </span>
+                        </span>
+                        <br>
+                    </td>
+                    <td class="a-right" data-rwd-label="Qty">
+                        <span class="nobr"><strong><?php echo (int)$_item->getQty() ?></strong></span>
+                    </td>
+                    <td class="a-right last" data-rwd-label="Subtotal">
+                        <span class="price-excl-tax">
+                            <span class="cart-price">
+                                <span class="price"><?php echo Mage::helper('core')->currency($_item->getRowTotal(), true, false) ?></span>
+                            </span>
+                        </span>
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+            <?php $_i++ ?>
+        <?php endforeach; ?>
+    </table>
+
+    <?php if ($_isPreorder && $_preOrderHelper->canBePurchased($_quote)): ?>
+        <?php // Pre order action ?>
+        <button onclick="window.location = '<?php echo $this->getQuoteCheckoutStartUrl($_quote->getId()) ?>'" class='button'>
+            <span>
+                <span><?php echo $this->__('Complete Pre-Order') ?></span>
+            </span>
+        </button>
+    <?php elseif (!$_isPreorder && $_quoteHelper->canBePurchased($_quote)): ?>
+        <?php // Saved quotes action ?>
+        <button onclick="window.location = '<?php echo $this->getQuoteCheckoutStartUrl($_quote->getId()) ?>'" class='button'>
+            <span>
+                <span><?php echo $this->__('Checkout With Quote') ?></span>
+            </span>
+        </button>
+    <?php endif; ?>
+
+    <div class="buttons-set">
+        <p class="back-link">
+            <a href="<?php echo $this->getBackUrl() ?>">
+                <small>&laquo; </small><?php echo $this->getBackTitle($_isPreorder) ?>
+            </a>
+        </p>
+    </div>
+</div>

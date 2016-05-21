@@ -1,0 +1,349 @@
+@import "mixin.less";
+
+@staffColor: #8eb589;
+@staffBg: #FDFFFD;
+
+@userColor: #9cb4c5;
+@userBg: #FAFCFF;
+
+@internalColor: #DD9898;
+@internalBg: #FFF3F3;
+
+.label(@from, @to) {
+    font-size: 11px;
+    #gradient > .vertical(@from, @to);
+    .border-radius(15px);
+    padding: 2px 15px;
+    color: #fff;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status_id, .priority_id, .color {
+    display: table-cell;
+    vertical-align: inherit;
+    text-align: -webkit-center;
+    text-align: center;
+    .aqua {
+        .label(#9FFDFD, #2EC5B9);
+    }
+    .grey {
+        .label(#868686, #424242);
+    }
+    .navy {
+        .label(#8D8DC7, #4C7EB4);
+    }
+    .silver {
+        .label(#c0c0c0, #8B8B8B);
+    }
+    .black   {
+        .label(#000000, darken(#000000, 20%));
+    }
+    .green   {
+        .label(#97e399, #47cd4a);
+    }
+    .olive   {
+        .label(#B4B471, #668121);
+    }
+    .teal {
+        .label(#59AFAF, #3298B1);
+    }
+    .blue {
+        .label(#A9A9FF, #5E6BFF);
+    }
+    .lime {
+        .label(#67FF4A, #68CF70);
+    }
+    .purple  {
+        .label(#DD61DD, #C007BF);
+    }
+    .fuchsia {
+        .label(#FFAEFF, #D55BD5);
+    }
+    .maroon  {
+        .label(#B47171, #AF5959);
+    }
+    .red  {
+        .label(#ff8b8b, #ff2525);
+    }
+    .orange  {
+        .label(#FF8C00, #FF8C00);
+    }
+    .yellow  {
+        .label(#ffd757, #f0b700);
+    }
+}
+
+.helpdesk-messages {
+    .message {
+        .clearfix();
+        position: relative;
+        border: 1px solid #d8d8d8;
+        margin: 50px 0px;
+        .border-radius(0px 5px 5px 0px);
+        padding: 10px;
+
+        .message-header {
+            position: absolute;
+            top: -28px;
+            font-weight: bold;
+            margin-left: -15px;
+        }
+
+        &:after {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid #d8d8d8;
+            position: absolute;
+            top: -9px;
+            left: 10px;
+            content: '';
+        }
+
+        &.staff {
+            border: 1px solid @staffColor;
+            border-left: 5px solid @staffColor;
+            background: @staffBg;
+
+            &:after {
+                border-bottom-color: @staffColor;
+            }
+        }
+
+        &.user {
+            border: 1px solid @userColor;
+            border-left: 5px solid @userColor;
+            background: @userBg;
+
+            &:after {
+                border-bottom-color: @userColor;
+            }
+        }
+
+        &.internal, &.internal_third  {
+            border: 1px solid @internalColor;
+            border-left: 5px solid @internalColor;
+            background: @internalBg;
+            margin-left: 40px;
+
+            &:after {
+                border-bottom-color: @internalColor;
+            }
+        }
+
+        a {
+            color: #1e0fbe;
+        }
+
+        .attachment {
+            margin: 8px 0px 1px 0px;
+
+            a {
+                margin-right: 5px;
+                color: #ea7601;
+            }
+        }
+    }
+}
+
+#public_reply_btn, #internal_reply_btn {
+    background: url('/skin/adminhtml/default/default/images/btn_back_bg.gif');
+    border-color: #ccc #aaa #aaa #ccc;
+    background-color: #fff;
+    color: #555;
+
+    &.active {
+        border-color: #ed6502 #a04300 #a04300 #ed6502;
+        background: #ffac47 url('/skin/adminhtml/default/default/images/btn_bg.gif');
+        color: #fff;
+    }
+}
+
+#reply_note {
+    position: absolute;
+    margin-top: -18px;
+    margin-left: 290px;
+}
+
+.MultiFile-wrap {
+    .MultiFile-list {
+        .MultiFile-label {
+            margin: 6px 0px 0px 0px;
+            .MultiFile-remove {
+                text-decoration: none;
+                font-size: 14px;
+                color: #f00;
+                line-height: 14px;
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.helpdeskadmin-adminhtml-ticket-edit, .helpdeskadmin-adminhtml-ticket-add {
+    .hor-scroll {
+        table.form-list {
+            width: 100%;
+
+            td.value {
+                width: auto;
+
+                textarea#reply {
+                    height: 25em;
+                    width: 90%;
+                    padding: 10px 13px;
+                    border: 1px solid @staffColor;
+                    background: @staffBg;
+                    border-left: 5px solid @staffColor;
+
+                    &.internal {
+                        border: 1px solid @internalColor;
+                        background: @internalBg;
+                        border-left: 5px solid @internalColor;
+                    }
+                }
+
+                .external-link {
+                    font-style: italic;
+                    width: 90%;
+                    border:none;
+                    background: transparent;
+
+                    &:focus {
+                        background: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    .entry-edit {
+        .box-left, .box-right  {
+            .entry-edit>.fieldset {
+                min-height: 120px;
+            }
+
+            .form-list td.label {
+                width: 125px;
+                label {
+                    width: 125px;
+                }
+            }
+        }
+    }
+    @media (max-width: 1280px) {
+        .entry-edit {
+            .box-left, .box-right  {
+                float: none;
+                width: 100%;
+
+                .entry-edit>.fieldset {
+                    min-height: 0px;
+                }
+            }
+        }
+    }
+}
+
+.helpdeskadmin-adminhtml-ticket-index {
+    .grid table td {
+        padding: 5px 5px;
+    }
+}
+
+#helpdesk_grid_table .search-header {
+  display: none;
+}
+#helpdesk_grid_table .a-search-td {
+  display: none;
+}
+#helpdesk_grid_archive_table .search-header {
+  display: none;
+}
+#helpdesk_grid_archive_table .a-search-td {
+  display: none;
+}
+
+#helpdesk-searchbox {
+  position: absolute;
+  right: 180px;
+  width: 18em;
+}
+
+h3.icon-head {
+    &.head-adminhtml-ticket {
+        background-image: url('../../images/application_view_tile.gif');
+    }
+
+    &.head-adminhtml-spam {
+        background-image: url('../../images/fam_application_form_delete.png');
+    }
+
+    &.head-adminhtml-satisfaction {
+        background-image: url('../../images/fam_user_comment.gif');
+    }
+
+    &.head-adminhtml-report-ticket,
+    &.head-adminhtml-report-satisfaction {
+        background-image: url('../../images/fam_folder_table.gif');
+    }
+
+    &.head-adminhtml-department,
+    &.head-adminhtml-gateway,
+    &.head-adminhtml-status,
+    &.head-adminhtml-priority,
+    &.head-adminhtml-template,
+    &.head-adminhtml-field,
+    &.head-adminhtml-pattern {
+        background-image: url('../../images/fam_folder_database.gif');
+    }
+}
+
+#hor-minimalist-a
+{
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+#hor-minimalist-a th
+{
+  padding: 10px 8px;
+  border-bottom: 1px solid #d6d6d6;
+}
+#hor-minimalist-a td
+{
+  padding: 9px 8px 0px 8px;
+}
+
+
+.last-activity {
+  &._1h {
+      color: #00F33A;
+  }
+  &._3h {
+    color: #00A026;
+  }
+  &._12h {
+    color: #004EF3;
+  }
+  &._24h {
+    color: #F516C8;
+  }
+  &._2d {
+    color: #F51616;
+  }
+  &._3d, &._5d {
+    color: #F51616;
+    font-weight: bold;
+  }
+}
+
+.helpdesk-notice {
+    border: 1px solid #DF280A;
+    background: #FAEBE7;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    color: #DF280A;
+}

@@ -1,0 +1,77 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * This module handles all the store locator functionality for Ellison.
+ * 
+ * The original code from this module is based off the FME_Gmapstrlocator module. We converted their
+ * module to an SDM module rather than extending from it because the amount of modifications and
+ * rewrites necessary for it to fit Ellison's spec were extensive, yet we still felt there was value
+ * in using FME's module as a starting point.
+ *
+ * @category  SDM
+ * @package   SDM_Gmapstrlocator
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+$_EEUS = Mage::helper('sdm_core')->isSite(SDM_Core_Helper_Data::ELLISON_SYSTEM_CODE_ED);
+$_ERUS = Mage::helper('sdm_core')->isSite(SDM_Core_Helper_Data::ELLISON_SYSTEM_CODE_RE);
+$_tabTitle = Mage::helper('gmapstrlocator')->getGMapStoresTabTitle();
+?>
+<?php if ($_EEUS): ?>
+<ul id='store-locator-tabs'>
+    <li class='tab active' data-tab-id="tab-content-online">
+        <a href="#">
+            <?php echo $this->__('Online Retailers'); ?>
+        </a>
+    </li>
+    <li class='tab' data-tab-id='tab-content-stores'>
+        <a href="#">
+            <?php echo $_tabTitle ?>
+        </a>
+    </li>
+</ul>
+<?php else: ?>
+<ul id='store-locator-tabs'>
+    <?php if ($_ERUS): ?>
+        <li class='tab active' data-tab-id='tab-content-stores'>
+            <a href="#">
+                <?php echo $_tabTitle ?>
+            </a>
+        </li>
+    <?php else: ?>
+        <li class='tab active' data-tab-id='tab-content-stores'>
+            <a href="#">
+                <?php echo $_tabTitle ?>
+            </a>
+        </li>
+        <li class='tab' data-tab-id="tab-content-online">
+            <a href="#">
+                <?php echo $this->__('Online Retailers'); ?>
+            </a>
+        </li>
+    <?php endif ?>
+</ul>
+<?php endif; ?>
+
+<div id="store-locator-search"<?php if ($_EEUS): ?> style='display:none;'<?php endif; ?>>
+    <h4><?php echo $this->__('Search By Name or Country')?></h4>
+    <input type='text' id='search-name' placeholder="<?php echo $this->__('Search By Name or Country'); ?>" />
+    <?php echo $this->getCountryHtmlSelect('search-name-country') ?>
+    <p class="search">
+        <input type='button' class='button' value='<?php echo $this->__('Search') ?>' id='search-by-name' />
+    </p>
+    <h4><?php echo $this->__('or By Location')?></h4>
+    <input type='text' id='search-address' placeholder="<?php echo $this->__('Enter City, State, and/or Zip'); ?>" />
+    <?php echo $this->getCountryHtmlSelect('search-location-country') ?>
+    <select id='search-radius'>
+        <option value='5'>5 miles</option>
+        <option value='10' selected="selected">10 miles</option>
+        <option value='25'>25 miles</option>
+        <option value='50'>50 miles</option>
+        <option value='100'>100 miles</option>
+    </select>
+    <p class="search">
+        <input type='button' class='button' value='<?php echo $this->__('Search') ?>' id='search-by-location' />
+    </p>
+</div>

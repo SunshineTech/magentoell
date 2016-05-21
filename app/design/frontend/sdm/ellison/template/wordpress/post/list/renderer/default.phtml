@@ -1,0 +1,26 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<div class="post-list-item">
+    <h2><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h2>
+    <?php echo $this->getBeforePostContentHtml() ?>
+    <div class="post-entry entry<?php if ($post->getFeaturedImage()): ?> post-entry-with-image<?php endif; ?>">
+        <?php if ($post->isViewableForVisitor()): ?>
+            <?php if ($this->displayExcerptInFeed() || $post->hasMoreTag()): ?>
+                <?php echo Mage::helper('sdm_core/wordpress')->truncatePost(
+                    $post->getPostExcerpt(),
+                    $post->getPermalink()
+                ); ?>
+            <?php endif; ?>
+        <?php else: ?>
+            <?php echo $this->getPasswordProtectHtml($post) ?>
+        <?php endif; ?>
+    </div>
+    <?php //echo $this->getAfterPostContentHtml() ?>
+</div>

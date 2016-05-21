@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Collection Rendering Widget
+ *
+ * @category  SDM
+ * @package   SDM_RenderCollection
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_RenderCollection>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+            	<Mage_Catalog />
+            	<SDM_Core />
+            	<SDM_Taxonomy />
+            	<SDM_Catalog />
+            </depends>
+        </SDM_RenderCollection>
+    </modules>
+</config>

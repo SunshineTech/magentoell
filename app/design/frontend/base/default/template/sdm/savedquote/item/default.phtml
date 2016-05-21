@@ -1,0 +1,95 @@
+<?php
+/**
+ * @var SDM_SavedQuote_Block_Item_Renderer $this
+ */
+
+$_item = $this->getItem();
+?>
+<tr>
+    <td class="product-cart-image">
+        <?php if ($this->hasProductUrl()):?>
+            <a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->escapeHtml($this->getProductName()) ?>" class="product-image">
+                <img src="<?php echo $this->getProductThumbnail()->resize(180); ?>" alt="<?php echo $this->escapeHtml($this->getProductName()) ?>" />
+            </a>
+        <?php endif;?>
+    </td>
+
+    <td class="product-cart-info">
+        <h2 class="product-name">
+        <?php if ($this->hasProductUrl()):?>
+            <a href="<?php echo $this->getProductUrl() ?>"><?php echo $this->escapeHtml($this->getProductName()) ?></a>
+        <?php else: ?>
+            <?php echo $this->escapeHtml($this->getProductName()) ?>
+        <?php endif; ?>
+        </h2>
+
+        <div class="product-cart-sku">
+            <span class="label"><?php echo $this->__('SKU'); ?>:</span> <?php echo $this->escapeHtml($_item->getSku()); ?>
+        </div>
+
+        <?php if ($_options = $this->getOptionList()):?>
+        <dl class="item-options">
+            <?php foreach ($_options as $_option) : ?>
+            <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
+                <dt><?php echo $this->escapeHtml($_option['label']) ?></dt>
+                <dd<?php if (isset($_formatedOptionValue['full_view'])): ?> class="truncated"<?php endif; ?>><?php echo $_formatedOptionValue['value'] ?>
+                <?php if (isset($_formatedOptionValue['full_view'])): ?>
+                <div class="truncated_full_value">
+                    <dl class="item-options">
+                        <dt><?php echo $this->escapeHtml($_option['label']) ?></dt>
+                        <dd><?php echo $_formatedOptionValue['full_view'] ?></dd>
+                    </dl>
+                </div>
+                <?php endif; ?>
+            </dd>
+            <?php endforeach; ?>
+        </dl>
+        <?php endif;?>
+
+        <?php if ($this->helper('savedquote')->isQuotePreOrder()): ?>
+        <label><?php echo $this->__('Prefered shipping date(s)') ?></label>
+        <div class="preOrderDateSelect">
+            <ul>
+                <li>
+                    <select name="pre_order_date[<?php echo $_item->getId() ?>][]">
+                        <?php foreach ($this->getPreOrderOptions() as $_value => $_label): ?>
+                        <option value="<?php echo $_value ?>"><?php echo $_label ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <label>Qty:</label>
+                    <input type="text" name="pre_order_qty[<?php echo $_item->getId() ?>][]" class='input-text qty' value='<?php echo $this->getQty() ?>' />
+                </li>
+            </ul>
+            <div class='qty-total'>
+                <?php echo $this->__("Total: ") ?>
+                <span class='user-qty'>0</span> 
+                <?php echo $this->__("of") ?>
+                <?php echo $this->getQty() ?>
+            </div>
+            <div class="validation-advice" style='display: none;'>
+                <?php echo $this->__("The quantities specified for your shipping dates are either invalid, or do not add up to the total number in your cart.") ?>
+            </div>
+            <a href="#" class='add-ship-date'>+ Add New Ship Date</a>
+        </div>
+        <?php endif ?>
+    </td>
+
+    <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+    <td class="product-cart-price" data-rwd-label="<?php echo $this->__('Price'); ?>" data-rwd-tax-label="<?php echo $this->__('Excl. Tax'); ?>">
+        <span class="cart-price" data-price='<?php echo number_format($_item->getPrice(), 2) ?>'>
+            <?php echo $this->helper('checkout')->formatPrice($_item->getPrice()) // simply get the selling price ?>
+        </span>
+    </td>
+    <?php endif; ?>
+
+    <td class="product-cart-actions" data-rwd-label="<?php echo $this->__('Qty'); ?>">
+        <input type="text" value="<?php echo $this->getQty() ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="12" readonly />
+    </td>
+
+    <!--Sub total starts here -->
+    <td class="product-cart-total" data-rwd-label="<?php echo $this->__('Subtotal'); ?>">
+        <span class="cart-price">
+            <?php echo $this->helper('checkout')->formatPrice($_item->getRowTotal()) ?>
+        </span>
+    </td>
+</tr>

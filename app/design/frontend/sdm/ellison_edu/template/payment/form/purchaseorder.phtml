@@ -1,0 +1,23 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+?>
+<ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+    <li>
+        <label for="po_number" class="required"><em>*</em><?php echo $this->__('Purchase Order Number') ?></label>
+        <div class="input-box">
+            <input type="text" id="po_number" name="payment[po_number]" title="<?php echo $this->__('Purchase Order Number') ?>" class="input-text required-entry" value="<?php echo $this->escapeHtml($this->getInfoData('po_number')) ?>" />
+        </div>
+        <div>
+            [You will be prompted to upload a purchase order after placing the order]
+        </div>
+    </li>
+</ul>

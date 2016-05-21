@@ -1,0 +1,50 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Banner Ads
+ *
+ * @category  SDM
+ * @package   SDM_Banner
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+$sliderCollection = $this->getSliderCollection();
+$sliderCount = count($sliderCollection);
+$_isSecure = Mage::app()->getFrontController()->getRequest()->isSecure();
+?>
+<div class="sale-slider">
+    <?php if ($sliderCount): ?>
+        <ul id="banner-slider">
+            <?php foreach ($sliderCollection as $sliderItem): ?>
+                <?php
+                    $sliderData = $sliderItem->getData();
+                    $sliderUrl = $sliderData['bannerurl'];
+                    $sliderImage = $sliderData['sliderimage'];
+                    $sliderMobileImage = $sliderData['mobileimage'];
+                ?>
+                <li>
+                    <?php if(!empty($sliderUrl)):?>
+                        <?php if (!empty($sliderImage)): ?>
+                            <a class="desktop" href="<?php echo $sliderUrl; ?>" target="_blank" >
+                                <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA, $_isSecure) . $sliderImage; ?>" />
+                            </a>
+                        <?php endif ?>
+                        <?php if (!empty($sliderMobileImage)): ?>
+                            <a class="mobile" href="<?php echo $sliderUrl; ?>" target="_blank" >
+                                <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA, $_isSecure) . $sliderMobileImage; ?>" />
+                            </a>
+                        <?php endif ?>
+                    <?php else:?>
+                        <?php if (!empty($sliderImage)): ?>
+                            <img class="desktop" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA, $_isSecure) . $sliderImage; ?>" />
+                        <?php endif ?>
+                        <?php if (!empty($sliderMobileImage)): ?>
+                            <img class="mobile" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA, $_isSecure) . $sliderMobileImage; ?>" />
+                        <?php endif ?>
+                    <?php endif ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</div>

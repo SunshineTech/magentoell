@@ -1,0 +1,244 @@
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+#newsletter-popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 999999;
+}
+
+#newsletter-popup-background {
+    background: black;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+}
+
+#newsletter-popup-window {
+    position: absolute;
+    background: #fff;
+    width: 620px;
+    top: 40%;
+    left: 50%;
+    margin-top: -175px;
+    margin-left: -310px;
+    border: 1px solid #999;
+}
+.popup-img,
+.form-wrap {
+    width: 50%;
+    float: left;
+}
+.popup-img img {
+    width: 100%;
+}
+.form-wrap {
+    padding: 20px;
+}
+.form-wrap .fieldset {
+    float: left;
+    width: 100%;
+}
+.form-wrap .note {
+    float: left;
+    width: 100%;
+    font-size: 12px;
+    font-family: "AvenirRegular";
+    text-align: right;
+}
+#newsletter-popup-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #000;
+    cursor: pointer;
+    line-height: normal;
+}
+#newsletter-popup-window h3 {
+    text-align: left;
+    margin: 20px 0;
+    font-size: 26px;
+    border-bottom: 1px solid #000;
+    padding: 0 0 20px 0;
+    line-height: 32px;
+}
+#newsletter-popup-window .head-text {
+    font-family: "AvenirRegular";
+    font-size: 22px;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+#newsletter-popup-window .form-list {
+    margin: 0;
+    padding: 0;
+}
+#newsletter-popup-window .form-list .input-box {
+    width: 100% !important;
+}
+#newsletter-popup-window .form-list li {
+    margin: 0;
+    float: left;
+    width: 100%;
+}
+#newsletter-popup-window .buttons-set {
+    margin: 10px auto;
+    padding: 0;
+    border-top: none;
+    text-align: right;
+    float: left;
+    width: 100%;
+}
+#newsletter-popup-window .buttons-set button.button {
+    float: none;
+    margin: 0;
+}
+.newsletter-account-edit .main form .form-list li {
+    float: left;
+    width: 100%;
+}
+
+.newsletter-account-edit .main form label {
+    font-family: "AvenirRegular";
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.newsletter-account-edit .main form .form-list li > label {
+    width: 100%;
+    float: left;
+    clear: both;
+    font-family: "AvenirBold";
+}
+
+body.newsletter-account-edit .wrapper .page .main-container .main form .form-list li > div.input-box {
+    width: 100% !important;
+    float: left;
+    padding: 0;
+}
+
+.newsletter-account-edit .main form .birthday .custom-dropdown select {
+    width: 115px;
+}
+
+.newsletter-account-edit .main form .birthday .custom-dropdown + .custom-dropdown {
+    margin-left: 10px;
+}
+
+.newsletter-account-edit .main form .form-list .input-box .field {
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+.newsletter-account-edit .main form .form-list .input-box .field:last-child {
+    margin-right: 0;
+}
+
+.newsletter-account-edit .main #newsletter-signup .page-title h1 {
+    font-weight: normal;
+    padding: 10px 0;
+    border-bottom: 1px solid #999;
+}
+.newsletter-account-edit p {
+    margin-bottom: 10px;
+}
+.newsletter-account-edit .main form .fieldset {
+    width: 50%;
+    float: left;
+    margin: 0;
+    padding: 0 10px 0 0;
+}
+.newsletter-account-edit .main form .fieldset + .fieldset {
+    padding: 0 0 0 10px;
+}
+.newsletter-account-edit .main form .buttons-set {
+    border: none;
+    padding: 0;
+}
+.newsletter-account-edit #newsletter-lookup {
+    padding: 20px 0 0 0;
+    margin: 20px 0 0 0;
+    border-top: 1px solid #999;
+    float: left;
+    width: 100%;
+}
+.newsletter-account-edit .main #newsletter-lookup .fieldset {
+    width: auto;
+    float: none;
+    padding: 0;
+}
+.newsletter-account-edit #thumb-image img {
+    width: 100%;
+}
+@media only screen and (max-width: 545px) {
+    #newsletter-popup-window {
+        width: 100%;
+        float: left;
+        margin: 0;
+        left: 0;
+        top: 10%;
+    }
+    .popup-img {
+        display: none;
+    }
+    .form-wrap {
+        width: 100%;
+    }
+    .form-wrap .input-box input[type=text] {
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    #newsletter-popup-window {
+        width: 100%;
+        float: left;
+        margin: 0;
+        left: 0;
+        top: 10%;
+    }
+}
+@media only screen and (max-width: 770px) {
+    .newsletter-account-edit .main form .form-list li .custom-dropdown,
+    .newsletter-account-edit .main form .form-list li .custom-dropdown select {
+        width: 100%;
+    }
+    .newsletter-account-edit .main form .birthday .custom-dropdown,
+    .newsletter-account-edit .main form .birthday .custom-dropdown + .custom-dropdown {
+        margin: 5px 0;
+    }
+}
+@media only screen and (max-width: 599px) {
+    .newsletter-account-edit .main form .form-list li .custom-dropdown,
+    .newsletter-account-edit .main form input[type=text] {
+        width: 100%;
+    }
+    .newsletter-account-edit .main form .birthday .custom-dropdown + .custom-dropdown {
+        margin: 0;
+    }
+    .newsletter-account-edit .main form .birthday .input-box .custom-dropdown {
+        margin: 0 0 10px 0;
+    }
+    .newsletter-account-edit .main form .birthday .custom-dropdown select {
+        width: 100%;
+    }
+    .newsletter-account-edit .main form .fieldset {
+        width: 100%;
+        display: block;
+    }
+    .newsletter-account-edit .main form .fieldset + .fieldset {
+        margin: 20px 0 0 0;
+        padding: 0;
+    }
+}

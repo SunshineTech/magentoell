@@ -1,0 +1,47 @@
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+html, body {
+    height: initial !important;
+}
+
+table {
+    width: 100%;
+}
+
+.print-head ~ * + * {
+    margin-top: 20px
+}
+
+table th {
+    font-weight: bold;
+}
+
+table td {
+    vertical-align: initial;
+}
+
+table .shipping, table .details {
+    width: 50%;
+}
+
+.details table th {
+    min-width: 140px;
+}
+
+.totals th, .totals td {
+    text-align: right;
+}
+
+body ol {
+    list-style-type: decimal;
+}

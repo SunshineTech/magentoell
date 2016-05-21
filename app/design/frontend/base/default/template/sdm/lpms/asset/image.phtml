@@ -1,0 +1,101 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's custom Landing Page Management System (LPMS).
+ *
+ * @category  SDM
+ * @package   SDM_Lpms
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+$_asset = $this->getAsset();
+$_assetId = $_asset->getId();
+$_assetImages = $this->getAsset()->getVisibleAssetImages();
+$_name = $_asset->getName();
+$_media = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+
+// Get variables to help with display
+$_max = $this->getAssetImageMax(count($_assetImages));
+$_hasSlider = $this->hasSlider();
+$_hasText = $this->hasText();
+$_horizontalCount = $this->horizontalCount();
+$_assetImageStartTag = $this->getAssetImageStartTag();
+$_assetImageEndTag = $this->getAssetImageEndTag();
+
+// Cut our number of assets down to the amount we're showing
+$_assetImages = array_slice($_assetImages, 0, $_max);
+
+?>
+
+<?php if (!empty($_name)): ?>
+    <h3><?php echo $_name; ?></h3>
+<?php endif; ?>
+
+<?php $_count = 1; ?>
+<?php foreach($_assetImages as $_assetImage): ?>
+    <?php if ($_count++ === 1): ?>
+        <!-- Asset Images Container Start -->
+        <?php if ($_hasSlider): ?>
+            <ul id="asset-image-slider-<?php echo $_assetId ?>" class="clearer">
+        <?php elseif ($_horizontalCount !== false): ?>
+            <ul class="asset-image-horizontal hor-<?php echo $_horizontalCount ?>">
+        <?php //elseif () ?>
+            <!--<div class='asset-image-container'>-->
+        <?php else: ?>
+            <div class='asset-image-container <?php if($_hasText):?>img-text<?php endif?>'>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <!-- Asset Image Item -->
+    <?php echo $_assetImageStartTag ?>
+        <?php if ($_assetImage->getData('image_href')): ?>
+            <a href='<?php echo $_assetImage->getData('image_href') ?>'>
+        <?php endif; ?>
+        <img src="<?php echo $_media . $_assetImage->getData('image_url') ?>" alt="<?php echo $_assetImage->getData('image_alt') ?>">
+        <?php if ($_assetImage->getData('image_href')): ?>
+            </a>
+        <?php endif; ?>
+    <?php echo $_assetImageEndTag ?>
+
+    <!-- Show text if this is an imgtxt type -->
+    <?php if ($_hasText): ?>
+        <?php echo $_asset->getData('content'); ?>
+    <?php endif; ?>
+
+    <?php if ($_max < $_count): ?>
+        <!-- Asset Images Container End -->
+        <?php if ($_hasSlider): ?>
+            </ul>
+        <?php elseif ($_horizontalCount !== false): ?>
+            </ul>
+        <?php else: ?>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+<?php endforeach; ?>
+
+<?php if ($_hasSlider): ?>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#asset-image-slider-<?php echo $_assetId ?>').owlCarousel({
+        items               : 1,
+        itemsDesktop        : false,
+        itemsDesktopSmall   : false,
+        itemsTablet         : false,
+        itemsTabletSmall    : false,
+        itemsMobile         : false,
+        itemsCustom         : false,
+        pagination          : true,
+        loop                : true,
+        rewindSpeed         : 200,
+        autoplay            : true,
+        autoplayTimeout     : 3500
+    });
+});
+</script>
+<?php endif; ?>
+
+<div class="clear"></div>

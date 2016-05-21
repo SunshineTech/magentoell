@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<checkout_cart_index>
+		<reference name="head">
+			<action method="addItem" ifconfig="saveforlater/settings/active"><type>skin_css</type><name>css/redstage_saveforlater/saveforlater.css</name></action>
+		</reference>
+		<reference name="checkout.cart">
+			<action method="setEmptyTemplate" ifconfig="saveforlater/settings/active"><value>redstage_saveforlater/cart_empty.phtml</value></action>
+			<action method="chooseTemplate" ifconfig="saveforlater/settings/active"/>
+		</reference>
+		<reference name="checkout.cart.form.before">
+			<block type="saveforlater/items" ifconfig="saveforlater/settings/active" name="saveforlater.items" template="redstage_saveforlater/items.phtml" />
+		</reference>
+	</checkout_cart_index>
+</layout>

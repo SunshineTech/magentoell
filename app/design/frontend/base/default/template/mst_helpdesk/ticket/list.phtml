@@ -1,0 +1,127 @@
+<?php
+$collection = $this->getTicketCollection()
+    ->joinFields()
+    ->setOrder('last_reply_at', 'desc')
+;
+
+?>
+<div class = "page-title">
+    <h1><?php echo $this->__("My Tickets") ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php if ($collection->count()): ?>
+<div class="box-account helpdesk-box-tickets">
+    <table class="data-table" id="my-tickets-table">
+        <thead>
+            <tr class="first last">
+                <th><?php echo $this->__("Title") ?></th>
+                <th><?php echo $this->__("Department") ?></th>
+                <th><?php echo $this->__("Last Reply") ?></th>
+                <th><?php echo $this->__("Status") ?></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+<?php foreach($collection as $ticket):?>
+<tr class="odd">
+   <td><a href="<?php echo $ticket->getUrl()?>"><?php echo $ticket->getName() ?></a>
+    <?php if (!$ticket->getLastMessage()->getIsRead()): ?><span class="unread"></span><?php endif;?>
+   </td>
+   <td><?php echo $ticket->getDepartment() ?></td>
+   <td><?php echo $ticket->getLastReplyName() ?>, <?php echo Mage::helper('core')->formatDate($ticket->getLastReplyAt(), 'medium') ?></td>
+   <td><?php echo $ticket->getStatus() ?></td>
+   <td><a href="<?php echo $ticket->getUrl()?>"><?php echo $this->__('View Ticket') ?></a></td>
+</tr>
+<?php endforeach?>
+    </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('my-tickets-table')</script>
+</div>
+<?php else: ?>
+    <div class="box-account">
+        <div>
+        <p><?php echo $this->__("You don't have open tickets") ?></p>
+        </div>
+    </div>
+<?php endif;?>
+
+<form action="<?php echo Mage::getUrl('helpdesk/ticket/postmessage')?>" method="POST"  enctype="multipart/form-data" id="helpdesk-form-validate">
+<div class="fieldset">
+    <h2 class="legend create_new_ticket"><?php echo $this->__("Create New Ticket") ?></h2>
+    <ul class="form-list">
+        <?php if ($this->getFrontendIsAllowPriority()): ?>
+        <li class="wide">
+            <label for="priority_id" class="required"><em>*</em><?php echo $this->__("Priority") ?></label>
+            <div class="input-box">
+                <select name="priority_id" id='priority_id'>
+                    <?php foreach ($this->getPriorityCollection() as $priority): ?>
+                    <option value="<?php echo $priority->getId()?>"><?php echo $priority->getName()?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </li>
+        <?php endif;?>
+        <?php if ($this->getFrontendIsAllowDepartment()): ?>
+        <li class="wide">
+            <label for="department_id" class="required"><em>*</em><?php echo $this->__("Department") ?></label>
+            <div class="input-box">
+                <select name="department_id" id='department_id'>
+                    <?php foreach ($this->getDepartmentCollection() as $department): ?>
+                    <option value="<?php echo $department->getId()?>"><?php echo $department->getName()?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </li>
+        <?php endif;?>
+        <?php if ($this->getFrontendIsAllowOrder() && $this->getOrderCollection()->count()): ?>
+        <li class="wide">
+            <label for="order_id"><?php echo $this->__("Order") ?></label>
+            <div class="input-box">
+                <select name="order_id" id='order_id'>
+                    <option value=""><?php echo $this->__('-- Select an Order --')?></option>
+                    <?php foreach ($this->getOrderCollection() as $order): ?>
+                    <option value="<?php echo $order->getId()?>"><?php echo Mage::helper('helpdesk')->getOrderLabel($order)?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </li>
+        <?php endif;?>
+        <li class="wide">
+            <label for="name" class="required"><em>*</em><?php echo $this->__("Subject") ?></label>
+            <div class="input-box">
+                <input name='name' id='name' class="input-text required-entry">
+            </div>
+        </li>
+        <li class="wide">
+            <label for="message" class="required"><em>*</em><?php echo $this->__("Message") ?></label>
+            <div class="input-box">
+                <textarea name='message' id='message'  class="input-text required-entry"></textarea>
+            </div>
+        </li>
+        <li class="wide">
+            <label for="attachment"><?php echo $this->__("Attach files") ?></label>
+            <div class="input-box">
+                <input type='file' class='multi' name='attachment[]' id='attachment'></textarea>
+            </div>
+        </li>
+        <?php foreach ($this->getCustomFields() as $field): ?>
+        <li class="wide">
+            <label for="<?php echo $field->getCode()?>" <?php echo $field->getIsRequiredCustomer()?'class="required"><em>*</em>':'>'?><?php echo $this->__($field->getName()) ?></label>
+            <div class="input-box <?php echo $field->getType()?>">
+                <?php echo $this->getInputHtml($field)?>
+            </div>
+            <p><?php echo $field->getDescription() ?></p>
+        </li>
+        <?php endforeach; ?>
+</div>
+<div class="buttons-set">
+    <p class="required">* <?php echo $this->__("Required Fields") ?></p>
+    <button type="submit" title="<?php echo $this->__("Submit Ticket") ?>" class="button"><span><span><?php echo $this->__("Submit Ticket") ?></span></span></button>
+</div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+   var dataForm = new VarienForm('helpdesk-form-validate', true);
+//]]>
+</script>

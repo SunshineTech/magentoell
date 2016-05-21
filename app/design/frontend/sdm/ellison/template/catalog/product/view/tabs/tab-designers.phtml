@@ -1,0 +1,47 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Tabs - Designers template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_product = $this->getProduct();
+$_designerCollection = $this->getDesignerCollection();
+
+?>
+<?php if (!empty($_designerCollection) && $_product->getTypeId() == 'simple'): ?>
+    <ul id="mediabox" class="designers-slider">
+        <?php foreach ($_designerCollection as $designer): ?>
+            <li>
+                <div id="designer-image" class="image">
+                    <?php
+                        $_designerImg = $designer->getImageUrl();
+                        $_designerId = $designer->getId();
+                        $_shortDesc = $designer->getDescription();
+                        $_phrase_array = explode(' ',$_shortDesc);
+                        $_designerUrl = "/designer/" . $designer->getCode();
+                    ?>
+                    <?php if(!empty($_designerImg)): ?>
+                            <img id="designer-collection-image-<?php echo $designer->getId(); ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $designer->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($designer, 'small_image'), null, true) ?>" />
+                    <?php else : ?>
+                        <img id="designer-collection-image-<?php echo $designer->getId(); ?>" src="<?php echo $this->getSkinUrl('images/catalog/product/placeholder/image.jpg'); ?>" alt="<?php echo $this->__('no designer image');?>" />
+                    <?php endif; ?>
+                </div>
+                <div id="designer-name" class="name"><?php echo $designer->getName();?></div>
+                <div class="description">
+                    <?php if(count($_phrase_array) > 15 && 15 > 0) {
+                            $description = implode(' ',array_slice($_phrase_array, 0, 15)).'...';
+                            echo $description;
+                        }
+                    ?>
+                </div>
+                <a id="designer-url" class="url" href="<?php echo $_designerUrl ?>"><?php echo $this->__('View Designer')?></a>
+            </li>
+        <?php endforeach;?>
+    </ul>
+<?php endif;?>

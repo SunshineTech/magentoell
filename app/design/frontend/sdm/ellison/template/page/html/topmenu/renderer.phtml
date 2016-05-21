@@ -1,0 +1,98 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's navigation links
+ *
+ * @category  design
+ * @package   sdm_ellison
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/** @var Mage_Page_Block_Html_Topmenu_Renderer $this */
+/** @var Varien_Data_Tree_Node $menuTree */
+/** @var string $childrenWrapClass */
+
+$html = '';
+
+$children = $menuTree->getChildren();
+$parentLevel = $menuTree->getLevel();
+$childLevel = is_null($parentLevel) ? 0 : $parentLevel + 1;
+
+$counter = 1;
+$childrenCount = $children->count();
+
+$parentPositionClass = $menuTree->getPositionClass();
+$itemPositionClassPrefix = $parentPositionClass ? $parentPositionClass . '-' : 'nav-';
+
+foreach ($children as $child) {
+    $child->setLevel($childLevel);
+    $child->setIsFirst($counter == 1);
+    $child->setIsLast($counter == $childrenCount);
+    $child->setPositionClass($itemPositionClassPrefix . $counter);
+    $outermostClassCode = 'level'. $childLevel;
+    $_hasChildren = ($child->hasChildren()) ? 'has-children' : '';
+
+    $html .= '<li '. $this->_getRenderedMenuItemAttributes($child) .'>';
+
+    if ($child->getOpenInNewTab() == 1) {
+        $html .= '<a href="'. $child->getUrl() .'" class="'. $outermostClassCode . ' ' . $_hasChildren .'" target="_blank">'. $this->escapeHtml($this->__($child->getName())) .'</a>';
+    } else {
+        $html .= '<a href="'. $child->getUrl() .'" class="'. $outermostClassCode . ' ' . $_hasChildren .'">'. $this->escapeHtml($this->__($child->getName())) .'</a>';
+    }
+
+    if (!empty($childrenWrapClass)) {
+        $html .= '<div class="'. $childrenWrapClass .'">';
+    }
+
+    $nextChildLevel = $childLevel + 1;
+
+    if (!empty($_hasChildren)) {
+        $html .= '<ul class="level'. $childLevel .' columns-'.$child->getChildren()->count().'">';
+        $html .=     $this->render($child, $childrenWrapClass);
+
+        if ((int)$childLevel === (int)0) {   // At the tab level; not same as category level.
+            $_itemCollection = $this->getCurrentTabFeatureProducts($child);
+            $_coreHelper = $this->helper('core');
+
+            if (!empty($_itemCollection)) {
+                $html .= '<div class="nav-prod-block">';
+                $html .= '<ul>';
+                foreach ($_itemCollection as $_product) {
+                    $html .= '<li class="item">';
+                    $html .= '<a href="' . $_product->getProductUrl() . '" title="' . $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) . '" class="product-image">';
+                    $img = (string)$this->helper('catalog/image')->init($_product, 'small_image')->resize(440);
+                    $img = str_replace("http://", "//", $img);
+                    $html .= '<img id="product-collection-image-' . $_product->getId() . '"
+                             src="' . $img . '" alt="' . $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) . '"';
+                    $html .= '</a>';
+                    $html .= '<a class="product-name" href="' . $_product->getProductUrl() . '">';
+                    $html .= $_product->getName();
+                    $html .= '</a>';
+                    $html .= '<div class="sku">' . Mage::helper('sdm_catalog')->getSkuLabel($_product) . $_product->getSku() . '</div>';
+                    if ($_product->getTypeId() == 'simple') {
+                        $html .= '<div class="price">' . $_coreHelper->formatPrice($_product->getFinalPrice(), false) . '</div>';
+                    } else {
+                        $html .= '<a class="view-details" href="' . $_product->getProductUrl() . '">';
+                        $html .= '<div>View Details</div>';
+                        $html .= '</a>';
+                    }
+                    $html .= '</li>';
+                }
+                $html .= '</ul>';
+                $html .= '</div>';
+            }
+        }
+        $html .= '</ul>';
+    }
+
+    if (!empty($childrenWrapClass)) {
+        $html .= '</div>';
+    }
+
+    $html .= '</li>';
+    $counter++;
+}
+
+echo $html;

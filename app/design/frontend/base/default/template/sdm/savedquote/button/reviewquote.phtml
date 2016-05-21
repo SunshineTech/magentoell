@@ -1,0 +1,38 @@
+<?php $address = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress(); ?>
+<?php $shippingCode = $address->getShippingMethod(); ?>
+<?php $postcode = $address->getPostcode(); ?>
+
+<?php if ($this->isPossibleOnepageCheckout()): ?>
+    <?php $_reviewQuoteUrl = $this->getReviewQuoteLink()?>
+    <button type="button" title="<?php echo $this->__('Pre-Order') ?>" class="button btn-proceed-checkout btn-saved-quote btn-checkout<?php if ($this->isDisabled()):?> no-checkout<?php endif; ?>"<?php if ($this->isDisabled()):?> disabled="disabled"<?php endif; ?> onclick="window.location='<?php echo $_reviewQuoteUrl ?>';">
+        <span>
+            <span>
+                <?php echo $this->__('Save Quote') ?>
+            </span>
+        </span>
+    </button>
+
+    <div class='saved-quote-msg'>
+        <?php if (empty($postcode)): ?>
+            <?php echo $this->__('Please note that shipping and tax must be calculated<br>and updated before you can "Save Quote"'); ?>
+        <?php elseif (empty($shippingCode)): ?>
+            <?php echo $this->__('Shipping estimate must be applied<br>to the total to save a quote'); ?>
+        <?php endif; ?>
+        <?php if (empty($shippingCode) || empty($postcode)): ?>
+        <script>
+        jQuery(document).ready(function(){
+            jQuery('.btn-saved-quote')
+                .removeAttr('onclick')
+                .on('click', function(){
+                    jQuery('.saved-quote-msg').css('color','red');
+                    jQuery('.shipping').css({
+                        'border-color':'red',
+                        'background-color':'#FFEFEF'
+                    });
+                    return false;
+                });
+        });
+        </script>
+        <?php endif ?>
+    </div>
+<?php endif; ?>

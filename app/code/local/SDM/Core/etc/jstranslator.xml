@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * SDM's core extension
+ *
+ * @category  SDM
+ * @package   SDM_Core
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<jstranslator>
+    <add_to_cart translate="message" module="sdm_core">
+        <message>Add To Cart</message>
+    </add_to_cart>
+    <added_to_cart translate="message" module="sdm_core">
+        <message>Added To Cart</message>
+    </added_to_cart>
+</jstranslator>

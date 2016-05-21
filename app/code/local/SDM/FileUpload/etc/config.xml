@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Extension to upload file
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_FileUpload
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_FileUpload>
+            <version>0.1.0</version>
+        </SDM_FileUpload>
+    </modules>
+    <global>
+        <models>
+            <sdm_upload>
+                <class>SDM_FileUpload_Model</class>
+                <resourceModel>sdm_upload_resource</resourceModel>
+            </sdm_upload>
+            <sdm_upload_resource>
+                <class>SDM_FileUpload_Model_Resource</class>
+                <entities>
+                    <file>
+                        <table>sdm_upload_file</table>
+                    </file>
+                </entities>
+            </sdm_upload_resource>
+        </models>
+        <resources>
+            <sdm_upload_setup>
+                <setup>
+                    <module>SDM_FileUpload</module>
+                </setup>
+            </sdm_upload_setup>
+        </resources>
+        <helpers>
+            <sdm_upload>
+                <class>SDM_FileUpload_Helper</class>
+            </sdm_upload>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <sdm_upload>
+                <use>standard</use>
+                <args>
+                    <module>SDM_FileUpload</module>
+                    <frontName>upload</frontName>
+                </args>
+            </sdm_upload>
+        </routers>
+    </frontend>
+</config>

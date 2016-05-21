@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * News page and articles
+ *
+ * @category  SDM
+ * @package   SDM_News
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_News>
+            <version>0.1.0</version>
+        </SDM_News>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_news>
+                <class>SDM_News_Block</class>
+            </sdm_news>
+        </blocks>
+        <helpers>
+            <sdm_news>
+                <class>SDM_News_Helper</class>
+            </sdm_news>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <sdm_news>
+                <use>standard</use>
+                <args>
+                    <module>SDM_News</module>
+                    <frontName>news</frontName>
+                </args>
+            </sdm_news>
+        </routers>
+        <layout>
+            <updates>
+                <sdm_news>
+                    <file>sdm/news.xml</file>
+                </sdm_news>
+            </updates>
+        </layout>
+    </frontend>
+</config>

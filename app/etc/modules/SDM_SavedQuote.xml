@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_SavedQuote>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Customer />
+                <Mage_Sales />
+                <SDM_Core />
+                <SDM_Shipping />
+                <SDM_PreOrder />
+                <!-- <Inchoo_LoginAsCustomer /> -->
+            </depends>
+        </SDM_SavedQuote>
+    </modules>
+</config>

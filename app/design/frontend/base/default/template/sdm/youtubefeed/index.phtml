@@ -1,0 +1,28 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+/**
+ * @var SDM_YoutubeFeed_Block_Index $this
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('Video Channels') ?></h1>
+</div>
+<ul>
+    <?php foreach ($this->getChannels() as $_channel): ?>
+    <li>
+        <a href="<?php echo $this->getUrl('*/channel/view', array('id' => $_channel->getId()))?>">
+            <?php echo $_channel->getName() ?>
+            <img src="<?php echo $_channel->getImageUrl() ?>" />
+        </a>
+    </li>
+    <?php endforeach ?>
+</ul>

@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Implements the customer/retailer discount logic for viewing and obtaining
+ * discounts and prices, as wel as managing the customer groups.
+ *
+ * @category  SDM
+ * @package   SDM_CustomerDiscount
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_CustomerDiscount>
+            <version>0.4.3</version>
+        </SDM_CustomerDiscount>
+    </modules>
+    <global>
+        <models>
+            <customerdiscount>
+                <class>SDM_CustomerDiscount_Model</class>
+                <resourceModel>customerdiscount_resource</resourceModel>
+            </customerdiscount>
+            <customerdiscount_resource>
+                <class>SDM_CustomerDiscount_Model_Resource</class>
+                <entities>
+                    <discountgroup>
+                        <table>sdm_customer_discount_group</table>
+                    </discountgroup>
+                    <applied_discount>
+                        <table>sdm_catalog_product_index_applied_discount</table>
+                    </applied_discount>
+                </entities>
+            </customerdiscount_resource>
+            <catalog>
+                <rewrite>
+                    <!-- <product>SDM_CustomerDiscount_Model_Product</product> -->
+                    <product_indexer_price>SDM_CustomerDiscount_Model_Product_Indexer_Price</product_indexer_price>
+                    <resource_product_indexer_price>SDM_CustomerDiscount_Model_Resource_Product_Indexer_Price</resource_product_indexer_price>
+                </rewrite>
+            </catalog>
+            <catalog_resource>
+                <rewrite>
+                    <product_indexer_price>SDM_CustomerDiscount_Model_Resource_Product_Indexer_Price</product_indexer_price>
+                </rewrite>
+            </catalog_resource>
+            <salesrule>
+                <rewrite>
+                    <quote_discount>SDM_CustomerDiscount_Model_Quote_Discount</quote_discount>
+                </rewrite>
+            </salesrule>
+        </models>
+        <resources>
+            <sdm_customerdiscount_setup>
+                <setup>
+                    <module>SDM_CustomerDiscount</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </sdm_customerdiscount_setup>
+        </resources>
+        <blocks>
+            <customerdiscount>
+               <class>SDM_CustomerDiscount_Block</class>
+            </customerdiscount>
+        </blocks>
+        <helpers>
+            <customerdiscount>
+                <class>SDM_CustomerDiscount_Helper</class>
+            </customerdiscount>
+        </helpers>
+        <!-- Observer types must be explicitly assigned in this extension; actually not sure about this anymore -->
+        <events>
+            <catalog_product_get_final_price>
+                <observers>
+                    <apply_retailer_catalog_discount>
+                        <type>singleton</type>
+                        <class>customerdiscount/observer</class>
+                        <method>applyPriceComparison</method>
+                    </apply_retailer_catalog_discount>
+                </observers>
+            </catalog_product_get_final_price>
+            <controller_action_postdispatch_checkout_cart_couponPost>
+                <observers>
+                    <reset_quote_item_price_frontend>
+                        <type>singleton</type>
+                        <class>customerdiscount/observer</class>
+                        <method>resetQuoteItemPrice</method>
+                    </reset_quote_item_price_frontend>
+                </observers>
+            </controller_action_postdispatch_checkout_cart_couponPost>
+            <!-- This event fires twice because cart and quote are saved once each in Mage and SDM CartController.php -->
+            <sales_quote_address_discount_item_customerdiscount>
+                <observers>
+                    <get_coupon_discount>
+                        <type>singleton</type>
+                        <class>customerdiscount/observer</class>
+                        <method>getCouponDiscount</method>
+                    </get_coupon_discount>
+                </observers>
+            </sales_quote_address_discount_item_customerdiscount>
+            <!--
+            Event 'adminhtml_sales_order_create_process_data_after' is not defined.
+            Mage_Adminhtml_Sales_Order_CreateController::_processActionData should
+            have this fired after getting final prices and applying coupon. For now,
+            Ellison does not require the admin to work with retailer price comparison.
+            -->
+            <!-- <adminhtml_sales_order_create_process_data_after>
+                <observers>
+                    <reset_quote_item_price_adminhtml>
+                        <type>singleton</type>
+                        <class>customerdiscount/observer</class>
+                        <method>test</method>
+                    </reset_quote_item_price_adminhtml>
+                </observers>
+            </adminhtml_sales_order_create_process_data_after> -->
+            <!-- Custom event fires after processing coupon -->
+        </events>
+        <sales>
+            <quote>
+                <item>
+                    <!-- Make these available when adding product to quote and in $item->getProduct() -->
+                    <!-- These configurations are copied from SDM_Sales -->
+                    <product_attributes>
+                        <msrp /> <!-- Note: this node is already defined in CE 1.9 -->
+                        <min_qty />
+                        <tag_discount_category />
+                        <price_euro />
+                        <special_price_euro />
+                        <release_date />
+                        <allow_cart />
+                        <allow_checkout />
+                        <allow_cart_backorder />
+                        <allow_checkout_backorder />
+                        <allow_preorder />
+                        <allow_quote />
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_CustomerDiscount after="Mage_Adminhtml">SDM_CustomerDiscount_Adminhtml</SDM_CustomerDiscount>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <customerdiscount>
+                    <file>customerdiscount.xml</file>
+                </customerdiscount>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

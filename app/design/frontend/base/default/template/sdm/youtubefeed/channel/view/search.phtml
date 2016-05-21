@@ -1,0 +1,23 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_YoutubeFeed_Block_Channel_View_Search $this
+ */
+?>
+<form id="channel-view-search" method="get" action="<?php echo $this->getFormAction() ?>">
+    <div class="search">
+        <input type="text" name="q" placeholder="<?php echo $this->__('Search for %s Videos by Product Type or Lesson...', $this->getChannel()->getName()) ?>" value="<?php echo $this->getRequest()->getParam('q') ?>" />
+        <button type="submit" title="Search" class="button search-button"><span><span><?php echo $this->__('Search')?></span></span>
+        </button>
+    </div>
+</form>

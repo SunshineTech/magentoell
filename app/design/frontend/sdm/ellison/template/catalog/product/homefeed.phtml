@@ -1,0 +1,24 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+$_productCollection = $this->getLoadedProductCollection();
+$title = $this->getBlockTitle();
+?>
+
+<?php if ($_productCollection->count()): ?>
+    <div class="homefeed-wrap">
+        <div class="homefeed-title">
+            <?php echo $title; ?>
+        </div>
+        <?php echo Mage::helper('rendercollection')->initNewListing($_productCollection)->toHtml(); ?>
+    </div>
+<?php endif; ?>

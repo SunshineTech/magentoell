@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Implements the product compatibility functionality.
+ *
+ * @category  SDM
+ * @package   SDM_Compatibility
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Compatibility>
+            <version>0.2.3</version>
+        </SDM_Compatibility>
+    </modules>
+    <global>
+        <models>
+            <compatibility>
+                <class>SDM_Compatibility_Model</class>
+                <resourceModel>compatibility_resource</resourceModel>
+            </compatibility>
+            <compatibility_resource>
+                <class>SDM_Compatibility_Model_Resource</class>
+                <entities>
+                    <compatibility>
+                        <table>sdm_compatibility</table>
+                    </compatibility>
+                    <productline>
+                        <table>sdm_compatibility_productline</table>
+                    </productline>
+                </entities>
+            </compatibility_resource>
+        </models>
+        <resources>
+            <sdm_compatibility_setup>
+                <setup>
+                    <module>SDM_Compatibility</module>
+                </setup>
+            </sdm_compatibility_setup>
+        </resources>
+        <blocks>
+            <compatibility>
+                <class>SDM_Compatibility_Block</class>
+            </compatibility>
+        </blocks>
+        <helpers>
+            <compatibility>
+                <class>SDM_Compatibility_Helper</class>
+            </compatibility>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_Compatibility after="Mage_Adminhtml">SDM_Compatibility_Adminhtml</SDM_Compatibility>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sdm_compatibility>
+                    <file>compatibility.xml</file>
+                </sdm_compatibility>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

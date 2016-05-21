@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+
+-->
+<config>
+    <modules>
+        <SDM_Navigation>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <SDM_Core />
+            </depends>
+        </SDM_Navigation>
+    </modules>
+</config>

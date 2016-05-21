@@ -1,0 +1,54 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Allows customers to follow an item
+ *
+ * @category  SDM
+ * @package   SDM_FollowItem
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_helper = $this->helper('sdm_catalog');
+?>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php $_follows = $this->getFollows(); ?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Followed Items') ?></h1>
+</div>
+<?php echo $this->getPagerHtml(); ?>
+<?php if($_follows->getSize()): ?>
+<table class="data-table" id="my-followed-items-table">
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Followed Item') ?></th>
+            <th><?php echo $this->__('Followed On') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($_follows as $_follow): ?>
+        <tr>
+            <td>
+                <?php echo $_follow->getEntityPrefix() ?>:
+                <a href='<?php echo $_follow->getEntityUrl() ?>'><?php echo $_follow->getEntityName() ?></a>
+                <br>
+                <?php echo $this->__($_helper->getSkuLabel($_follow->getEntityInstance()) . '%s', $_follow->getEntityInstance()->getSku()) ?>
+                <br />
+                <div class="follow-large">
+                    <?php echo Mage::helper('followitem')->getFollowLinkHtml($_follow) ?>
+                </div>
+            </td>
+            <td>
+                <?php echo date('F j, Y', strtotime($_follow->getCreatedAt())); ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-followed-items-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have no followed items.'); ?></p>
+<?php endif ?>

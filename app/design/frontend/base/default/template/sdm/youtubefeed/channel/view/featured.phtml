@@ -1,0 +1,53 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Embed Youtube Videos and Playlists
+ *
+ * @category  SDM
+ * @package   SDM_YoutubeFeed
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_YoutubeFeed_Block_Channel_View_Featured $this
+ */
+/**
+ * @var SDM_YoutubeFeed_Model_Video $_video
+ */
+$_video  = $this->getFeaturedVideo();
+/**
+ * @var SDM_YoutubeFeed_Helper_Data $_helper
+ */
+$_helper = $this->helper('sdm_youtubefeed');
+?>
+<?php if ($_video && $_video->getId()): ?>
+<div class="channel-view-featured">
+    <h2><?php echo $this->__('Featured Video') ?></h2>
+    <a href="#" onclick="jQuery(this).next().show(); return false;" class="video-image">
+        <div class="play"><i class="fa fa-youtube-play"></i></div>
+        <img src="<?php echo $this->helper('sdm_youtubefeed')->getVideoImage($_video) ?>" />
+    </a>
+    <div class="video-embed" style="display: none;">
+        <div class="video-overlay"></div>
+        <div class="video-wrap">
+            <div class="close"><i class="fa fa-times"></i></div>
+            <h2><?php echo $_video->getName() ?></h2>
+            <?php echo $_helper->getVideoIframe($_video) ?>
+        </div>
+    </div>
+    <div class="details">
+        <h3 class="video-name"><?php echo $_video->getName() ?></h3>
+        <ul class="video-details">
+            <li><?php echo Mage::getSingleton('core/date')->date('M d, Y', $_video->getPublishedAt()) ?></li>
+            <li><?php echo $_helper->getReadableDuration($_video->getDuration()) ?></li>
+            <li><?php echo $this->__('%s views', $_video->getViews()) ?></li>
+        </ul>
+        <?php if ($_video->getFileUrl()): ?>
+            <p class="video-file-url"><a target="_blank" href="<?php echo $_video->getFileUrl() ?>"><?php echo $this->__('Download Instructions') ?></a></p>
+        <?php endif ?>
+            <p class="video-description"><?php echo nl2br($this->helper('core/string')->truncate($_video->getDescription(), 200, '...')) ?></p>
+    </div>
+</div>
+<?php endif ?>

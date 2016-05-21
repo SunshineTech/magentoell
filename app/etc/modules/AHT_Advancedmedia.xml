@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AHT_Advancedmedia>
+            <active>true</active>
+            <codePool>local</codePool>
+        </AHT_Advancedmedia>
+    </modules>
+</config> 

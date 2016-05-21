@@ -1,0 +1,198 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+// =============================================
+// Brand Colors
+// =============================================
+// Usually not used directly in Sass partials.
+// Only used to define context-based color vars in this file.
+
+// Background
+$bg-primary: #f2f2f2; // lighter gray
+$hyperlink: #fa0001; //first blue from the style guide
+$hover: #004d7f; //first blue from the style guide
+// General Border
+$border-primary: #999999; // gray
+
+// Header
+$span-orange: #f99100; //orange
+$span-green: #00e801; //green
+$span-red: #fa0000; //red
+$span-yellow: #fcc90d; //yellow
+$span-blue: #009bff; //second blue from the style guide
+
+$header-bg: #ffffff;
+$header-border: #EDEEF0; //gray from the style guide
+$header-search: #009bff; //second blue from the style guide
+$border-search: #EDEEF0; //gray from the style guide
+$nav-border: #004d7f; //first blue from the style guide
+$header-text-primary: #000000;
+$header-text-link: #009bff; //second blue from the style guide
+$search-button-icon: #ffffff;
+
+// Body
+$widget-box-text: #ffffff;
+$slider-arrows: #f1312f;
+$blocks-bg: #ffffff;
+$slider-pagination: #ffffff;
+$count-bg: #009bff; //second blue from the style guide
+
+// Footer
+$footer-border: #ffffff;
+$footer-bg-primary: #009bff; //second blue from the style guide
+$footer-block-title-text: #ffffff;
+$footer-bg-secondary: #004d7f; //first blue from the style guide
+
+$footer-subscribe: #004d7f; //first blue from the style guide
+$footer-subscribe-text: #ffffff;
+$border-subscribe: #004d7f; //first blue from the style guide
+
+$footer-text-primary: #ffffff;
+$footer-text-secondary: #ffffff;
+
+$copyright-link: #ffffff;
+
+// =============================================
+// Base Colors
+// =============================================
+
+// Text
+$text-primary: #333333; // dark gray
+$text-secondary: #c9c8c7; // Light gray
+$text-tertiary: #000000; // black
+$text-theme: #009bff; //second blue from the style guide
+
+// =============================================
+// Compass Defaults
+// =============================================
+
+// Border Radius
+
+$default-border-radius: 5px;
+
+// Transition
+
+$default-transition-property: all;
+$default-transition-duration: 200ms;
+$default-transition-function: linear;
+$default-transition-delay: 0;
+
+// =============================================
+// Primary Break Points
+// =============================================
+
+// These should be used with the bp (max-width, xx) mixin
+// where a min-width is used, remember to +1 to break correctly.
+// If these are changed, they must also be updated in app.js
+
+$bp-xsmall: 479px;
+$bp-small: 599px;
+$bp-medium: 770px;
+$bp-large: 979px;
+$bp-xlarge: 1199px;
+
+// =============================================
+// Base Values
+// =============================================
+
+// Spacing
+
+$gap: 10px;
+
+$trim: 30px;
+// This will get applied on viewports smaller than 480px
+$trim-small: 15px;
+
+// Padding that will get applied to content areas
+$box-spacing-large: 20px;
+
+// Standard padding around box elements such as banner messages, etc
+$box-spacing: 10px;
+
+// Standard spacing between elements within a box, such as "Add to cart", "Price box", etc
+$element-spacing: 7px;
+
+// Dimensions
+
+$max-content-width: 1000px;
+$max-container-width: $trim + $max-content-width + $trim;
+$max-std-formatted-width: 50em;
+
+// Notifications
+
+// =============================================
+// Element Colors
+// =============================================
+
+// Table
+
+$c-table-background: #F4F4F4;
+$c-table-heading-background: #D8D8D8;
+$c-table-border: #C0C0C0;
+
+$c-table-zebra-odd: #F8F7F5;
+$c-table-zebra-even: #EEEDED;
+
+// Tabs
+
+$c-tabs-background: #F0F0F0;
+
+// Email
+$c-email-background: #EBEBEB;
+$c-email-background-secondary: #E1F0F8;
+$c-email-border: #C3CED4;
+$c-email-action: #3696C2;
+$c-email-cell: #F1F1F1;
+$c-email-highlighted-background: #FFFDD9;
+$c-email-highlighted-border: #FFF74C;
+
+// =============================================
+// Typography
+// =============================================
+
+// Google Web Font stylesheet is included via layout XML
+
+// Font Stacks
+
+$avenir: 'AvenirRegular', 'Helvetica Neue', Verdana, Arial, sans-serif;
+$avenirbold: 'AvenirBold', 'Helvetica Neue', Verdana, Arial, sans-serif;
+$avenirblack: 'AvenirBlack', 'Helvetica Neue', Verdana, Arial, sans-serif;
+$georgia: Georgia, Times, 'Times New Roman', serif;
+
+// Font Sizes
+
+$f-size-xxl: 18px;
+$f-size-xl: 16px;
+$f-size-l: 15px;
+
+$f-size: 14px;
+
+$f-size-s: 13px;
+$f-size-xs: 12px;
+$f-size-xxs: 11px;
+
+// Base Measures
+
+$b-line-height: 1.5;
+$b-margin-bottom: 1.5em;

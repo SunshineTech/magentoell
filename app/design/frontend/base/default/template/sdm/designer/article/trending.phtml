@@ -1,0 +1,9 @@
+<div class="trending-products">
+	<h2>
+		<?php echo $this->__('Trending') ?>: 
+		<a href='/designer/<?php echo $this->getDesigner()->getCode() ?>'>
+			<?php echo $this->getDesigner()->getName() ?>
+		</a>
+	</h2>
+	<?php echo $this->getTrendingProductsBlock()->toHtml() ?>
+</div>

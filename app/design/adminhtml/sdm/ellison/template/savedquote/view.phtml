@@ -1,0 +1,294 @@
+<?php
+$_quote      = Mage::registry('saved_quote');
+$_coreHelper = Mage::helper('core');
+$_isPreOrder = Mage::helper('sdm_preorder')->isQuotePreOrder($_quote);
+$_typeLabel  = $_isPreOrder ? 'Pre-Order' : 'Quote';
+$_address    = $_quote->getShippingAddress();
+$_storeId    = $_quote->getStoreId();
+$_store      = Mage::getModel('core/store')->load($_storeId);
+$_websiteId  = $_store->getWebsiteId();
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $this->getHeaderHtml() ?></td>
+            <td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+<form id="edit_quote_form" action="<?php echo $this->getFormEditUrl($_quote) ?>" method="POST">
+    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+    <div class="box-left">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend">
+                    <?php echo $this->__($_typeLabel . ' #' . $_quote->getIncrementId()) ?>
+                </h4>
+            </div>
+            <div id="log_details_fieldset" class="log-details">
+                <table cellspacing="0" class="log-info table">
+                    <col width="15%" />
+                    <col />
+                    <tbody>
+                        <tr>
+                            <th><?php echo $this->__($_typeLabel. ' Name'); ?></th>
+                            <td><?php echo $this->escapeHtml($_quote->getName()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $this->__('Status'); ?></th>
+                            <td><?php echo $this->getStatus() ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $this->__('Created At'); ?></th>
+                            <td><?php echo $this->formatDate($_quote->getCreatedAt(), 'short', true) ?> </td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $this->__('Expires At'); ?></th>
+                            <td class="value">
+                                <input name="expires_at" id="expires_at" value="<?php echo $this->formatDate($_quote->getExpiresAt(), 'short', true) ?>" title="Publish Time" style="width:16em !important" type="text" class="input-text required-entry">
+                                <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" alt="" class="v-middle" id="expires_at_trig" title="Select Date" style="">
+                                <script type="text/javascript">
+                                //<![CDATA[
+                                Calendar.setup({
+                                    inputField: "expires_at",
+                                    ifFormat: "%m/%e/%Y %I:%M %p",
+                                    showsTime: true,
+                                    button: "expires_at_trig",
+                                    align: "Bl",
+                                    singleClick : true
+                                });
+                                //]]>
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $this->__('Store'); ?></th>
+                            <td><?php echo $this->escapeHtml($_store->getName()) ?></td>
+                        </tr>
+                        <?php if ($this->getOrderIncrementId()): ?>
+                        <tr>
+                            <th><?php echo $this->__('Order #'); ?></th>
+                            <td><a href="<?php echo $this->getUrl('*/sales_order/view', array('order_id' => $_quote->getOrderId())) ?>"><?php echo $this->getOrderIncrementId() ?></a></td>
+                        </tr>
+                        <?php endif ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="entry-edit">
+        <div class='box-right'>
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend">
+                    <?php echo $this->__("Customer Info") ?>
+                </h4>
+            </div>
+            <div id="log_details_fieldset" class="log-details">
+                 <table style="width: 400px;">
+                    <tr>
+                        <th><?php echo $this->__('Customer Name'); ?></th>
+                        <td><?php echo $this->escapeHtml($this->getCustomerName()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo $this->__('Customer Email'); ?></th>
+                        <td><?php echo $this->escapeHtml($_quote->getCustomerEmail()) ?></td>
+                    </tr>
+                    <tr id="ax_account_id_block">
+                        <th class="label">
+                            <label><?php echo Mage::helper('sales')->__('AX Account ID') ?></label>
+                        </th>
+                        <td class="value">
+                            <input class="adminhtml_ax_account_id" id="ax_account_id" name="ax_account_id" value="<?php echo $this->getCustomer()->getAxCustomerId() ?>" class="input-text" type="text">
+                        </td>
+                    </tr>
+                    <tr id="ax_invoice_id_block">
+                        <th class="label">
+                            <label><?php echo Mage::helper('sales')->__('Invoice Account ID') ?></label>
+                        </th>
+                        <td class="value">
+                            <input class="adminhtml_ax_invoice_id" id="ax_invoice_id" name="ax_invoice_id" value="<?php echo $this->getCustomer()->getAxInvoiceId() ?>" class="input-text" type="text">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <?php if (!$_isPreOrder): ?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-edit-form fieldset-legend">
+                <?php echo $this->__('Shipping Address'); ?>
+            </h4>
+        </div>
+        <div class="log-details">
+            <?php if ($_address->getCompany()): ?>
+            <p><?php echo $_address->getCompany() ?></p>
+            <?php endif ?>
+            <p><?php echo $_address->getFirstname() ?> <?php echo $_address->getLastname() ?></p>
+            <p><?php echo nl2br($_address->getStreet()) ?></p>
+            <p><?php echo $_address->getCity() ?>, <?php echo $_address->getRegion() ?> <?php echo $_address->getPostcode() ?></p>
+            <p><?php echo $_address->getCountry() ?></p>
+            <p><?php echo $this->__('T: %s', $_address->getTelephone()) ?></p>
+            <?php if ($_address->getFax()): ?>
+            <p><?php echo $this->__('F: %s', $_address->getFax()) ?></p>
+            <?php endif ?>
+        </div>
+    </div>
+    <?php endif ?>
+
+    <div class="entry-edit grid">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend">
+                    <?php echo $this->__($_typeLabel . ' Items'); ?>
+                </h4>
+            </div>
+            <div class="log-details">
+                <table cellspacing="0">
+                    <thead>
+                        <tr class="headings">
+                            <th><?php echo $this->__('Name') ?></th>
+                            <th><?php echo $this->__('SKU') ?></th>
+                            <th><?php echo $this->__('Price') ?></th>
+                            <th><?php echo $this->__('Quantity') ?></th>
+                            <th><?php echo $this->__('Inventory') ?></th>
+                            <th><?php echo $this->__('Lifecycle / Release') ?></th>
+                            <th><?php echo $this->__('Row Total') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 0; foreach ($_quote->getItemCollection() as $_item): ?>
+                            <?php $_product = $_item->getProduct(); ?>
+                            <?php $_releaseDate = explode(' ', $_product->getReleaseDate()); ?>
+                            <?php $_releaseDate = reset($_releaseDate); ?>
+                            <tr class="<?php echo $i % 2 ? 'even' : 'odd' ?>">
+                                <td><?php echo $_item->getName() ?></td>
+                                <td><?php echo $_item->getSku() ?></td>
+                                <td>
+                                    <input type='text' name='quote_items[<?php echo $_item->getSku() ?>][price]' value='<?php echo number_format($_item->getPrice(), 2) ?>' />
+                                </td>
+                                <td>
+                                    <input type='text' name='quote_items[<?php echo $_item->getSku() ?>][qty]' value='<?php echo round($_item->getQty()) ?>' />
+                                </td>
+                                <td>
+                                    <?php echo $this->getStockByWebsite($_item, $_websiteId) ?>
+                                </td>
+                                <td>
+                                    <?php echo $_product->getAttributeText('life_cycle'); ?>
+                                    <?php echo empty($_releaseDate) ? '' : '/ ' . $_releaseDate; ?>
+                                </td>
+                                <td>
+                                    <?php echo $_coreHelper->currency($_item->getRowTotal(), true, false) ?>
+                                </td>
+                            </tr>
+                            <?php $i++ ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div id="add-item-wrap">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-edit-form fieldset-legend">
+                        <?php echo $this->__('New ' . $_typeLabel . ' Items'); ?>
+                    </h4>
+                </div>
+                <div class="log-details">
+                    <table cellspacing="0" id='new-quote-item-table'>
+                        <thead>
+                            <tr class="headings">
+                                <th><?php echo $this->__('SKU') ?></th>
+                                <th><?php echo $this->__('Price') ?></th>
+                                <th><?php echo $this->__('Quantity') ?></th>
+                                <th><?php echo $this->__('Remove') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="sample">
+                                <td>
+                                    <input type='text' name='new_item_sku[]' value='' />
+                                    <small>&nbsp;If adding a SKU that already exists above, this entry will take precedence</small>
+                                </td>
+                                <td>
+                                    <input type='text' name='new_item_price[]' value='' />
+                                    <small>&nbsp;Leave empty to set to current product price</small>
+                                </td>
+                                <td><input type='text' name='new_item_qty[]' value='1' /></td>
+                                <td>
+                                    <button type='button' class='scalable delete left remove-add-item-row'>
+                                        <span>
+                                            <span>Remove</span>
+                                        </span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="small-pad-top">
+        <button type='button' id='add-quote-item-button' class='scalable add right'>
+            <span>
+                <span><?php echo $this->__("Add Item To " . $_typeLabel); ?></span>
+            </span>
+        </button>
+        <div class="clear"></div>
+    </div>
+
+    <div class="entry-edit">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Totals'); ?></h4>
+            </div>
+            <div class="log-details">
+                <table cellspacing="0" class="log-info table">
+                    <colgroup>
+                        <col width="15%" />
+                        <col />
+                    </colgroup>
+                    <?php foreach ($_quote->getTotals() as $_total): ?>
+                        <?php if (!$_isPreOrder && ($_total['code'] === 'shipping' || $_total['code'] === 'shipping_surcharge' || $_total['code'] === 'tax')): ?>
+                            <tr>
+                                <th><?php echo $_total['label'] ?></th>
+                                <td><input type='text' name='<?php echo $_total['code'] ?>' value='<?php echo number_format($_total['value'], 2) ?>' /></td>
+                            </tr>
+                        <?php else: ?>
+                            <tr>
+                                <th><?php echo $_total['label'] ?></th>
+                                <td><?php echo $_coreHelper->currency($_total['value'], true, false) ?></td>
+                            </tr>
+                        <?php endif; ?>
+                    <?php endforeach ?>
+                    <?php $_discount = $_quote->getTotals('discount', 'Coupon Used') ?>
+                    <?php if ($_discount): ?>
+                        <tr>
+                            <th><?php echo $_discount['label'] ?></th>
+                            <td><?php echo $_quote->getCouponCodes() ?></td>
+                        </tr>
+                    <?php endif  ?>
+                </table>
+                <div>
+                    <p>* <?php echo $this->__('Discount is already applied on the saved item price when the quote was saved originally. It does not re-calculate. Reference only.') ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="entry-edit">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend">
+                    <?php echo $this->__('Internal Comments'); ?>
+                </h4>
+            </div>
+            <div class="log-details">
+                <textarea style='width: 80%;height: 150px;' name="internal_comments"><?php echo $_quote->getInternalComments() ?></textarea>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    var editForm = new varienForm('edit_quote_form', '');
+</script>

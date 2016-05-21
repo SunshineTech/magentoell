@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    
+    <adminhtml_catalog_product_action_attribute_edit>
+        <reference name="tab_inventory">
+    		      <action method="setTemplate"><template>aitcommonfiles/design--adminhtml--default--default--template--catalog--product--edit--action--inventory.phtml</template></action>
+    	</reference>
+    </adminhtml_catalog_product_action_attribute_edit>    
+    
+</layout> 
+<!--
+/**
+ * Multi-Location Inventory
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitquantitymanager
+ * @version      2.2.3
+ * @license:     rJhV4acfvLy4sPgpe7MoLJnfOEhDVfWVuKRvbpcv30
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

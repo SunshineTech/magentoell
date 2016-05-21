@@ -1,0 +1,50 @@
+<!--@subject {{var ticket.getEmailSubject('Rappel du billet')}} @-->
+<!--@vars
+{"htmlescape var=$customer.name":"Customer Name",
+"var customer.email":"Customer Email"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f;  }
+@-->
+{{var hidden_separator}}
+<div style="font:13px/1.45em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                        	S'il vous plait, répondez au billet suivant:<br><br>
+                            {{var ticket.name}}<br>
+                            ------------------------------<br><br>
+
+                            Billet ID: {{var ticket.code}}<br>
+                            Nom: {{htmlescape var=$customer.name}}<br>
+                            Adresse e-mail: {{var customer.email}}<br>
+                            Magasin: {{var store.getFrontendName()}}<br>
+                            Département: {{var ticket.department}}<br>
+                            Personnel: -- Unassigned --<br>
+                            Statut: {{var ticket.status}}<br>
+                            Priorité: {{var ticket.priority}}<br>
+                            Crée: {{var ticket.getCreatedAtFormated('long')}}<br>
+                            <br>
+                            {{var ticket.getLastMessageHtmlText()}}
+                            {{var ticket.getHistoryHtml()}}
+                            {{var ticket.getHiddenCodeHtml()}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,42 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_value = $this->getValue();
+$_fax   = $this->getFax();
+
+?>
+
+<div class="field file">
+	<label for="<?php echo $this->getId() ?>" class='required'>
+		<?php echo $this->getName() ?>
+	</label>
+	<input id="<?php echo $this->getId() ?>" type='file' name='<?php echo $this->getId() ?>' class='<?php if (!empty($_value)): ?>has-file<?php else: ?>required-entry<?php endif; ?> file-field' />
+	<?php if($this->getNote()): ?>
+		<div class="clear"></div>
+		<div class='note'><?php echo $this->getNote() ?></div>
+	<?php endif; ?>
+	<div class="clear"></div>
+	<label for='<?php echo $this->getId() ?>_fax' class='fax'>
+		<input type='checkbox' name='<?php echo $this->getId() ?>_fax' id='<?php echo $this->getId() ?>_fax'<?php if($_fax): ?> checked="checked"<?php endif; ?> class='fax-field' />
+		<?php echo $this->__('I will fax this document'); ?>
+	</label>
+	<?php if (!empty($_value)): ?>
+		<div class="clear"></div>
+		<div class='existing-file'>
+			<?php echo $this->__(
+				"You have already uploaded your %s. To view the file you uploaded, <a href='%s' target='_blank'>click here</a>. By uploading a new file or selecting \"I will fax this document\", your old file will be deleted.",
+				$this->getName(),
+				Mage::getBaseUrl('media').$this->getValue()
+			) ?>
+		</div>
+	<?php endif; ?>
+</div>

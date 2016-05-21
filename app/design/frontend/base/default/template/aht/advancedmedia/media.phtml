@@ -1,0 +1,226 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+
+<?php
+	$_product = $this->getProduct();
+	$_helper = $this->helper('catalog/output');
+	$advancedMedia = Mage::getModel('advancedmedia/advancedmedia')
+		->getCollection()
+		->addFieldToFilter('product_id', $_product->getId())
+		->addFieldToFilter('is_exclude', 0);
+	$isEnableSlide = Mage::getStoreConfig('advancedmedia/thumbnail/slide_of_thumbnail');
+	$useLightbox = Mage::getStoreConfig('advancedmedia/general/use_lightbox');
+	$mainImageWidth = Mage::getStoreConfig('advancedmedia/general/width');
+	$mainImageHeight = Mage::getStoreConfig('advancedmedia/general/height');
+	$lightboxImageWidth = Mage::getStoreConfig('advancedmedia/lightbox/width');
+	$lightboxImageHeight = Mage::getStoreConfig('advancedmedia/lightbox/height');
+	$thumbnailImageWidth = Mage::getStoreConfig('advancedmedia/thumbnail/width');
+	$thumbnailImageHeight = Mage::getStoreConfig('advancedmedia/thumbnail/height');
+	$visibleSlide = Mage::getStoreConfig('advancedmedia/thumbnail/visible');
+	$zoomWidth = Mage::getStoreConfig('advancedmedia/imagezoom/width');
+	$zoomHeight = Mage::getStoreConfig('advancedmedia/imagezoom/height');
+	$zoomPosition = Mage::getStoreConfig('advancedmedia/imagezoom/position');
+	$widthSlide = (($thumbnailImageWidth+4+9)*$visibleSlide)-9;
+	$pathImageVideo = Mage::getStoreConfig('advancedmedia/thumbnail/video_thumbnail');
+?>
+
+	<div class="product-image product-image-zoom">
+		<div id="wrap">
+			<a gallery="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" class="cloud-zoom" id="cloudZoom">
+			<?php
+				$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize($mainImageWidth,$mainImageHeight).'" width="'.$mainImageWidth.'" height="'.$mainImageHeight.'" />';
+				echo $_helper->productAttribute($_product, $_img, 'image');
+			?>
+			</a>
+		</div>
+		<a class="fancybox-buttons" id="imagehidden-0" href="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($lightboxImageWidth,$lightboxImageHeight)?>" data-fancybox-group="button"></a>
+		<div id="product-image-container">
+			<div class="advancedmedia-loading" style="display:none"><img src="<?php echo $this->getSkinUrl('advancedmedia/images/ajax-loader.gif');?>" alt="Loading..."/></div>
+		</div>
+	</div>
+<?php if ((count($this->getGalleryImages()) > 0) || (count($advancedMedia)>0)): ?>
+<?php if($useLightbox == 1):?>
+<script type="text/javascript">
+	ahtjQuery(document).ready(function() {
+		ahtjQuery('.fancybox-buttons').fancybox({
+			openEffect  : 'none',
+			closeEffect : 'none',
+			prevEffect : 'none',
+			nextEffect : 'none',
+
+		});
+	});
+</script>
+<div class="media-lightbox">
+<a id="zoomClickButton" class="main-button" onclick="lightBox(this.lang); return false" href="#" lang="imagehidden-0"></a>
+</div>
+<?php endif?>
+<div class="more-views">
+	<h2><?php echo $this->__('More Views') ?></h2>
+	<?php if($isEnableSlide == 1):?>
+		<div id="slide-carousel-featured" style="width:<?php echo $widthSlide?>px;">
+			<?php if((count($this->getGalleryImages()) + count($advancedMedia)) > $visibleSlide):?>
+			<div class="controls-featured">
+				<a href="javascript:void(0)" class="carousel-control ico-next" rel="next"></a>
+				<a href="javascript:void(0)" class="carousel-control ico-prev" rel="prev"></a>
+			</div>
+			<?php endif;?>
+			<div id="aht-slide-featured" class="carousel" style="width:<?php echo $widthSlide?>px;">
+				<div class="middle-featured" style="width:<?php echo $widthSlide?>px;">
+					<ul class="advancedmedia-list" style="width:100000px;">
+						<?php if(count($this->getGalleryImages()) > 0): ?>
+							<?php $i=0;foreach ($this->getGalleryImages() as $_image):$i++; ?>
+								<li class="advancedmedia-<?php echo $_image->getPosition() ?>">
+									<div>
+										<div style="display:none">
+											<img src="<?php echo $_image->getUrl() ?>" />
+										</div>
+										<a style="width:<?php echo $thumbnailImageWidth;?>px;height:<?php echo $thumbnailImageHeight;?>px"  onclick="changeImage('imagehidden-<?php echo $i?>',this.href);return false;" class="cloud-zoom-gallery"  href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($mainImageWidth,$mainImageHeight);?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>">
+											<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($thumbnailImageWidth,$thumbnailImageHeight); ?>" width="<?php echo $thumbnailImageWidth?>" height="<?php echo $thumbnailImageHeight?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+										</a>
+										<a id="imagehidden-<?php echo $i?>" class="fancybox-buttons" data-fancybox-group="button" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($lightboxImageWidth,$lightboxImageWidth)?>"></a>
+									</div>
+								</li>
+							<?php endforeach; ?>
+						<?php endif ?>
+						<?php if(count($advancedMedia)>0):?>
+							<?php $j=0;foreach ($advancedMedia as $_media):$j++; ?>
+								<li class="advancedmedia-<?php echo $_media->getMediaPosition() ?>">
+									<?php if($_media->getUseType()==2): ?>
+									<div style="position:relative">
+										<a style="width:<?php echo $thumbnailImageWidth;?>px;height:<?php echo $thumbnailImageHeight;?>px" href="#" title="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>" onclick="changeVideo(<?php echo $_media->getId() ?>, <?php echo $_media->getUseType() ?>,'video-<?php echo $j?>'); return false">
+											<img src="http://img.youtube.com/vi/<?php echo Mage::helper('advancedmedia/data')->getYoutubeKey($_media->getMediaEmbed()) ?>/1.jpg" alt="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>" width="<?php echo $thumbnailImageWidth?>" height="<?php echo $thumbnailImageHeight?>"/>
+										</a>
+										<div style="width:<?php echo $thumbnailImageWidth;?>px;height:<?php echo $thumbnailImageHeight;?>px" class="play-button" onclick="changeVideo(<?php echo $_media->getId() ?>, <?php echo $_media->getUseType() ?>,'video-<?php echo $j?>'); return false">
+											<img src="<?php echo $this->getSkinUrl('advancedmedia/images/play-button.png') ?>" alt="<?php echo $this->__('Play') ?>"/>
+										</div>
+										<a id="video-<?php echo $j?>" class="fancybox-buttons fancybox.iframe" data-fancybox-group="button" href="<?php echo Mage::helper('advancedmedia/data')->getYoutubeLink($_media->getMediaEmbed())?>"></a>
+									</div>
+									<?php else: ?>
+									<div>
+										<a style="width:<?php echo $thumbnailImageWidth;?>px;height:<?php echo $thumbnailImageHeight;?>px" href="<?php echo $this->getUrl().'advancedmedia/index/iframe?url='.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$_media->getMediaSrc()?>" title="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>" onclick="changeVideo(<?php echo $_media->getId() ?>, <?php echo $_media->getUseType() ?>,'video-<?php echo $j?>'); return false">
+											<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'advancedmedia/'.$pathImageVideo; ?>" alt="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>" width="<?php echo $thumbnailImageWidth?>" height="<?php echo $thumbnailImageHeight?>"/>
+										</a>
+										<a id="video-<?php echo $j?>" class="fancybox-buttons fancybox.iframe" data-fancybox-group="button" href="<?php echo $this->getUrl().'advancedmedia/index/iframe?url='.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$_media->getMediaSrc()?>" title="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>"></a>
+									</div>
+									<?php endif ?>
+								</li>
+							<?php endforeach; ?>
+						<?php endif ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	<?php else:?>
+		<ul class="advancedmedia-list" style="width:<?php echo $widthSlide?>px;">
+		<?php if(count($this->getGalleryImages()) > 0): ?>
+			<?php $i=0;foreach ($this->getGalleryImages() as $_image):$i++; ?>
+				<li class="advancedmedia-<?php echo $_image->getPosition() ?>">
+					<div>
+						<div style="display:none">
+							<img src="<?php echo $_image->getUrl() ?>" />
+						</div>
+						<a style="width:<?php echo $thumbnailImageWidth;?>px;height:<?php echo $thumbnailImageHeight;?>px" onclick="changeImage('imagehidden-<?php echo $i?>',this.href);return false;" class="cloud-zoom-gallery" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($mainImageWidth,$mainImageHeight)?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>">
+							<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($thumbnailImageWidth,$thumbnailImageHeight); ?>" width="<?php echo $thumbnailImageWidth?>" height="<?php echo $thumbnailImageHeight?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+						</a>
+						<a id="imagehidden-<?php echo $i?>" class="fancybox-buttons" data-fancybox-group="button" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($lightboxImageWidth,$lightboxImageWidth)?>"></a>
+					</div>
+				</li>
+			<?php endforeach; ?>
+		<?php endif ?>
+		<?php if(count($advancedMedia)>0):?>
+			<?php $j=0;foreach ($advancedMedia as $_media):$j++; ?>
+				<li class="advancedmedia-<?php echo $_media->getMediaPosition() ?>">
+					<?php if($_media->getUseType()==2): ?>
+					<div style="position:relative">
+						<a style="width:<?php echo $thumbnailImageWidth;?>px;height:<?php echo $thumbnailImageHeight;?>px" href="#" title="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>" onclick="changeVideo(<?php echo $_media->getId() ?>, <?php echo $_media->getUseType() ?>,'video-<?php echo $j?>'); return false">
+							<img src="http://img.youtube.com/vi/<?php echo Mage::helper('advancedmedia/data')->getYoutubeKey($_media->getMediaEmbed()) ?>/1.jpg" alt="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>" width="<?php echo $thumbnailImageWidth?>" height="<?php echo $thumbnailImageHeight?>"/>
+						</a>
+						<div style="width:<?php echo $thumbnailImageWidth;?>px;height:<?php echo $thumbnailImageHeight;?>px" class="play-button" onclick="changeVideo(<?php echo $_media->getId() ?>, <?php echo $_media->getUseType() ?>,'video-<?php echo $j?>'); return false">
+							<img src="<?php echo $this->getSkinUrl('advancedmedia/images/play-button.png') ?>" alt="<?php echo $this->__('Play') ?>"/>
+						</div>
+						<a id="video-<?php echo $j?>" class="fancybox-buttons fancybox.iframe" data-fancybox-group="button" href="<?php echo Mage::helper('advancedmedia/data')->getYoutubeLink($_media->getMediaEmbed())?>"></a>
+					</div>
+					<?php else: ?>
+					<div>
+						<a style="width:<?php echo $thumbnailImageWidth;?>px;height:<?php echo $thumbnailImageHeight;?>px" href="#" onclick="changeVideo(<?php echo $_media->getId() ?>, <?php echo $_media->getUseType() ?>,'video-<?php echo $j?>'); return false">
+							<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'advancedmedia/'.$pathImageVideo; ?>" alt="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>" />
+						</a>
+						<a id="video-<?php echo $j?>" class="fancybox-buttons fancybox.iframe" data-fancybox-group="button" href="<?php echo $this->getUrl().'advancedmedia/index/iframe?url='.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$_media->getMediaSrc()?>" title="<?php echo $this->htmlEscape($_media->getMediaLabel()) ?>"></a>
+					</div>
+					<?php endif ?>
+				</li>
+			<?php endforeach; ?>
+		<?php endif ?>
+		</ul>
+	<?php endif;?>
+	<script type="text/javascript">
+		ahtjQuery(document).ready(function() {
+			new Carousel($('aht-slide-featured').down('.middle-featured'), $('aht-slide-featured').select('li'), $('slide-carousel-featured').select('.controls-featured a'), {duration: 0.5 , transition: 'sinoidal',visibleSlides: <?php echo $visibleSlide?>,circular:false,auto : false,wheel: false  });
+		});
+	</script>
+</div>
+<script type="text/javascript">
+	OrderDIV(1);
+	function changeImage(href,src){
+		ahtjQuery('#zoomClickButton').attr('lang',href);
+		ahtjQuery('#image').attr('src',src);
+		ahtjQuery('#wrap').show();
+		ahtjQuery('#product-image-container').hide();
+		ahtjQuery('#product-image-container').html('');
+	}
+	function changeVideo(id, type,href){
+		ahtjQuery.ajax({
+		  url: '<?php echo $this->getUrl('advancedmedia/index/video') ?>',
+		  data: "id="+id,
+		  beforeSend: function(){
+			ahtjQuery('#wrap').hide();
+			ahtjQuery('.advancedmedia-loading').show();
+		  },
+		  success: function(response){
+			ahtjQuery('#zoomClickButton').attr('lang',href);
+			ahtjQuery('#product-image-container').show();
+			ahtjQuery('#product-image-container').html(response);
+			ahtjQuery('#product-image-container iframe').width(<?php echo $mainImageWidth; ?>);
+			ahtjQuery('#product-image-container iframe').height(<?php echo $mainImageHeight; ?>);
+			if(type==1)
+				flowplayer("player", "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>advancedmedia/flowplayer-3.2.7.swf");
+			ahtjQuery('.advancedmedia-loading').hide();
+		  }
+		});
+	}
+	function lightBox(id){
+		ahtjQuery('#'+id).click();
+	}
+</script>
+<?php endif; ?>

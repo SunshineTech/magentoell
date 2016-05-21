@@ -1,0 +1,170 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * This module handles all the store locator functionality for Ellison.
+ * 
+ * The original code from this module is based off the FME_Gmapstrlocator module. We converted their
+ * module to an SDM module rather than extending from it because the amount of modifications and
+ * rewrites necessary for it to fit Ellison's spec were extensive, yet we still felt there was value
+ * in using FME's module as a starting point.
+ *
+ * @category  SDM
+ * @package   SDM_Gmapstrlocator
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+$_helper = Mage::helper('gmapstrlocator');
+$_SZUK = Mage::helper('sdm_core')->isSite(SDM_Core_Helper_Data::ELLISON_SYSTEM_CODE_UK);
+$_EEUS = Mage::helper('sdm_core')->isSite(SDM_Core_Helper_Data::ELLISON_SYSTEM_CODE_ED);
+?>
+<script type="text/javascript">
+    var GMAPS = {};
+    GMAPS.apiKey = '<?php echo Mage::helper('gmapstrlocator')->getGMapAPIKey() ?>';
+    GMAPS.defaultCountry = '<?php echo Mage::helper('core')->getDefaultCountry() ?>';
+    GMAPS.defaultLat = <?php echo Mage::helper('gmapstrlocator')->getGMapStandardLatitude() ?>;
+    GMAPS.defaultLng = <?php echo Mage::helper('gmapstrlocator')->getGMapStandardLongitude() ?>;
+    GMAPS.defaultZoom = <?php echo Mage::helper('gmapstrlocator')->getGMapZoom() ?>;
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<?php echo Mage::helper('gmapstrlocator')->getGMapAPIKey() ?>"></script>
+<script src="<?php echo $this->getSkinUrl('sdm/gmapstrlocator/js/store-locator.js'); ?>"></script>
+
+<ul id="store-locator-tab-contents">
+    <li class="tab-content<?php if (!$_EEUS): ?> active<?php endif; ?>" id="tab-content-stores">
+        <div id="standard-ajax-loading" class='store-locator-ajax-loading'></div> 
+        <h2>
+            <?php echo Mage::helper('gmapstrlocator')->getGMapPageTitle() ?>
+        </h2>
+        <div id="store-locator-map"></div>
+        <div class="clear"></div>
+
+        <?php if (!($_SZUK)) :?>
+            <div class="legend">
+                <h3>
+                    <?php echo $this->__('Product Lines & Brands') ?>
+                </h3>
+                <div class="brands-legend">
+                    <?php foreach($_helper->getProductLines() as $key => $value): ?>
+                        <span class='brand-key <?php echo $key ?>'>
+                            <?php echo $this->__($value); ?>
+                        </span>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="clear"></div>
+        <?php endif ?>
+
+        <div id="locator-standard-results" class='store-locator-result-section'>
+            <h2 style='display: none;' class='standard-heading'>
+                <?php echo $this->__('Search Results'); ?>
+            </h2> 
+            <ul>
+                <!-- 
+                    The li.item-template below is used as a template
+                    for the JavaScript to create new list items.
+                -->
+                <li style='display: none;' class='item-template'>
+                   <!--  <div class="section section-1">
+                        <p>
+                            <img class='image' src="" />
+                        </p>
+                    </div> -->
+                    <div class="section section-2">
+                        <h3>
+                            <a href='#' class="name">Store Name</a>
+                        </h3>
+                        <p class='design-center'>
+                            <?php echo $this->__('Has Ellison Design Center') ?>
+                        </p>
+                        <?php if (!($_SZUK)) :?>
+                            <p class='brands'>
+                                <span class='brand-key allstar' title='All Star'></span>
+                                <span class='brand-key eclips' title='eClips'></span>
+                                <span class='brand-key prestige' title='Prestige'></span>
+                                <span class='brand-key quilting' title='Quilting'></span>
+                                <span class='brand-key sizzix' title='Sizzix'></span>
+                            </p>
+                        <?php endif ?>
+                        <p class="distance"></p>
+                    </div>
+                    <div class="section section-3">            
+                        <p class='address' data-country=''></p>
+                        <p class='phone'>
+                            <strong>Phone: </strong> <span></span>
+                        </p>
+                        <p class='fax'>
+                            <strong>Fax: </strong> <span></span>
+                        </p>
+                        <p class="rep-serving">
+                            <strong>Representative Serves:</strong> <span></span>
+                        </p>
+                    </div>
+                    <div class="section section-4">            
+                        <p class="website">
+                            <a href="#" class='button' target="_blank">Browse Website</a>
+                        </p>
+                        <p class='email'>
+                            <a href='#'>Email Store</a>
+                        </p>
+                        <p class='directions'>
+                            <a href='#' target="_blank">Get Directions</a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <div class="no-results" style='display: none;'>
+                <p><?php echo $this->__('No results found. Try modifying your search.'); ?></p>
+            </div>
+        </div>
+
+        <div id="retailers-block">
+            <?php echo $this->getChildHtml('retailers') ?>
+        </div>
+    </li>
+    <li class="tab-content<?php if ($_EEUS): ?> active<?php endif; ?>" id="tab-content-online">
+        <div id="online-ajax-loading" class='store-locator-ajax-loading'></div> 
+        <h1>
+            <?php echo $this->__('Online Retailers') ?>
+        </h1>
+        <div class="clear"></div>
+
+        <div class="legend">
+            <h3>
+                <?php echo $this->__('Product Lines & Brands') ?>
+            </h3>
+            <div class="brands-legend">
+                <?php foreach($_helper->getProductLines() as $key => $value): ?>
+                    <span class='brand-key <?php echo $key ?>'>
+                        <?php echo $this->__($value); ?>
+                    </span>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div id="locator-online-results" class='store-locator-result-section'>
+            <ul>
+                
+            </ul>
+            <div class="no-results" style='display: none;'>
+                <p><?php echo $this->__('No online retailers found.'); ?></p>
+            </div>
+        </div>
+    </li>   
+</ul>
+
+<script type="text/javascript">
+/**
+ * When jQuery and Google Maps are ready, start the store locator engine
+ */
+var storeLocator = null;
+jQuery(document).ready(function(){
+    google.maps.event.addDomListener(window, 'load', function() {
+        storeLocator = new SDMStoreLocator(
+            'store-locator-map',
+            'locator-standard-results',
+            'locator-online-results'
+        );
+    });
+});
+</script>

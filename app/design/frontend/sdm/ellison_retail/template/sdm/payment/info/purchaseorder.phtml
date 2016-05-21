@@ -1,0 +1,49 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Magento catalog customizations
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Checkout
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+?>
+<?php
+$_parentId = $this->getInfo()->getParentId();
+$_type = SDM_Checkout_Helper_Data::PURCHASE_ORDER_PAYMENT_CODE;
+$_upload = $this->getUpload($_parentId, $_type);
+?>
+
+<p><?php echo $this->escapeHtml($this->getMethod()->getTitle()) ?></p>
+<p><?php echo Mage::helper('payment')->__('PO Number: %s', $this->escapeHtml($this->getInfo()->getPoNumber())) ?></p>
+<div class="">
+    <form action="<?php echo $this->getUploadFileUrl() ?>" id="purchase-order-upload" method="post" enctype="multipart/form-data">
+        <?php echo $this->__('PO File') ?>:
+        <?php if ($_upload->getId()): ?>
+            <?php $_fileExists = false ?>
+            [<a href="<?php echo Mage::getUrl() . $_upload->getPath() ?>" target="_blank"><?php echo $_upload->getLabel() ?></a>]
+        <?php else: ?>
+            <?php $_fileExists = true ?>
+            [Please upload a file]
+        <?php endif; ?>
+        <input type="file" id="po_file" name="po_file" value="" title="Purchase Order File" class="input-file" />
+        <input type="hidden" name="parent_id" value="<?php echo $_parentId ?>" />
+        <input type="hidden" name="type" value="<?php echo $_type ?>" />
+        <input type="submit" value="Upload" />
+    </form>
+</div>
+<?php if($_fileExists): ?>
+<div class="">
+    <ul class="messages">
+        <li class="error-msg">
+            <ul>
+                <li><span>Please upload a purchase order. Your order will not be processed until a purchase order has been uploaded.</span></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<?php endif; ?>

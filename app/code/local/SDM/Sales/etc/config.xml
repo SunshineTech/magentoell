@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's Mage_Sales customizations
+ *
+ * @category  SDM
+ * @package   SDM_Sales
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Sales>
+            <version>0.2.3</version>
+        </SDM_Sales>
+    </modules>
+    <global>
+        <models>
+            <sdm_sales>
+                <class>SDM_Sales_Model</class>
+                <resourceModel>sdm_sales_resource</resourceModel>
+            </sdm_sales>
+            <sdm_sales_resource>
+                <class>SDM_Sales_Model_Resource</class>
+                <entities>
+                    <order_ax>
+                        <table>sdm_sales_flat_order_ax</table>
+                    </order_ax>
+                </entities>
+            </sdm_sales_resource>
+            <sales>
+                <rewrite>
+                    <order>SDM_Sales_Model_Order</order>
+                    <order_item>SDM_Sales_Model_Order_Item</order_item>
+                    <quote>SDM_Sales_Model_Quote</quote>
+                    <quote_address_total_subtotal>SDM_Sales_Model_Quote_Address_Total_Subtotal</quote_address_total_subtotal>
+                </rewrite>
+            </sales>
+        </models>
+        <resources>
+            <sdm_sales_setup>
+                <setup>
+                    <module>SDM_Sales</module>
+                    <class>SDM_Sales_Model_Resource_Setup</class>
+                </setup>
+            </sdm_sales_setup>
+        </resources>
+        <blocks>
+            <sdm_sales>
+                <class>SDM_Sales_Block</class>
+            </sdm_sales>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_view_items_renderer_default>SDM_Sales_Block_Adminhtml_Sales_Order_View_Items_Renderer_Default</sales_order_view_items_renderer_default>
+                    <sales_order_view>SDM_Sales_Block_Adminhtml_Sales_Order_View</sales_order_view>
+                    <sales_order_grid>SDM_Sales_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
+                </rewrite>
+            </adminhtml>
+            <sales>
+                <rewrite>
+                    <order_totals>SDM_Sales_Block_Order_Totals</order_totals>
+                </rewrite>
+            </sales>
+        </blocks>
+        <helpers>
+            <sdm_sales>
+                <class>SDM_Sales_Helper</class>
+            </sdm_sales>
+            <adminhtml>
+                <rewrite>
+                    <sales>SDM_Sales_Helper_Adminhtml_Sales</sales>
+                </rewrite>
+            </adminhtml>
+        </helpers>
+        <events>
+            <sales_quote_item_set_product>
+                <observers>
+                    <set_custom_attributes>
+                        <class>sdm_sales/observer</class>
+                        <method>salesQuoteItemSetCustomAttributes</method>
+                    </set_custom_attributes>
+                </observers>
+            </sales_quote_item_set_product>
+            <sales_order_place_after>
+                <observers>
+                    <custom_order_status_change>
+                        <class>sdm_sales/observer</class>
+                        <method>customOrderStatusChange</method>
+                    </custom_order_status_change>
+                </observers>
+            </sales_order_place_after>
+        </events>
+        <fieldsets>
+            <sales_convert_quote_item>
+                <msrp>
+                    <to_order_item>*</to_order_item>
+                </msrp>
+                <item_type>
+                    <to_order_item>*</to_order_item>
+                </item_type>
+            </sales_convert_quote_item>
+            <sales_convert_order_item>
+                <msrp>
+                    <to_quote_item>*</to_quote_item>
+                </msrp>
+                <item_type>
+                    <to_quote_item>*</to_quote_item>
+                </item_type>
+            </sales_convert_order_item>
+        </fieldsets>
+        <sales>
+            <quote>
+                <item>
+                    <!-- Make these available when adding product to quote and in $item->getProduct() -->
+                    <product_attributes>
+                        <msrp /> <!-- Note: this node is already defined in CE 1.9 -->
+                        <min_qty />
+                        <tag_discount_category />
+                        <price_euro />
+                        <special_price_euro />
+                        <release_date />
+                        <allow_cart />
+                        <allow_checkout />
+                        <allow_cart_backorder />
+                        <allow_checkout_backorder />
+                        <allow_preorder />
+                        <allow_quote />
+                        <product_type />
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_Sales before="Mage_Adminhtml">SDM_Sales_Adminhtml</SDM_Sales>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <sales>
+                <args>
+                    <modules>
+                        <SDM_Sales before="Mage_Sales">SDM_Sales</SDM_Sales>
+                    </modules>
+                </args>
+            </sales>
+        </routers>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sdm_sales module="SDM_Sales">
+                    <file>sdm/sales.xml</file>
+                </sdm_sales>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

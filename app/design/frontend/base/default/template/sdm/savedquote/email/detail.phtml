@@ -1,0 +1,72 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var $this SDM_SavedQuote_Block_Email_Detail
+ */
+
+$_quote          = $this->getQuote();
+$_coreHelper     = $this->helper('core');
+$_preOrderHelper = $this->helper('sdm_preorder');
+
+?>
+<h2><?php echo $this->__('Items') ?></h2>
+<table style="width: 100%;">
+    <thead>
+        <tr>
+            <th style="padding: 5px; text-align: left; font-weight: bold; width: 150px;"><?php echo $this->__('Product Name') ?></th>
+            <th style="padding: 5px; text-align: left; font-weight: bold;"><?php echo $this->__('SKU') ?></th>
+            <th style="padding: 5px; text-align: left; font-weight: bold;"><?php echo $this->__('Release Date') ?></th>
+            <th style="padding: 5px; text-align: right; font-weight: bold;"><?php echo $this->__('Price') ?></th>
+            <th style="padding: 5px; text-align: right; font-weight: bold;"><?php echo $this->__('Quantity') ?></th>
+            <th style="padding: 5px; text-align: right; font-weight: bold;"><?php echo $this->__('Row Total') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($_quote->getItemCollection() as $_item): ?>
+        <tr>
+            <td style="padding: 5px; text-align: left;"><?php echo $_item->getName() ?></td>
+            <td style="padding: 5px; text-align: left;"><?php echo $_item->getSku() ?></td>
+            <td style="padding: 5px; text-align: left;"><?php echo $_preOrderHelper->getReadableDate($_item->getPreOrderReleaseDate()) ?></td>
+            <td style="padding: 5px; text-align: right;"><?php echo $_coreHelper->currency($_item->getPrice(), true, false) ?></td>
+            <td style="padding: 5px; text-align: right;"><?php echo round($_item->getQty()) ?></td>
+            <td style="padding: 5px; text-align: right;"><?php echo $_coreHelper->currency($_item->getRowTotal(), true, false) ?></td>
+        </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
+<table style="width: 100%;">
+    <tbody>
+        <tr>
+            <th style="padding: 5px; text-align: right; font-weight: bold;">
+                <?php echo $this->__('Subtotal') ?>
+                <?php if ($_coupon = $_quote->getCouponCodes()): ?>
+                    <?php echo $this->__('(Including discount "%s")', $_coupon) ?>
+                <?php endif ?>
+            </th>
+            <td style="padding: 5px; text-align: right; width: 20%;">
+                <?php echo $_coreHelper->currency($_quote->getSubtotal(), true, false) ?>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2><?php echo $this->__('Customer Information') ?></h2>
+<p><?php echo $_quote->getCustomerFirstname() ?> <?php echo $_quote->getCustomerLastname() ?></p>
+
+<h2><?php echo $this->__('Shipping Date') ?></h2>
+<p><?php echo $_preOrderHelper->getReadableDate($_quote->getPreOrderShippingDate()) ?></p>
+
+<p><?php echo $this->__('We will contact you by email once the Pre-order is available to process.') ?></p>

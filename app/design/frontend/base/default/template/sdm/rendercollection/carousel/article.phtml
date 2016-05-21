@@ -1,0 +1,58 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Collection Rendering Widget
+ *
+ * @category  SDM
+ * @package   SDM_RenderCollection
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+?>
+<?php
+    $_articles = $this->getCollection();
+    $_collectionSize = $_articles->count();
+    $_helper = $this->helper('catalog/output');
+    $_columnCount = 4;
+?>
+<?php if($_collectionSize): ?>
+<div class="render-collection article-carousel">
+    <?php $i=0; foreach ($_articles as $_article): ?>
+        <?php $_content = $_article->getContent(); ?>
+        <?php $_contentTrimmed = strip_tags($_content); ?>
+        <?php $_contentTrimmed = Mage::helper('core/string')->truncate($_contentTrimmed, 170, '...', $remainder, false); ?>
+        <?php $_cover = $_article->getHeroImage() ?>
+        <?php $_url = Mage::getUrl($_article->getData('identifier')); ?>
+        <?php if ($i++ === 0): ?>
+        <ul class="products-grid--max-4-col collection-carousel owl-carousel" id="<?php echo $this->getCarouselId() ?>">
+        <?php endif ?>
+            <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                <?php if ($_cover): ?>
+                    <a href="<?php echo $_url ?>" class="product-image">
+                    <?php $_imgSize = 210; ?>
+                        <img id="product-collection-image-<?php echo $_article->getId(); ?>"
+                             src="<?php echo $this->helper('sdm_core')->resizeImg($_cover, 210, 210); ?>" />
+                    </a>
+                <?php endif; ?>
+                <div class="product-info">
+                    <h3><?php echo $_article->getContentHeading() ?></h3>
+                    <p><?php echo $_contentTrimmed ?></p>
+                    <div class="actions">
+                        <p class="action">
+                            <a title="Read Article" class="button" href="<?php echo $_url ?>">
+                                <?php echo $this->__('Read Full Article') ?>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </li>
+        <?php if ($i == $_collectionSize): ?>
+        </ul>
+        <?php endif ?>
+    <?php endforeach ?>
+</div>
+<?php endif; ?>
+<script type='text/javascript'>
+    <?php echo $this->getCarouselInit() ?>
+</script>

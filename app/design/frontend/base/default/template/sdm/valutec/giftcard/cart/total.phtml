@@ -1,0 +1,33 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Valutec Giftcard Integration
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Valutec
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+/**
+ * @var SDM_Valutec_Block_Checkout_Cart_Total $this
+ */
+$_card   = $this->getCard();
+$_amount = $this->getAmount();
+?>
+<?php if ($_amount > 0 && $_card): ?>
+<tr>
+    <th colspan="<?php echo $this->getColspan(); ?>" style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+            <?php echo $this->__('Giftcard (%s)', $_card['number']); ?>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </th>
+    <td style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+            -<?php echo $this->helper('checkout')->formatPrice($_amount) ?>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </td>
+</tr>
+<?php endif ?>

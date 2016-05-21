@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Modifications to Mirasvit_Helpdesk Extension
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Helpdesk
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Helpdesk>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mirasvit_Helpdesk />
+            </depends>
+        </SDM_Helpdesk>
+    </modules>
+</config>

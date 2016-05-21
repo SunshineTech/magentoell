@@ -1,0 +1,26 @@
+<?php
+$config = $this->getConfig();
+$customer = $this->getCustomer();
+?>
+<form action="<?php echo $this->getKbResultUrl()?>" method="GET" id="helpdesk-contact-form" class="helpdesk-contact-form form-kb">
+    <div class="close" onclick="window.parent.helpdeskFormHide();">&times;</div>
+    <div class="dropbox">
+        <h2 class="legend"><?php echo $config->getFormTitle() ?></h2>
+        <div class="inside-form">
+            <ul class="form-list">
+                <li>
+                    <label for="s" class="required"><?php echo $this->__('What is your question?') ?><em>*</em></label>
+                    <div class="input-box">
+                        <input type="text" name='s' id='s' class="input-text required-entry" placeholder="" value ="<?php echo $this->getSearchQuery()?>">
+                        <button type="submit" title="<?php echo $this->__("Next") ?>" class="post-button"><?php echo $this->__("Next") ?></button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('helpdesk-contact-form', true);
+//]]>
+</script>

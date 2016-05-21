@@ -1,0 +1,44 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Valutec Giftcard Integration
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Valutec
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Valutec_Block_Page_Html_Head_js $this
+ */
+?>
+<script>
+// <![CDATA[
+var sdm_valutec_giftcard = new SDM_Valutec_Giftcard('<?php echo $this->getUrlApply() ?>', '<?php echo $this->getUrlBalance() ?>', '<?php echo $this->getUrlRemove() ?>');
+// ]]>
+
+if (typeof payment !== 'undefined') {
+    payment.switchMethod = function(method){
+        if (this.currentMethod && $('payment_form_'+this.currentMethod)) {
+            this.changeVisible(this.currentMethod, true);
+            $('payment_form_'+this.currentMethod).fire('payment-method:switched-off', {method_code : this.currentMethod});
+        }
+        if ($('payment_form_'+method)){
+            this.changeVisible(method, false);
+            $('payment_form_'+method).fire('payment-method:switched', {method_code : method});
+        } else {
+            //Event fix for payment methods without form like "Check / Money order"
+            document.body.fire('payment-method:switched', {method_code : method});
+        }
+        if (method) {
+            this.lastUsedMethod = method;
+        }
+        this.currentMethod = method;
+    }   
+}
+
+</script>

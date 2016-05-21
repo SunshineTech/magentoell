@@ -1,0 +1,35 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Handles designer page and designer article rendering
+ *
+ * @category  SDM
+ * @package   SDM_Designer
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_processor = Mage::helper('cms')->getBlockTemplateProcessor();
+?>
+
+<?php $_designer = $this->getDesigner(); ?>
+
+<?php if ($_designer->getRichDescription()):?>
+	<div class="designer-bio">
+		<?php echo $_processor->filter($_designer->getRichDescription()); ?>
+	</div>
+<?php endif ?>
+<div class="clear"></div>
+<ul class="designer-tab-content">
+	<?php foreach($this->getDesignerTabs() as $_tabData): ?>
+		<li id='<?php echo $_tabData['id'] ?>'>
+			<h3 class='tab-heading'>
+				<?php echo $_tabData['name'] ?>
+				<?php echo ($_tabData['name'] === 'Articles' ? 'about' : 'from')?>
+				<?php echo $_designer->getName() ?>
+			</h3>
+			<?php echo $_tabData['block']->toHtml() ?>
+		</li>
+	<?php endforeach; ?>
+</ul>

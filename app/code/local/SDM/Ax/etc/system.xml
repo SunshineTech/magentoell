@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's AX ERP integration
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Ax
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <sections>
+        <sdm_ax translate="label" module="sdm_ax">
+            <label>AX ERP Integration</label>
+            <tab>sdm_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <comment><![CDATA[Warning: disabling will cease communication between AX and Magento]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enabled>
+                       <order_export_filename translate="label">
+                            <label>Order Export File Name</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Default: global_orders_download_{dmy}_{Gis}.xml<br>File name can be modified, but the formats of date and time cannot ({dmy}, {Gis}).]]></comment>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_export_filename>
+                        <export_path translate="label">
+                            <label>Order XML Save Path</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default: erp/export/to_ax</comment>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </export_path>
+                        <export_path_uk translate="label">
+                            <label>UK Order XML Save Path</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default: erp/export/to_ax_uk</comment>
+                            <sort_order>350</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </export_path_uk>
+                        <import_path_order_status translate="label">
+                            <label>AX Order Status Dropoff Path</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default: erp/import/order_status</comment>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </import_path_order_status>
+                        <import_path_inventory translate="label">
+                            <label>AX Inventory Dropoff Path</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default: erp/import/inventory</comment>
+                            <sort_order>450</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </import_path_inventory>
+                        <archive_export_path translate="label">
+                            <label>Order XML Archive</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default: erp/archive/orders/to_ax</comment>
+                            <sort_order>460</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </archive_export_path>
+                        <archive_export_path_uk translate="label">
+                            <label>UK Order XML Archive</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default: erp/archive/orders/to_ax_uk</comment>
+                            <sort_order>470</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </archive_export_path_uk>
+                        <archive_path_inventory translate="label">
+                            <label>Inventory Archive</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default: erp/archive/inventory</comment>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </archive_path_inventory>
+                        <archive_path_order_status translate="label">
+                            <label>Order Status Archive</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Default: erp/arvhice/inventory</comment>
+                            <sort_order>600</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </archive_path_order_status>
+                        <logging translate="label">
+                            <label>Logging</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>900</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </logging>
+                        <log_filename translate="label">
+                            <label>Log File Name</label>
+                            <comment><![CDATA[Default: sdm_ax.log]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1000</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </log_filename>
+                    </fields>
+                </general>
+                <ax translate="label">
+                    <label>AX - EEUS</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>150</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <ax_account_id translate="label">
+                            <label>AX Account ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </ax_account_id>
+                        <invoice_account_id translate="label">
+                            <label>Invoice Account ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </invoice_account_id>
+                    </fields>
+                </ax>
+                <processes translate="label">
+                    <label>ERP Integration Test</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <export_order translate="label">
+                            <label>Export Orders</label>
+                            <comment><![CDATA[This may take a while. Check var/log/sdm_ax.log for details.]]></comment>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>sdm_ax/adminhtml_system_config_form_button_exportorder</frontend_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </export_order>
+                        <update_order translate="label">
+                            <label>Update Orders</label>
+                            <comment><![CDATA[This may take a while. Check var/log/sdm_ax.log for details.]]></comment>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>sdm_ax/adminhtml_system_config_form_button_updateorder</frontend_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </update_order>
+                        <update_product translate="label">
+                            <label>Update Products</label>
+                            <comment><![CDATA[This may take a while. Check var/log/sdm_ax.log for details.]]></comment>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>sdm_ax/adminhtml_system_config_form_button_updateproduct</frontend_model>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </update_product>
+                    </fields>
+                </processes>
+            </groups>
+        </sdm_ax>
+    </sections>
+</config>

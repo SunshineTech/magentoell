@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Allows saving quotes that can be later be converted into orders with preserved
+ * pricing.
+ *
+ * @category  SDM
+ * @package   SDM_SavedQuote
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout>
+    <!-- Node name must match SDM_SavedQuote_Block_Adminhtml_SavedQuote's
+    <{$_controller}_{action name}> -->
+    <adminhtml_retailerapplication_index>
+        <reference name="content">
+            <block type="retailerapplication/adminhtml_retailerapplication" name="retailerapplication_adminhtml_retailerapplication" />
+        </reference>
+    </adminhtml_retailerapplication_index>
+</layout>

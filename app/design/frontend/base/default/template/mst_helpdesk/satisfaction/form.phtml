@@ -1,0 +1,24 @@
+<div class="page-title">
+    <h1><?php echo $this->__('Thank You') ?></h1>
+</div>
+<form action="<?php echo $this->getPostUrl()?>" method="POST" enctype="multipart/form-data"    id="helpdesk-form-validate" >
+<div class='fieldset'>
+<p>
+<?php echo $this->__("Thank you for participating in our survey!") ?><br><br>
+<?php echo $this->__('If you would like to provide additional comments, please do so below:') ?>
+</p>
+    <ul class="form-list">
+        <li class="wide">
+            <label for="comment" class="required"><em>*</em><?php echo $this->__("Message") ?></label>
+            <div class="input-box">
+                <textarea name='comment' id='comment' class="input-text required-entry"></textarea>
+            </div>
+        </li>
+    <button type="submit" title="<?php echo $this->__("Submit") ?>" class="button"><span><span><?php echo $this->__("Submit Message") ?></span></span></button>
+</div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('helpdesk-form-validate', true);
+//]]>
+</script>

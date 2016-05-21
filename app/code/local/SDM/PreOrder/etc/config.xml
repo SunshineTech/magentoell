@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Pre Order Module
+ *
+ * @category  SDM
+ * @package   SDM_PreOrder
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_PreOrder>
+            <version>2.2.3</version>
+        </SDM_PreOrder>
+    </modules>
+    <global>
+        <helpers>
+            <sdm_preorder>
+                <class>SDM_PreOrder_Helper</class>
+            </sdm_preorder>
+        </helpers>
+        <models>
+            <sdm_preorder>
+                <class>SDM_PreOrder_Model</class>
+            </sdm_preorder>
+        </models>
+        <resources>
+            <sdm_preorder_setup>
+                <setup>
+                    <module>SDM_PreOrder</module>
+                    <class>Mage_Sales_Model_Resource_Setup</class>
+                </setup>
+            </sdm_preorder_setup>
+        </resources>
+        <events>
+            <sales_quote_item_set_product>
+                <observers>
+                    <sdm_preorder_quote_item_add>
+                        <class>sdm_preorder/observer</class>
+                        <method>quoteItemAdd</method>
+                    </sdm_preorder_quote_item_add>
+                </observers>
+            </sales_quote_item_set_product>
+            <sales_convert_quote_item_to_order_item>
+                <observers>
+                    <sdm_preorder_quote_item_convert>
+                        <class>sdm_preorder/observer</class>
+                        <method>quoteItemConvert</method>
+                    </sdm_preorder_quote_item_convert>
+                </observers>
+            </sales_convert_quote_item_to_order_item>
+            <controller_action_predispatch_checkout_onepage_index>
+                <observers>
+                    <sdm_preorder_checkout_allowed>
+                        <class>sdm_preorder/observer</class>
+                        <method>checkoutAllowed</method>
+                    </sdm_preorder_checkout_allowed>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_index>
+            <controller_action_predispatch_checkout_multishipping_index>
+                <observers>
+                    <sdm_preorder_checkout_allowed>
+                        <class>sdm_preorder/observer</class>
+                        <method>checkoutAllowed</method>
+                    </sdm_preorder_checkout_allowed>
+                </observers>
+            </controller_action_predispatch_checkout_multishipping_index>
+        </events>
+        <template>
+            <email>
+                <sdm_preorder_created>
+                    <label>Pre-Order Approved</label>
+                    <file>sdm/preorder/created.html</file>
+                    <type>html</type>
+                </sdm_preorder_created>
+                <sdm_preorder_approved>
+                    <label>Pre-Order Approved</label>
+                    <file>sdm/preorder/approved.html</file>
+                    <type>html</type>
+                </sdm_preorder_approved>
+                <sdm_preorder_denied>
+                    <label>Pre-Order Denied</label>
+                    <file>sdm/preorder/denied.html</file>
+                    <type>html</type>
+                </sdm_preorder_denied>
+            </email>
+        </template>
+    </global>
+</config>

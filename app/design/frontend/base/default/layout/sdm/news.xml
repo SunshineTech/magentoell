@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * News page and articles
+ *
+ * @category  SDM
+ * @package   SDM_News
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+    <!-- News Listing -->
+    <news_listing>
+        <!--<reference name="root">   
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>   
+        </reference>-->
+        <reference name="root">   
+            <action method="setTemplate"><template>page/1column.phtml</template></action>   
+        </reference>
+        <reference name="head">
+            <action method="setTitle"><title>News</title></action>
+        </reference>
+        <!--<reference name="left">
+            <block type="sdm_news/filter" name="news_filter" template="sdm/news/filter.phtml" />
+        </reference>-->
+        <reference name="content">
+            <block type="sdm_news/listing" name="news_listing" template="sdm/news/listing.phtml" />
+        </reference>
+    </news_listing>
+    <page_type_news>
+        <reference name="cms.wrapper">
+            <block type="core/template" name="news_links" template="sdm/lpms/news_link.phtml" />
+        </reference>
+    </page_type_news>
+</layout>

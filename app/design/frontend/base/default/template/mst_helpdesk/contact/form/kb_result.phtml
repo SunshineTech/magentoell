@@ -1,0 +1,33 @@
+<?php
+$config = $this->getConfig();
+$customer = $this->getCustomer();
+$_collection = $this->getArticleCollection();
+?>
+<div class="helpdesk-contact-form form-kb-result">
+    <div class="close" onclick="window.parent.helpdeskFormHide();">&times;</div>
+    <div class="dropbox">
+        <h2 class="legend"><?php echo $this->getSearchQuery() ?></h2>
+        <p class="helpful"><?php echo $this->__('We found the following topics that might be helpful:') ?></p>
+        <div class="inside-form">
+            <?php foreach($_collection as $_article):?>
+            <div class="article-item">
+                <a class="name" href="<?php echo $_article->getUrl()?>" target='_blank'><?php echo $_article->getName() ?></a>
+                <div class="info">
+                    <?php if ($_article->getRating() && $this->isRatingEnabled()): ?>
+                    <div class="rating-box">
+                        <div class="rating" style="width:<?php echo $_article->getRating() * 20 ?>%;"></div>
+                    </div>
+                    <?php endif ?>
+                </div>
+                <p class="detail"><?php echo Mage::helper('core/string')->truncate(strip_tags($_article->getTextHtml()), 90) ?></p>
+            </div>
+            <?php endforeach ?>
+            <script type="text/javascript">decorateTable('article-table')</script>
+            <a class="back" href="<?php echo $this->getKbUrl()?>"><?php echo $this->__("Go back") ?></a>
+            <a class="more" href="<?php echo $this->getAllResultsUrl()?>" target='_blank'><?php echo $this->__("See all results") ?></a>
+        </div>
+        <button title="<?php echo $this->__("None of these are helpful - get in touch") ?>" class="post-button" onclick="window.location='<?php echo $this->getFormUrl()?>'"><?php echo $this->__("None of these are helpful - get in touch") ?></button>
+    </div>
+</div>
+
+

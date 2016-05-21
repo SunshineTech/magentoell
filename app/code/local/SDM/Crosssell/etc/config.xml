@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Add ability to set a limit via Admin instead of statically set in the Core file.
+ *
+ * @category  SDM
+ * @package   SDM_Crosssell
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Crosssell>
+            <version>1.0.0</version>
+        </SDM_Crosssell>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_crosssell>
+                <class>SDM_Crosssell_Block</class>
+            </sdm_crosssell>
+            <checkout>
+                <rewrite>
+                    <cart_crosssell>SDM_Crosssell_Block_Cart_Crosssell</cart_crosssell>
+                </rewrite>
+            </checkout>
+        </blocks>
+        <helpers>
+            <sdm_crosssell>
+                <class>SDM_Crosssell_Helper</class>
+            </sdm_crosssell>
+        </helpers>
+    </global>
+    <default>
+        <sdm_crosssell>
+            <general>
+                <enabled>1</enabled>
+                <limit>10</limit>
+            </general>
+        </sdm_crosssell>
+    </default>
+</config>

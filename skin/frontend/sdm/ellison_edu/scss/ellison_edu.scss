@@ -1,0 +1,465 @@
+/**
+ * Separation Degrees Media
+ *
+ * global.css
+ *
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @category  Separation Degrees Media
+ * @package   sdm
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+@import "../../ellison/scss/framework";
+@import "edu-var";
+@import "../../ellison/scss/ellison";
+@import "../../ellison/scss/ellison-responsive";
+
+body {
+    font-family: 'Open Sans', sans-serif !important;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Nunito', sans-serif !important;
+    }
+    button,
+    input,
+    select,
+    table,
+    textarea {
+        font-family: 'Open Sans', sans-serif;
+    }
+    strong {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+    }
+    .button,
+    .cart-table .product-cart-actions .button,
+    #co-shipping-method-form .buttons-set .button,
+    .button:hover,
+    .cart-table .product-cart-actions .button:hover,
+    #co-shipping-method-form .buttons-set .button:hover,
+    .footer .button {
+        font-family: 'Open Sans', sans-serif;
+    }
+    .price-box .price {
+        font-family: 'Open Sans', sans-serif;
+    }
+    .wrapper {
+        .page {
+            .header-wrap {
+                span.green,
+                span.orange,
+                span.red,
+                span.yellow,
+                span.blue {
+                    width: 20%;
+                    height: 1px;
+                    float: left;
+                }
+                span.green {
+                    border-bottom: 5px solid $span-green;
+                }
+                span.orange {
+                    border-bottom: 5px solid $span-orange;
+                }
+                span.red {
+                    border-bottom: 5px solid $span-red;
+                }
+                span.yellow {
+                    border-bottom: 5px solid $span-yellow;
+                }
+                span.blue {
+                    border-bottom: 5px solid $span-blue;
+                }
+                .page-header {
+                    padding-top: 6px;
+                    .page-header-container {
+                        .logo {
+                            top: 18px;
+                            padding: 0;
+                            width: 152px;
+                            .large {
+                                width: 100%;
+                            }
+                        }
+                        #header-nav {
+                            #nav {
+                                .nav-primary {
+                                    margin-top: 45px;
+                                    a {
+                                        font-family: 'Nunito', sans-serif;
+                                    }
+                                    li.level0 {
+                                        ul.level0 {
+                                            border: 1px solid $border-search;
+                                            .nav-prod-block {
+                                                background: $header-search;
+                                                a {
+                                                    color: $search-button-icon;
+                                                }
+                                                ul {
+                                                    li {
+                                                        .sku {
+                                                            color: $search-button-icon;
+                                                        }
+                                                        .price {
+                                                            color: $span-green;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                @media only screen and (max-width: 770px) {
+                                    .nav-primary {
+                                        margin-top: 0;
+                                    }
+                                }
+                            }
+                        }
+                        #header-search {
+                            top: 45px;
+                        }
+                    }
+                }
+            }
+            .main-container {
+                .main {
+                    .col-main {
+                        .std {
+                            .hp-block-wrap {
+                                #homepage-widget {
+                                    li {
+                                        .widget-box {
+                                            a {
+                                                background: $header-search;
+                                                &:hover {
+                                                    color: $search-button-icon !important;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// Catalog
+.catalog-product-view {
+    .wrapper {
+        .page {
+            .main-container {
+                .main {
+                    .product-view {
+                        .product-essential {
+                            .product-shop {
+                                .add-to-box {
+                                    .add-to-links {
+                                        li {
+                                            a {
+                                                color: $text-tertiary;
+                                            }
+                                        }
+                                    }
+                                    .add-to-cart-buttons {
+                                        .button {
+                                            background: $header-search;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// Saved a quote
+.savedquote-quote-index {
+    .cart {
+        .page-title {
+            border-bottom: 1px solid $border-primary;
+            h1 {
+                float: none;
+                margin: 0;
+                font-family: $georgia;
+                font-weight: normal;
+                text-transform: capitalize;
+                font-size: 32px;
+                color: $body-text-secondary;
+            }
+        }
+        #saved-quote-form {
+            .form-list {
+                float: left;
+                width: 40%;
+                padding: 0 20px 0 0;
+                .fieldset {
+                    .required {
+                        float: none;
+                    }
+                    label {
+                        font-size: 14px;
+                        font-family: 'Open Sans', sans-serif;
+                        font-weight: normal;
+                    }
+                    .input-box {
+                        input[type=text],
+                        input[type=tel] {
+                            width: 100%;
+                        }
+                    }
+                    .disabled-field{
+                        input, select{
+                            background: #eee;
+                            cursor: not-allowed;
+                        }
+                    }
+                }
+            }
+            .cart-table {
+                float: left;
+                width: 60%;
+                .product-name {
+                    font-family: $georgia;
+                    font-size: 14px;
+                    text-transform: none;
+                    font-weight: normal;
+                }
+                .product-cart-sku {
+                    font-style: normal;
+                    font-size: 12px;
+                    font-family: 'Open Sans', sans-serif;
+                    line-height: normal;
+                    font-weight: normal;
+                }
+                thead {
+                    th {
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 14px;
+                        text-transform: capitalize;
+                    }
+                }
+                tfoot {
+                    button {
+                        span {
+                            font-family: 'Open Sans', sans-serif;
+                            height: auto;
+                            line-height: normal;
+                            text-transform: none;
+                        }
+                    }
+                }
+            }
+            h2 {
+                font-size: 22px;
+                color: $body-text;
+            }
+            .cart-totals-wrapper {
+                font-family: 'Open Sans', sans-serif;
+                text-align: right;
+                .cart-totals {
+                    border: none;
+                    background: none;
+                    #summary {
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 16px;
+                        margin: 0 0 10px 0;
+                    }
+                    #savedquote-totals-table {
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 14px;
+                        line-height: normal;
+                        text-transform: none;
+                        tfoot {
+                            border: none;
+                            td {
+                                padding: 10px 0 0 10px;
+                                vertical-align: bottom;
+                                margin: 0;
+                                line-height: normal;
+                            }
+                        }
+                    }
+                }
+                .btn-proceed-checkout {
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+}
+#saved-quote-select-address {
+    .message {
+        width: 100%;
+        margin: 5px 0px 15px;
+        font-style: italic;
+        font-size: 11px;
+        float: left;
+    }
+}
+/**
+ * News and Press Releases
+ */
+.sdm-news-index-index .main-container .col-main .news-article-listing .post,
+.sdm-pressreleases-index-index .main-container .col-main .news-article-listing .post {
+    background: $text-theme;
+    color: #fff;
+}
+.footer-wrap {
+    .footer-container {
+        .footer {
+            font-family: 'Open Sans', sans-serif;
+            .links {
+                .li.title,
+                .block-title {
+                    font-family: 'Nunito', sans-serif;
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width: 771px) {
+    body {
+        .wrapper {
+            .page {
+                .header-wrap {
+                    .page-header {
+                        .page-header-container {
+                            height: 94px;
+                            .logo {
+                                min-height: initial;
+                            }
+                            #header-nav {
+                                padding-left: 170px;
+                            }
+                            .skip-links {
+                                .account-cart-wrapper {
+                                    .header-minicart {
+                                        #header-cart.skip-active {
+                                            .minicart-wrapper {
+                                                .block-subtitle {
+                                                    color: $text-tertiary;
+                                                }
+                                            }
+                                        }
+                                        .skip-cart {
+                                            color: $header-text-link;
+                                            .count-desk {
+                                                color: $header-text-link;
+                                            }
+                                        }
+                                    }
+                                    .loginSignup,
+                                    .retailerApplication {
+                                        .links {
+                                            li {
+                                                a {
+                                                    padding: 0 10px;
+                                                    color: $header-text-link;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .header-minicart {
+                                        #header-cart.skip-active {
+                                            .minicart-wrapper {
+                                                .checkout-button {
+                                                    background: $header-search;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .page-header-container.tiny {
+                            height: 79px;
+                            .logo {
+                                width: 110px;
+                            }
+                            #header-nav {
+                                padding-left: 120px;
+                                #nav {
+                                    height: auto;
+                                    .nav-primary {
+                                        margin-top: 34px;
+                                    }
+                                }
+                            }
+                            #header-search {
+                                top: 38px;
+                            }
+                        }
+                    }
+                }
+                .main-container {
+                    padding-top: 100px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 770px) {
+    body {
+        .wrapper {
+            .page {
+                .header-wrap {
+                    .page-header {
+                        .page-header-container {
+                            .logo {
+                                margin: 15px auto;
+                            }
+                            .skip-links {
+                                .account-cart-wrapper {
+                                    .header-minicart {
+                                        .skip-cart {
+                                            .count {
+                                                background: $count-bg;
+                                            }
+                                        }
+                                        #header-cart.skip-active {
+                                            .minicart-wrapper {
+                                                .cart-link,
+                                                .checkout-button {
+                                                    background: $count-bg;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Saved a quote
+    .savedquote-quote-index {
+        .cart {
+            #saved-quote-form {
+                .form-list,
+                .cart-table,
+                .cart-totals-wrapper {
+                    width: 100%;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+.catalog-product-view .wrapper .page .main-container .main .product-view .product-essential .product-collateral .collateral-tabs .tab-container .tab-content #mediabox .url {
+    background: #009bff;
+    &:hover {
+        text-decoration: none;
+    }
+}

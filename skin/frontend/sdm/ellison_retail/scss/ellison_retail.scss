@@ -1,0 +1,97 @@
+/**
+ * Separation Degrees Media
+ *
+ * global.css
+ *
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @category  Separation Degrees Media
+ * @package   sdm
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+@import "../../ellison/scss/framework";
+@import "retail-var";
+@import "../../ellison/scss/ellison";
+@import "../../ellison/scss/ellison-responsive";
+
+body {
+    .wrapper {
+        .page {
+            .header-wrap {
+                .page-header {
+                    .page-header-container {
+                        .logo {
+                            top: 0;
+                            padding: 0;
+                            width: 152px;
+                            .large {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+            .price-box-msrp-only {
+                text-align: center;
+            }
+        }
+    }
+}
+.customer-account-login,
+.customer-account-forgotpassword,
+.customer-account-create {
+    .col-main {
+        .page-title {
+            h1 {
+                color: $text-tertiary;
+            }
+        }
+    }
+}
+.customer-account {
+    #cc-table {
+        th {
+            text-transform: none;
+            font-family: $avenirbold;
+            line-height: normal;
+            padding: 5px 10px;
+        }
+    }
+}
+@media only screen and (min-width: 771px) {
+    body {
+        .wrapper {
+            .page {
+                .header-wrap {
+                    .page-header {
+                        .page-header-container {
+                            #header-nav {
+                                padding-left: 170px;
+                            }
+                            .skip-links {
+                                .account-cart-wrapper {
+                                    .header-minicart {
+                                        #header-cart.skip-active {
+                                            .minicart-wrapper {
+                                                .block-subtitle {
+                                                    color: $text-tertiary;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .page-header-container.tiny {
+                            .logo {
+                                width: 103px;
+                            }
+                            #header-nav {
+                                padding-left: 118px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

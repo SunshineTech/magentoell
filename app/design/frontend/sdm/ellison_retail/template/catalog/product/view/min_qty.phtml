@@ -1,0 +1,6 @@
+<?php $_product = $this->getProduct() ?>
+<?php if ($_product->getMinQty() > 1) : ?>
+    <div>
+        <span><?php echo $this->__('Min. order quantity of %s applies', $_product->getMinQty()) ?></span>
+    </div>
+<?php endif; ?>

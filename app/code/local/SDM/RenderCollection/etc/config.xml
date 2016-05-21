@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Product Carousel widget
+ *
+ * @category  SDM
+ * @package   SDM_RenderCollection
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_RenderCollection>
+            <version>0.1.1</version>
+        </SDM_RenderCollection>
+    </modules>
+    <global>
+        <blocks>
+            <rendercollection>
+                <class>SDM_RenderCollection_Block</class>
+            </rendercollection>
+        </blocks>
+        <helpers>
+            <rendercollection>
+                <class>SDM_RenderCollection_Helper</class>
+            </rendercollection>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <rendercollection>
+                    <file>sdm/rendercollection.xml</file>
+                </rendercollection>
+            </updates>
+        </layout>
+    </frontend>
+</config>

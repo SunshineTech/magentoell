@@ -1,0 +1,30 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_selectValues  = explode(',', $this->getValue());   // Array of strings
+$_values = $this->getValues();
+?>
+
+<div class="field multiselect">
+    <label for="<?php echo $this->getId() ?>" class="required">
+        <?php echo $this->getName() ?>
+    </label>
+    <select id="resell_brands" name="<?php echo $this->getId() ?>[]" class="required-entry" multiple="multiple">
+        <?php foreach ($_values as $_k => $_label): ?>
+            <?php $selected = '' ?>
+            <?php if (in_array($_k, $_selectValues)): //((string)$_k === $_selectValues): ?>
+                <?php $selected = 'selected="selected"' ?>
+            <?php endif; ?>
+            <option value="<?php echo $_k ?>" <?php echo $selected ?>><?php echo $_label ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>

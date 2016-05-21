@@ -1,0 +1,70 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Collection Rendering Widget
+ *
+ * @category  SDM
+ * @package   SDM_RenderCollection
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+?>
+<?php
+    $_productCollection = $this->getCollection();
+    $_collectionSize = is_array($_productCollection) ? count($_productCollection) : $_productCollection->count();
+    $_helper = $this->helper('catalog/output');
+    $_saleLabelHelper = $this->helper('sdm_catalog/salelabel');
+    $_columnCount = 5;
+?>
+<?php if($_collectionSize): ?>
+<div class="render-collection product-carousel category-print-catalogs">
+    <ul class="products-grid--max-<?php echo $_columnCount ?>-col collection-carousel owl-carousel" id="<?php echo $this->getCarouselId() ?>">
+    <?php $i=0; foreach ($_productCollection as $_product): ?>
+        <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                <?php $_imgSize = 210; ?>
+            <img class="img" id="product-collection-image-<?php echo $_product->getId(); ?>"
+                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                 alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+            <div class="product-info">
+                <h2 class="product-name">
+                    <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                </h2>
+                <?php if ($_product->getData('print_catalog_url') || $_product->getData('print_catalog_download_url')): ?>
+                    <ul class="add-to-links">
+                        <?php if ($_product->getData('print_catalog_url')): ?>
+                            <li class="view-details">
+                                <a title="<?php echo $this->__('View Catalog Online') ?>" href="<?php echo $_product->getData('print_catalog_url') ?>" target="_blank">
+                                    <?php echo $this->__('View Catalog Online') ?>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if ($_product->getData('print_catalog_download_url')): ?>
+                            <li class="download">
+                                <a title="<?php echo $this->__('Download Catalog') ?>" href="<?php echo $_product->getData('print_catalog_download_url') ?>" target="_blank">
+                                    <?php echo $this->__('Download Catalog') ?>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                <?php endif; ?>
+                <?php if ($_product->getButtonVisibleListing()): ?>
+                    <?php if($_product->getButtonType() == 'add-to-cart'): ?>
+                        <div class="actions">
+                            <p class="action">
+                                <button type="button" class="button btn-cart ajax-cart" data-ajax-url="<?php echo $this->getAddToCartUrl($_product) ?>">
+                                    <span><span><?php echo $_product->getButtonValue() ?></span></span>
+                                </button>
+                            </p>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </li>
+    <?php endforeach ?>
+    </ul>
+</div>
+<?php endif; ?>
+<script type='text/javascript'>
+    <?php echo $this->getCarouselInit() ?>
+</script>

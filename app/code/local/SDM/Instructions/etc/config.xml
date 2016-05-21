@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Handles rendering the instructions page
+ *
+ * @category  SDM
+ * @package   SDM_Instructions
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Instructions>
+            <version>0.1.0</version>
+        </SDM_Instructions>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_instructions>
+                <class>SDM_Instructions_Block</class>
+            </sdm_instructions>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <sdm_instructions>
+                    <file>sdm/instructions.xml</file>
+                </sdm_instructions>
+            </updates>
+        </layout>
+        <routers>
+            <sdm_instructions>
+                <use>standard</use>
+                <args>
+                    <module>SDM_Instructions</module>
+                    <frontName>instructions</frontName>
+                </args>
+            </sdm_instructions>
+        </routers>
+    </frontend>
+</config>

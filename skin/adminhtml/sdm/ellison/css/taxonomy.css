@@ -1,0 +1,29 @@
+/**
+ * Separation Degrees Media
+ *
+ * Ellison's custom product taxonomy implementation.
+ *
+ * @category  SDM
+ * @package   SDM_Taxonomy
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+.website-multiselect-box {
+    height: 100px;
+}
+.special-product-table {
+    width: 600px !important;
+}
+.sku {
+    width: 30%
+}
+.discount-type {
+    width: 30%
+}
+.discount-value {
+    width: 30%
+}
+.select-dropdown {
+    width: 100% ;
+}

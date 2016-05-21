@@ -1,0 +1,51 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Tabs - Projects template
+ *
+ * @category  SDM
+ * @package   SDM
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_product = $this->getProduct();
+$_projects = $_product->getAssociatedParents();
+$_firstProject = reset($_projects);
+
+?>
+<?php if (!empty($_projects) && $_product->getTypeId() == 'simple'): ?>
+    <ul id="mediabox" class="project-slider">
+        <li>
+            <div id="project-image" class="image">
+                <?php $_imgSize = 300; ?>
+                <img id="project-collection-image-<?php echo $_firstProject->getId(); ?>"
+                     src="<?php echo $this->helper('catalog/image')->init($_firstProject, 'small_image')->keepFrame(false)->resize($_imgSize); ?>"
+                     alt="<?php echo $this->stripTags($this->getImageLabel($_firstProject, 'small_image'), null, true) ?>" />
+            </div>
+            <div id="project-name" class="name"><?php echo $_firstProject->getName();?></div>
+            <div class="description">
+                <?php
+                    $_descRaw = $_firstProject->getDescription();
+                    $phrase_array = explode(' ',$_descRaw);
+                    if(count($phrase_array) > 15 && 15 > 0) {
+                      $_description = implode(' ',array_slice($phrase_array, 0, 15)).'...';
+                    }
+                ?>
+            <?php if(!empty($_description)): ?>
+                    <?php echo $_description ?>
+                <?php endif ?>
+            </div>
+            <div class="sku">
+                <?php echo Mage::helper('sdm_catalog')->getSkuLabel($_firstProject) . $_firstProject->getSku()?>
+            </div>
+            <?php
+                $_projectUrl = $_firstProject->getProductUrl();
+                if (!empty($_projectUrl)):
+            ?>
+                <a id="project-url" class="url" href="<?php echo $_projectUrl ?>"><?php echo $this->__('View ' . Mage::helper('sdm_catalog')->getProjectLabelFromProduct($_product)) ?></a>
+            <?php endif;?>
+        </li>
+    </ul>
+<?php endif;?>

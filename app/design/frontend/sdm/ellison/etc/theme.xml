@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * theme.xml
+ *
+ * @author    Separation Degrees <magento@separationdegrees.com>
+ * @category  Separation Degrees Media
+ * @package   sdm
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<theme>
+    <parent>rwd/default</parent>
+    <layout>
+        <updates>
+            <ellison>
+                <file>ellison.xml</file>
+            </ellison>
+        </updates>
+    </layout>
+</theme>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * This module handles all the store locator functionality for Ellison.
+ * 
+ * The original code from this module is based off the FME_Gmapstrlocator module. We converted their
+ * module to an SDM module rather than extending from it because the amount of modifications and
+ * rewrites necessary for it to fit Ellison's spec were extensive, yet we still felt there was value
+ * in using FME's module as a starting point.
+ *
+ * @category  SDM
+ * @package   SDM_Gmapstrlocator
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+    <adminhtml_gmapstrlocator_index>
+        <reference name="content">
+            <block type="gmapstrlocator/adminhtml_gmapstrlocator" name="gmapstrlocator" />
+        </reference>
+    </adminhtml_gmapstrlocator_index>
+    <adminhtml_gmapstrlocator_edit>
+        <update handle="editor"/>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/gmapstrlocator.js</name>
+            </action>
+        </reference>
+    </adminhtml_gmapstrlocator_edit>
+    <cms_wysiwyg_images_index>
+        <remove name="footer" />
+        <remove name="head" />
+        <reference name="left">
+            <block name="wysiwyg_images.js" type="adminhtml/cms_wysiwyg_images_content" template="cms/browser/js.phtml" />
+            <block name="wysiwyg_images.tree" type="adminhtml/cms_wysiwyg_images_tree" template="cms/browser/tree.phtml" />
+        </reference>
+        <reference name="content">
+            <block name="wysiwyg_images.content"  type="adminhtml/cms_wysiwyg_images_content" template="cms/browser/content.phtml">
+                <block name="wysiwyg_images.uploader" type="adminhtml/cms_wysiwyg_images_content_uploader" template="cms/browser/content/uploader.phtml" />
+                <block name="wysiwyg_images.newfolder" type="adminhtml/cms_wysiwyg_images_content_newfolder" template="cms/browser/content/newfolder.phtml" />
+            </block>
+        </reference>
+    </cms_wysiwyg_images_index>
+</layout>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <DCKAP_Speedanalyzer>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>0.1.0</version>
+    </DCKAP_Speedanalyzer>
+  </modules>
+</config>

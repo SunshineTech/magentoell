@@ -1,0 +1,93 @@
+/**
+ * Separation Degrees One
+ *
+ * Ellison's Teachers' Planning Calendar
+ *
+ * @category  SDM
+ * @package   SDM_Calendar
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+.sdm-calendar-container .fc-time {
+    display: none;
+}
+
+.sdm-calendar-container table {
+    width: 100%;
+}
+
+.sdm-calendar-event-view .calendar-view {
+    position: relative;
+}
+
+.sdm-calendar-event-view .page-title h1 {
+    border-bottom: #959595 solid 1px;
+}
+
+.sdm-calendar-event-view .calendar-right {
+    font-size: 14px;
+    float: left;
+}
+
+.sdm-calendar-event-view .calendar-view > img {
+    border: 1px solid #959595;
+    float: left;
+    width: 30%;
+}
+.sdm-calendar-event-view .calendar-view .calendar-right {
+    width: 65%;
+    margin-left: 5%;
+}
+
+.sdm-calendar-event-view .calendar-view .calendar-right .item {
+    margin: 0px 0px 10px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+    .sdm-calendar-event-view .calendar-view > img {
+        width: 96%;
+        margin: 2%;
+    }
+    .sdm-calendar-event-view .calendar-view .calendar-right {
+        width: 96%;
+        margin: 2%;
+    }
+}
+
+.sdm-calendar-event-view .calendar-right h3 {
+    font-size: 14px;
+    font-family: AvenirRegular, 'Helvetica Neue', Verdana, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.sdm-calendar-event-view .calendar-right .item {
+    float: left;
+    width: 46%;
+}
+
+.sdm-calendar-event-view .desc {
+    clear: both;
+    margin-top: 26px;
+}
+
+.sdm-calendar-event-view .sponsor {
+    margin-top: 26px;
+}
+
+.sdm-calendar-event-view .calendar-right p + p {
+    margin-top: 24px;
+}
+
+.sdm-calendar-event-view .calendar-view .go-back {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: url('../images/calendar-back-arrow.png') no-repeat 0 2px;
+    padding-left: 15px;
+}
+
+.sdm-calendar-container .fc ~ .fc .fc-right {
+    display: none;
+}

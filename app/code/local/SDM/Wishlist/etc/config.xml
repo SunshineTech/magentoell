@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees Media
+ *
+ * Fixes an issue with wishlists
+ *
+ * @category  SDM
+ * @package   SDM_Wishlist
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Wishlist>
+            <version>0.1.0</version>
+        </SDM_Wishlist>
+    </modules>
+    <global>
+        <blocks>
+            <sdm_wishlist>
+                <class>SDM_Wishlist_Block</class>
+            </sdm_wishlist>
+            <wishlist>
+                <rewrite>
+                    <customer_wishlist_item_options>SDM_Wishlist_Block_Customer_Wishlist_Item_Options</customer_wishlist_item_options>
+                </rewrite>
+            </wishlist>
+        </blocks>
+    </global>
+</config>

@@ -1,0 +1,37 @@
+/**
+ * Separation Degrees One
+ *
+ * Global CSS
+ *
+ * @category  SDO
+ * @package   SDO
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+#add_root_category_button {
+    display: none;
+}
+.adminhtml_ax_account_id, .adminhtml_ax_invoice_id {
+    width: 90px;
+}
+.upload_csv {
+    width: 100px;
+    height: 20px;
+    overflow: hidden;
+    position:relative;
+    float:right;
+}
+.import_btn {
+    padding:2px 12px;
+}
+.upload_csv input {
+    display: block !important;
+    height: 100%;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    cursor:pointer;
+}

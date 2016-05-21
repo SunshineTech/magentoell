@@ -1,0 +1,66 @@
+/**
+ * Separation Degrees One
+ *
+ * Valutec Giftcard Integration
+ *
+ * @category  SDM
+ * @package   SDM_Valutec
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+#sdm-valutec-giftcard-balance-response {
+    font-weight: bold;
+    margin-top: 10px;
+    border: 1px solid rgb(210, 210, 210);
+    padding: 10px;
+}
+
+#sdm-valutec-giftcard-balance {
+    margin-top: 10px;
+}
+
+.sdm-valutech-giftcard-payment-message {
+    background: rgb(203, 240, 203);
+    border: 1px solid rgb(0, 213, 0);
+    padding: 10px;
+}
+
+.sdm-valutec-check-index .page-title {
+    margin: 20px auto;
+    text-align: center;
+}
+.sdm-valutec-check-index .page-title h1 {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+}
+.sdm-valutec-check-index .giftcard-img {
+    padding: 0 10%;
+}
+.sdm-valutec-check-index .giftcard-img img {
+    width: 100%;
+}
+.sdm-valutec-check-index #co-payment-form,
+#sdm-valutec-giftcard-balance-response {
+    width: 370px;
+    margin: 0 auto;
+}
+#sdm-valutec-giftcard-balance-response {
+    font-size: 14px;
+    font-family: 'AvenirBold', 'Helvetica Neue', Verdana, Arial, sans-serif;
+    text-transform: capitalize;
+    background-color: #fff;
+}
+#co-payment-form #sdm-valutec-giftcard-balance-response {
+    margin: 10px 0px 0px;
+}
+.sdm-valutec-check-index #co-payment-form input {
+    width: 100%;
+}
+.sdm-valutec-check-index label {
+    font-size: 14px;
+    font-family: 'AvenirBold', 'Helvetica Neue', Verdana, Arial, sans-serif;
+    text-transform: capitalize;
+    line-height: normal;
+}

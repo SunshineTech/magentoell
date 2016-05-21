@@ -1,0 +1,35 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Magento catalog customizations
+ *
+ * @category  SDM
+ * @package   SDM_Catalog
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+?>
+<?php $_product = $this->getProduct(); ?>
+<?php $_buybox  = $this->helper('sdm_catalog/buybox')->getBuyBoxData($_product); ?>
+<?php $_buttonValue = $_product->getButtonValue(); ?>
+<?php $_buttonType = $_product->getButtonType(); ?>
+<?php if($_buttonType == 'text'): ?>
+    <p class="availability">
+        <span><?php echo $_buttonValue ?></span>
+    </p>
+<?php elseif ($_buttonType == 'add-to-cart'): ?>
+    <div class="cart-msg-block"></div>
+    <div class="add-to-cart">
+        <?php if(!$_product->isGrouped()): ?>
+        <div class="qty-wrapper">
+            <label for="qty"><?php echo $this->__('Qty:') ?></label>
+            <input type="text" pattern="\d*" name="qty" id="qty" maxlength="12" value="<?php echo max($this->getProductDefaultQty() * 1, 1) ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+        </div>
+        <?php endif; ?>
+        <div class="add-to-cart-buttons">
+            <button type="button" title="<?php echo $_buttonValue ?>" class="button btn-cart ajax-cart"><span><span><?php echo $_buttonValue ?></span></span></button>
+            <?php echo $this->getChildHtml('', true, true) ?>
+        </div>
+    </div>
+<?php endif; ?>

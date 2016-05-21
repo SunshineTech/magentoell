@@ -1,0 +1,32 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_value  = (string)$this->getValue();
+$_values = $this->getValues();
+?>
+
+<div class="field array">
+	<label for="<?php echo $this->getId() ?>" class='required'>
+		<?php echo $this->getName() ?>
+	</label>
+	<select id="<?php echo $this->getId() ?>" name='<?php echo $this->getId() ?>' class="required-entry">
+		<option></option>
+		<?php foreach($_values as $_k => $_v): ?>
+			<option value="<?php echo $_k ?>"<?php if ((string)$_k === $_value): ?> selected="selected"<?php endif; ?>>
+				<?php echo $_v ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
+	<?php if($this->getNote()): ?>
+		<div class='note'><?php echo $this->getNote() ?></div>
+	<?php endif; ?>
+</div>

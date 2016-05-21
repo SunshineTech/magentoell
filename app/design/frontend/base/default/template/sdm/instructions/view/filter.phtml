@@ -1,0 +1,28 @@
+<?php
+/**
+ * Separation Degrees Media
+ *
+ * Instruction
+ *
+ * @category  SDM
+ * @package   SDM_Instructions
+ * @author    Separation Degrees Media <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees Media (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Instructions_Block_Page $this
+ */
+$_instructionTypes = $this->getAllInstructionData();
+?>
+<div class="instructions-sidebar">
+    <ul class='instructions-links'>
+        <?php foreach($_instructionTypes as $_instructionType): ?>
+            <li<?php if($_instructionType['active']): ?> class='active'<?php endif ?>>
+                <a href='<?php echo Mage::getUrl("*/index/index/product_type/".$_instructionType['code']); ?>'>
+                    <?php echo $_instructionType['label'] ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

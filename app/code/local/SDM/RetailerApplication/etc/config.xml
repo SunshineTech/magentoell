@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_RetailerApplication>
+            <version>0.2.3</version>
+        </SDM_RetailerApplication>
+    </modules>
+    <global>
+        <models>
+            <retailerapplication>
+                <class>SDM_RetailerApplication_Model</class>
+                <resourceModel>retailerapplication_resource</resourceModel>
+            </retailerapplication>
+            <retailerapplication_resource>
+                <class>SDM_RetailerApplication_Model_Resource</class>
+                <entities>
+                    <application>
+                        <table>sdm_retailerapplication</table>
+                    </application>
+                </entities>
+            </retailerapplication_resource>
+        </models>
+        <resources>
+            <sdm_retailerapplication>
+                <setup>
+                    <module>SDM_RetailerApplication</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+            </sdm_retailerapplication>
+        </resources>
+        <helpers>
+            <retailerapplication>
+                <class>SDM_RetailerApplication_Helper</class>
+            </retailerapplication>
+        </helpers>
+        <blocks>
+            <retailerapplication>
+                <class>SDM_RetailerApplication_Block</class>
+            </retailerapplication>
+            <page>
+                <rewrite>
+                    <template_links>SDM_RetailerApplication_Block_Template_Links</template_links>
+                </rewrite>
+            </page>
+        </blocks>
+    </global>
+    <frontend>
+        <secure_url>
+            <retailerapplication>/retailerapplication</retailerapplication>
+        </secure_url>
+        <routers>
+            <sdm_retailerapplication>
+                <use>standard</use>
+                <args>
+                    <module>SDM_RetailerApplication</module>
+                    <frontName>retailerapplication</frontName>
+                </args>
+            </sdm_retailerapplication>
+        </routers>
+        <layout>
+            <updates>
+                <sdm_retailerapplication>
+                    <file>sdm/retailerapplication.xml</file>
+                </sdm_retailerapplication>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <retailerapplication module="SDM_RetailerApplication">
+                    <file>retailerapplication.xml</file>
+                </retailerapplication>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SDM_RetailerApplication after="Mage_Adminhtml">SDM_RetailerApplication_Adminhtml</SDM_RetailerApplication>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

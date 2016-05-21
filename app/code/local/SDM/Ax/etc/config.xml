@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Ellison's AX ERP integration
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Ax
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<config>
+    <modules>
+        <SDM_Ax>
+            <version>0.3.0</version>
+        </SDM_Ax>
+    </modules>
+    <global>
+        <models>
+            <sdm_ax>
+                <class>SDM_Ax_Model</class>
+            </sdm_ax>
+        </models>
+        <blocks>
+            <sdm_ax>
+                <class>SDM_Ax_Block</class>
+            </sdm_ax>
+        </blocks>
+        <helpers>
+            <sdm_ax>
+                <class>SDM_Ax_Helper</class>
+            </sdm_ax>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <sdm_ax after="Mage_Adminhtml">SDM_Ax_Adminhtml</sdm_ax>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <default>
+        <sdm_ax>
+            <general>
+                <order_export_filename>global_orders_download_{dmy}_{Gis}.xml</order_export_filename>
+                <export_path>erp/export/to_ax</export_path>
+                <export_path_uk>erp/export/to_ax_uk</export_path_uk>
+                <import_path_order_status>erp/import/order_status</import_path_order_status>
+                <import_path_inventory>erp/import/inventory</import_path_inventory>
+                <archive_path_inventory>erp/archive/inventory</archive_path_inventory>
+                <archive_path_order_status>erp/archive/order_status</archive_path_order_status>
+                <log_filename>sdm_ax.log</log_filename>
+                <archive_export_path>erp/archive/orders/to_ax</archive_export_path>
+                <archive_export_path_uk>erp/archive/orders/to_ax_uk</archive_export_path_uk>
+            </general>
+            <ax>
+                <ax_account_id>424670</ax_account_id>
+                <invoice_account_id>424670</invoice_account_id>
+            </ax>
+        </sdm_ax>
+    </default>
+</config>

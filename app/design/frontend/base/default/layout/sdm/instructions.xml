@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Handles rendering the instructions page
+ *
+ * @category  SDM
+ * @package   SDM_Instructions
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+    <instructions_page>
+    	<reference name="root">
+    		<action method="setTemplate">
+                <template>sdm/instructions/page/2columns-left.phtml</template>
+            </action>
+            <block type="sdm_instructions/page" template="sdm/instructions/view/search.phtml" name="instructions.search" />
+    	</reference>
+        <reference name="left">
+            <block type="sdm_instructions/page" name="instructions.filter" template="sdm/instructions/view/filter.phtml" />
+        </reference>
+    	<reference name="content">
+            <block type="sdm_instructions/page" name="instructions.list" template="sdm/instructions/view/list.phtml" />
+        </reference>
+    </instructions_page>
+</layout>

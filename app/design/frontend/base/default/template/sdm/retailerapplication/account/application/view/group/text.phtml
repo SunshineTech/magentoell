@@ -1,0 +1,33 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Manages the retailer application
+ *
+ * @category  SDM
+ * @package   SDM_RetailerApplication
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+$_value = $this->getValue();
+
+?>
+
+<div class="field text">
+	<label for="<?php echo $this->getId() ?>" class='required'>
+		<?php echo $this->getName() ?>
+	</label>
+	<input id="<?php echo $this->getId() ?>" type='text' class="required-entry" name='<?php echo $this->getId() ?>' value='<?php echo $_value ?>' />
+	<?php if($this->getAllowNoVal()): ?>
+		<div class="noval">
+			<input id="<?php echo $this->getId() ?>_noval" type='checkbox' />
+			<label for="<?php echo $this->getId() ?>_noval">
+				<?php echo $this->getNoValMessage() ?>
+			</label>
+		</div>
+	<?php endif; ?>
+	<?php if($this->getNote()): ?>
+		<div class='note'><?php echo $this->getNote() ?></div>
+	<?php endif; ?>
+</div>

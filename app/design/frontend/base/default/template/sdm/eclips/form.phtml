@@ -1,0 +1,13 @@
+<?php if ($this->isCustomerLoggedIn()): ?>
+    <p>Enter your eClips Serial Number below.</p>
+    <form id="eclips-download-form" method="post" action="<?php echo $this->getUrl('eclips/index/submit') ?>">
+        <label class="serial-number" for="serial_number"><span class="required"></span>Serial Number:</label>
+        <input class="serial-input-box" id="serial_number" name="serial_number" class="input-text validate-alpha required-entry" placeholder="" value="" />
+        <input class="form_button button" name="" value="Submit" type="submit">
+    </form>
+    <div class="update-note">
+        NOTE: Your serial number can be found on the label on the back of your eClips Handheld Remote Control.
+    </div>
+<?php else: ?>
+    <p>Please log in to download the update.</p>
+<?php endif; ?>

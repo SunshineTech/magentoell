@@ -1,0 +1,63 @@
+<?php
+/**
+ * Separation Degrees One
+ *
+ * Lyris Newsletter Management
+ *
+ * PHP Version 5
+ *
+ * @category  SDM
+ * @package   SDM_Lyris
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+
+/**
+ * @var SDM_Lyris_Block_Popup $this
+ */
+?>
+<div id="newsletter-popup">
+    <div id="newsletter-popup-background"></div>
+    <div id="newsletter-popup-window">
+        <div class="popup-img">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eeus_email_modal_image')->toHtml()?>
+        </div>
+        <div class="form-wrap">
+            <form id="newsletter-popup-form" action="<?php echo $this->getFormAction() ?>" method="post">
+                <input type="hidden" name="lyris_37783" value="Popup" />
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('eeus_email_modal_text')->toHtml()?>
+                <div id="newsletter-popup-close">
+                    <i class="fa fa-times"></i>
+                </div>
+                <div class="fieldset">
+                    <ul class="form-list">
+                        <li>
+                            <div class="input-box">
+                                <input type="text" name="lyris_1" id="name_first" value="<?php echo $this->getValue('lyris_1') ?>" class="input-text required-entry" placeholder="<?php echo $this->__('First Name') ?>" />
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-box">
+                                <input type="text" name="email" class="input-text required-entry validate-email" placeholder="<?php echo $this->__('Email Address') ?>" />
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="buttons-set">
+                        <button type="button" title="<?php echo $this->__('subscribe') ?>" onclick="newsletterPopupSignup.submit()" class="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+                    </div>
+                </div>
+                <div class="note">
+                    <?php echo $this->__('*Offer valid for first-time registrants only');?>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+//<![CDATA[
+    var newsletterPopupSignup = new VarienForm('newsletter-popup-form');
+    $('newsletter-popup-close').observe('click', function() {
+        $('newsletter-popup').remove();
+    });
+//]]>
+</script>

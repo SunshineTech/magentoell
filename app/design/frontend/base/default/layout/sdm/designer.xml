@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Separation Degrees One
+ *
+ * Handles designer page and designer article rendering
+ *
+ * @category  SDM
+ * @package   SDM_Designer
+ * @author    Separation Degrees One <magento@separationdegrees.com>
+ * @copyright Copyright (c) 2015 Separation Degrees One (http://www.separationdegrees.com)
+ */
+-->
+<layout version="0.1.0">
+    <designer>
+    	<reference name="root">   
+    		<action method="setTemplate"><template>page/1column.phtml</template></action>   
+    	</reference>
+    </designer>
+    <!-- Designer Page -->
+    <designer_page>
+    	<reference name="head">
+            <action method="addItem"><type>skin_js</type><script>js/sdm/designer.js</script></action>
+    	</reference>
+    	<reference name="content">
+            <block type="core/template" name="designer_page" template="sdm/designer/page.phtml" />
+        </reference>
+        <reference name="designer_page">
+            <block type="sdm_designer/page_tabs" name="designer_page_tabs" template="sdm/designer/page/tabs.phtml" />
+        </reference>
+    </designer_page>
+    <!-- Designer Article -->
+    <page_type_designer>
+        <reference name="root">
+            <action method="addBodyClass"><classname>designer-article</classname></action>
+        </reference>
+        <reference name="content">
+            <block type="sdm_designer/article_trending" name="designer_article_trending" template="sdm/designer/article/trending.phtml" />
+        </reference>
+    </page_type_designer>
+</layout>
